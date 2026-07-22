@@ -53,3 +53,13 @@ wp-content/themes/hostinger-ai-theme/vendor/mantle-framework/contracts/cache/
 videos/
 media-assets/
 data/scorsese_raw/
+uploads/
+videos/
+media-assets/
+.private/
+wp-content/uploads/
+*.mp4
+*.mov
+*.zip
+*.sql
+.env
