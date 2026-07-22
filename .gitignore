@@ -44,3 +44,12 @@ wp-content/cache/
 wp-content/plugins/litespeed-cache/tpl/cache/
 wp-content/plugins/hostinger-ai-assistant/vendor/mantle-framework/contracts/cache/
 wp-content/themes/hostinger-ai-theme/vendor/mantle-framework/contracts/cache/
+# Large media files
+*.mp4
+*.mov
+*.avi
+*.mkv
+
+videos/
+media-assets/
+data/scorsese_raw/
