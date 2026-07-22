@@ -1,65 +1,125 @@
-# ==========================
-# GITIGNORE FOR MARKPIRES.COM
-# ==========================
+# ==========================================
 
-# Large media folders
+# MARKPIRES.COM GITIGNORE
+
+# Production Website + Goliath Development
+
+# ==========================================
+
+
+
+# --------------------------
+
+# Large Media Assets
+
+# --------------------------
+
 videos/
+
 media-assets/
+
 data/scorsese_raw/
 
-# User uploads
 uploads/
 
-# Private files
-.private/
 
-# Build folders
-.builds/
 
-# Temporary files
-*.crdownload
-*.tmp
+# Large media files anywhere
 
-# Logs
-*.log
-
-# Operating system files
-.DS_Store
-Thumbs.db
-
-# Large video/audio files anywhere
 *.mp4
+
 *.mov
+
 *.avi
+
 *.mkv
+
 *.wav
+
 *.mp3
 
-# Backups
-*.bak
-*.backup
-*_backup_*
-# WordPress caches
-wp-content/cache/
-wp-content/plugins/litespeed-cache/tpl/cache/
-wp-content/plugins/hostinger-ai-assistant/vendor/mantle-framework/contracts/cache/
-wp-content/themes/hostinger-ai-theme/vendor/mantle-framework/contracts/cache/
-# Large media files
-*.mp4
-*.mov
-*.avi
-*.mkv
 
-videos/
-media-assets/
-data/scorsese_raw/
-uploads/
-videos/
-media-assets/
+
+
+
+# --------------------------
+
+# Private / Sensitive Files
+
+# --------------------------
+
 .private/
-wp-content/uploads/
-*.mp4
-*.mov
-*.zip
-*.sql
+
 .env
+
+
+
+
+
+# --------------------------
+
+# Build / Temporary Files
+
+# --------------------------
+
+.builds/
+
+*.tmp
+
+*.crdownload
+
+
+
+
+
+# --------------------------
+
+# Logs
+
+# --------------------------
+
+*.log
+
+
+
+
+
+# --------------------------
+
+# Backups
+
+# --------------------------
+
+*.bak
+
+*.backup
+
+*_backup_*
+
+
+
+
+
+# --------------------------
+
+# Operating System Files
+
+# --------------------------
+
+.DS_Store
+
+Thumbs.db
+
+
+
+
+
+# --------------------------
+
+# WordPress Cache
+
+# --------------------------
+
+wp-content/cache/
+
+wp-content/plugins/litespeed-cache/tpl/cache/
