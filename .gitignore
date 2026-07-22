@@ -1,4 +1,9 @@
-# Build folders
+videos/
+media-assets/
+*.mp4
+*.mov
+*.avi
+*.mkv# Build folders
 .builds/
 
 # Private files
