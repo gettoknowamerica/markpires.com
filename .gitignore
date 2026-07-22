@@ -1,0 +1,21 @@
+# Build folders
+.builds/
+
+# Private files
+.private/
+
+# User uploads
+uploads/
+
+# Temporary downloads
+*.crdownload
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Cache
+cache/
+tmp/

@@ -1,0 +1,13 @@
+/*
+|--------------------------------------------------------------------------
+| YOUTUBE / COLUMBO — TWO CHANNEL / TWO KEY SETUP
+|--------------------------------------------------------------------------
+| Paste this into lead-engine/config.php and fill in each API key.
+| Channel IDs below are already filled from your test output.
+*/
+
+define('YOUTUBE_API_KEY_MARK_INSPIRES', 'PASTE_MARK_INSPIRES_YOUTUBE_DATA_API_KEY_HERE');
+define('YOUTUBE_CHANNEL_MARK_INSPIRES', 'UCu3f0qHwbQiNXCX5mjIKL9Q');
+
+define('YOUTUBE_API_KEY_DISCOVER_CT', 'PASTE_DISCOVER_CT_YOUTUBE_DATA_API_KEY_HERE');
+define('YOUTUBE_CHANNEL_DISCOVER_CT', 'UCyMNm7MbIR4H4LMZRgnKSPw');

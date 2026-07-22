@@ -1,0 +1,17 @@
+/* V35.5 Emergency Mission Control movement patch */
+.hq .room .worker{
+  animation-duration:6s!important;
+  animation-iteration-count:infinite!important;
+  animation-timing-function:ease-in-out!important;
+  position:absolute!important;
+  left:50%!important;
+  top:55%!important;
+  bottom:auto!important;
+  z-index:5!important;
+}
+.hq .room:nth-child(1) .worker{animation-name:gScoutPatrol!important}
+.hq .room:nth-child(2) .worker{animation-name:gJessicaPatrol!important}
+.hq .room:nth-child(3) .worker{animation-name:gScorsesePatrol!important}
+.hq .room:nth-child(4) .worker{animation-name:gShakespearePatrol!important}
+.hq .room:nth-child(5) .worker{animation-name:gEinsteinPatrol!important}
+.hq .room:nth-child(6) .worker{animation-name:gRockefellerPatrol!important}

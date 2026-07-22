@@ -1,0 +1,16 @@
+POST to:
+https://markpires.com/lead-engine/executive-progress-update.php?key=timetomakethedonuts
+
+JSON body example:
+{
+  "executive": "Columbo",
+  "related_type": "youtube_index",
+  "related_id": "run-id-or-task-id",
+  "title": "Indexing Mark insPires + Discover CT",
+  "status": "working",
+  "progress": 54,
+  "current_phase": "Importing YouTube video metadata",
+  "next_milestone": "Create archive and repurpose assets",
+  "asset_count": 50,
+  "handoff_to": "Shakespeare"
+}

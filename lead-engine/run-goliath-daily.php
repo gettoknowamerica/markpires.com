@@ -1,0 +1,11 @@
+<?php
+ini_set('display_errors',0); error_reporting(E_ALL); require_once __DIR__ . '/config.php'; header('Content-Type: application/json; charset=utf-8');
+$key=$_GET['key']??''; if(!defined('AFTER_HOURS_CRON_KEY') || !hash_equals(AFTER_HOURS_CRON_KEY,$key)){http_response_code(403); echo json_encode(['success'=>false,'error'=>'Invalid key']); exit;}
+$mode=$_GET['mode']??'full'; $base='https://'.($_SERVER['HTTP_HOST']??'markpires.com'); $k=rawurlencode($key);
+function call_url($url){$ch=curl_init($url);curl_setopt_array($ch,[CURLOPT_RETURNTRANSFER=>true,CURLOPT_TIMEOUT=>55]);$body=curl_exec($ch);$http=curl_getinfo($ch,CURLINFO_HTTP_CODE);$err=curl_error($ch);curl_close($ch);$json=json_decode($body,true);return ['url'=>$url,'http'=>$http,'ok'=>$http>=200&&$http<300,'error'=>$err,'body'=>is_array($json)?$json:substr((string)$body,0,1200)];}
+$jobs=[]; if($mode==='full'||$mode==='light'){$jobs[]=['Executive Assistant',"$base/lead-engine/build-executive-assistant.php?key=$k"];}
+if($mode==='full'){$jobs[]=['Owner Research Queue',"$base/lead-engine/build-owner-research-queue.php?key=$k&limit=250&mode=replace"];$jobs[]=['Blotato Organic Queue',"$base/lead-engine/build-blotato-distribution-director.php?key=$k"];}
+if($mode==='full'||$mode==='followup'){$jobs[]=['Lead Drip Cron',"$base/lead-engine/cron-drip.php?key=$k"];$jobs[]=['After Hours Callback Cron',"$base/lead-engine/after-hours-callback-cron.php?key=$k"];}
+if($mode==='full'||$mode==='content'){$jobs[]=['Media Director',"$base/lead-engine/build-media-director.php?key=$k"];$jobs[]=['Shorts Factory',"$base/lead-engine/build-shorts-factory.php?key=$k"];$jobs[]=['Distribution Director',"$base/lead-engine/build-blotato-distribution-director.php?key=$k"];}
+$results=[]; foreach($jobs as [$name,$url]){$r=call_url($url);$r['name']=$name;$results[]=$r;} echo json_encode(['success'=>true,'mode'=>$mode,'ran'=>count($results),'message'=>'Goliath daily run completed. Review each job response.','results'=>$results], JSON_PRETTY_PRINT);
+?>

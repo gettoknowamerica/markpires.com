@@ -1,0 +1,27 @@
+<?php
+session_start();
+require_once __DIR__ . '/../lead-engine/config.php';
+if(empty($_SESSION['mp_dashboard_auth'])){header('Location:/dashboard/');exit;}
+function h($v){return htmlspecialchars((string)$v,ENT_QUOTES,'UTF-8');}
+function sbl103($m,$ep,$p=null){
+  $ch=curl_init(rtrim(SUPABASE_URL,'/').'/rest/v1/'.ltrim($ep,'/'));
+  curl_setopt_array($ch,[CURLOPT_RETURNTRANSFER=>true,CURLOPT_CUSTOMREQUEST=>$m,CURLOPT_HTTPHEADER=>['apikey: '.SUPABASE_SERVICE_ROLE_KEY,'Authorization: Bearer '.SUPABASE_SERVICE_ROLE_KEY,'Content-Type: application/json','Prefer: return=representation'],CURLOPT_TIMEOUT=>25]);
+  if($p!==null)curl_setopt($ch,CURLOPT_POSTFIELDS,json_encode($p));
+  $b=curl_exec($ch);$http=curl_getinfo($ch,CURLINFO_HTTP_CODE);curl_close($ch);$d=json_decode($b,true);
+  return['ok'=>$http>=200&&$http<300,'http'=>$http,'body'=>$b,'data'=>is_array($d)?$d:[]];
+}
+$outcomes=sbl103('GET','hunter_outcomes?select=*&order=created_at.desc&limit=300')['data'];
+$campaigns=sbl103('GET','hunter_campaigns?select=*&order=conversion_rate.desc&limit=200')['data'];
+$queue=sbl103('GET','hunter_queue?select=status,last_outcome,hunter_score,town,next_followup_at&limit=1000')['data'];
+$stats=['attempts'=>count($outcomes),'answered'=>0,'voicemail'=>0,'future'=>0,'appt'=>0,'wrong'=>0,'dnc'=>0];$outcomeCounts=[];$followups=0;
+foreach($outcomes as $o){if(!empty($o['answered']))$stats['answered']++;if(!empty($o['voicemail']))$stats['voicemail']++;if(!empty($o['future_seller']))$stats['future']++;if(!empty($o['appointment_requested']))$stats['appt']++;if(!empty($o['wrong_number']))$stats['wrong']++;if(!empty($o['dnc_request']))$stats['dnc']++;$oc=$o['outcome']?:'unknown';$outcomeCounts[$oc]=($outcomeCounts[$oc]??0)+1;}
+foreach($queue as $q){if(!empty($q['next_followup_at'])&&strtotime($q['next_followup_at'])<=strtotime('+7 days'))$followups++;}
+$cronKey=defined('AFTER_HOURS_CRON_KEY')?AFTER_HOURS_CRON_KEY:'YOUR_KEY';
+?><!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hunter Learning V10.3</title><style>
+body{margin:0;background:#f5f3ef;color:#10101a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.header{background:linear-gradient(135deg,#10101a,#1a1a2e);color:#fff;padding:30px}.brand{font-family:Georgia,serif;color:#c8a96e;font-size:36px}.wrap{max-width:1450px;margin:auto;padding:26px}.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}.kpi,.panel{background:#fff;border-radius:16px;box-shadow:0 2px 12px #0001}.kpi{padding:18px}.n{font-size:30px;font-weight:900}.panel{margin-top:18px;overflow:hidden}.panel h2{font-family:Georgia,serif;margin:0;padding:18px;border-bottom:1px solid #eee}table{width:100%;border-collapse:collapse}td,th{text-align:left;padding:11px;border-bottom:1px solid #eee;font-size:14px;vertical-align:top}th{font-size:11px;text-transform:uppercase;color:#777;background:#faf9f6}.btn{display:inline-block;background:#c8a96e;color:#111;text-decoration:none;padding:9px 11px;border-radius:9px;font-weight:900}.muted{color:#777;font-size:13px}.layout{display:grid;grid-template-columns:1fr .55fr;gap:18px}@media(max-width:900px){.grid,.layout{grid-template-columns:1fr}.wrap{padding:14px}}
+</style></head><body><div class="header"><div class="brand">Hunter Learning V10.3</div><div>Jessica learns from hunter outcomes · <a style="color:#fff" href="/dashboard/homeowner-hunter.php">Hunter Queue</a></div></div><main class="wrap">
+<p><a class="btn" target="_blank" href="/lead-engine/process-hunter-outcomes.php?key=<?=h($cronKey)?>">Process Hunter Outcomes</a></p>
+<section class="grid"><div class="kpi"><div class="n"><?=h($stats['attempts'])?></div>Attempts</div><div class="kpi"><div class="n"><?=h($stats['answered'])?></div>Answered</div><div class="kpi"><div class="n"><?=h($stats['voicemail'])?></div>Voicemails</div><div class="kpi"><div class="n"><?=h($stats['future'])?></div>Future Sellers</div><div class="kpi"><div class="n"><?=h($stats['appt'])?></div>Appointments</div><div class="kpi"><div class="n"><?=h($followups)?></div>7-Day Followups</div></section>
+<div class="layout"><section class="panel"><h2>Recent Hunter Outcomes</h2><table><tr><th>Outcome</th><th>Homeowner</th><th>Town</th><th>Score</th><th>Summary</th></tr><?php foreach($outcomes as $o):?><tr><td><strong><?=h($o['outcome'])?></strong><div class="muted"><?=h($o['created_at'])?></div></td><td><?=h($o['owner_name'])?><div class="muted"><?=h($o['phone'])?></div></td><td><?=h($o['town'])?></td><td><?=h($o['lead_score'])?></td><td><?=h($o['jessica_summary']?:$o['notes'])?></td></tr><?php endforeach;?></table></section>
+<section class="panel"><h2>Outcome Breakdown</h2><table><tr><th>Outcome</th><th>Count</th></tr><?php foreach($outcomeCounts as $k=>$v):?><tr><td><?=h($k)?></td><td><?=h($v)?></td></tr><?php endforeach;?></table><h2>Campaign Learning</h2><table><tr><th>Campaign</th><th>Conversion</th><th>Signals</th></tr><?php foreach($campaigns as $c):?><tr><td><strong><?=h($c['name'])?></strong></td><td><?=h(round(((float)$c['conversion_rate'])*100,1))?>%</td><td class="muted">Attempts <?=h($c['calls_attempted'])?><br>Answered <?=h($c['calls_answered'])?><br>Future <?=h($c['future_sellers_found'])?><br>Appts <?=h($c['appointments_found'])?></td></tr><?php endforeach;?></table></section></div>
+</main></body></html>

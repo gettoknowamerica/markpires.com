@@ -1,0 +1,21 @@
+HOSTINGER CRON NOTE
+
+No end time is needed in Hostinger.
+Each cron entry fires at the start time/frequency you select.
+
+Tonight:
+10:05 PM daily:
+https://markpires.com/lead-engine/build-overnight-research.php?key=YOUR_KEY
+
+10:20 PM daily:
+https://markpires.com/lead-engine/build-discovery-intelligence.php?key=YOUR_KEY
+
+10:35 PM daily:
+https://markpires.com/lead-engine/build-compliant-import-queue.php?key=YOUR_KEY
+
+10:45 PM daily:
+https://markpires.com/lead-engine/cron-monitor.php?key=YOUR_KEY
+
+Morning:
+8:05 AM daily:
+https://markpires.com/lead-engine/cron-master.php?key=YOUR_KEY

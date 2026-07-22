@@ -1,0 +1,17 @@
+Goliath Omni OS Release 57.5.1
+Scout CSV Data Folder Fix
+
+What changed:
+- Every CSV upload is copied to public_html/data/scout_uploads/
+- Expired listing imports now return a clear diagnostic when the uploaded CSV is the wrong type.
+- Agent/master-list CSVs are preserved but not imported as expired listings.
+- Importer recognizes more common MLS/CRV header variations.
+
+Install:
+1. Upload public_html over public_html.
+2. No SQL required if v57.4 SQL already ran.
+3. Open /dashboard/scout-expired-upload.php.
+4. Upload the actual expired/CRV listing CSV.
+
+Important:
+The uploaded data/agent_master_list_import.csv is an agent roster/contact export. It has full_name, userid, office_name, office_city, office_phone, email, etc. It is not an expired listing CSV because it does not contain property address or MLS listing data.

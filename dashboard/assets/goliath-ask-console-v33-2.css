@@ -1,0 +1,24 @@
+
+/* V33.2 Ask Goliath Command Console */
+.gAskBackdrop{display:none;position:fixed;inset:0;background:#000b;z-index:10010}
+.gAskPanel{display:none;position:fixed;right:22px;top:22px;width:620px;max-width:calc(100vw - 24px);height:760px;max-height:calc(100vh - 44px);background:linear-gradient(180deg,#0b1220,#07101d);border:1px solid #c8a96e66;border-radius:22px;box-shadow:0 30px 90px #000e;z-index:10011;overflow:hidden}
+.gAskPanel.open,.gAskBackdrop.open{display:block}
+.gAskHead{padding:14px;border-bottom:1px solid #263753;display:flex;align-items:center;justify-content:space-between;gap:10px;background:#08111f}
+.gAskHead h2{margin:0;color:#c8a96e;font:900 27px Georgia,serif}
+.gAskHead small{display:block;color:#94a3b8;font:800 12px Inter,Arial}
+.gAskClose{background:#0b1220!important;color:#c8a96e!important;border-color:#c8a96e66!important}
+.gAskBody{height:calc(100% - 182px);overflow:auto;padding:14px;display:grid;gap:10px}
+.gMsg{border:1px solid #263753;border-radius:16px;padding:11px 12px;background:#0f172a;color:#e5e7eb;line-height:1.45;font-size:13px}
+.gMsg.user{background:#102754;border-color:#315db4}
+.gMsg.goliath{background:#111827;border-color:#c8a96e44}
+.gMsg strong{color:#c8a96e}
+.gAskFoot{border-top:1px solid #263753;background:#08111f;padding:12px}
+.gAskInput{width:100%;min-height:86px;background:#030712;color:#fff;border:1px solid #263753;border-radius:14px;padding:12px;font:800 13px ui-monospace,Consolas,monospace;resize:vertical}
+.gAskActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}
+.gAskActions button{border-radius:12px}
+.gAskPrimary{background:#1d4ed8!important;color:#fff!important}
+.gAskVoice{background:#166534!important;color:#fff!important}
+.gAskMemory{background:#c8a96e!important;color:#111827!important}
+.gAskStatus{font-size:12px;color:#94a3b8;margin-top:8px}
+.gAskListening{color:#22c55e;font-weight:950}
+@media(max-width:800px){.gAskPanel{left:10px;right:10px;top:10px;width:auto;height:calc(100vh - 20px);max-height:none}}

@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard/
+Disallow: /lead-engine/
+Disallow: /goliath-core/
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /_api/
+Disallow: /buddyforms-submissions-page/
+Disallow: /buddyforms-preview-page/
+Disallow: /player-embed/
+Disallow: /register/
+
+Sitemap: https://www.markpires.com/sitemap.xml

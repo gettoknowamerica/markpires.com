@@ -1,0 +1,14 @@
+Goliath Omni OS Release 57.6
+Scout CRM Detail Replacement
+
+What changed:
+- Scout's Executive Office now opens directly into a CRM-style revenue desk.
+- No right-side single-contact viewer for Scout.
+- Shows all Scout opportunities, research queue items, and website leads in one table.
+- Search, call, text, email, map, source, and Jessica handoff are inline.
+- Upload CSV / CRV and Add Address live at the top of Scout's page.
+
+Install:
+1. Upload public_html/dashboard/goliath-agent-detail.php over the existing file.
+2. No SQL required.
+3. Open /dashboard/goliath-agent-detail.php?department=Scout.

@@ -1,0 +1,44 @@
+
+/* V37 Living Headquarters: JS-driven navigation */
+.hq .room{position:relative!important;overflow:hidden!important}
+.hq .room .worker.livingAgent{
+  position:absolute!important;left:50%!important;top:55%!important;bottom:auto!important;
+  width:34px!important;height:46px!important;background:transparent!important;border:0!important;
+  box-shadow:none!important;font-size:0!important;z-index:12!important;
+  transform:translate(-50%,-50%) translate(0px,0px) rotate(0deg)!important;
+  transition:transform 1.8s cubic-bezier(.22,.85,.28,1), filter .25s ease!important;
+  will-change:transform!important;animation:none!important;
+}
+.hq .room:nth-child(1) .worker.livingAgent,
+.hq .room:nth-child(2) .worker.livingAgent,
+.hq .room:nth-child(3) .worker.livingAgent,
+.hq .room:nth-child(4) .worker.livingAgent,
+.hq .room:nth-child(5) .worker.livingAgent,
+.hq .room:nth-child(6) .worker.livingAgent{animation:none!important}
+.livingAgent:before{content:"";position:absolute;left:8px;top:0;width:18px;height:18px;border-radius:50%;background:#d9a067;box-shadow:0 2px 0 rgba(0,0,0,.35)}
+.livingAgent:after{content:"";position:absolute;left:5px;top:16px;width:24px;height:24px;border-radius:7px 7px 5px 5px;background:#1d4ed8;box-shadow:inset 0 -8px 0 rgba(0,0,0,.18),0 5px 12px rgba(0,0,0,.35)}
+.livingAgent i,.livingAgent b{position:absolute;display:block;width:7px;height:20px;top:24px;background:#111827;border-radius:6px;transform-origin:top center;z-index:-1}
+.livingAgent i{left:9px}.livingAgent b{right:9px}
+.livingAgent.walking i{animation:gV37Legs .34s infinite alternate ease-in-out}
+.livingAgent.walking b{animation:gV37Legs .34s infinite alternate-reverse ease-in-out}
+.livingAgent i:before,.livingAgent b:before{content:"";position:absolute;width:6px;height:16px;top:-15px;background:#d9a067;border-radius:6px}
+.livingAgent i:before{left:-8px}.livingAgent b:before{right:-8px}
+.livingAgent.walking i:before{animation:gV37Arms .34s infinite alternate ease-in-out}
+.livingAgent.walking b:before{animation:gV37Arms .34s infinite alternate-reverse ease-in-out}
+@keyframes gV37Legs{from{transform:rotate(-18deg)}to{transform:rotate(18deg)}}
+@keyframes gV37Arms{from{transform:rotate(20deg)}to{transform:rotate(-20deg)}}
+.livingAgent.working{filter:drop-shadow(0 0 12px rgba(34,197,94,.75))!important}
+.livingAgent.working:after{animation:gV37WorkPulse 1.2s infinite ease-in-out}
+@keyframes gV37WorkPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.hq .room:nth-child(1) .livingAgent:after{background:#2563eb}.hq .room:nth-child(1) .livingAgent:before{background:#5b3a24}
+.hq .room:nth-child(2) .livingAgent:after{background:#be7c1f}.hq .room:nth-child(2) .livingAgent:before{background:#2b1c14}
+.hq .room:nth-child(3) .livingAgent:after{background:#6d28d9}.hq .room:nth-child(3) .livingAgent:before{background:#111827}
+.hq .room:nth-child(4) .livingAgent:after{background:#1d4ed8}.hq .room:nth-child(4) .livingAgent:before{background:#3a2417}
+.hq .room:nth-child(5) .livingAgent:after{background:#475569}.hq .room:nth-child(5) .livingAgent:before{background:#111827}
+.hq .room:nth-child(6) .livingAgent:after{background:#991b1b}.hq .room:nth-child(6) .livingAgent:before{background:#6b4a2f}
+.v37Station{position:absolute;width:18px;height:18px;border-radius:50%;background:rgba(200,169,110,.18);border:1px solid rgba(200,169,110,.52);box-shadow:0 0 16px rgba(200,169,110,.2);z-index:4;pointer-events:none}
+.v37Station.active{background:rgba(34,197,94,.25);border-color:rgba(34,197,94,.85);box-shadow:0 0 22px rgba(34,197,94,.55)}
+.v37Notify{position:fixed;right:18px;bottom:18px;z-index:20000;background:linear-gradient(135deg,#0f172a,#07101d);border:1px solid rgba(200,169,110,.55);color:#fff;border-radius:14px;padding:11px 13px;box-shadow:0 18px 50px rgba(0,0,0,.65);max-width:320px;font:800 12px Inter,Arial,sans-serif;animation:v37Pop 3.8s ease forwards}
+.v37Notify strong{display:block;color:#c8a96e;margin-bottom:3px}
+@keyframes v37Pop{0%{transform:translateY(20px);opacity:0}10%,80%{transform:translateY(0);opacity:1}100%{transform:translateY(18px);opacity:0}}
+@media(max-width:700px){.hq .room .worker.livingAgent{width:30px!important;height:40px!important}}

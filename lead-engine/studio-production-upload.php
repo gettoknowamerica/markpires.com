@@ -1,0 +1,12 @@
+<?php
+require_once __DIR__.'/config.php';
+$key=$_POST['key']??'';if(defined('AFTER_HOURS_CRON_KEY')&&AFTER_HOURS_CRON_KEY&&!hash_equals(AFTER_HOURS_CRON_KEY,$key)){http_response_code(403);exit('Invalid key');}
+function slug($s){$s=strtolower(trim($s));$s=preg_replace('/[^a-z0-9]+/','-',$s);return trim($s,'-')?:'scorsese-project';}
+function sb($t,$rows){$ch=curl_init(rtrim(SUPABASE_URL,'/').'/rest/v1/'.$t);curl_setopt_array($ch,[CURLOPT_RETURNTRANSFER=>true,CURLOPT_POST=>true,CURLOPT_POSTFIELDS=>json_encode($rows),CURLOPT_HTTPHEADER=>['apikey: '.SUPABASE_SERVICE_ROLE_KEY,'Authorization: Bearer '.SUPABASE_SERVICE_ROLE_KEY,'Content-Type: application/json','Prefer: return=representation'],CURLOPT_TIMEOUT=>30]);$b=curl_exec($ch);curl_close($ch);return json_decode($b,true)?:$b;}
+$project=$_POST['project_name']??'Scorsese Project';$slug=slug($project);$stamp=date('Ymd-His');$dir=realpath(__DIR__.'/..').'/dashboard/assets/production/'.$slug.'-'.$stamp;$url='/dashboard/assets/production/'.$slug.'-'.$stamp;@mkdir($dir.'/clips',0775,true);@mkdir($dir.'/assets',0775,true);$clips=[];
+foreach(($_FILES['clips']['name']??[]) as $i=>$name){if(empty($_FILES['clips']['tmp_name'][$i]))continue;$ext=strtolower(pathinfo($name,PATHINFO_EXTENSION)?:'mp4');$new=$slug.'-'.($i+1).'.'.$ext;if(move_uploaded_file($_FILES['clips']['tmp_name'][$i],$dir.'/clips/'.$new))$clips[]=['index'=>$i+1,'name'=>$new,'url'=>$url.'/clips/'.$new,'original'=>$name];}
+$prompt="Scorsese raw footage edit mission\nProject: $project\nInstructions: ".($_POST['instructions']??'')."\nClips:\n";foreach($clips as $c){$prompt.=$c['index'].'. '.$c['url']."\n";}
+$res=sb('goliath_commands',[['command_type'=>'production_edit','department'=>'Scorsese','title'=>'Raw footage edit: '.$project,'prompt'=>$prompt,'status'=>'queued','priority'=>130,'source'=>'studio_raw_footage','metadata'=>['project_name'=>$project,'clips'=>$clips,'instructions'=>$_POST['instructions']??'']]]);
+sb('goliath_events',[['department'=>'Scorsese','event_type'=>'raw_footage_uploaded','title'=>'Scorsese received raw footage','detail'=>count($clips).' clips uploaded for '.$project.'.','roi_estimate'=>9000,'confidence'=>95,'status'=>'queued','phase'=>'raw_intake','progress'=>10,'link_url'=>'/dashboard/goliath-studio.php','metadata'=>['project_name'=>$project,'clips'=>$clips]]]);
+header('Location:/dashboard/goliath-studio.php?uploaded=1');exit;
+?>

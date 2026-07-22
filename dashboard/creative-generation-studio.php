@@ -1,0 +1,1 @@
+<?php header('Location: /dashboard/goliath-studio.php?from=legacy-studio', true, 302); exit; ?>

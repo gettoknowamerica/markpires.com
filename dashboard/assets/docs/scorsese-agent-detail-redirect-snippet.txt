@@ -1,0 +1,7 @@
+Optional safety redirect for /dashboard/goliath-agent-detail.php
+Paste this directly after the session/auth/config lines, before page output:
+
+if (isset($_GET['department']) && strcasecmp((string)$_GET['department'], 'Scorsese') === 0) {
+  header('Location: /dashboard/scorsese-media-center.php');
+  exit;
+}

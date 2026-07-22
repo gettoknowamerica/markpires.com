@@ -1,0 +1,3 @@
+source_name,source_type,lead_type,name,phone,email,address,town,state,market,consent_status,dnc_status,notes
+Example Opt-In Form,opt_in,seller,Jane Sample,2035551212,jane@example.com,123 Main St,Greenwich,CT,Lower Fairfield County,opt_in,clear,Asked for home valuation
+Example Public Business,public_business,builder,ABC Builders,2035552323,info@abcbuilder.com,,Westport,CT,Fairfield County,business_contact,clear,Public business contact

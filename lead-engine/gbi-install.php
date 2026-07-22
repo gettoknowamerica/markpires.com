@@ -1,0 +1,14 @@
+<?php
+ini_set('display_errors',0);
+header('Content-Type: application/json; charset=utf-8');
+try{
+ require_once __DIR__.'/config.php'; require_once __DIR__.'/goliath-db.php';
+ $key=$_GET['key']??''; $expected=defined('AFTER_HOURS_CRON_KEY')?AFTER_HOURS_CRON_KEY:(defined('RETELL_WEBHOOK_KEY')?RETELL_WEBHOOK_KEY:'timetomakethedonuts');
+ if(!hash_equals((string)$expected,(string)$key)){http_response_code(403);echo json_encode(['ok'=>false,'error'=>'bad_key']);exit;}
+ function ex94($sql){ if(function_exists('gdb_exec')) return gdb_exec($sql); $pdo=gdb(); return $pdo->exec($sql); }
+ ex94("CREATE TABLE IF NOT EXISTS goliath_browser_jobs (id INT AUTO_INCREMENT PRIMARY KEY, job_uid VARCHAR(80) UNIQUE, commission_id INT NULL, task_id INT NULL, executive_key VARCHAR(80), job_type VARCHAR(120), target_name VARCHAR(255), target_address VARCHAR(255), target_town VARCHAR(120), prompt MEDIUMTEXT, search_urls JSON NULL, status VARCHAR(80) DEFAULT 'queued', progress INT DEFAULT 0, current_step VARCHAR(255), result_json JSON NULL, evidence MEDIUMTEXT, error_message MEDIUMTEXT, priority INT DEFAULT 100, locked_at DATETIME NULL, completed_at DATETIME NULL, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, INDEX(status), INDEX(executive_key), INDEX(job_type), INDEX(priority)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+ ex94("CREATE TABLE IF NOT EXISTS goliath_browser_events (id INT AUTO_INCREMENT PRIMARY KEY, event_uid VARCHAR(80) UNIQUE, browser_job_id INT NULL, executive_key VARCHAR(80), event_type VARCHAR(120), title VARCHAR(255), details MEDIUMTEXT, metadata JSON NULL, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, INDEX(browser_job_id), INDEX(executive_key), INDEX(event_type)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+ ex94("CREATE TABLE IF NOT EXISTS goliath_executive_heartbeat (id INT AUTO_INCREMENT PRIMARY KEY, executive_key VARCHAR(80) UNIQUE, status VARCHAR(80) DEFAULT 'idle', current_job_id INT NULL, current_task_id INT NULL, current_commission_id INT NULL, current_step VARCHAR(255), progress INT DEFAULT 0, browser_status VARCHAR(120), pages_read INT DEFAULT 0, evidence_count INT DEFAULT 0, phones_found INT DEFAULT 0, emails_found INT DEFAULT 0, confidence_score INT DEFAULT 0, message MEDIUMTEXT, metadata JSON NULL, updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, INDEX(status), INDEX(updated_at)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+ echo json_encode(['ok'=>true,'version'=>'V94 Browser Intelligence Core Install','tables'=>['goliath_browser_jobs','goliath_browser_events','goliath_executive_heartbeat'],'time'=>date('c')],JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
+}catch(Throwable $e){echo json_encode(['ok'=>false,'version'=>'V94 Browser Intelligence Core Install','error'=>$e->getMessage(),'file'=>$e->getFile(),'line'=>$e->getLine()],JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);}
+?>

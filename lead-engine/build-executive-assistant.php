@@ -1,0 +1,22 @@
+<?php
+ini_set('display_errors',0); error_reporting(E_ALL);
+require_once __DIR__.'/config.php';
+header('Content-Type: application/json; charset=utf-8');
+function sb($m,$ep,$p=null){$ch=curl_init(rtrim(SUPABASE_URL,'/').'/rest/v1/'.ltrim($ep,'/'));curl_setopt_array($ch,[CURLOPT_RETURNTRANSFER=>true,CURLOPT_CUSTOMREQUEST=>$m,CURLOPT_HTTPHEADER=>['apikey: '.SUPABASE_SERVICE_ROLE_KEY,'Authorization: Bearer '.SUPABASE_SERVICE_ROLE_KEY,'Content-Type: application/json','Prefer: return=representation'],CURLOPT_TIMEOUT=>90]);if($p!==null)curl_setopt($ch,CURLOPT_POSTFIELDS,json_encode($p));$b=curl_exec($ch);$h=curl_getinfo($ch,CURLINFO_HTTP_CODE);curl_close($ch);$d=json_decode($b,true);return['ok'=>$h>=200&&$h<300,'body'=>$b,'data'=>is_array($d)?$d:[]];}
+function first($a){return!empty($a)?$a[0]:null;}
+try{
+$key=$_GET['key']??'';if(!defined('AFTER_HOURS_CRON_KEY')||!hash_equals(AFTER_HOURS_CRON_KEY,$key)){http_response_code(403);echo json_encode(['success'=>false,'error'=>'Invalid key']);exit;}
+$unique=sb('GET','jessica_opportunity_engine?select=*&opportunity_type=eq.goliath_unique_seller&order=revenue_score.desc,urgency_score.desc,created_at.desc&limit=25')['data'];
+$raw=sb('GET','jessica_opportunity_engine?select=*&opportunity_type=eq.failed_never_sold&order=revenue_score.desc,created_at.desc&limit=25')['data'];
+$leads=sb('GET','leads?select=*&order=created_at.desc&limit=5')['data'];
+$top=first($unique)?:first($raw);$lead=first($leads);
+$title=$top['title']??'No Goliath opportunity yet';$score=(int)($top['revenue_score']??0);
+$leadSummary=$lead?(($lead['name']??'Unknown lead').' — '.($lead['address']??'').' — score '.(($lead['adaptive_score']??$lead['lead_score']??0))):'No inbound lead requiring executive action right now.';
+$summary="Good morning Mark.\n\nGoliath Executive Assistant is online.\n\nUnique seller opportunities visible: ".number_format(count($unique))." in the top ranked view.\n\nTop revenue opportunity:\n".$title."\nRevenue score: ".$score."\n\nWhy now:\n".($top['why_now']??'Run Goliath and build consolidated list.')."\n\nTop lead:\n".$leadSummary."\n\nToday's mission:\nVerify the top unique seller opportunity, then turn it into one real seller conversation and one seller-facing content piece.";
+$actions=[['priority'=>100,'type'=>'revenue','title'=>'Review Top Unique Seller Opportunity','detail'=>$title.' — score '.$score],['priority'=>95,'type'=>'owner','title'=>'Find Owner/Contact Path','detail'=>'Verify owner name, mailing address, and legal contact route before outreach.'],['priority'=>90,'type'=>'content','title'=>'Create Seller Recovery Content','detail'=>'Why homes fail to sell and what to do before relisting.'],['priority'=>85,'type'=>'lead','title'=>'Check Inbound Leads','detail'=>$leadSummary],['priority'=>80,'type'=>'ad','title'=>'Run Failed Listing Funnel Angle','detail'=>'Did your home fail to sell? Get a fresh local strategy review.']];
+$plan=['plan_date'=>date('Y-m-d'),'plan_type'=>'morning','title'=>'Goliath Executive Plan — '.date('M j, Y'),'executive_summary'=>$summary,'top_opportunity_id'=>(string)($top['id']??''),'top_opportunity_title'=>$title,'top_opportunity_score'=>$score,'top_lead_summary'=>$leadSummary,'top_expired_summary'=>$title,'top_street_summary'=>'MLS failed-sale intelligence is primary.','top_content_action'=>'Create seller recovery content from top opportunity.','top_ad_action'=>'Use failed listing recovery funnel.','top_call_action'=>'Human review before outreach.','priority_actions'=>$actions,'revenue_focus'=>'Turn one unique failed-sale opportunity into one real seller conversation.','status'=>'active','created_at'=>date('c'),'updated_at'=>date('c')];
+$r=sb('POST','goliath_daily_plans',[$plan]);if(!$r['ok']){echo json_encode(['success'=>false,'error'=>'Plan insert failed','details'=>$r['body']],JSON_PRETTY_PRINT);exit;}
+$pid=$r['data'][0]['id']??null;$tasks=0;if($pid){foreach($actions as $a){$tr=sb('POST','goliath_daily_tasks',[['plan_id'=>$pid,'task_type'=>$a['type'],'task_title'=>$a['title'],'task_detail'=>$a['detail'],'priority'=>$a['priority'],'owner'=>'Mark','status'=>'new','due_label'=>'today','created_at'=>date('c'),'updated_at'=>date('c')]]);if($tr['ok'])$tasks++;}}
+echo json_encode(['success'=>true,'plan_id'=>$pid,'tasks_created'=>$tasks,'unique_visible'=>count($unique),'raw_visible'=>count($raw),'summary'=>$summary],JSON_PRETTY_PRINT);
+}catch(Throwable $e){http_response_code(500);echo json_encode(['success'=>false,'error'=>$e->getMessage(),'line'=>$e->getLine()],JSON_PRETTY_PRINT);}
+?>

@@ -1,0 +1,41 @@
+.v111Ask{min-width:0}
+.v111Connection{margin-left:auto;font-size:8px;border:1px solid #ffffff22;border-radius:999px;padding:3px 6px;color:#f59e0b}
+.v111Connection.online{color:#86efac;border-color:#22c55e88;box-shadow:0 0 12px #22c55e33}
+.v111Conversation{height:150px;overflow:auto;display:flex;flex-direction:column;gap:7px;margin-bottom:8px;padding-right:3px}
+.v111Bubble{display:flex;flex-direction:column;gap:3px;padding:8px 10px;border-radius:12px;font-size:11px;line-height:1.35}
+.v111Bubble b{font-size:9px;text-transform:uppercase;letter-spacing:.06em}
+.v111Bubble.goliath{background:linear-gradient(135deg,#172033,#090e18);border:1px solid #d4af3740;color:#f8e8bc}
+.v111Bubble.mark{align-self:flex-end;background:linear-gradient(135deg,#075985,#0c4a6e);border:1px solid #38bdf866;color:#e0f2fe;max-width:92%}
+.v111Bubble.error{background:#450a0a;border:1px solid #ef444466;color:#fecaca}
+.v111ChatForm textarea{min-height:62px!important}
+.v111ChatActions{display:grid;grid-template-columns:auto 1fr auto;gap:6px;margin-top:6px}
+.v111ChatActions button{padding:8px 9px!important;font-size:10px!important}
+.v111VoiceState{font-size:9px;color:#94a3b8;margin-top:6px}
+#v111VoiceButton.active{box-shadow:0 0 22px #38bdf888;animation:v111Pulse 1.2s infinite}
+@keyframes v111Pulse{50%{transform:scale(1.02)}}
+.v111CalendarCard{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;background:linear-gradient(135deg,#0b111d,#140b22);border:1px solid #9333ea55;border-radius:18px;padding:14px;margin:14px 0;box-shadow:0 18px 45px #0007}
+.v111CalendarCard h3{margin:0;color:#f0abfc}.v111CalendarCard p{margin:5px 0;color:#cbd5e1;font-size:12px}
+.v111CalendarPreview{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.v111CalendarPreview div{background:#050914;border:1px solid #ffffff14;border-radius:10px;padding:8px}.v111CalendarPreview b{display:block;font-size:11px}.v111CalendarPreview small{font-size:9px;color:#94a3b8}
+.v111Modal{position:fixed;inset:0;background:#000c;display:none;place-items:center;z-index:99999;padding:18px}.v111Modal.open{display:grid}.v111ModalPanel{position:relative;width:min(1400px,96vw);height:90vh;background:#05070d;border:1px solid #d4af3755;border-radius:18px;overflow:hidden}.v111ModalPanel iframe{width:100%;height:100%;border:0}.v111ModalClose{position:absolute;right:10px;top:10px;z-index:2;width:38px;height:38px;border-radius:50%;border:1px solid #ffffff44;background:#000;color:#fff;font-size:24px}
+@media(max-width:620px){.v111Conversation{height:118px}.v111ChatActions{grid-template-columns:1fr 1fr}.v111ChatActions .red{grid-column:1/-1}.v111CalendarCard{grid-template-columns:1fr}.v111CalendarPreview{grid-template-columns:1fr 1fr}}
+/* V111.2 Living TV monitor */
+.v111TvHome,.v111TvDetail{position:relative;z-index:3;height:100%}
+.v111TvDetail{display:flex;flex-direction:column;min-height:220px;max-height:252px}
+.v111TvDetail[hidden]{display:none}
+.v111TvDetailBar{display:grid;grid-template-columns:auto 1fr auto;gap:9px;align-items:center;border-bottom:1px solid rgba(154,255,238,.2);padding-bottom:8px;margin-bottom:8px}
+.v111TvDetailBar button{border:1px solid #f6d67966;background:#23180a;color:#f6d679;border-radius:8px;padding:6px 8px;font-weight:900;cursor:pointer}
+.v111TvDetailBar strong{color:#f4f1c7;text-align:center;letter-spacing:.06em}
+.v111TvDetailBar span{font-size:9px;color:#86efac;border:1px solid #22c55e55;border-radius:999px;padding:3px 6px}
+.v111TvDetailBody{overflow:auto;overscroll-behavior:contain;padding:3px 8px 18px;color:#dffbf6;line-height:1.45;scrollbar-color:#d4af37 #061114}
+.v111TvDetailBody h2,.v111TvDetailBody h3{color:#f6d679;margin:8px 0}
+.v111TvDetailBody p{white-space:pre-wrap}
+.v111TvDetailBody .tvMeta{color:#7dd3fc;font-size:10px;text-transform:uppercase;letter-spacing:.06em}
+.v111TvDetailBody .tvActions{display:flex;gap:7px;flex-wrap:wrap;position:sticky;bottom:0;background:linear-gradient(180deg,transparent,#061114 30%);padding:16px 0 3px}
+.v111TvDetailBody .tvAction{border:1px solid #d4af3766;background:#2b1d0b;color:#ffe9a8;border-radius:8px;padding:7px 9px;text-decoration:none;font-weight:900;cursor:pointer}
+.crtRow{cursor:pointer}
+.crtRow.v111Flash{animation:v111TvFlash .65s ease both}
+@keyframes v111TvFlash{0%{opacity:0;filter:brightness(2);transform:translateY(8px)}100%{opacity:1;filter:none;transform:none}}
+.v111CampaignCard{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;background:linear-gradient(135deg,#10131c,#251207);border:1px solid #d4af3755;border-radius:18px;padding:14px;margin:14px 0;box-shadow:0 18px 45px #0007}
+.v111CampaignCard h3{margin:0;color:#f6d679}.v111CampaignCard p{margin:5px 0;color:#cbd5e1;font-size:12px}.v111CampaignActions{display:flex;gap:8px;flex-wrap:wrap}.v111CampaignPanel{width:min(1100px,96vw)}
+@media(max-width:620px){.v111TvDetail{max-height:210px}.v111CampaignCard{grid-template-columns:1fr}.v111CampaignActions{display:grid;grid-template-columns:1fr 1fr}}

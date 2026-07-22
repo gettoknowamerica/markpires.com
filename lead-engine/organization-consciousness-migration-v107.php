@@ -1,0 +1,19 @@
+<?php
+ini_set('display_errors',0); header('Content-Type: application/json; charset=utf-8');
+try{require_once __DIR__.'/config.php';require_once __DIR__.'/goliath-db.php';
+$key=$_GET['key']??'';$expected=defined('AFTER_HOURS_CRON_KEY')?AFTER_HOURS_CRON_KEY:(defined('RETELL_WEBHOOK_KEY')?RETELL_WEBHOOK_KEY:'timetomakethedonuts');
+if(!hash_equals((string)$expected,(string)$key)){http_response_code(403);echo json_encode(['ok'=>false,'error'=>'bad_key']);exit;}
+function ex107($s){return gdb()->exec($s);} function one107($s,$p=[]){try{return gdb_one($s,$p)?:null;}catch(Throwable $e){return null;}}
+function col107($t,$c){$r=one107("SELECT COUNT(*) c FROM information_schema.columns WHERE table_schema=DATABASE() AND table_name=? AND column_name=?",[$t,$c]);return ((int)($r['c']??0))>0;}
+function add107($t,$c,$d,&$chg){if(!col107($t,$c)){ex107("ALTER TABLE `$t` ADD COLUMN `$c` $d");$chg[]="$t.$c";}}
+$chg=[];$tables=[
+'goliath_opportunity_marketplace'=>['opportunity_uid'=>'VARCHAR(100) NULL','source'=>'VARCHAR(120) NULL','source_id'=>'INT NULL','executive_key'=>'VARCHAR(80) NULL','title'=>'VARCHAR(255) NULL','opportunity_type'=>'VARCHAR(100) NULL','business_unit'=>'VARCHAR(120) NULL','details'=>'MEDIUMTEXT NULL','priority_score'=>'INT DEFAULT 0','confidence_score'=>'INT DEFAULT 0','revenue_score'=>'INT DEFAULT 0','authority_score'=>'INT DEFAULT 0','relationship_score'=>'INT DEFAULT 0','media_score'=>'INT DEFAULT 0','difficulty_score'=>'INT DEFAULT 0','recommended_team_json'=>'JSON NULL','status'=>"VARCHAR(60) DEFAULT 'proposed'",'project_uid'=>'VARCHAR(100) NULL','created_at'=>'DATETIME DEFAULT CURRENT_TIMESTAMP','updated_at'=>'DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'],
+'goliath_council_sessions'=>['session_uid'=>'VARCHAR(100) NULL','session_type'=>'VARCHAR(80) NULL','title'=>'VARCHAR(255) NULL','status'=>"VARCHAR(60) DEFAULT 'open'",'summary'=>'MEDIUMTEXT NULL','created_at'=>'DATETIME DEFAULT CURRENT_TIMESTAMP','closed_at'=>'DATETIME NULL'],
+'goliath_council_messages'=>['session_uid'=>'VARCHAR(100) NULL','speaker_key'=>'VARCHAR(80) NULL','speaker_name'=>'VARCHAR(140) NULL','message_type'=>'VARCHAR(80) NULL','message_text'=>'MEDIUMTEXT NULL','confidence_score'=>'INT DEFAULT 0','opportunity_uid'=>'VARCHAR(100) NULL','project_uid'=>'VARCHAR(100) NULL','created_at'=>'DATETIME DEFAULT CURRENT_TIMESTAMP'],
+'goliath_council_votes'=>['session_uid'=>'VARCHAR(100) NULL','opportunity_uid'=>'VARCHAR(100) NULL','executive_key'=>'VARCHAR(80) NULL','vote'=>'VARCHAR(40) NULL','score'=>'INT DEFAULT 0','reason'=>'MEDIUMTEXT NULL','created_at'=>'DATETIME DEFAULT CURRENT_TIMESTAMP'],
+'goliath_chairman_inputs'=>['session_uid'=>'VARCHAR(100) NULL','input_uid'=>'VARCHAR(100) NULL','input_text'=>'MEDIUMTEXT NULL','action_type'=>'VARCHAR(80) NULL','target_uid'=>'VARCHAR(100) NULL','priority_delta'=>'INT DEFAULT 0','status'=>"VARCHAR(60) DEFAULT 'logged'",'created_at'=>'DATETIME DEFAULT CURRENT_TIMESTAMP'],
+'goliath_org_memory_lessons'=>['lesson_uid'=>'VARCHAR(100) NULL','scope'=>'VARCHAR(120) NULL','executive_key'=>'VARCHAR(80) NULL','title'=>'VARCHAR(255) NULL','lesson_text'=>'MEDIUMTEXT NULL','confidence_score'=>'INT DEFAULT 0','evidence_json'=>'JSON NULL','status'=>"VARCHAR(60) DEFAULT 'active'",'created_at'=>'DATETIME DEFAULT CURRENT_TIMESTAMP','updated_at'=>'DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP']];
+foreach($tables as $t=>$cols){ex107("CREATE TABLE IF NOT EXISTS `$t` (id INT AUTO_INCREMENT PRIMARY KEY) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");foreach($cols as $c=>$d)add107($t,$c,$d,$chg);}
+echo json_encode(['ok'=>true,'version'=>'V107.0 Organization Consciousness Migration','changed_count'=>count($chg),'changed'=>$chg,'time'=>date('c')],JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
+}catch(Throwable $e){echo json_encode(['ok'=>false,'error'=>$e->getMessage(),'file'=>$e->getFile(),'line'=>$e->getLine()],JSON_PRETTY_PRINT);}
+?>

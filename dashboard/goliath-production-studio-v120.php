@@ -1,0 +1,23 @@
+<?php
+declare(strict_types=1);
+session_start();
+require_once __DIR__.'/../lead-engine/config.php';
+require_once __DIR__.'/../lead-engine/goliath-db.php';
+if(empty($_SESSION['mp_dashboard_auth'])){header('Location:/dashboard/');exit;}
+function h($v):string{return htmlspecialchars((string)$v,ENT_QUOTES,'UTF-8');}
+$key=defined('AFTER_HOURS_CRON_KEY')?AFTER_HOURS_CRON_KEY:'timetomakethedonuts';
+$versions=gdb_all("SELECT v.*,m.title mission_title FROM goliath_v118_asset_versions v JOIN goliath_v112_missions m ON m.id=v.mission_id WHERE COALESCE(v.is_tangible,1)=1 AND COALESCE(m.visible_in_production_studio,1)=1 ORDER BY v.id DESC LIMIT 100")?:[];
+$backlog=gdb_all("SELECT executive_key,status,COUNT(*) count FROM goliath_autonomous_backlog GROUP BY executive_key,status ORDER BY executive_key,status")?:[];
+$crm=[
+ 'leads'=>(int)(gdb_one("SELECT COUNT(*) c FROM leads")['c']??0),
+ 'new'=>(int)(gdb_one("SELECT COUNT(*) c FROM leads WHERE status='new'")['c']??0),
+ 'phones'=>(int)(gdb_one("SELECT COUNT(*) c FROM internal_crm_contacts WHERE COALESCE(best_phone,phone,'')=''")['c']??0),
+ 'emails'=>(int)(gdb_one("SELECT COUNT(*) c FROM internal_crm_contacts WHERE COALESCE(best_email,email,'')=''")['c']??0)
+];
+?><!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Goliath Production Studio</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#040812;color:#eef5ff;font-family:Arial}.head{padding:22px;background:#0a1423;border-bottom:1px solid #273a55}.head h1{margin:0;color:#f0cf76}.wrap{padding:16px;max-width:1800px;margin:auto}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.kpi,.panel{background:#0b1321;border:1px solid #263a55;border-radius:15px}.kpi{padding:13px}.kpi b{display:block;font-size:28px;color:#f0cf76}.grid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:12px;margin-top:14px}.panel{overflow:hidden}.panel h2{margin:0;padding:12px;background:#101d30;color:#f0cf76}.work{display:block;color:#fff;text-decoration:none;padding:11px;border-bottom:1px solid #1e2b3d}.work:hover{background:#11213a}.work small{color:#95a7bd}.pill{display:inline-block;padding:4px 7px;border-radius:99px;background:#24405f;font-size:11px}.frame{width:100%;height:72vh;border:0;background:#fff}.buttons a{display:inline-block;background:#805f12;color:white;text-decoration:none;padding:8px 10px;border-radius:8px;margin:3px;font-weight:bold}@media(max-width:850px){.kpis{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.frame{height:70vh}}
+</style></head><body><header class="head"><h1>Goliath Production Studio</h1><p>Actual work only. No executive briefs, generic overviews, HubSpot/Supabase workflows or invisible edits.</p></header><main class="wrap">
+<div class="kpis"><div class="kpi"><b><?=$crm['leads']?></b>Internal Leads</div><div class="kpi"><b><?=$crm['new']?></b>New Leads</div><div class="kpi"><b><?=$crm['phones']?></b>Missing Phones</div><div class="kpi"><b><?=$crm['emails']?></b>Missing Emails</div></div>
+<p class="buttons"><a target="_blank" href="/lead-engine/goliath-v120-autonomous-governor.php?key=<?=h($key)?>">Run Autonomous Governor</a><a href="/dashboard/leads.php">Website Leads</a><a href="/dashboard/contact-enrichment-center.php">Contact Enrichment</a><a href="/dashboard/goliath-mission-control.php">Mission Control</a></p>
+<div class="grid"><section class="panel"><h2>Actual Work</h2><?php foreach($versions as $i=>$v):?><a class="work" href="#" onclick="document.getElementById('viewer').src='<?=h('/dashboard/goliath-workflow-review-v119-2.php?mission_id='.(int)$v['mission_id'].'&stage='.(int)$v['stage_no'].'&embed=1')?>';return false;"><span class="pill"><?=h($v['executive_key'])?></span> <span class="pill">v<?=h($v['stage_no'])?></span><br><strong><?=h($v['title']?:$v['mission_title'])?></strong><br><small><?=h($v['artifact_type'])?> · <?=h($v['status'])?> · <?=h($v['created_at'])?></small></a><?php endforeach;?><?php if(!$versions):?><p style="padding:15px;color:#9eb0c4">No tangible artifacts yet. Run the governor or commission the absentee-owner article.</p><?php endif;?></section><section class="panel"><iframe id="viewer" class="frame" src="<?=!empty($versions)?h('/dashboard/goliath-workflow-review-v119-2.php?mission_id='.(int)$versions[0]['mission_id'].'&stage='.(int)$versions[0]['stage_no'].'&embed=1'):'about:blank'?>"></iframe></section></div></main><script>setTimeout(()=>location.reload(),60000)</script></body></html>

@@ -1,0 +1,107 @@
+[
+    {
+        "id": "scorsese_46e83b96ae249d567405be5461d08e7f",
+        "assigned_agent": "Scorsese",
+        "title": "Raw media intake: 20260701-181902-1782944001792-17d74339ffa6d8-IMG_1757.mov",
+        "status": "queued",
+        "workflow_state": "queued",
+        "progress": 8,
+        "current_phase": "Raw media uploaded and waiting for production claim",
+        "metadata": {
+            "agent": "Scorsese",
+            "source_file": "20260701-181902-1782944001792-17d74339ffa6d8-IMG_1757.mov"
+        },
+        "created_at": "2026-07-01T18:19:03-04:00",
+        "updated_at": "2026-07-01T18:19:03-04:00"
+    },
+    {
+        "id": "scorsese_3428a77192c2b3f1e82c0bbfe0d54280",
+        "assigned_agent": "Scorsese",
+        "title": "Raw media intake: _chunks",
+        "status": "queued",
+        "workflow_state": "queued",
+        "progress": 8,
+        "current_phase": "Raw media uploaded and waiting for production claim",
+        "metadata": {
+            "agent": "Scorsese",
+            "source_file": "_chunks"
+        },
+        "created_at": "2026-07-01T18:19:03-04:00",
+        "updated_at": "2026-07-01T18:19:03-04:00"
+    },
+    {
+        "id": "scout_0a29eccb63d77dd2840d5407111e949e",
+        "assigned_agent": "Scout",
+        "title": "Lead source uploaded: 20260701-174535-connectMLS_Toolkit_CMA_fields_20260701-115537.XLSX",
+        "status": "working",
+        "workflow_state": "working",
+        "progress": 34,
+        "current_phase": "Owner/lead source data queued for enrichment",
+        "metadata": {
+            "agent": "Scout",
+            "source_file": "20260701-174535-connectMLS_Toolkit_CMA_fields_20260701-115537.XLSX"
+        },
+        "created_at": "2026-07-01T13:45:35-04:00",
+        "updated_at": "2026-07-01T13:45:35-04:00"
+    },
+    {
+        "id": "scout_8928038b3f51403b2d54e7a53b0ffc81",
+        "assigned_agent": "Scout",
+        "title": "Lead source uploaded: 20260701-182141-connectMLS_Toolkit_CMA_fields_20260701-115537.XLSX",
+        "status": "working",
+        "workflow_state": "working",
+        "progress": 34,
+        "current_phase": "Owner/lead source data queued for enrichment",
+        "metadata": {
+            "agent": "Scout",
+            "source_file": "20260701-182141-connectMLS_Toolkit_CMA_fields_20260701-115537.XLSX"
+        },
+        "created_at": "2026-07-01T14:21:41-04:00",
+        "updated_at": "2026-07-01T14:21:41-04:00"
+    },
+    {
+        "id": "scout_0d994553742b37d98c42f843f1e6bd8e",
+        "assigned_agent": "Scout",
+        "title": "Lead source uploaded: 20260701-184220-connectMLS_Toolkit_CMA_fields_20260701-144206.csv",
+        "status": "working",
+        "workflow_state": "working",
+        "progress": 34,
+        "current_phase": "Owner/lead source data queued for enrichment",
+        "metadata": {
+            "agent": "Scout",
+            "source_file": "20260701-184220-connectMLS_Toolkit_CMA_fields_20260701-144206.csv"
+        },
+        "created_at": "2026-07-01T14:42:20-04:00",
+        "updated_at": "2026-07-01T14:42:20-04:00"
+    },
+    {
+        "id": "jessica_leads_csv",
+        "assigned_agent": "Jessica",
+        "title": "17 website leads in local CRM log",
+        "status": "review",
+        "workflow_state": "review",
+        "progress": 92,
+        "current_phase": "New relationship records ready for Human Touch follow-up",
+        "metadata": {
+            "agent": "Jessica",
+            "lead_count": 17
+        },
+        "created_at": "2026-06-14T22:25:15-04:00",
+        "updated_at": "2026-06-14T22:25:15-04:00"
+    },
+    {
+        "id": "shakespeare_personalized_content",
+        "assigned_agent": "Shakespeare",
+        "title": "Personalized lead content opportunities",
+        "status": "queued",
+        "workflow_state": "queued",
+        "progress": 12,
+        "current_phase": "Waiting for lead transcript/profile content prompts",
+        "metadata": {
+            "agent": "Shakespeare",
+            "source": "local_leads"
+        },
+        "created_at": "2026-06-14T22:25:15-04:00",
+        "updated_at": "2026-06-14T22:25:15-04:00"
+    }
+]

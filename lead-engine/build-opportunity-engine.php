@@ -1,0 +1,27 @@
+<?php
+ini_set('display_errors',0); error_reporting(E_ALL); require_once __DIR__.'/config.php'; header('Content-Type: application/json; charset=utf-8');
+function sb($m,$ep,$p=null){$ch=curl_init(rtrim(SUPABASE_URL,'/').'/rest/v1/'.ltrim($ep,'/'));curl_setopt_array($ch,[CURLOPT_RETURNTRANSFER=>true,CURLOPT_CUSTOMREQUEST=>$m,CURLOPT_HTTPHEADER=>['apikey: '.SUPABASE_SERVICE_ROLE_KEY,'Authorization: Bearer '.SUPABASE_SERVICE_ROLE_KEY,'Content-Type: application/json','Prefer: return=representation'],CURLOPT_TIMEOUT=>90]);if($p!==null)curl_setopt($ch,CURLOPT_POSTFIELDS,json_encode($p));$b=curl_exec($ch);$h=curl_getinfo($ch,CURLINFO_HTTP_CODE);curl_close($ch);$d=json_decode($b,true);return ['ok'=>$h>=200&&$h<300,'body'=>$b,'data'=>is_array($d)?$d:[]];}
+function opp($p){return sb('POST','jessica_opportunity_engine',[array_merge(['opportunity_date'=>date('Y-m-d'),'status'=>'new','created_at'=>date('c'),'updated_at'=>date('c')],$p)]);}
+try{
+$key=$_GET['key']??''; if(!defined('AFTER_HOURS_CRON_KEY')||!hash_equals(AFTER_HOURS_CRON_KEY,$key)){http_response_code(403);echo json_encode(['success'=>false,'error'=>'Invalid key']);exit;}
+$created=0;
+$expired=sb('GET','mls_expired_records?select=*&order=opportunity_score.desc,expired_date.desc&limit=250')['data'];
+foreach($expired as $e){$score=(int)($e['opportunity_score']??0); if($score<55)continue;
+ $why='Trusted MLS expired record. Failed to sell after '.(int)$e['days_on_market'].' days. Last price: $'.number_format((float)($e['list_price']??0)).'.';
+ opp(['opportunity_type'=>'expired_listing','title'=>'Expired Listing: '.$e['address'],'source_table'=>'mls_expired_records','source_id'=>$e['id'],'town'=>$e['town'],'address'=>$e['address'],'revenue_score'=>$score,'confidence_score'=>98,'urgency_score'=>min(100,45+(int)$e['days_on_market']/5),'why_now'=>$why,'recommended_action'=>'Human review first. Confirm still off-market, then Mark prepares a value-first expired listing strategy call or letter.','content_angle'=>'Seller education: why homes expire and what to do differently before relisting.','ad_angle'=>'Home Value Funnel ad: “Did your home fail to sell? Get a fresh local strategy review.”','followup_angle'=>'Check current MLS/public status, confirm not relisted/sold, then add to Mark review queue.','compliance_note'=>'MLS-export source. Human review decides outreach. Verify current status before contact.']); $created++;
+}
+$streets=sb('GET','street_intelligence?select=*&order=street_score.desc&limit=50')['data'];
+foreach($streets as $s){$score=(int)($s['street_score']??0); if($score<60)continue;
+ opp(['opportunity_type'=>'street','title'=>'Street Opportunity: '.$s['street_name'],'source_table'=>'street_intelligence','source_id'=>$s['id']??$s['street_name'],'town'=>$s['town'],'address'=>$s['street_name'],'revenue_score'=>$score,'confidence_score'=>70,'urgency_score'=>55,'why_now'=>$s['jessica_notes']??'Strong street pattern.','recommended_action'=>'Research top owners and connect this to seller content and the valuation funnel.','content_angle'=>'Film a local seller signal short about '.$s['street_name'].'.','ad_angle'=>'Test a town-specific valuation ad inspired by this street signal.','followup_angle'=>'Review owner enrichment and compliance queue.','compliance_note'=>'Public record research only until compliance review.']); $created++;
+}
+$approved=sb('GET','approved_owner_contact_queue?select=*&order=priority_score.desc&limit=50')['data'];
+foreach($approved as $a){$score=(int)($a['priority_score']??0); if($score<50)continue;
+ opp(['opportunity_type'=>'approved_owner','title'=>'Approved Owner: '.$a['owner_name'],'source_table'=>'approved_owner_contact_queue','source_id'=>$a['id']??'','town'=>$a['town'],'address'=>$a['property_address'],'revenue_score'=>$score,'confidence_score'=>90,'urgency_score'=>70,'why_now'=>'This owner is already in the approved contact queue.','recommended_action'=>'Mark follows the approved contact method with a value-first conversation.','content_angle'=>'Create homeowner value content relevant to this town/street.','ad_angle'=>'Use approved owner patterns to improve seller funnel messaging.','followup_angle'=>$a['script_notes']??'Contact according to compliance snapshot.','compliance_note'=>'Verify DNC/opt-out/current status before contact.']); $created++;
+}
+$leads=sb('GET','leads?select=*&order=created_at.desc&limit=50')['data'];
+foreach($leads as $l){$score=(int)($l['adaptive_score']??$l['lead_score']??0); if($score<50)continue;
+ opp(['opportunity_type'=>'inbound_lead','title'=>'Inbound Lead: '.($l['name']??'Unknown'),'source_table'=>'leads','source_id'=>$l['id']??'','town'=>$l['town']??'','address'=>$l['address']??'','revenue_score'=>min(100,$score+10),'confidence_score'=>85,'urgency_score'=>90,'why_now'=>'Inbound lead activity is closest to revenue.','recommended_action'=>'Mark should personally review and contact high-scoring inbound leads quickly.','content_angle'=>'Create FAQ content matching this lead type.','ad_angle'=>'Use this lead pattern to refine Home Value Funnel copy.','followup_angle'=>'Call/text/email based on lead consent and funnel source.','compliance_note'=>'Review inbound consent path; prioritize direct Mark follow-up.']); $created++;
+}
+echo json_encode(['success'=>true,'opportunities_created'=>$created],JSON_PRETTY_PRINT);
+}catch(Throwable $e){http_response_code(500);echo json_encode(['success'=>false,'error'=>$e->getMessage(),'line'=>$e->getLine()],JSON_PRETTY_PRINT);}
+?>

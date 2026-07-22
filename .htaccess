@@ -1,0 +1,55 @@
+# =========================================================
+# MarkPires.com V75.2 Google Cleanup / Canonical Rules
+# Upload this to public_html/.htaccess
+# Backup your current .htaccess first if one exists.
+# =========================================================
+
+Options -Indexes
+DirectoryIndex index.html index.php
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Force canonical host + HTTPS.
+# Final canonical homepage should be: https://www.markpires.com/
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} !^www\.markpires\.com$ [NC]
+RewriteRule ^ https://www.markpires.com%{REQUEST_URI} [R=301,L]
+
+# Normalize index files.
+RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.(html|php)[\s?] [NC]
+RewriteRule ^(.*/)?index\.(html|php)$ /$1 [R=301,L]
+
+# ---------------------------------------------------------
+# Legacy pages with useful replacement
+# ---------------------------------------------------------
+RewriteRule ^services/?$ /#services [R=301,L,NE]
+RewriteRule ^oggi-gelato-grand-opening-party/?$ /blog/ [R=301,L]
+
+# ---------------------------------------------------------
+# Legacy Wix / WordPress / BuddyForms / video URLs: Gone
+# These pages are intentionally retired and should drop out
+# of Google's index.
+# ---------------------------------------------------------
+RewriteRule ^_api/v2/dynamicmodel/?$ - [G,L]
+RewriteRule ^user-videos/?$ - [G,L]
+RewriteRule ^video-tag/?$ - [G,L]
+RewriteRule ^video-category/?$ - [G,L]
+RewriteRule ^search-videos/?$ - [G,L]
+RewriteRule ^buddyforms-submissions-page/?$ - [G,L]
+RewriteRule ^buddyforms-preview-page/?$ - [G,L]
+RewriteRule ^player-embed/?$ - [G,L]
+RewriteRule ^register/?$ - [G,L]
+RewriteRule ^es/product-page/ - [G,L]
+RewriteRule ^hi/product-page/ - [G,L]
+
+# Former WordPress endpoints. This is not a WordPress site.
+RewriteRule ^wp-login\.php$ - [G,L]
+RewriteRule ^wp-admin/? - [G,L]
+RewriteRule ^wp-admin/admin-ajax\.php$ - [G,L]
+</IfModule>
+
+# Security / crawl sanity
+<FilesMatch "^(config\.php|\.env|composer\.(json|lock)|package(-lock)?\.json)$">
+  Require all denied
+</FilesMatch>

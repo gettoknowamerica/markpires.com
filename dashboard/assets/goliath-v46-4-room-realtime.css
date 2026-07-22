@@ -1,0 +1,132 @@
+/* V46.4 Mission Control: portrait rooms, on-screen workers, realtime work chips */
+body .grid.gMissionGrid{
+  grid-template-columns:minmax(820px,1fr) 245px!important;
+  gap:12px!important;
+}
+body .hq.gFourByFour{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:12px!important;
+  align-items:start!important;
+}
+body .agentTile{
+  min-width:0!important;
+  overflow:visible!important;
+}
+body .agentHeader{
+  margin:0 0 6px!important;
+  padding:7px 10px!important;
+  min-height:30px!important;
+  border-radius:14px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:7px!important;
+  font-size:13px!important;
+  font-weight:900!important;
+  letter-spacing:.02em!important;
+  background:rgba(6,10,18,.76)!important;
+  border:1px solid rgba(255,255,255,.14)!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.22)!important;
+}
+body .agentHeaderIcon{font-size:15px!important;filter:drop-shadow(0 0 8px currentColor)!important}
+body .agentHeaderName{white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+body .hq.gFourByFour .room{
+  aspect-ratio:3/4!important;
+  min-height:0!important;
+  height:auto!important;
+  width:100%!important;
+  padding:10px!important;
+  border-radius:22px!important;
+  background-size:cover!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  overflow:hidden!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-end!important;
+  box-sizing:border-box!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.05), 0 18px 30px rgba(0,0,0,.32)!important;
+}
+body .hq.gFourByFour .room:before{
+  background:linear-gradient(180deg,rgba(3,5,12,.05) 0%,rgba(3,5,12,.08) 45%,rgba(3,5,12,.72) 100%)!important;
+}
+body .hq.gFourByFour .room p{
+  font-size:11px!important;
+  line-height:1.18!important;
+  padding:6px 7px!important;
+  border-radius:10px!important;
+  background:rgba(0,0,0,.32)!important;
+  backdrop-filter:blur(4px)!important;
+}
+body .hq.gFourByFour .room .metric{
+  top:10px!important;
+  right:10px!important;
+  font-size:18px!important;
+  line-height:1!important;
+  padding:6px 8px!important;
+  border-radius:999px!important;
+  background:rgba(0,0,0,.42)!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+}
+/* Keep workers/dots in the upper third so animations never fall off-screen */
+body .hq.gFourByFour .room .worker,
+body .hq.gFourByFour .room .aiHuman{
+  position:absolute!important;
+  left:50%!important;
+  top:34%!important;
+  right:auto!important;
+  bottom:auto!important;
+  transform:translate(-50%,-50%) scale(.78)!important;
+  transform-origin:center!important;
+  z-index:3!important;
+  max-width:64px!important;
+  max-height:86px!important;
+  transition:top .7s ease,left .7s ease,filter .25s ease!important;
+}
+body .agentTile:nth-child(odd) .room .worker{left:44%!important;top:31%!important}
+body .agentTile:nth-child(even) .room .worker{left:57%!important;top:37%!important}
+body .agentTile:nth-child(3n) .room .worker{left:49%!important;top:27%!important}
+body .agentTile.is-working .room .worker{
+  animation:gAgentPulse 1.7s ease-in-out infinite!important;
+  filter:drop-shadow(0 0 12px currentColor)!important;
+}
+@keyframes gAgentPulse{0%,100%{transform:translate(-50%,-50%) scale(.78)}50%{transform:translate(-50%,-54%) scale(.88)}}
+body .agentWorkBubble{
+  position:absolute!important;
+  left:10px!important;
+  top:10px!important;
+  z-index:2!important;
+  font-size:10px!important;
+  font-weight:800!important;
+  padding:5px 7px!important;
+  border-radius:999px!important;
+  background:rgba(0,0,0,.43)!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+  color:#fff!important;
+  backdrop-filter:blur(4px)!important;
+}
+body .agentTile.is-working .agentWorkBubble{background:rgba(49,211,141,.22)!important;border-color:rgba(49,211,141,.48)!important;color:#c9ffe5!important}
+/* Hard-wire distinct original 3:4 rooms */
+body .hq .room[data-dept="Scout"]{background-image:url('/dashboard/assets/rooms/scout-office.png?v=464')!important}
+body .hq .room[data-dept="Jessica"]{background-image:url('/dashboard/assets/rooms/jessica-office.jpeg?v=464')!important}
+body .hq .room[data-dept="Scorsese"]{background-image:url('/dashboard/assets/rooms/scorsese-studio.png?v=464')!important}
+body .hq .room[data-dept="Shakespeare"]{background-image:url('/dashboard/assets/rooms/shakespeare-publishing.png?v=464')!important}
+body .hq .room[data-dept="Einstein"]{background-image:url('/dashboard/assets/rooms/einstein-analytics.png?v=464')!important}
+body .hq .room[data-dept="Rockefeller"]{background-image:url('/dashboard/assets/rooms/rockefeller-office.png?v=464')!important}
+body .hq .room[data-dept="Prospector"]{background-image:url('/dashboard/assets/rooms/prospector-office.png?v=464')!important}
+body .hq .room[data-dept="Columbo"]{background-image:url('/dashboard/assets/rooms/columbo-office.png?v=464')!important}
+/* Agent color identities: headers, glows, shirts */
+body .agentTile[data-agent-tile="Scout"]{--agent:#31d38d}.agentTile[data-agent-tile="Jessica"]{--agent:#f3c15f}.agentTile[data-agent-tile="Scorsese"]{--agent:#b266ff}.agentTile[data-agent-tile="Shakespeare"]{--agent:#66d9ff}.agentTile[data-agent-tile="Einstein"]{--agent:#4da3ff}.agentTile[data-agent-tile="Rockefeller"]{--agent:#ff8b3d}.agentTile[data-agent-tile="Prospector"]{--agent:#e5b84a}.agentTile[data-agent-tile="Columbo"]{--agent:#d09b72}
+body .agentTile .agentHeader{color:var(--agent)!important;border-color:color-mix(in srgb,var(--agent) 38%,transparent)!important;box-shadow:0 0 20px color-mix(in srgb,var(--agent) 14%,transparent)!important}
+body .agentTile .room{outline:1px solid color-mix(in srgb,var(--agent) 20%,transparent)!important}
+body .agentTile .worker b, body .agentTile .worker i{background:var(--agent)!important}
+body .agentTile[data-agent-tile="Columbo"] .worker:before{
+  content:"";position:absolute;width:34px;height:9px;left:50%;top:-9px;border-radius:999px 999px 4px 4px;background:#2a1a12;transform:translateX(-50%) rotate(-8deg);z-index:4;box-shadow:0 -8px 0 -2px #3a2417,0 2px 7px rgba(0,0,0,.45)
+}
+body .missionSidePanel{width:245px!important;min-width:245px!important;max-width:245px!important;position:sticky!important;top:12px!important}
+body .miniFeed{max-height:430px!important;overflow:auto!important}
+@media(max-width:1420px){body .grid.gMissionGrid{grid-template-columns:1fr!important}body .missionSidePanel{width:auto!important;min-width:0!important;max-width:none!important;position:static!important}body .hq.gFourByFour{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+@media(max-width:900px){body .hq.gFourByFour{grid-template-columns:repeat(2,minmax(0,1fr))!important}body .missionSidePanel{display:block!important}body .valueCard{display:block!important}}
+@media(max-width:520px){body .hq.gFourByFour{grid-template-columns:1fr!important}body .hq.gFourByFour .room{max-height:520px!important}.agentHeader{font-size:14px!important}}

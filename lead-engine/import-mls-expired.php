@@ -1,0 +1,23 @@
+<?php
+ini_set('display_errors',0); error_reporting(E_ALL); require_once __DIR__.'/config.php'; header('Content-Type: application/json; charset=utf-8');
+function sb($m,$ep,$p=null){$ch=curl_init(rtrim(SUPABASE_URL,'/').'/rest/v1/'.ltrim($ep,'/'));curl_setopt_array($ch,[CURLOPT_RETURNTRANSFER=>true,CURLOPT_CUSTOMREQUEST=>$m,CURLOPT_HTTPHEADER=>['apikey: '.SUPABASE_SERVICE_ROLE_KEY,'Authorization: Bearer '.SUPABASE_SERVICE_ROLE_KEY,'Content-Type: application/json','Prefer: return=representation'],CURLOPT_TIMEOUT=>120]);if($p!==null)curl_setopt($ch,CURLOPT_POSTFIELDS,json_encode($p));$b=curl_exec($ch);$h=curl_getinfo($ch,CURLINFO_HTTP_CODE);curl_close($ch);$d=json_decode($b,true);return ['ok'=>$h>=200&&$h<300,'body'=>$b,'data'=>is_array($d)?$d:[]];}
+function norm($s){return strtolower(trim(preg_replace('/[^a-z0-9]+/i',' ',(string)$s)));}
+function getv($row,$keys){foreach($keys as $k){foreach($row as $rk=>$v){if(norm($rk)===norm($k)&&trim((string)$v)!=='')return trim((string)$v);}}return '';}
+function money($v){return (float)preg_replace('/[^0-9.]/','',(string)$v);}
+function datev($v){$t=strtotime($v);return $t?date('Y-m-d',$t):null;}
+function score($r){$s=45;$dom=(int)$r['days_on_market'];$price=(float)$r['list_price'];if($dom>=90)$s+=12;if($dom>=180)$s+=10;if($dom>=365)$s+=8;if($price>=700000)$s+=8;if($price>=1200000)$s+=8;if(!empty($r['expired_date']))$s+=7;if(strlen($r['listing_description'])>200)$s+=5;if((float)$r['tax_amount']>10000)$s+=5;return min(100,$s);}
+try{
+$key=$_POST['key']??''; if(!defined('AFTER_HOURS_CRON_KEY')||!hash_equals(AFTER_HOURS_CRON_KEY,$key)){http_response_code(403);echo json_encode(['success'=>false,'error'=>'Invalid key']);exit;}
+if(empty($_FILES['file']['tmp_name'])){echo json_encode(['success'=>false,'error'=>'No CSV uploaded']);exit;}
+$batch=$_POST['batch']?:'expired_'.date('Ymd_His');$replace=$_POST['replace']??'no';
+if($replace==='all')sb('DELETE','mls_expired_records?id=not.is.null'); elseif($replace==='yes')sb('DELETE','mls_expired_records?import_batch=eq.'.rawurlencode($batch));
+$fh=fopen($_FILES['file']['tmp_name'],'r');$headers=fgetcsv($fh); if(!$headers){echo json_encode(['success'=>false,'error'=>'No headers']);exit;}
+$inserted=0;$batchRows=[];$dupes=0;
+while(($data=fgetcsv($fh))!==false){$row=[];foreach($headers as $i=>$h)$row[$h]=$data[$i]??'';$address=getv($row,['address','property address','street address','listing address','full address']);$town=getv($row,['town','city','municipality']);if(!$address)continue;
+$rec=['import_batch'=>$batch,'source_name'=>'MLS Export','address'=>$address,'town'=>$town,'status'=>getv($row,['status','listing status']),'list_price'=>money(getv($row,['list price','price','last list price','current price'])),'original_price'=>money(getv($row,['original price','original list price'])),'expired_date'=>datev(getv($row,['expired date','expiration date','off market date'])),'list_date'=>datev(getv($row,['list date','listing date'])),'days_on_market'=>(int)money(getv($row,['days on market','dom','cdom'])),'bedrooms'=>money(getv($row,['bedrooms','beds','br'])),'bathrooms'=>money(getv($row,['bathrooms','baths','ba'])),'sqft'=>money(getv($row,['sqft','square feet','living area'])),'year_built'=>(int)money(getv($row,['year built','yr built'])),'tax_amount'=>money(getv($row,['tax','taxes','tax amount','annual tax'])),'assessed_value'=>money(getv($row,['assessed value','assessment'])),'listing_description'=>getv($row,['remarks','public remarks','description','listing description']),'last_agent'=>getv($row,['agent','listing agent','list agent']),'office_name'=>getv($row,['office','listing office','brokerage']),'raw'=>$row,'data_confidence'=>98,'created_at'=>date('c'),'updated_at'=>date('c')];
+$rec['opportunity_score']=score($rec);$rec['jessica_reason']='Trusted MLS expired export. Failed-to-sell record. High-confidence source; human review controls contact action.';
+$batchRows[]=$rec;if(count($batchRows)>=200){$r=sb('POST','mls_expired_records',$batchRows);if($r['ok'])$inserted+=count($batchRows);$batchRows=[];}}
+if($batchRows){$r=sb('POST','mls_expired_records',$batchRows);if($r['ok'])$inserted+=count($batchRows);}
+echo json_encode(['success'=>true,'batch'=>$batch,'inserted'=>$inserted,'replace_mode'=>$replace],JSON_PRETTY_PRINT);
+}catch(Throwable $e){http_response_code(500);echo json_encode(['success'=>false,'error'=>$e->getMessage(),'line'=>$e->getLine()],JSON_PRETTY_PRINT);}
+?>

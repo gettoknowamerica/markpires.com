@@ -1,0 +1,20 @@
+<?php
+session_start(); require_once __DIR__.'/../lead-engine/config.php'; require_once __DIR__.'/../lead-engine/goliath-db.php';
+if(empty($_SESSION['mp_dashboard_auth'])){header('Location:/dashboard/?next='.rawurlencode($_SERVER['REQUEST_URI']??'/dashboard/goliath-organization-kernel.php'));exit;}
+function h($v){return htmlspecialchars((string)$v,ENT_QUOTES,'UTF-8');}
+function rows($s,$p=[]){try{return gdb_all($s,$p)?:[];}catch(Throwable $e){return [];}}
+function one($s,$p=[]){try{return gdb_one($s,$p)?:[];}catch(Throwable $e){return [];}}
+$key=defined('AFTER_HOURS_CRON_KEY')?AFTER_HOURS_CRON_KEY:'timetomakethedonuts';
+$vision=one("SELECT * FROM goliath_founders_vision WHERE vision_key='founder_v1' LIMIT 1");
+$health=one("SELECT * FROM organization_health_snapshots ORDER BY id DESC LIMIT 1");
+$incidents=rows("SELECT * FROM chief_of_staff_incidents ORDER BY severity DESC,id DESC LIMIT 30");
+$genomes=rows("SELECT * FROM executive_genomes ORDER BY executive_key");
+$notes=rows("SELECT * FROM goliath_notifications ORDER BY priority DESC,id DESC LIMIT 25");
+$scores=rows("SELECT * FROM executive_scorecards WHERE score_date=CURDATE() ORDER BY overall_score DESC");
+?><!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Goliath Organization Kernel</title><link rel="stylesheet" href="/dashboard/assets/goliath-carbon.css"></head><body><div class="wrap">
+<header class="top"><div><div class="logo">🧬 GOLIATH ORGANIZATION KERNEL</div><div class="muted">Founder Vision · Executive Genomes · Chief of Staff · Scorecards · Notifications</div></div><div><a class="btn" href="/dashboard/goliath-organization-runtime.php">Runtime</a> <a class="btn" href="/dashboard/goliath-mission-control.php">Mission Control</a> <a class="btn gold" target="_blank" href="/lead-engine/organization-kernel-v104.php?key=<?=h($key)?>">RUN KERNEL</a></div></header>
+<section class="grid"><main class="panel"><h2>Founder’s Vision</h2><p><?=nl2br(h($vision['vision_text']??'Run V104 kernel first.'))?></p></main><aside class="panel"><h2>Organization Health</h2><div class="big"><?=h($health['health_score']??'--')?></div><div class="muted"><?=h($health['summary']??'No snapshot yet.')?></div></aside></section>
+<section class="panel" style="margin-top:14px"><h2>Executive Scorecards</h2><div class="cards"><?php foreach($scores as $s): ?><div class="item"><b><?=h(ucfirst(str_replace('_',' ',$s['executive_key'])))?></b><div class="big"><?=h($s['overall_score'])?></div><div class="muted">Active <?=h($s['missions_active'])?> · Done <?=h($s['missions_completed'])?> · Blocked <?=h($s['blocked_count'])?></div><div class="muted"><?=h($s['recommendation'])?></div></div><?php endforeach; ?></div></section>
+<section class="grid"><main class="panel"><h2>Chief of Staff Incidents</h2><div class="list"><?php foreach($incidents as $i): ?><div class="item"><b><?=h($i['title'])?></b><div class="muted">Severity <?=h($i['severity'])?> · <?=h($i['status'])?> · Assigned <?=h($i['assigned_to'])?></div><div class="muted"><?=h($i['recommended_action'])?></div></div><?php endforeach; ?></div></main><aside class="panel"><h2>Notifications</h2><div class="list"><?php foreach($notes as $n): ?><div class="item"><b><?=h($n['title'])?></b><div class="muted"><?=h($n['notification_type'])?> · <?=h($n['channel'])?> · Priority <?=h($n['priority'])?></div><div class="muted"><?=h($n['message'])?></div></div><?php endforeach; ?></div></aside></section>
+<section class="panel" style="margin-top:14px"><h2>Executive Genomes</h2><div class="cards"><?php foreach($genomes as $g): ?><div class="item"><b><?=h($g['display_name'])?></b><div class="muted"><?=h($g['role_title'])?> · <?=h($g['department'])?></div><p class="muted"><?=h($g['mission'])?></p></div><?php endforeach; ?></div></section>
+</div></body></html>

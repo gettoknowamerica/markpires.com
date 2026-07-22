@@ -1,0 +1,22 @@
+<?php
+session_start();
+require_once __DIR__ . '/../lead-engine/config.php';
+if(empty($_SESSION['mp_dashboard_auth'])){header('Location:/dashboard/');exit;}
+function h($v){return htmlspecialchars((string)$v,ENT_QUOTES,'UTF-8');}
+function sb122d($ep){
+  $ch=curl_init(rtrim(SUPABASE_URL,'/').'/rest/v1/'.ltrim($ep,'/'));
+  curl_setopt_array($ch,[CURLOPT_RETURNTRANSFER=>true,CURLOPT_HTTPGET=>true,CURLOPT_HTTPHEADER=>['apikey: '.SUPABASE_SERVICE_ROLE_KEY,'Authorization: Bearer '.SUPABASE_SERVICE_ROLE_KEY],CURLOPT_TIMEOUT=>25]);
+  $b=curl_exec($ch);curl_close($ch);$d=json_decode($b,true);return is_array($d)?$d:[];
+}
+$imports=sb122d('compliant_lead_imports?select=*&order=created_at.desc&limit=200');
+$cron=sb122d('cron_schedule_registry?select=*&order=recommended_time.asc&limit=100');
+$stats=['total'=>count($imports),'approved'=>0,'call'=>0,'review'=>0];
+foreach($imports as $i){if(($i['approval_status']??'')==='approved')$stats['approved']++;if(!empty($i['call_eligible']))$stats['call']++;if(($i['approval_status']??'')==='review')$stats['review']++;}
+$cronKey=defined('AFTER_HOURS_CRON_KEY')?AFTER_HOURS_CRON_KEY:'YOUR_KEY';
+?><!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>V12.2 Safe Source Importer</title><style>
+body{margin:0;background:#f5f3ef;color:#10101a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.header{background:linear-gradient(135deg,#10101a,#1a1a2e);color:#fff;padding:30px}.brand{font-family:Georgia,serif;color:#c8a96e;font-size:36px}.wrap{max-width:1450px;margin:auto;padding:26px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.kpi,.panel{background:#fff;border-radius:16px;box-shadow:0 2px 12px #0001}.kpi{padding:18px}.n{font-size:30px;font-weight:900}.panel{margin-top:18px;overflow:hidden}.panel h2{font-family:Georgia,serif;margin:0;padding:18px;border-bottom:1px solid #eee}.btn{display:inline-block;background:#c8a96e;color:#111;text-decoration:none;padding:9px 11px;border-radius:9px;font-weight:900;font-size:12px;margin:2px}.light{background:#f2efe8;color:#111}table{width:100%;border-collapse:collapse}td,th{text-align:left;padding:11px;border-bottom:1px solid #eee;font-size:14px;vertical-align:top}th{font-size:11px;text-transform:uppercase;color:#777;background:#faf9f6}.muted{color:#777;font-size:13px}.layout{display:grid;grid-template-columns:1fr .45fr;gap:18px}@media(max-width:900px){.grid,.layout{grid-template-columns:1fr}.wrap{padding:14px}}</style></head><body><div class="header"><div class="brand">V12.2 Safe Source Importer</div><div>CSV/vendor/opt-in/public business source intake + cron monitor</div></div><main class="wrap">
+<p><a class="btn" target="_blank" href="/lead-engine/import-approved-source-csv.php?key=<?=h($cronKey)?>&file=approved-source.csv">Import approved-source.csv</a><a class="btn light" target="_blank" href="/lead-engine/cron-monitor.php?key=<?=h($cronKey)?>">Cron Monitor</a><a class="btn light" href="/dashboard/compliant-lead-imports.php">Compliant Imports</a></p>
+<section class="grid"><div class="kpi"><div class="n"><?=h($stats['total'])?></div>Total Imports</div><div class="kpi"><div class="n"><?=h($stats['approved'])?></div>Approved</div><div class="kpi"><div class="n"><?=h($stats['call'])?></div>Call Eligible</div><div class="kpi"><div class="n"><?=h($stats['review'])?></div>Review</div></section>
+<div class="layout"><section class="panel"><h2>Recent Imports</h2><table><tr><th>Lead</th><th>Type</th><th>Eligibility</th><th>Source</th></tr><?php foreach($imports as $i):?><tr><td><strong><?=h($i['name'] ?: 'Research Target')?></strong><div class="muted"><?=h($i['phone'])?><br><?=h($i['email'])?><br><?=h($i['town'])?></div></td><td><?=h($i['lead_type'])?><br><?=h($i['approval_status'])?></td><td>DNC <?=h($i['dnc_status'])?><br>Call <?=h(!empty($i['call_eligible'])?'yes':'no')?><br>Email <?=h(!empty($i['email_eligible'])?'yes':'no')?></td><td><?=h($i['source_name'])?><div class="muted"><?=h($i['source_type'])?></div></td></tr><?php endforeach;?></table></section>
+<section class="panel"><h2>Cron Jobs</h2><table><tr><th>Job</th><th>When</th></tr><?php foreach($cron as $c):?><tr><td><strong><?=h($c['job_name'])?></strong><div class="muted"><?=h($c['notes'])?></div></td><td><?=h($c['recommended_time'])?><br><?=h($c['frequency'])?></td></tr><?php endforeach;?></table></section></div>
+</main></body></html>

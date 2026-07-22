@@ -1,0 +1,15 @@
+<?php
+ini_set('display_errors',0); error_reporting(E_ALL);
+require_once __DIR__ . '/config.php';
+header('Content-Type: application/json; charset=utf-8');
+try{
+$key=$_GET['key']??($_POST['key']??'');
+if(!defined('AFTER_HOURS_CRON_KEY')||!hash_equals(AFTER_HOURS_CRON_KEY,$key)){http_response_code(403);echo json_encode(['success'=>false,'error'=>'Invalid key']);exit;}
+function sb141i($m,$ep,$p=null){$ch=curl_init(rtrim(SUPABASE_URL,'/').'/rest/v1/'.ltrim($ep,'/'));curl_setopt_array($ch,[CURLOPT_RETURNTRANSFER=>true,CURLOPT_CUSTOMREQUEST=>$m,CURLOPT_HTTPHEADER=>['apikey: '.SUPABASE_SERVICE_ROLE_KEY,'Authorization: Bearer '.SUPABASE_SERVICE_ROLE_KEY,'Content-Type: application/json','Prefer: return=representation'],CURLOPT_TIMEOUT=>30]);if($p!==null)curl_setopt($ch,CURLOPT_POSTFIELDS,json_encode($p));$b=curl_exec($ch);$h=curl_getinfo($ch,CURLINFO_HTTP_CODE);curl_close($ch);$d=json_decode($b,true);return ['ok'=>$h>=200&&$h<300,'http'=>$h,'body'=>$b,'data'=>is_array($d)?$d:[]];}
+$raw=file_get_contents('php://input');$json=json_decode($raw,true);if(!is_array($json))$json=[];
+$g=function($k,$d='')use($json){return $_POST[$k]??$_GET[$k]??$json[$k]??$d;};
+$row=[['source_type'=>$g('source_type','fsbo'),'source_platform'=>$g('source_platform','manual_url'),'source_url'=>$g('source_url',''),'listing_title'=>$g('listing_title',''),'property_address'=>$g('property_address',$g('address','')),'town'=>$g('town',''),'state'=>$g('state','CT'),'county'=>$g('county','Fairfield County'),'list_price'=>is_numeric($g('list_price',0))?(float)$g('list_price',0):0,'beds'=>$g('beds',''),'baths'=>$g('baths',''),'sqft'=>$g('sqft',''),'lot_size'=>$g('lot_size',''),'days_on_market'=>is_numeric($g('days_on_market',0))?(int)$g('days_on_market',0):0,'price_reductions'=>is_numeric($g('price_reductions',0))?(int)$g('price_reductions',0):0,'owner_name'=>$g('owner_name',''),'owner_phone'=>$g('owner_phone',$g('phone','')),'owner_email'=>$g('owner_email',$g('email','')),'years_owned'=>is_numeric($g('years_owned',0))?(float)$g('years_owned',0):0,'last_sale_price'=>is_numeric($g('last_sale_price',0))?(float)$g('last_sale_price',0):0,'estimated_value'=>is_numeric($g('estimated_value',0))?(float)$g('estimated_value',0):0,'estimated_equity'=>is_numeric($g('estimated_equity',0))?(float)$g('estimated_equity',0):0,'dnc_status'=>$g('dnc_status','unchecked'),'realtor_status'=>$g('realtor_status','unchecked'),'approval_status'=>$g('approval_status','source_review'),'notes'=>$g('notes',''),'raw_payload'=>array_merge($_GET,$_POST,$json),'status'=>'active','created_at'=>date('c'),'updated_at'=>date('c')]];
+$r=sb141i('POST','seller_opportunity_sources',$row);
+echo json_encode(['success'=>$r['ok'],'inserted'=>$r['data'],'http'=>$r['http'],'body'=>$r['ok']?'':$r['body']],JSON_PRETTY_PRINT);
+}catch(Throwable $e){http_response_code(500);echo json_encode(['success'=>false,'message'=>$e->getMessage(),'line'=>$e->getLine()],JSON_PRETTY_PRINT);}
+?>

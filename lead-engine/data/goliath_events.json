@@ -1,0 +1,422 @@
+[
+    {
+        "id": "event_35eb4621198a5c9d1669e278d93ec80e",
+        "department": "Scout",
+        "title": "CSV success",
+        "detail": "Lead lead_1781399781_be44ae82 written to CSV",
+        "status": "success",
+        "progress": 100,
+        "confidence": 92,
+        "created_at": "2026-06-14 01:16:21",
+        "updated_at": "2026-06-14 01:16:21",
+        "metadata": {
+            "agent": "Scout",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_b846123b8376a0e26b5299e12faefdae",
+        "department": "Goliath",
+        "title": "Supabase error",
+        "detail": "HTTP 0 \u2014 URL rejected: Port number was not a decimal number between 0 and 65535 \u2014 Response: ",
+        "status": "error",
+        "progress": 20,
+        "confidence": 45,
+        "created_at": "2026-06-14 01:16:21",
+        "updated_at": "2026-06-14 01:16:21",
+        "metadata": {
+            "agent": "Goliath",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_5d4f968da189679e52036763c0520832",
+        "department": "Goliath",
+        "title": "HubSpot success",
+        "detail": "POST contact HTTP 0 \u2014 ID:  \u2014 Body: ",
+        "status": "success",
+        "progress": 100,
+        "confidence": 92,
+        "created_at": "2026-06-14 01:16:21",
+        "updated_at": "2026-06-14 01:16:21",
+        "metadata": {
+            "agent": "Goliath",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_4ea86a7dfaa56297a3557312926e1518",
+        "department": "Goliath",
+        "title": "PHPMailer error",
+        "detail": "SMTP Error: Could not authenticate.",
+        "status": "error",
+        "progress": 20,
+        "confidence": 45,
+        "created_at": "2026-06-14 01:16:23",
+        "updated_at": "2026-06-14 01:16:23",
+        "metadata": {
+            "agent": "Goliath",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_eb4c424724637159e34c6402875a6e2d",
+        "department": "Jessica",
+        "title": "Email_Mark success",
+        "detail": "To Mark via php_mail \u2014 subject: \ud83d\udcc5 CONSULTATION markpiresrealtalk@gmail.com",
+        "status": "success",
+        "progress": 100,
+        "confidence": 92,
+        "created_at": "2026-06-14 01:16:23",
+        "updated_at": "2026-06-14 01:16:23",
+        "metadata": {
+            "agent": "Jessica",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_9a9a9121b20760cede868e165ba4b1ee",
+        "department": "Goliath",
+        "title": "PHPMailer error",
+        "detail": "SMTP Error: Could not authenticate.",
+        "status": "error",
+        "progress": 20,
+        "confidence": 45,
+        "created_at": "2026-06-14 01:16:26",
+        "updated_at": "2026-06-14 01:16:26",
+        "metadata": {
+            "agent": "Goliath",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_727b8f4b8d23b6ce155389a19c50a85f",
+        "department": "Jessica",
+        "title": "AutoReply success",
+        "detail": "To lead markpiresrealtalk@gmail.com via php_mail",
+        "status": "success",
+        "progress": 100,
+        "confidence": 92,
+        "created_at": "2026-06-14 01:16:26",
+        "updated_at": "2026-06-14 01:16:26",
+        "metadata": {
+            "agent": "Jessica",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_00cbf25275d28ab77045dd414b805ec9",
+        "department": "Scout",
+        "title": "CSV success",
+        "detail": "Lead lead_1781399858_700465f8 written to CSV",
+        "status": "success",
+        "progress": 100,
+        "confidence": 92,
+        "created_at": "2026-06-14 01:17:38",
+        "updated_at": "2026-06-14 01:17:38",
+        "metadata": {
+            "agent": "Scout",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_9576f467f2a50f89e645aa31675bd4ce",
+        "department": "Goliath",
+        "title": "Supabase error",
+        "detail": "HTTP 0 \u2014 URL rejected: Port number was not a decimal number between 0 and 65535 \u2014 Response: ",
+        "status": "error",
+        "progress": 20,
+        "confidence": 45,
+        "created_at": "2026-06-14 01:17:38",
+        "updated_at": "2026-06-14 01:17:38",
+        "metadata": {
+            "agent": "Goliath",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_4f3a32e4dda741d233335c044d9473cc",
+        "department": "Goliath",
+        "title": "HubSpot success",
+        "detail": "POST contact HTTP 0 \u2014 ID:  \u2014 Body: ",
+        "status": "success",
+        "progress": 100,
+        "confidence": 92,
+        "created_at": "2026-06-14 01:17:38",
+        "updated_at": "2026-06-14 01:17:38",
+        "metadata": {
+            "agent": "Goliath",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_6d3817bb80b9e8d711c965afcc5a5b2b",
+        "department": "Goliath",
+        "title": "PHPMailer error",
+        "detail": "SMTP Error: Could not authenticate.",
+        "status": "error",
+        "progress": 20,
+        "confidence": 45,
+        "created_at": "2026-06-14 01:17:40",
+        "updated_at": "2026-06-14 01:17:40",
+        "metadata": {
+            "agent": "Goliath",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_8a85840fffae11ea521105a879c52fa7",
+        "department": "Jessica",
+        "title": "Email_Mark success",
+        "detail": "To Mark via php_mail \u2014 subject: \ud83d\udcec NEW LEAD markpiresrealtalk@gmail.com",
+        "status": "success",
+        "progress": 100,
+        "confidence": 92,
+        "created_at": "2026-06-14 01:17:40",
+        "updated_at": "2026-06-14 01:17:40",
+        "metadata": {
+            "agent": "Jessica",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_39c5320ae8f16496e23617359d8541e0",
+        "department": "Goliath",
+        "title": "PHPMailer error",
+        "detail": "SMTP Error: Could not authenticate.",
+        "status": "error",
+        "progress": 20,
+        "confidence": 45,
+        "created_at": "2026-06-14 01:17:43",
+        "updated_at": "2026-06-14 01:17:43",
+        "metadata": {
+            "agent": "Goliath",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_bdc15ceaef2573506a048fd8f195a9e2",
+        "department": "Jessica",
+        "title": "AutoReply success",
+        "detail": "To lead markpiresrealtalk@gmail.com via php_mail",
+        "status": "success",
+        "progress": 100,
+        "confidence": 92,
+        "created_at": "2026-06-14 01:17:43",
+        "updated_at": "2026-06-14 01:17:43",
+        "metadata": {
+            "agent": "Jessica",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_3ce0b8fdedd12145b1d9a9373acb949a",
+        "department": "Scout",
+        "title": "CSV success",
+        "detail": "Lead lead_1781449303_28a3e6ef written to CSV",
+        "status": "success",
+        "progress": 100,
+        "confidence": 92,
+        "created_at": "2026-06-14 15:01:43",
+        "updated_at": "2026-06-14 15:01:43",
+        "metadata": {
+            "agent": "Scout",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_c66536769a6561bb8bc5ba81deb37feb",
+        "department": "Goliath",
+        "title": "Supabase error",
+        "detail": "HTTP 0 \u2014 URL rejected: Port number was not a decimal number between 0 and 65535 \u2014 Response: ",
+        "status": "error",
+        "progress": 20,
+        "confidence": 45,
+        "created_at": "2026-06-14 15:01:43",
+        "updated_at": "2026-06-14 15:01:43",
+        "metadata": {
+            "agent": "Goliath",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_d0a5debf8c97949f22bc2a6ec0ba9c27",
+        "department": "Goliath",
+        "title": "HubSpot success",
+        "detail": "POST contact HTTP 0 \u2014 ID:  \u2014 Body: ",
+        "status": "success",
+        "progress": 100,
+        "confidence": 92,
+        "created_at": "2026-06-14 15:01:43",
+        "updated_at": "2026-06-14 15:01:43",
+        "metadata": {
+            "agent": "Goliath",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_28702ca806cd7c7ffdc2ca2360d46fb4",
+        "department": "Goliath",
+        "title": "PHPMailer error",
+        "detail": "SMTP Error: Could not authenticate.",
+        "status": "error",
+        "progress": 20,
+        "confidence": 45,
+        "created_at": "2026-06-14 15:01:46",
+        "updated_at": "2026-06-14 15:01:46",
+        "metadata": {
+            "agent": "Goliath",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_d5eb443efb52e0e608e5b5d02d2e81a5",
+        "department": "Jessica",
+        "title": "Email_Mark success",
+        "detail": "To Mark via php_mail \u2014 subject: \ud83d\udcec NEW LEAD markpiresrealtalk@gmail.com",
+        "status": "success",
+        "progress": 100,
+        "confidence": 92,
+        "created_at": "2026-06-14 15:01:46",
+        "updated_at": "2026-06-14 15:01:46",
+        "metadata": {
+            "agent": "Jessica",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_0d76ce4f40c5d76fca782bb8b7a421ac",
+        "department": "Goliath",
+        "title": "PHPMailer error",
+        "detail": "SMTP Error: Could not authenticate.",
+        "status": "error",
+        "progress": 20,
+        "confidence": 45,
+        "created_at": "2026-06-14 15:01:49",
+        "updated_at": "2026-06-14 15:01:49",
+        "metadata": {
+            "agent": "Goliath",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_f769d8e4e79f5c36e9ded2aa76f00bc1",
+        "department": "Jessica",
+        "title": "AutoReply success",
+        "detail": "To lead markpiresrealtalk@gmail.com via php_mail",
+        "status": "success",
+        "progress": 100,
+        "confidence": 92,
+        "created_at": "2026-06-14 15:01:49",
+        "updated_at": "2026-06-14 15:01:49",
+        "metadata": {
+            "agent": "Jessica",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_3cb09ed947d2859d2ea5588ab1188954",
+        "department": "Scout",
+        "title": "CSV success",
+        "detail": "Lead lead_1781490315_6c771eaf written to CSV",
+        "status": "success",
+        "progress": 100,
+        "confidence": 92,
+        "created_at": "2026-06-15 02:25:15",
+        "updated_at": "2026-06-15 02:25:15",
+        "metadata": {
+            "agent": "Scout",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_53b09319c6a1e84933112fc7bdead646",
+        "department": "Goliath",
+        "title": "Supabase error",
+        "detail": "HTTP 0 \u2014 URL rejected: Port number was not a decimal number between 0 and 65535 \u2014 Response: ",
+        "status": "error",
+        "progress": 20,
+        "confidence": 45,
+        "created_at": "2026-06-15 02:25:15",
+        "updated_at": "2026-06-15 02:25:15",
+        "metadata": {
+            "agent": "Goliath",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_c1a05b7433e5eb40b680849ef22efde8",
+        "department": "Goliath",
+        "title": "HubSpot success",
+        "detail": "POST contact HTTP 0 \u2014 ID:  \u2014 Body: ",
+        "status": "success",
+        "progress": 100,
+        "confidence": 92,
+        "created_at": "2026-06-15 02:25:15",
+        "updated_at": "2026-06-15 02:25:15",
+        "metadata": {
+            "agent": "Goliath",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_e174a8e841c13a4149a3b9ac2780c141",
+        "department": "Goliath",
+        "title": "PHPMailer error",
+        "detail": "SMTP Error: Could not authenticate.",
+        "status": "error",
+        "progress": 20,
+        "confidence": 45,
+        "created_at": "2026-06-15 02:25:18",
+        "updated_at": "2026-06-15 02:25:18",
+        "metadata": {
+            "agent": "Goliath",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_1729f7af14e2fc4e0971f3f184e8435c",
+        "department": "Jessica",
+        "title": "Email_Mark success",
+        "detail": "To Mark via php_mail \u2014 subject: \ud83d\udcb0 HOME VALUATION backtothefuturemark@gmail.com",
+        "status": "success",
+        "progress": 100,
+        "confidence": 92,
+        "created_at": "2026-06-15 02:25:18",
+        "updated_at": "2026-06-15 02:25:18",
+        "metadata": {
+            "agent": "Jessica",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_6a3679610406453b739a826650f28a51",
+        "department": "Goliath",
+        "title": "PHPMailer error",
+        "detail": "SMTP Error: Could not authenticate.",
+        "status": "error",
+        "progress": 20,
+        "confidence": 45,
+        "created_at": "2026-06-15 02:25:20",
+        "updated_at": "2026-06-15 02:25:20",
+        "metadata": {
+            "agent": "Goliath",
+            "local_log": true
+        }
+    },
+    {
+        "id": "event_98883cfe7b2dd25f8f5675f6d6bfb253",
+        "department": "Jessica",
+        "title": "AutoReply success",
+        "detail": "To lead backtothefuturemark@gmail.com via php_mail",
+        "status": "success",
+        "progress": 100,
+        "confidence": 92,
+        "created_at": "2026-06-15 02:25:20",
+        "updated_at": "2026-06-15 02:25:20",
+        "metadata": {
+            "agent": "Jessica",
+            "local_log": true
+        }
+    }
+]

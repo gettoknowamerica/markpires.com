@@ -1,0 +1,8 @@
+<?php
+ini_set('display_errors',0);header('Content-Type: application/json; charset=utf-8');
+try{require_once __DIR__.'/config.php';$key=$_GET['key']??'';$expected=defined('AFTER_HOURS_CRON_KEY')?AFTER_HOURS_CRON_KEY:(defined('RETELL_WEBHOOK_KEY')?RETELL_WEBHOOK_KEY:'timetomakethedonuts');if(!hash_equals((string)$expected,(string)$key)){http_response_code(403);echo json_encode(['ok'=>false,'error'=>'bad_key']);exit;}
+$targets=[__DIR__.'/executive-engine/executive-engine.php',__DIR__.'/scout-autopilot.php',__DIR__.'/gbi-job-update.php',__DIR__.'/scout-contact-update.php'];$changed=[];$skipped=[];
+foreach($targets as $file){if(!file_exists($file)){$skipped[]="$file missing";continue;}$s=file_get_contents($file);if(strpos($s,'goliath-normalize.php')!==false){$skipped[]="$file already patched";continue;}$done=false;foreach(["require_once __DIR__.'/../goliath-db.php';","require_once __DIR__.'/goliath-db.php';"] as $needle){if(strpos($s,$needle)!==false){$add=strpos($needle,'../')!==false?"require_once __DIR__.'/../goliath-normalize.php';":"require_once __DIR__.'/goliath-normalize.php';";$s=str_replace($needle,$needle."\n".$add,$s);$done=true;break;}}if(!$done){$skipped[]="$file no include point";continue;}copy($file,$file.'.bak-v95-6-'.date('Ymd-His'));file_put_contents($file,$s);$changed[]=$file;}
+echo json_encode(['ok'=>true,'version'=>'V95.6 Normalize Include Patch','changed'=>$changed,'skipped'=>$skipped,'time'=>date('c')],JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
+}catch(Throwable $e){echo json_encode(['ok'=>false,'error'=>$e->getMessage(),'file'=>$e->getFile(),'line'=>$e->getLine()],JSON_PRETTY_PRINT);}
+?>

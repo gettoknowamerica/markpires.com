@@ -1,0 +1,263 @@
+<?php
+session_start();
+require_once __DIR__ . '/../lead-engine/config.php';
+require_once __DIR__ . '/../lead-engine/goliath-db.php';
+require_once __DIR__ . '/../lead-engine/goliath-company-brain.php';
+if(empty($_SESSION['mp_dashboard_auth'])){header('Location:/dashboard/?next='.rawurlencode($_SERVER['REQUEST_URI']??'/dashboard/goliath-mission-control.php'));exit;}
+function h($v){return htmlspecialchars((string)$v,ENT_QUOTES,'UTF-8');}
+function normalize_exec_key($d){
+  $k=strtolower(trim((string)$d));
+  $k=preg_replace('/[^a-z]/','',$k);
+  $aliases=[
+    'oliath'=>'goliath',
+    'essica'=>'jessica',
+    'cout'=>'scout',
+    'corsese'=>'scorsese',
+    'ozart'=>'mozart',
+    'hakespeare'=>'shakespeare',
+    'instein'=>'einstein',
+    'olumbo'=>'columbo',
+    'rospector'=>'prospector',
+    'ockefeller'=>'rockefeller',
+    'andora'=>'pandora'
+  ];
+  return $aliases[$k]??$k;
+}
+function pretty_exec_name($d){
+  $k=normalize_exec_key($d);
+  $names=[
+    'goliath'=>'Goliath','jessica'=>'Jessica','scout'=>'Scout','scorsese'=>'Scorsese','mozart'=>'Mozart',
+    'shakespeare'=>'Shakespeare','einstein'=>'Einstein','columbo'=>'Columbo','prospector'=>'Prospector',
+    'rockefeller'=>'Rockefeller','pandora'=>'Pandora'
+  ];
+  return $names[$k]??ucfirst($k);
+}
+function iconx($d){$d=normalize_exec_key($d);return ['goliath'=>'🏛️','jessica'=>'✉️','scout'=>'🕵️','scorsese'=>'🎬','mozart'=>'🎼','shakespeare'=>'✒️','einstein'=>'📊','columbo'=>'🕵️‍♂️','prospector'=>'⛏️','rockefeller'=>'💰','pandora'=>'🌍'][$d]??'⚡';}
+function agent_url($d){$k=normalize_exec_key($d); if($k==='scorsese')return '/dashboard/scorsese-studio-pro.php'; if($k==='goliath')return '#executive-council'; return '/dashboard/executive-office.php?exec='.rawurlencode($k);}
+
+function mc_rows($sql,$p=[]){try{return gdb_all($sql,$p)?:[];}catch(Throwable $e){return [];} }
+function mc_one($sql,$p=[]){try{return gdb_one($sql,$p)?:[];}catch(Throwable $e){return [];} }
+$brain=gcb_company_snapshot();
+/* V81.1 safety: older/newer dispatchers sometimes stripped the first letter from executive keys.
+   Normalize those keys for display, links, icons, and meters so Mission Control always shows the real names. */
+if(isset($brain['by_executive']) && is_array($brain['by_executive'])){
+  $fixed=[];
+  foreach($brain['by_executive'] as $raw=>$stats){
+    $key=normalize_exec_key($raw);
+    if(!isset($fixed[$key])) $fixed[$key]=$stats;
+    else{
+      $fixed[$key]['total']=(int)($fixed[$key]['total']??0)+(int)($stats['total']??0);
+      $fixed[$key]['verified']=(int)($fixed[$key]['verified']??0)+(int)($stats['verified']??0);
+      $fixed[$key]['needs']=(int)($fixed[$key]['needs']??0)+(int)($stats['needs']??0);
+      $fixed[$key]['score']=max((int)($fixed[$key]['score']??0),(int)($stats['score']??0));
+      if(!empty($stats['latest'])) $fixed[$key]['latest']=$stats['latest'];
+    }
+  }
+  $brain['by_executive']=$fixed;
+}
+if(isset($brain['opportunity_radar']) && is_array($brain['opportunity_radar'])){
+  foreach($brain['opportunity_radar'] as &$opp){
+    if(isset($opp['executive'])) $opp['executive']=normalize_exec_key($opp['executive']);
+  }
+  unset($opp);
+}
+$agents=[
+ 'jessica'=>['name'=>'Jessica','role'=>'Communications, Scheduling & Follow-Up','shirt'=>'#ef4444','room'=>'jessica-office.jpeg'],
+ 'scout'=>['name'=>'Scout','role'=>'Lead Discovery & Market Intelligence','shirt'=>'#22c55e','room'=>'scout-office.png'],
+ 'scorsese'=>['name'=>'Scorsese','role'=>'Film Director & Creative Production','shirt'=>'#a855f7','room'=>'scorsese-studio.png'],
+ 'mozart'=>['name'=>'Mozart','role'=>'Music Composition & Audio Production','shirt'=>'#e5e7eb','room'=>'mozart-office.png'],
+ 'shakespeare'=>['name'=>'Shakespeare','role'=>'Blogs, Copywriting & Storytelling','shirt'=>'#7f1d1d','room'=>'shakespeare-publishing.png'],
+ 'einstein'=>['name'=>'Einstein','role'=>'Data Science, AI & Analytics','shirt'=>'#3b82f6','room'=>'einstein-analytics.png'],
+ 'columbo'=>['name'=>'Columbo','role'=>'Archive Intelligence & YouTube Growth','shirt'=>'#facc15','room'=>'columbo-office.png'],
+ 'prospector'=>['name'=>'Prospector','role'=>'Opportunity Discovery & Trend Mining','shirt'=>'#166534','room'=>'prospector-office.png'],
+ 'rockefeller'=>['name'=>'Rockefeller','role'=>'Revenue Optimization & Financial Decisions','shirt'=>'#f97316','room'=>'rockefeller-office.png'],
+ 'pandora'=>['name'=>'Pandora','role'=>'Business Expansion & Partnerships','shirt'=>'#c026d3','room'=>'pandora-office.png']
+];
+$key=defined('AFTER_HOURS_CRON_KEY')?AFTER_HOURS_CRON_KEY:'timetomakethedonuts';
+
+$mc_videos=mc_rows("SELECT id,title,status,progress,output_url,thumbnail_url,output_path,created_at,updated_at,completed_at FROM scorsese_comfy_jobs WHERE status IN ('complete','completed','ready') AND output_url IS NOT NULL AND output_url<>'' AND output_url NOT LIKE 'http://127.0.0.1:%' ORDER BY completed_at DESC, updated_at DESC, id DESC LIMIT 8");
+$mc_render_queue=mc_rows("SELECT id,title,status,progress,updated_at,error_message FROM scorsese_comfy_jobs WHERE status IN ('queued','retry','working','rendering','failed','error') ORDER BY updated_at DESC,id DESC LIMIT 8");
+$mc_datasets=mc_rows("SELECT * FROM internal_contact_sources ORDER BY id DESC LIMIT 8");
+$mc_scout_counts=mc_one("SELECT COUNT(*) total, SUM(CASE WHEN COALESCE(phone,'')<>'' OR COALESCE(existing_phone,'')<>'' THEN 1 ELSE 0 END) phones, SUM(CASE WHEN COALESCE(email,'')<>'' OR COALESCE(existing_email,'')<>'' THEN 1 ELSE 0 END) emails FROM internal_crm_contacts");
+?><!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta http-equiv="Cache-Control" content="no-store"><title>Goliath Mission Control V81.2</title>
+<link rel="stylesheet" href="/dashboard/assets/goliath-v33.css?v=33"><link rel="stylesheet" href="/dashboard/assets/goliath-v45-final.css?v=456"><link rel="stylesheet" href="/dashboard/assets/goliath-mission-control-v62.css?v=723">
+<style>
+:root{--gold:#d4af37}body{background:radial-gradient(circle at top,#111827 0,#05070d 44%,#020308 100%);color:#f8f1df}.top{gap:16px;align-items:center}.brandbar{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}.btn{display:inline-flex;align-items:center;gap:6px;border-radius:12px;padding:10px 14px;font-weight:900;text-decoration:none;border:1px solid #ffffff22;color:#fff;box-shadow:0 10px 28px #0005}.btn.gold{background:linear-gradient(135deg,#d4af37,#7a5b10);color:#111}.btn.green{background:linear-gradient(135deg,#16a34a,#064e3b)}.btn.blue{background:linear-gradient(135deg,#2563eb,#1e3a8a)}.btn.purple{background:linear-gradient(135deg,#9333ea,#581c87)}.btn.orange{background:linear-gradient(135deg,#f97316,#7c2d12)}.btn.red{background:linear-gradient(135deg,#dc2626,#7f1d1d)}
+.commandFrame{display:grid;grid-template-columns:minmax(0,1fr) 285px;gap:18px;align-items:start}.leftColumn,.rightColumn{display:grid;gap:14px}.hqPanel,.sidePanel,.promptBox,.councilBox,.feedBox,.radarBox{background:#07111f;border:1px solid #22405f;border-radius:20px;box-shadow:0 18px 45px #0007}.hqPanel{padding:16px}.hqTitle{display:flex;justify-content:space-between;align-items:center;font-weight:1000;letter-spacing:.08em;text-transform:uppercase;color:#e8f0ff;margin:0 0 10px}.hqGrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}.agentCell{min-width:0}.agentName{height:26px;display:flex;align-items:center;gap:7px;font-weight:1000;color:#fff;text-shadow:0 2px 8px #000}.newBadge{background:linear-gradient(135deg,#22c55e,#16a34a,#065f46);color:#ecfdf5;border-radius:999px;font-size:10px;font-weight:1000;padding:4px 8px;box-shadow:0 0 18px #18e36b66;border:1px solid #bbf7d0aa}
+.studioLive{position:absolute;right:10px;bottom:10px;z-index:8;letter-spacing:.08em}.office{position:relative;aspect-ratio:1/1;width:100%;min-height:190px;border:1px solid color-mix(in srgb,var(--shirt),#ffffff 18%);border-radius:18px;overflow:hidden;background-size:cover;background-position:center;display:block;color:#fff;text-decoration:none;box-shadow:0 18px 42px #0008}.office:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0005,#0001 42%,#000c)}.roomTitle{position:absolute;top:10px;left:10px;right:10px;background:#050914cc;border:1px solid #ffffff18;border-radius:12px;padding:7px 9px;font-size:10.5px;line-height:1.12;font-weight:900;color:#f5e7bc;text-transform:uppercase;min-height:26px}.metric{position:absolute;top:52px;right:10px;background:#000c;border:1px solid #ffffff33;border-radius:12px;padding:5px 9px;font-weight:1000;color:var(--gold);font-size:12px}
+
+.worker{
+position:absolute;z-index:5;left:42%;top:48%;width:40px;height:50px;
+filter:drop-shadow(0 10px 9px #000b);
+transform-origin:50% 72%;
+animation:walkPath1 34s linear infinite;
+}
+.worker .head{position:absolute;left:13px;top:0;width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 28%,#ffd8ad,#b8794d 75%);border:2px solid #151515;z-index:4}
+.worker .hair{position:absolute;left:10px;top:-2px;width:22px;height:13px;border-radius:50% 50% 42% 42%;background:#2b1a12;border:1px solid #111;z-index:5;opacity:.92}
+.worker .neck{position:absolute;left:17px;top:14px;width:8px;height:7px;background:#c98b62;border-left:1px solid #111;border-right:1px solid #111;z-index:2}
+.worker .torso{position:absolute;left:8px;top:19px;width:26px;height:24px;border-radius:12px 12px 8px 8px;background:linear-gradient(180deg,color-mix(in srgb,var(--shirt),#fff 22%),var(--shirt));border:2px solid #111;z-index:3}
+.worker .shoulders{position:absolute;left:3px;top:19px;width:36px;height:14px;border-radius:16px 16px 8px 8px;background:linear-gradient(180deg,color-mix(in srgb,var(--shirt),#fff 14%),var(--shirt));border:2px solid #111;z-index:2}
+.worker .arm{position:absolute;top:25px;width:7px;height:22px;border-radius:8px;background:#c98b62;border:1px solid #111;z-index:1;transform-origin:50% 4px;animation:armSwing .72s ease-in-out infinite alternate}
+.worker .arm.left{left:0}.worker .arm.right{right:0;animation-delay:.36s}
+.worker .leg{position:absolute;bottom:0;width:8px;height:18px;border-radius:8px;background:#111827;border:1px solid #050505;z-index:1;transform-origin:50% 2px;animation:legSwing .72s ease-in-out infinite alternate}
+.worker .leg.left{left:11px}.worker .leg.right{right:11px;animation-delay:.36s}
+.agentCell:nth-child(2n) .worker{animation-name:walkPath2;animation-duration:38s}
+.agentCell:nth-child(3n) .worker{animation-name:walkPath3;animation-duration:36s}
+.agentCell:nth-child(4n) .worker{animation-name:walkPath4;animation-duration:40s}
+.agentCell:nth-child(5n) .worker{animation-name:walkPath5;animation-duration:42s}
+@keyframes armSwing{from{transform:rotate(23deg)}to{transform:rotate(-23deg)}}
+@keyframes legSwing{from{transform:rotate(-18deg) translateY(1px)}to{transform:rotate(18deg) translateY(-1px)}}
+
+/* Corrected: every waypoint is biased LEFT/CENTER and safely inside each room. */
+@keyframes walkPath1{
+0%,10%{left:30%;top:46%;transform:rotate(0deg)} 20%,28%{left:48%;top:38%;transform:rotate(82deg)}
+38%,46%{left:52%;top:24%;transform:rotate(0deg)} 56%,64%{left:28%;top:28%;transform:rotate(-90deg)}
+74%,82%{left:24%;top:58%;transform:rotate(180deg)} 94%,100%{left:30%;top:46%;transform:rotate(-130deg)}
+}
+@keyframes walkPath2{
+0%,10%{left:46%;top:48%;transform:rotate(0deg)} 20%,28%{left:24%;top:56%;transform:rotate(-95deg)}
+38%,46%{left:24%;top:30%;transform:rotate(0deg)} 56%,64%{left:46%;top:26%;transform:rotate(90deg)}
+74%,82%{left:54%;top:56%;transform:rotate(180deg)} 94%,100%{left:46%;top:48%;transform:rotate(135deg)}
+}
+@keyframes walkPath3{
+0%,10%{left:30%;top:34%;transform:rotate(0deg)} 20%,28%{left:54%;top:34%;transform:rotate(90deg)}
+38%,46%{left:48%;top:58%;transform:rotate(180deg)} 56%,64%{left:22%;top:56%;transform:rotate(-90deg)}
+74%,82%{left:38%;top:46%;transform:rotate(45deg)} 94%,100%{left:30%;top:34%;transform:rotate(-135deg)}
+}
+@keyframes walkPath4{
+0%,10%{left:50%;top:32%;transform:rotate(0deg)} 20%,28%{left:28%;top:28%;transform:rotate(-90deg)}
+38%,46%{left:22%;top:50%;transform:rotate(180deg)} 56%,64%{left:40%;top:58%;transform:rotate(90deg)}
+74%,82%{left:54%;top:50%;transform:rotate(0deg)} 94%,100%{left:50%;top:32%;transform:rotate(-180deg)}
+}
+@keyframes walkPath5{
+0%,10%{left:26%;top:38%;transform:rotate(0deg)} 20%,28%{left:40%;top:26%;transform:rotate(60deg)}
+38%,46%{left:56%;top:42%;transform:rotate(130deg)} 56%,64%{left:50%;top:58%;transform:rotate(190deg)}
+74%,82%{left:26%;top:56%;transform:rotate(-80deg)} 94%,100%{left:26%;top:38%;transform:rotate(-150deg)}
+}
+.meterDock{position:absolute;left:10px;right:10px;bottom:10px;background:#050914e8;border:1px solid #ffffff22;border-radius:14px;padding:8px}.meterLine{display:flex;align-items:center;gap:7px}.battery{height:9px;flex:1;background:#000;border:1px solid #ffffff33;border-radius:999px;overflow:hidden}.battery b{display:block;height:100%;background:linear-gradient(90deg,var(--shirt,#d4af37),#fff2);box-shadow:0 0 12px var(--shirt,#d4af37)}.meterLine em{font-size:11px;font-weight:1000}.taskText{display:block;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:10.5px;color:#dbe3f2}.taskText strong{color:var(--shirt,#d4af37);text-transform:uppercase}
+.sidePanel{overflow:hidden}.sideHead{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #ffffff18}.sideHead b{padding:13px 14px;color:#e8f0ff;letter-spacing:.08em;text-transform:uppercase}.scoreboard,.goliathMini,.radarBox,.feedBox,.promptBox,.councilBox{padding:14px}.scoreboard h3,.radarBox h3,.promptBox h3,.councilBox h3,.feedBox h3{margin:0 0 8px;color:#d4af37;text-transform:uppercase;letter-spacing:.06em}.total{font-size:36px;font-weight:1000;color:#fff;margin:8px 0}.scoreRow,.radarItem,.eventMini{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid #ffffff12;padding:6px 0;font-size:12px;color:#fff;text-decoration:none}.radarItem{display:block}.radarItem b{color:#fff}.radarItem small{color:#d4af37}.scoreRow span{color:#d4af37;font-weight:1000}.promptBox textarea{width:100%;min-height:92px;background:#050914;color:#fff;border:1px solid #ffffff22;border-radius:14px;padding:12px;font-family:Arial,sans-serif;resize:vertical}.promptActions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.councilGrid{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:12px}.councilCard{background:#050914;border:1px solid #ffffff16;border-radius:14px;padding:12px;min-height:92px}.councilHero{background:linear-gradient(135deg,#111827,#3b2c0b);border-color:#d4af3750}.councilCard strong{color:#fff}.councilCard p{color:#c9d6ea;margin:6px 0 0}
+
+/* V81.4 layout polish: header/name bar + external meter footer */
+.hqGrid{gap:18px 16px}
+.agentCell{background:#07111f;border:1px solid color-mix(in srgb,var(--shirt),#ffffff 14%);border-radius:18px;padding:0 0 10px;box-shadow:0 18px 42px #0007;overflow:hidden}
+.agentName{height:30px;padding:0 10px;background:linear-gradient(180deg,#1a2333e8,#080d18e8);border-bottom:1px solid color-mix(in srgb,var(--shirt),#ffffff 18%);justify-content:center;letter-spacing:.04em;position:relative}
+.agentName .newBadge{display:none}
+.office{border-radius:0;border:0;box-shadow:none;min-height:178px}
+.roomTitle{top:8px;left:9px;right:9px;min-height:0;font-size:9px;line-height:1.08;padding:5px 7px;font-weight:700;letter-spacing:.02em;background:#050914b5;text-transform:uppercase;opacity:.92}
+.metric{top:42px;right:9px;font-size:12px}
+.office .meterDock{display:none}
+.agentFooter{display:block}
+.agentFooter .meterDock{position:relative;left:auto;right:auto;bottom:auto;display:block;margin:8px 10px 0;background:#050914f0;border:1px solid color-mix(in srgb,var(--shirt),#ffffff 15%);border-radius:13px;padding:8px}
+.taskText{font-size:10px}
+
+
+/* V81.2 Columbo gold gradient/readability polish */
+.agentCell[style*="#facc15"]{
+  --shirt:#facc15;
+}
+.agentCell[style*="#facc15"] .agentName{
+  background:linear-gradient(180deg,#713f12,#422006 58%,#0b1020);
+  border-bottom-color:#facc15;
+  box-shadow:inset 0 -1px 0 #facc1555;
+}
+.agentCell[style*="#facc15"] .office{
+  border-color:#facc1555;
+}
+.agentCell[style*="#facc15"] .worker .torso,
+.agentCell[style*="#facc15"] .worker .shoulders{
+  background:linear-gradient(180deg,#fde68a 0%,#facc15 45%,#ca8a04 100%);
+}
+.agentCell[style*="#facc15"] .battery b{
+  background:linear-gradient(90deg,#fef3c7 0%,#facc15 42%,#eab308 72%,#854d0e 100%);
+  box-shadow:0 0 16px #facc1590;
+}
+.agentCell[style*="#facc15"] .meterDock{
+  border-color:#facc1555;
+  box-shadow:0 0 18px #facc1518;
+}
+.agentCell[style*="#facc15"] .meterLine em,
+.agentCell[style*="#facc15"] .taskText strong,
+.agentCell[style*="#facc15"] .metric{
+  color:#facc15;
+  text-shadow:0 1px 8px #000;
+}
+
+
+/* V82.2 Mission Control additions: mini media center + Scout intake */
+.mediaBox,.scoutIntake{background:#07111f;border:1px solid #22405f;border-radius:20px;box-shadow:0 18px 45px #0007;padding:14px}.mediaBox h3,.scoutIntake h3{margin:0 0 8px;color:#d4af37;text-transform:uppercase;letter-spacing:.06em}.mediaGrid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:14px}.videoScreen{background:#000;border:1px solid #d4af3744;border-radius:16px;overflow:hidden;min-height:300px;display:flex;align-items:center;justify-content:center}.videoScreen video{width:100%;max-height:390px;display:block;background:#000}.emptyMedia{color:#94a3b8;text-align:center;padding:35px}.mediaList{max-height:390px;overflow:auto;display:grid;gap:8px}.mediaItem{display:block;background:#050914;border:1px solid #ffffff14;border-radius:12px;padding:10px;color:#fff;text-decoration:none}.mediaItem b{color:#fff}.mediaItem small{color:#d4af37}.mediaBtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.scoutGrid{display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:14px}.intakeForm{display:grid;grid-template-columns:1fr 1fr;gap:10px}.intakeForm .full{grid-column:1/-1}.intakeForm input,.intakeForm select,.intakeForm textarea{width:100%;background:#050914;color:#fff;border:1px solid #ffffff22;border-radius:12px;padding:10px}.datasetList{max-height:310px;overflow:auto;display:grid;gap:8px}.datasetCard{background:#050914;border:1px solid #ffffff14;border-radius:12px;padding:10px}.datasetCard b{color:#fff}.datasetCard small{color:#94a3b8}.datasetStats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:8px 0}.datasetStats div{background:#050914;border:1px solid #ffffff14;border-radius:12px;padding:9px}.datasetStats b{display:block;color:#d4af37;font-size:18px}.datasetStats span{font-size:10px;color:#94a3b8;text-transform:uppercase;font-weight:900}.newBadge{font-size:8px!important;padding:2px 5px!important}.studioLive{right:8px!important;bottom:8px!important}
+@media(max-width:1180px){.mediaGrid,.scoutGrid{grid-template-columns:1fr}}@media(max-width:620px){.intakeForm{grid-template-columns:1fr}.intakeForm .full{grid-column:auto}.datasetStats{grid-template-columns:repeat(2,1fr)}}
+
+@media(max-width:1180px){.commandFrame{grid-template-columns:1fr}.hqGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.office{min-height:260px}}@media(max-width:620px){.hqGrid,.councilGrid{grid-template-columns:1fr}.brandbar{justify-content:flex-start}.office{aspect-ratio:1/1;min-height:0}}
+</style><link rel="stylesheet" href="/dashboard/assets/goliath-mission-control-mobile-v95-4.css?v=954"><link rel="stylesheet" href="/dashboard/assets/goliath-mission-control-mobile-v95-5.css?v=955"></head><body><div class="shell"><script>
+let goliathFormDirty = false;
+
+document.addEventListener('input', e => {
+  if (e.target.closest('form')) goliathFormDirty = true;
+});
+
+document.addEventListener('change', e => {
+  if (e.target.closest('form')) goliathFormDirty = true;
+});
+
+setInterval(() => {
+  const active = document.activeElement;
+  const isTyping = active && ['INPUT','TEXTAREA','SELECT'].includes(active.tagName);
+  const hasFileSelected = document.querySelector('input[type="file"]')?.files?.length > 0;
+
+  if (goliathFormDirty || isTyping || hasFileSelected) {
+    console.log('Mission Control refresh paused while form is active.');
+    return;
+  }
+
+  location.reload();
+}, 60000);
+</script><?php if(file_exists(__DIR__.'/includes/goliath-sidebar-v33.php')) require __DIR__.'/includes/goliath-sidebar-v33.php'; ?><main class="main">
+<section class="top"><div><h1>Mission Control</h1><p>V81.2 Command Central: square executive rooms, speed-to-content workspaces, evidence, memory, handoffs, and opportunity radar.</p></div><div class="brandbar"><a class="btn gold" href="/dashboard/goliath-executive-inbox.php">🔴 Executive Inbox</a><a class="btn gold" href="/dashboard/goliath-deliverables.php">📦 Deliverables</a><a class="btn green" href="/dashboard/goliath-executive-memory.php">🧠 Memory</a><a class="btn purple" href="/dashboard/scorsese-studio-pro.php">🎬 Scorsese</a><a class="btn blue" href="/dashboard/goliath-worker-output.php">✅ Completed</a><a class="btn orange" href="/dashboard/goliath-system-health.php?key=<?=h($key)?>">🟢 Health</a></div></section>
+<section class="commandFrame"><div class="leftColumn"><div class="hqPanel"><div class="hqTitle"><b>Goliath HQ</b><span>10 Executive Agents — 1:1 Command Rooms</span></div><div class="hqGrid">
+<?php foreach($agents as $k=>$info): $s=$brain['by_executive'][$k]??['total'=>0,'verified'=>0,'needs'=>0,'score'=>0,'latest'=>'No deliverables yet']; /* Meter percent comes from gcb_company_snapshot()['by_executive'][$k]['score']; it updates when the company brain snapshot reflects new verified/needs-evidence deliverables. */ $p=(int)($s['score']??0); $active=(int)($s['total']??0); $roomUrl='/dashboard/assets/rooms/'.$info['room'].'?v=761'; ?>
+<div class="agentCell" style="--shirt:<?=h($info['shirt'])?>;"><div class="agentName"><span><?=iconx($k)?></span><span><?=h($info['name'])?></span></div><a class="office" style="background-image:url('<?=h($roomUrl)?>')" href="<?=h(agent_url($k))?>"><span class="roomTitle"><?=h($info['role'])?></span><span class="metric"><?=h($active)?></span><?php if($active):?><span class="newBadge studioLive">LIVE</span><?php endif;?><span class="worker"><span class="hair"></span><span class="head"></span><span class="neck"></span><span class="shoulders"></span><span class="torso"></span><span class="arm left"></span><span class="arm right"></span><span class="leg left"></span><span class="leg right"></span></span></a><div class="agentFooter"><span class="meterDock"><span class="meterLine"><span class="battery"><b style="width:<?=$p?>%"></b></span><em><?=$p?>%</em></span><span class="taskText"><strong><?=h($s['verified']??0)?> verified:</strong> <?=h($s['latest']??'No deliverables yet')?></span></span></div></div>
+<?php endforeach; ?></div></div>
+<div class="promptBox"><h3>Executive Team Prompt</h3><form method="post" action="/lead-engine/goliath-executive-prompt.php"><input type="hidden" name="key" value="<?=h($key)?>"><textarea name="prompt" placeholder="@Team I need a homeowner script, short blog, and image ideas about Fairfield County sellers cashing in while the post-COVID market is still running strong."></textarea><div class="promptActions"><button class="btn gold" type="submit">Send to Team</button><a class="btn green" target="_blank" href="/lead-engine/run-goliath-production-dispatcher.php?key=<?=h($key)?>&limit=25&update=1">Run Dispatcher</a><a class="btn purple" href="/dashboard/goliath-deliverables.php">Review Deliverables</a></div></form></div>
+<section class="mediaBox">
+  <h3>Scorsese Studio Pro Preview</h3>
+  <div class="mediaGrid">
+    <div>
+      <div class="videoScreen" id="missionVideoScreen">
+        <?php if(count($mc_videos)): $v=$mc_videos[0]; ?>
+          <video controls src="<?=h($v['output_url'])?>"></video>
+        <?php else: ?>
+          <div class="emptyMedia"><div style="font-size:42px">🎬</div><b>No finished Hostinger MP4s yet</b><br><span>Queue from Scorsese Studio Pro or run the Comfy worker.</span></div>
+        <?php endif; ?>
+      </div>
+      <div class="mediaBtns"><a class="btn purple" href="/dashboard/scorsese-studio-pro.php">Open Full Media Center</a><a class="btn green" target="_blank" href="/lead-engine/scorsese-comfy-status.php?key=<?=h($key)?>">Render Status</a><button class="btn gold" onclick="alert('Social scheduler handoff is next.')">Approve / Queue Social</button><button class="btn orange" onclick="alert('Open the full Media Center to revise this asset.')">Revise</button></div>
+    </div>
+    <div class="mediaList">
+      <?php foreach($mc_videos as $v): ?><a class="mediaItem" href="#" onclick="playMissionVideo('<?=h($v['output_url'])?>');return false;"><b><?=h($v['title']?:'Scorsese video')?></b><br><small>Job #<?=h($v['id'])?> · <?=h($v['completed_at']?:$v['updated_at'])?></small></a><?php endforeach; ?>
+      <?php if(count($mc_render_queue)): ?><div class="mediaItem"><b>Render Queue</b></div><?php endif; ?>
+      <?php foreach($mc_render_queue as $q): ?><div class="mediaItem"><b><?=h($q['title'])?></b><br><small><?=h($q['status'])?> · <?=h($q['progress'])?>%</small></div><?php endforeach; ?>
+    </div>
+  </div>
+</section>
+<section class="scoutIntake">
+  <h3>Scout Intelligence Intake</h3>
+  <div class="scoutGrid">
+    <div>
+      <form class="intakeForm" method="post" enctype="multipart/form-data" action="/lead-engine/scout-csv-intake.php">
+        <input type="hidden" name="key" value="<?=h($key)?>"><div class="full"><input name="dataset_title" required placeholder="Dataset title, e.g. July Absentee Owners / New Canaan Expireds"></div>
+        <div><select name="dataset_type"><option value="expired">Expired Listings</option><option value="absentee">Absentee Owners</option><option value="probate">Probate</option><option value="luxury">Luxury Sellers</option><option value="buyers">Buyers</option><option value="sellers">Sellers</option><option value="investors">Investors</option><option value="music_booking">Music Booking</option><option value="speaking_booking">Speaking Booking</option><option value="custom">Custom</option></select></div>
+        <div><select name="priority"><option value="5">★★★★★ Priority</option><option value="4">★★★★ High</option><option value="3">★★★ Normal</option><option value="2">★★ Low</option></select></div>
+        <div class="full"><textarea name="description" rows="3" placeholder="Notes for Scout: what this list is, where it came from, and what you want done with it."></textarea></div>
+        <div class="full"><input type="file" name="csv_file" accept=".csv,.txt" required></div>
+        <div class="full promptActions"><button class="btn gold" type="submit">Upload + Queue Scout</button><a class="btn green" target="_blank" href="/lead-engine/run-scout-data-cycle.php?key=<?=h($key)?>&limit=20&mode=dossiers">Generate Today's 20 Dossiers</a><a class="btn blue" href="/dashboard/scout-ready-contacts.php">Open Scout Contacts</a><a class="btn" href="/dashboard/scout-contact-workspace.php">Workspace</a></div>
+      </form>
+      <div class="datasetStats"><div><b><?=h($mc_scout_counts['total']??0)?></b><span>CRM Records</span></div><div><b><?=h($mc_scout_counts['phones']??0)?></b><span>Phones</span></div><div><b><?=h($mc_scout_counts['emails']??0)?></b><span>Emails</span></div><div><b>20</b><span>Daily Dossier Goal</span></div></div>
+    </div>
+    <aside><h3 style="font-size:14px">Active Datasets</h3><div class="datasetList"><?php if(!count($mc_datasets)): ?><div class="datasetCard"><b>No datasets cataloged yet.</b><br><small>Upload a CSV and Scout will take it from there.</small></div><?php endif; ?><?php foreach($mc_datasets as $d): ?><div class="datasetCard"><b><?=h($d['title']??$d['source_name']??$d['file_name']??('Dataset #'.$d['id']))?></b><br><small><?=h($d['source_type']??$d['dataset_type']??'dataset')?> · <?=h($d['created_at']??'')?></small><div class="promptActions"><a class="btn green" style="padding:7px 9px;font-size:11px" target="_blank" href="/lead-engine/run-scout-data-cycle.php?key=<?=h($key)?>&source_id=<?=h($d['id'])?>&limit=20&mode=dossiers">Research Now</a></div></div><?php endforeach; ?></div></aside>
+  </div>
+</section>
+</div>
+<div class="rightColumn"><aside class="sidePanel"><div class="sideHead"><b>Company Brain</b><b>V76.1</b></div><div class="goliathMini"><h3 style="color:#d4af37;margin:0 0 8px">Goliath OS</h3><p>Deliverables: <b><?=h($brain['counts']['deliverables']??0)?></b><br>Verified: <b><?=h($brain['counts']['verified']??0)?></b><br>Needs Evidence: <b><?=h($brain['counts']['needs_evidence']??0)?></b><br>Handoffs: <b><?=h($brain['counts']['handoffs']??0)?></b></p></div><div class="scoreboard"><h3>Completed Today</h3><div class="total"><?=h($brain['counts']['today']??0)?></div><?php foreach($brain['by_executive'] as $name=>$s): ?><a class="scoreRow" href="/dashboard/goliath-deliverables.php?exec=<?=h($name)?>"><b><?=iconx($name)?> <?=h(pretty_exec_name($name))?></b><span><?=h($s['total']??0)?></span></a><?php endforeach;?></div></aside>
+<?php if(file_exists(__DIR__.'/includes/executive-inbox-widget-v95.php')) require __DIR__.'/includes/executive-inbox-widget-v95.php'; ?>
+<div class="radarBox"><h3>Opportunity Radar</h3><?php foreach(array_slice($brain['opportunity_radar']??[],0,7) as $o): ?><a class="radarItem" href="<?=h($o['url']??'#')?>"><b><?=h($o['title']??'Opportunity')?></b><br><small>Score <?=h($o['score']??0)?> · <?=h(ucfirst($o['executive']??'Goliath'))?></small><br><span><?=h($o['next_action']??'Review next action.')?></span></a><?php endforeach; ?></div></div></section>
+<section class="councilBox" id="executive-council"><h3>Goliath Executive Council</h3><div class="councilGrid"><div class="councilCard councilHero"><strong>Today's Command</strong><p>Focus on verified deliverables, not generic text. Anything without evidence moves to Needs Evidence.</p></div><div class="councilCard"><strong>Biggest Bottleneck</strong><p><?=h(($brain['counts']['needs_evidence']??0)).' deliverables need stronger proof or clickable outputs.'?></p></div><div class="councilCard"><strong>Highest Opportunity</strong><p><?=h(($brain['opportunity_radar'][0]['title']??'No high-value opportunity yet.'))?></p></div></div></section>
+<script>function playMissionVideo(url){document.getElementById("missionVideoScreen").innerHTML="<video controls autoplay src=""+String(url).replace(/"/g,"&quot;")+""></video>";}</script></main></div></body></html>

@@ -1,0 +1,13 @@
+{
+  "Scout": {"Firecrawl":"web intelligence", "Crawl4AI":"web crawling", "Playwright":"browser automation", "BrowserUse":"browser research", "Newspaper4k":"article extraction", "BeautifulSoup":"HTML parsing", "Trafilatura":"clean extraction", "MeiliSearch":"fast lead search", "Qdrant":"semantic memory"},
+  "Jessica": {"N8N":"automation", "KokoroTTS":"voice", "Piper":"voice", "SoleroVAD":"voice activity", "Playwright":"browser assistant"},
+  "Scorsese": {"WhisperX":"transcription", "AIFFmpeg":"editing", "Remotion":"programmatic video", "SAM2":"segmentation", "RIFE":"frame interpolation", "Flowframes":"smooth motion", "4KUpscaler":"upscale", "IPAdapter":"visual style", "PULID":"identity consistency", "KokoroTTS":"voiceover"},
+  "Shakespeare": {"Humanizer":"final polish", "MarkItDown":"document extraction", "Firecrawl":"research", "Crawl4AI":"web research", "Newspaper4k":"article research", "Trafilatura":"clean extraction", "MeiliSearch":"content index", "Qdrant":"semantic memory"},
+  "Columbo": {"YouTubeAPI":"archive index", "WhisperX":"transcripts", "MarkItDown":"archive docs", "MeiliSearch":"search", "Qdrant":"memory", "Trafilatura":"web context"},
+  "Mozart": {"AudioCraft":"music generation", "Demux":"stem separation", "PayaNoteAudio":"audio notes", "SoleroVAD":"voice detection", "AIFFmpeg":"audio processing"},
+  "Prospector": {"Firecrawl":"opportunity discovery", "Crawl4AI":"web crawling", "Playwright":"browser automation", "BrowserUse":"research", "Trafilatura":"clean extraction", "MeiliSearch":"opportunity index", "Qdrant":"semantic opportunity memory"},
+  "Rockefeller": {"Qdrant":"memory", "MeiliSearch":"pipeline search", "N8N":"automation"},
+  "Einstein": {"OpenWebUI":"local AI", "Ollama":"local models", "Qdrant":"vector memory", "MeiliSearch":"search", "Autogen":"multi-agent reasoning", "OpenClaw":"orchestration"},
+  "Pandora": {"Firecrawl":"market discovery", "Crawl4AI":"web research", "Playwright":"browser automation", "BrowserUse":"research", "Qdrant":"idea memory", "MeiliSearch":"market index"},
+  "Goliath": {"OpenClaw":"orchestration", "N8N":"automation", "KokoroTTS":"voice", "Qdrant":"memory", "MeiliSearch":"search"}
+}

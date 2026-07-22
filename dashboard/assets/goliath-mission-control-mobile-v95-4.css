@@ -1,0 +1,27 @@
+/* V95.4 Mission Control Mobile Polish */
+@media(max-width:760px){
+  body{overflow-x:hidden}
+  .shell{display:block!important;width:100%!important}
+  .main{width:100%!important;padding:10px!important;margin:0!important}
+  .top{display:block!important}
+  .top h1{font-size:28px!important;line-height:1.05!important}
+  .brandbar{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;gap:8px!important;justify-content:flex-start!important;padding-bottom:8px!important}
+  .brandbar .btn,.promptActions .btn,.mediaBtns .btn{white-space:nowrap!important;flex:0 0 auto!important}
+  .commandFrame,.mediaGrid,.scoutGrid,.councilGrid{grid-template-columns:1fr!important}
+  .hqGrid{grid-template-columns:1fr!important;gap:14px!important}
+  .agentCell{border-radius:18px!important}
+  .office{min-height:230px!important;aspect-ratio:16/10!important}
+  .worker{transform:scale(.9)!important}
+  .sideHead{grid-template-columns:1fr!important}
+  .datasetStats{grid-template-columns:repeat(2,1fr)!important}
+  .intakeForm{grid-template-columns:1fr!important}
+  .videoScreen{min-height:210px!important}
+  .mediaList{max-height:260px!important}
+  .promptBox textarea{min-height:120px!important}
+}
+@media(max-width:430px){
+  .main{padding:8px!important}
+  .office{min-height:205px!important}
+  .roomTitle{font-size:8.5px!important}
+  .metric{font-size:11px!important}
+}

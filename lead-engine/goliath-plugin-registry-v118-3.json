@@ -1,0 +1,430 @@
+{
+  "version": "V118.3",
+  "law": "Every Executive may request any available plugin. The Executive must know what the plugin does, use the best tool for the mission, preserve evidence and never invent tool output.",
+  "plugins": [
+    {
+      "key": "ollama",
+      "name": "Ollama",
+      "capability": "Local LLM reasoning, drafting, classification, script analysis and editorial decisions.",
+      "best_for": [
+        "goliath",
+        "shakespeare",
+        "einstein",
+        "pandora",
+        "scorsese",
+        "mozart",
+        "jessica",
+        "scout",
+        "sherlock",
+        "columbo",
+        "prospector",
+        "rockefeller"
+      ],
+      "rule": "Model output is reasoning, not external evidence."
+    },
+    {
+      "key": "openclaw",
+      "name": "OpenClaw",
+      "capability": "Local tool orchestration, specialist planning and plugin commissioning.",
+      "best_for": [
+        "goliath",
+        "scorsese",
+        "scout",
+        "sherlock",
+        "columbo",
+        "prospector"
+      ],
+      "rule": "Use only confirmed installed tools and report failures honestly."
+    },
+    {
+      "key": "whisperx",
+      "name": "WhisperX",
+      "capability": "Speech transcription, word-level timestamps, alignment and speaker-aware transcript preparation.",
+      "best_for": [
+        "scorsese",
+        "columbo",
+        "mozart"
+      ],
+      "rule": "Keep source media and timestamps; do not invent dialogue."
+    },
+    {
+      "key": "ffmpeg",
+      "name": "FFmpeg / AIFFmpeg",
+      "capability": "Cutting, joining, transcoding, filters, proxies, audio extraction, captions and final encoding.",
+      "best_for": [
+        "scorsese",
+        "mozart"
+      ],
+      "rule": "Never overwrite originals; create versioned outputs."
+    },
+    {
+      "key": "remotion",
+      "name": "Remotion",
+      "capability": "Programmatic video timelines, captions, overlays, motion graphics, templates and multi-format rendering.",
+      "best_for": [
+        "scorsese",
+        "pandora",
+        "shakespeare"
+      ],
+      "rule": "Render from versioned project data and preserve the editable timeline."
+    },
+    {
+      "key": "comfyui",
+      "name": "ComfyUI",
+      "capability": "Node-based image/video generation, B-roll, backgrounds, visual treatments and workflow rendering.",
+      "best_for": [
+        "scorsese",
+        "pandora"
+      ],
+      "rule": "Confirm models/nodes before queueing and keep prompts/workflow JSON."
+    },
+    {
+      "key": "wan",
+      "name": "WAN Text-to-Video",
+      "capability": "Short cinematic AI video generation from prompts or reference frames.",
+      "best_for": [
+        "scorsese",
+        "pandora"
+      ],
+      "rule": "Use for supporting shots, not fabricated documentary evidence."
+    },
+    {
+      "key": "sam2",
+      "name": "SAM2",
+      "capability": "Video/image subject segmentation and object tracking for masks and compositing.",
+      "best_for": [
+        "scorsese"
+      ],
+      "rule": "Segmentation is not identity recognition."
+    },
+    {
+      "key": "ipadapter",
+      "name": "IP-Adapter",
+      "capability": "Reference-image guidance for style, composition and visual consistency.",
+      "best_for": [
+        "scorsese",
+        "pandora"
+      ],
+      "rule": "Use approved references and review for drift."
+    },
+    {
+      "key": "pulid",
+      "name": "PuLID",
+      "capability": "Identity-consistency guidance for approved subjects and characters.",
+      "best_for": [
+        "scorsese"
+      ],
+      "rule": "Use only approved source images and human review."
+    },
+    {
+      "key": "rife",
+      "name": "RIFE / Flowframes",
+      "capability": "Frame interpolation, smoother motion and slow-motion generation.",
+      "best_for": [
+        "scorsese"
+      ],
+      "rule": "Inspect for motion artifacts before delivery."
+    },
+    {
+      "key": "upscaler",
+      "name": "4K Upscalers",
+      "capability": "Restoration and high-resolution final delivery.",
+      "best_for": [
+        "scorsese"
+      ],
+      "rule": "Upscale only approved cuts; do not hide poor source quality."
+    },
+    {
+      "key": "demucs",
+      "name": "Demucs",
+      "capability": "Audio stem separation for vocals, instruments and cleanup/mastering workflows.",
+      "best_for": [
+        "mozart",
+        "scorsese"
+      ],
+      "rule": "Preserve original audio and document stem lineage."
+    },
+    {
+      "key": "opencv",
+      "name": "OpenCV / PySceneDetect",
+      "capability": "Shot boundaries, scene changes, visual metrics, duplicate frames and camera-change analysis.",
+      "best_for": [
+        "scorsese",
+        "columbo"
+      ],
+      "rule": "Scores assist editorial judgment; they do not replace it."
+    },
+    {
+      "key": "mediapipe",
+      "name": "MediaPipe",
+      "capability": "Face, pose, hand and movement signals for framing and performance analysis.",
+      "best_for": [
+        "scorsese"
+      ],
+      "rule": "Do not use for identity recognition."
+    },
+    {
+      "key": "ytdlp",
+      "name": "yt-dlp",
+      "capability": "Approved archive retrieval, metadata extraction and source ingestion.",
+      "best_for": [
+        "columbo",
+        "scorsese",
+        "mozart"
+      ],
+      "rule": "Use only content Mark owns or is authorized to process."
+    },
+    {
+      "key": "browser",
+      "name": "Browser Use / Playwright",
+      "capability": "Current web research, navigation, form testing, screenshots and structured extraction.",
+      "best_for": [
+        "scout",
+        "sherlock",
+        "prospector",
+        "einstein",
+        "columbo",
+        "jessica"
+      ],
+      "rule": "Do not claim success without source URLs or test evidence."
+    },
+    {
+      "key": "firecrawl",
+      "name": "Firecrawl / Crawl4AI",
+      "capability": "Multi-page crawling and clean structured research extraction.",
+      "best_for": [
+        "scout",
+        "sherlock",
+        "prospector",
+        "einstein",
+        "columbo"
+      ],
+      "rule": "Crawled content requires source attribution and verification."
+    },
+    {
+      "key": "newspaper",
+      "name": "Newspaper4k / Trafilatura / BeautifulSoup",
+      "capability": "Article extraction, metadata parsing and HTML data structuring.",
+      "best_for": [
+        "scout",
+        "sherlock",
+        "shakespeare",
+        "einstein",
+        "columbo",
+        "prospector"
+      ],
+      "rule": "Parsed content is not automatically current or verified."
+    },
+    {
+      "key": "qdrant",
+      "name": "Qdrant",
+      "capability": "Semantic memory across transcripts, leads, assets and prior work.",
+      "best_for": [
+        "goliath",
+        "jessica",
+        "scout",
+        "sherlock",
+        "shakespeare",
+        "einstein",
+        "columbo",
+        "scorsese",
+        "mozart",
+        "prospector",
+        "rockefeller",
+        "pandora"
+      ],
+      "rule": "Internal memory is not external proof."
+    },
+    {
+      "key": "meilisearch",
+      "name": "Meilisearch",
+      "capability": "Fast keyword search across CRM, transcripts, assets and archives.",
+      "best_for": [
+        "goliath",
+        "jessica",
+        "scout",
+        "sherlock",
+        "shakespeare",
+        "einstein",
+        "columbo",
+        "scorsese",
+        "mozart",
+        "prospector",
+        "rockefeller",
+        "pandora"
+      ],
+      "rule": "Return record IDs or paths when referencing internal results."
+    },
+    {
+      "key": "kokoro",
+      "name": "Kokoro TTS",
+      "capability": "Natural local voice output and temporary narration tracks.",
+      "best_for": [
+        "goliath",
+        "scorsese",
+        "mozart"
+      ],
+      "rule": "Kokoro speaks approved conversational text; it is not the LLM."
+    },
+    {
+      "key": "resend",
+      "name": "Resend",
+      "capability": "Transactional and approved campaign email delivery.",
+      "best_for": [
+        "jessica",
+        "shakespeare"
+      ],
+      "rule": "External email is sent as Mark Pires and requires approval rules."
+    },
+    {
+      "key": "calendar",
+      "name": "Google Calendar",
+      "capability": "Availability, appointments, reminders and event management.",
+      "best_for": [
+        "jessica",
+        "goliath"
+      ],
+      "rule": "Never create or change events without explicit authorization."
+    },
+    {
+      "key": "social",
+      "name": "Goliath Social Connectors",
+      "capability": "Platform-specific queueing, scheduling, publishing and performance ingestion.",
+      "best_for": [
+        "goliath",
+        "prospector",
+        "einstein",
+        "rockefeller",
+        "scorsese",
+        "shakespeare",
+        "pandora"
+      ],
+      "rule": "Keep Founder approval until each connector passes a real post test."
+    }
+  ],
+  "executive_mappings": {
+    "Goliath": [
+      "ollama",
+      "openclaw",
+      "qdrant",
+      "meilisearch",
+      "kokoro",
+      "calendar",
+      "social"
+    ],
+    "Jessica": [
+      "ollama",
+      "qdrant",
+      "meilisearch",
+      "browser",
+      "resend",
+      "calendar"
+    ],
+    "Scout": [
+      "ollama",
+      "openclaw",
+      "browser",
+      "firecrawl",
+      "newspaper",
+      "qdrant",
+      "meilisearch"
+    ],
+    "Sherlock": [
+      "ollama",
+      "openclaw",
+      "browser",
+      "firecrawl",
+      "newspaper",
+      "qdrant",
+      "meilisearch"
+    ],
+    "Einstein": [
+      "ollama",
+      "browser",
+      "firecrawl",
+      "newspaper",
+      "qdrant",
+      "meilisearch",
+      "social"
+    ],
+    "Shakespeare": [
+      "ollama",
+      "newspaper",
+      "qdrant",
+      "meilisearch",
+      "remotion",
+      "resend",
+      "social"
+    ],
+    "Columbo": [
+      "ollama",
+      "openclaw",
+      "whisperx",
+      "opencv",
+      "ytdlp",
+      "browser",
+      "firecrawl",
+      "newspaper",
+      "qdrant",
+      "meilisearch"
+    ],
+    "Scorsese": [
+      "ollama",
+      "openclaw",
+      "whisperx",
+      "ffmpeg",
+      "remotion",
+      "comfyui",
+      "wan",
+      "sam2",
+      "ipadapter",
+      "pulid",
+      "rife",
+      "upscaler",
+      "demucs",
+      "opencv",
+      "mediapipe",
+      "ytdlp",
+      "qdrant",
+      "meilisearch",
+      "kokoro",
+      "social"
+    ],
+    "Mozart": [
+      "ollama",
+      "whisperx",
+      "ffmpeg",
+      "demucs",
+      "ytdlp",
+      "qdrant",
+      "meilisearch",
+      "kokoro"
+    ],
+    "Prospector": [
+      "ollama",
+      "openclaw",
+      "browser",
+      "firecrawl",
+      "newspaper",
+      "qdrant",
+      "meilisearch",
+      "social"
+    ],
+    "Rockefeller": [
+      "ollama",
+      "qdrant",
+      "meilisearch",
+      "social"
+    ],
+    "Pandora": [
+      "ollama",
+      "comfyui",
+      "wan",
+      "ipadapter",
+      "remotion",
+      "qdrant",
+      "meilisearch",
+      "social"
+    ]
+  }
+}

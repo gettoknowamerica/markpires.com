@@ -1,0 +1,28 @@
+{"timestamp":"2026-06-14 01:16:21","service":"CSV","status":"success","detail":"Lead lead_1781399781_be44ae82 written to CSV"}
+{"timestamp":"2026-06-14 01:16:21","service":"Supabase","status":"error","detail":"HTTP 0 \u2014 URL rejected: Port number was not a decimal number between 0 and 65535 \u2014 Response: "}
+{"timestamp":"2026-06-14 01:16:21","service":"HubSpot","status":"success","detail":"POST contact HTTP 0 \u2014 ID:  \u2014 Body: "}
+{"timestamp":"2026-06-14 01:16:23","service":"PHPMailer","status":"error","detail":"SMTP Error: Could not authenticate."}
+{"timestamp":"2026-06-14 01:16:23","service":"Email_Mark","status":"success","detail":"To Mark via php_mail \u2014 subject: \ud83d\udcc5 CONSULTATION markpiresrealtalk@gmail.com"}
+{"timestamp":"2026-06-14 01:16:26","service":"PHPMailer","status":"error","detail":"SMTP Error: Could not authenticate."}
+{"timestamp":"2026-06-14 01:16:26","service":"AutoReply","status":"success","detail":"To lead markpiresrealtalk@gmail.com via php_mail"}
+{"timestamp":"2026-06-14 01:17:38","service":"CSV","status":"success","detail":"Lead lead_1781399858_700465f8 written to CSV"}
+{"timestamp":"2026-06-14 01:17:38","service":"Supabase","status":"error","detail":"HTTP 0 \u2014 URL rejected: Port number was not a decimal number between 0 and 65535 \u2014 Response: "}
+{"timestamp":"2026-06-14 01:17:38","service":"HubSpot","status":"success","detail":"POST contact HTTP 0 \u2014 ID:  \u2014 Body: "}
+{"timestamp":"2026-06-14 01:17:40","service":"PHPMailer","status":"error","detail":"SMTP Error: Could not authenticate."}
+{"timestamp":"2026-06-14 01:17:40","service":"Email_Mark","status":"success","detail":"To Mark via php_mail \u2014 subject: \ud83d\udcec NEW LEAD markpiresrealtalk@gmail.com"}
+{"timestamp":"2026-06-14 01:17:43","service":"PHPMailer","status":"error","detail":"SMTP Error: Could not authenticate."}
+{"timestamp":"2026-06-14 01:17:43","service":"AutoReply","status":"success","detail":"To lead markpiresrealtalk@gmail.com via php_mail"}
+{"timestamp":"2026-06-14 15:01:43","service":"CSV","status":"success","detail":"Lead lead_1781449303_28a3e6ef written to CSV"}
+{"timestamp":"2026-06-14 15:01:43","service":"Supabase","status":"error","detail":"HTTP 0 \u2014 URL rejected: Port number was not a decimal number between 0 and 65535 \u2014 Response: "}
+{"timestamp":"2026-06-14 15:01:43","service":"HubSpot","status":"success","detail":"POST contact HTTP 0 \u2014 ID:  \u2014 Body: "}
+{"timestamp":"2026-06-14 15:01:46","service":"PHPMailer","status":"error","detail":"SMTP Error: Could not authenticate."}
+{"timestamp":"2026-06-14 15:01:46","service":"Email_Mark","status":"success","detail":"To Mark via php_mail \u2014 subject: \ud83d\udcec NEW LEAD markpiresrealtalk@gmail.com"}
+{"timestamp":"2026-06-14 15:01:49","service":"PHPMailer","status":"error","detail":"SMTP Error: Could not authenticate."}
+{"timestamp":"2026-06-14 15:01:49","service":"AutoReply","status":"success","detail":"To lead markpiresrealtalk@gmail.com via php_mail"}
+{"timestamp":"2026-06-15 02:25:15","service":"CSV","status":"success","detail":"Lead lead_1781490315_6c771eaf written to CSV"}
+{"timestamp":"2026-06-15 02:25:15","service":"Supabase","status":"error","detail":"HTTP 0 \u2014 URL rejected: Port number was not a decimal number between 0 and 65535 \u2014 Response: "}
+{"timestamp":"2026-06-15 02:25:15","service":"HubSpot","status":"success","detail":"POST contact HTTP 0 \u2014 ID:  \u2014 Body: "}
+{"timestamp":"2026-06-15 02:25:18","service":"PHPMailer","status":"error","detail":"SMTP Error: Could not authenticate."}
+{"timestamp":"2026-06-15 02:25:18","service":"Email_Mark","status":"success","detail":"To Mark via php_mail \u2014 subject: \ud83d\udcb0 HOME VALUATION backtothefuturemark@gmail.com"}
+{"timestamp":"2026-06-15 02:25:20","service":"PHPMailer","status":"error","detail":"SMTP Error: Could not authenticate."}
+{"timestamp":"2026-06-15 02:25:20","service":"AutoReply","status":"success","detail":"To lead backtothefuturemark@gmail.com via php_mail"}

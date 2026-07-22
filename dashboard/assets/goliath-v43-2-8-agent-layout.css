@@ -1,0 +1,161 @@
+
+/* V43.2 Mission Control 8-Agent Layout
+   Goal: 4 agents top / 4 agents bottom, activity box smaller, no money clutter.
+*/
+
+/* Main Mission Control content grid: HQ gets more room, activity panel gets less */
+.missionGrid,
+.mission-grid,
+.controlGrid,
+.control-grid,
+.gMissionGrid {
+  display:grid!important;
+  grid-template-columns:minmax(0, 1fr) minmax(260px, 330px)!important;
+  gap:14px!important;
+  align-items:start!important;
+}
+
+/* HQ / agent room grid: force 4 x 2 on desktop */
+.hq,
+.agentGrid,
+.agent-grid,
+.rooms,
+.roomGrid,
+.room-grid {
+  display:grid!important;
+  grid-template-columns:repeat(4, minmax(0, 1fr))!important;
+  gap:12px!important;
+  align-items:stretch!important;
+}
+
+/* Compact rooms so eight fit cleanly */
+.hq .room,
+.agentGrid .room,
+.rooms .room {
+  min-height:205px!important;
+  padding:10px!important;
+}
+
+/* Keep room header compact and beautiful */
+.hq .room h3,
+.agentGrid .room h3,
+.rooms .room h3 {
+  font-size:14px!important;
+  padding:4px 8px!important;
+}
+
+.hq .room h3 .deptIcon,
+.agentGrid .room h3 .deptIcon,
+.rooms .room h3 .deptIcon {
+  width:23px!important;
+  height:23px!important;
+  font-size:14px!important;
+}
+
+/* Smaller room labels */
+.hq .room p,
+.agentGrid .room p,
+.rooms .room p {
+  font-size:11px!important;
+  line-height:1.2!important;
+  padding:3px 6px!important;
+  max-width:92%!important;
+}
+
+/* Metric pill smaller */
+.hq .room .metric,
+.agentGrid .room .metric,
+.rooms .room .metric {
+  font-size:11px!important;
+  padding:3px 7px!important;
+}
+
+/* Current Activity / Recent Activity box: compact */
+.activityPanel,
+.activity-panel,
+.currentActivity,
+.current-activity,
+.feed,
+.activityFeed,
+.activity-feed,
+.gActivity,
+.gActivityPanel {
+  max-height:430px!important;
+  overflow:auto!important;
+}
+
+/* Compact activity rows and hide ROI/money amount clutter */
+.activityPanel .roi,
+.activity-panel .roi,
+.currentActivity .roi,
+.feed .roi,
+.activityFeed .roi,
+.gActivity .roi,
+.activityPanel [class*="roi"],
+.activity-panel [class*="roi"],
+.currentActivity [class*="roi"],
+.feed [class*="roi"],
+.activityFeed [class*="roi"],
+.gActivity [class*="roi"],
+.activityPanel [class*="money"],
+.activity-panel [class*="money"],
+.currentActivity [class*="money"],
+.feed [class*="money"],
+.activityFeed [class*="money"],
+.gActivity [class*="money"] {
+  display:none!important;
+}
+
+.activityPanel li,
+.activity-panel li,
+.currentActivity li,
+.feed li,
+.activityFeed li,
+.gActivity li,
+.activityPanel .event,
+.activity-panel .event,
+.currentActivity .event,
+.feed .event,
+.activityFeed .event,
+.gActivity .event {
+  padding:8px 9px!important;
+  margin-bottom:7px!important;
+  font-size:12px!important;
+  line-height:1.25!important;
+}
+
+/* Tablet: 2 x 4 */
+@media(max-width:1150px){
+  .missionGrid,
+  .mission-grid,
+  .controlGrid,
+  .control-grid,
+  .gMissionGrid {
+    grid-template-columns:1fr!important;
+  }
+  .hq,
+  .agentGrid,
+  .agent-grid,
+  .rooms,
+  .roomGrid,
+  .room-grid {
+    grid-template-columns:repeat(2, minmax(0, 1fr))!important;
+  }
+}
+
+/* Mobile: one column, hamburger already handles nav */
+@media(max-width:650px){
+  .hq,
+  .agentGrid,
+  .agent-grid,
+  .rooms,
+  .roomGrid,
+  .room-grid {
+    grid-template-columns:1fr!important;
+  }
+  .hq .room,
+  .agentGrid .room,
+  .rooms .room {
+    min-height:185px!important;
+  }
+}

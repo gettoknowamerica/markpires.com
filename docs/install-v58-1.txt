@@ -1,0 +1,14 @@
+Goliath Omni OS V58.1 — Scorsese Chunked Upload
+
+Install:
+1. Upload the public_html folder over your public_html folder.
+2. Run sql/goliath-v58-1-scorsese-chunked-upload.sql in Supabase.
+3. Ensure these folders exist and are writable:
+   public_html/data/scorsese_raw/
+   public_html/data/legacy_raw/
+   public_html/data/scorsese_chunks/
+4. Open /dashboard/scorsese-chunk-upload.php
+
+Recommended:
+- Use normal Scorsese Media Vault for small clips.
+- Use Chunked Upload for long/large files, especially LegacySaved.

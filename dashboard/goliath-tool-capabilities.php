@@ -1,0 +1,11 @@
+<?php
+session_start();
+require_once __DIR__ . '/../lead-engine/config.php';
+require_once __DIR__ . '/../lead-engine/goliath-executive-intelligence.php';
+if(empty($_SESSION['mp_dashboard_auth'])){header('Location:/dashboard/?next='.rawurlencode($_SERVER['REQUEST_URI']??'/dashboard/goliath-tool-capabilities.php'));exit;}
+function h($v){return htmlspecialchars((string)$v,ENT_QUOTES,'UTF-8');}
+$dict=gei_tool_dictionary();
+$agents=['Goliath','Scout','Prospector','Pandora','Einstein','Shakespeare','Scorsese','Mozart','Columbo','Jessica','Rockefeller'];
+?><!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Goliath Tool Capabilities</title><link rel="stylesheet" href="/dashboard/assets/goliath-v33.css?v=33"><link rel="stylesheet" href="/dashboard/assets/goliath-v45-final.css?v=456"><style>body{background:#030712;color:#fff}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}.card{background:#0f172a;border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:14px}.card h3{color:#f5d48b;margin:0 0 8px}.tag{display:inline-block;background:#1e293b;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:4px 8px;margin:2px;font-size:12px}.tool{white-space:normal}.tool small{color:#94a3b8}.agentBlock{margin-bottom:22px}.agentBlock h2{color:#d4af37}</style></head><body><div class="shell"><?php @require __DIR__.'/includes/goliath-sidebar-v33.php'; ?><main class="main"><section class="top"><div><h1>Executive Tool Capability Dictionary</h1><p>What every executive knows about the tools/plugins available to Goliath OS.</p></div><div class="brandbar"><a class="btn dark" href="/dashboard/goliath-mission-control.php">Mission Control</a></div></section>
+<?php foreach($agents as $a): $tools=gei_agent_tools($a); ?><section class="agentBlock panel"><h2><?=h($a)?></h2><div class="inner"><div class="grid"><?php foreach($tools as $k): if(!isset($dict[$k]))continue; $t=$dict[$k]; ?><div class="card tool"><h3><?=h($t['name'])?></h3><p><?=h($t['capability'])?></p><small><b>Inputs:</b> <?=h($t['inputs'])?><br><b>Outputs:</b> <?=h($t['outputs'])?><br><b>Never:</b> <?=h($t['never'])?></small></div><?php endforeach;?></div></div></section><?php endforeach;?>
+</main></div></body></html>

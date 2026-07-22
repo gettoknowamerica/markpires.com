@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{BLOG_TITLE}} | Mark Pires — Connecticut's House Detective</title>
+<meta name="description" content="{{META_DESCRIPTION}}">
+<meta property="og:title" content="{{BLOG_TITLE}} | Mark Pires">
+<meta property="og:description" content="{{META_DESCRIPTION}}">
+<meta property="og:image" content="{{HERO_IMAGE_URL}}">
+<meta property="og:type" content="article">
+<link rel="canonical" href="https://markpires.com/blog/{{SLUG}}">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"{{BLOG_TITLE}}","description":"{{META_DESCRIPTION}}","author":{"@type":"Person","name":"Mark Pires","url":"https://markpires.com","jobTitle":"Licensed Real Estate Agent","worksFor":{"@type":"Organization","name":"Coldwell Banker Realty"}},"publisher":{"@type":"Organization","name":"Mark Pires Real Estate","logo":{"@type":"ImageObject","url":"https://markpires.com/images/branding/house-detective-logo.png"}},"datePublished":"{{DATE}}","image":"{{HERO_IMAGE_URL}}","mainEntityOfPage":"https://markpires.com/blog/{{SLUG}}"}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ── */
+:root {
+  --navy:   #0B1C36;
+  --navy2:  #152035;
+  --gold:   #C9A227;
+  --gold2:  rgba(201,162,39,.15);
+  --cream:  #F8F5EF;
+  --white:  #FFFFFF;
+  --text:   #1a1a2e;
+  --muted:  #666;
+  --serif:  'Cormorant Garamond','Georgia',serif;
+  --sans:   'Montserrat','Arial',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--serif);background:var(--cream);color:var(--text);overflow-x:hidden}
+
+/* ── NAV ── */
+.blog-nav{
+  background:var(--navy);
+  padding:.9rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;
+  border-bottom:1px solid rgba(201,162,39,.15);
+}
+.nav-logo{display:flex;align-items:center;gap:.7rem;text-decoration:none}
+.nav-logo img{height:40px;width:auto;object-fit:contain;filter:brightness(1)}
+.nav-logo span{font-family:var(--sans);font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.38)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-family:var(--sans);font-size:.65rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-links a.active{border-bottom:1px solid var(--gold);padding-bottom:2px}
+.nav-cta-link{font-family:var(--sans);font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.55rem 1.2rem;border:1px solid var(--gold);color:var(--gold);text-decoration:none;transition:all .25s}
+.nav-cta-link:hover{background:var(--gold);color:var(--navy)}
+@media(max-width:768px){.nav-links{display:none}.blog-nav{padding:.8rem 1.2rem}}
+
+/* ── HERO ── */
+.blog-hero{
+  position:relative;min-height:520px;
+  display:flex;align-items:flex-end;
+  background:var(--navy) no-repeat center center / cover;
+  overflow:hidden;
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(11,28,54,.92) 0%,rgba(11,28,54,.6) 40%,rgba(11,28,54,.35) 100%);
+}
+.hero-content{
+  position:relative;z-index:1;
+  max-width:1100px;width:100%;margin:0 auto;
+  padding:3.5rem 2rem 3rem;
+  display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:flex-end;
+}
+.hero-left{max-width:680px}
+.hero-category{
+  font-family:var(--sans);font-size:.6rem;font-weight:600;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;
+  display:flex;align-items:center;gap:.6rem;
+}
+.hero-category::before{content:'';width:28px;height:1px;background:var(--gold)}
+.blog-hero h1{
+  font-family:var(--serif);font-size:clamp(2rem,4.5vw,3.2rem);
+  font-weight:700;color:var(--white);line-height:1.15;margin-bottom:.9rem;
+  letter-spacing:-.01em;
+}
+.hero-subtitle{
+  font-family:var(--serif);font-size:1.1rem;font-style:italic;
+  font-weight:300;color:rgba(255,255,255,.6);margin-bottom:1.8rem;
+}
+.hero-author-bar{
+  display:flex;align-items:center;gap:1rem;
+  padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.12);
+}
+.author-avatar{
+  width:46px;height:46px;border-radius:50%;object-fit:cover;
+  border:2px solid var(--gold);flex-shrink:0;
+}
+.hero-author-meta{display:flex;flex-direction:column;gap:.2rem}
+.hero-byline{font-family:var(--sans);font-size:.62rem;color:rgba(255,255,255,.5);letter-spacing:.06em}
+.hero-byline span{color:var(--gold);font-weight:600}
+.hero-meta-row{display:flex;gap:1rem;font-family:var(--sans);font-size:.58rem;color:rgba(255,255,255,.35);letter-spacing:.05em}
+.hero-sig{
+  display:flex;flex-direction:column;align-items:flex-end;gap:.4rem;
+  text-align:right;
+}
+.sig-script{
+  font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-style:italic;
+  color:var(--gold);line-height:1;letter-spacing:.02em;
+}
+.sig-title{
+  font-family:var(--sans);font-size:.5rem;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:rgba(255,255,255,.35);
+}
+.sig-logo{height:44px;width:auto;object-fit:contain;filter:brightness(1);margin-top:.4rem}
+@media(max-width:768px){
+  .blog-hero{min-height:420px}
+  .hero-content{grid-template-columns:1fr;padding:2rem 1.4rem 2.5rem}
+  .hero-sig{display:none}
+  .blog-hero h1{font-size:clamp(1.7rem,7vw,2.6rem)}
+}
+
+/* ── ARTICLE WRAPPER ── */
+.blog-article{max-width:1100px;margin:0 auto;padding:3.5rem 2rem}
+@media(max-width:768px){.blog-article{padding:2rem 1.4rem}}
+
+/* ── CONTENT TYPOGRAPHY ── */
+.blog-article h2{
+  font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold);margin:2.8rem 0 .9rem;
+  padding-bottom:.5rem;border-bottom:1px solid rgba(201,162,39,.2);
+}
+.blog-article h3{
+  font-family:var(--serif);font-size:1.3rem;font-weight:600;
+  color:var(--navy);margin:1.8rem 0 .7rem;
+}
+.blog-article p{
+  font-family:var(--serif);font-size:1.05rem;line-height:1.85;
+  color:#2a2a3e;margin-bottom:1.2rem;
+}
+.blog-article strong{color:var(--navy);font-weight:600}
+.blog-article em{font-style:italic;color:#444}
+.blog-article ul,.blog-article ol{padding-left:1.6rem;margin-bottom:1.2rem}
+.blog-article li{
+  font-family:var(--serif);font-size:1.05rem;line-height:1.75;color:#2a2a3e;margin-bottom:.4rem;
+}
+
+/* ── QUICK FACTS BOX ── */
+.quick-facts-box{
+  background:var(--white);border:1px solid rgba(201,162,39,.3);
+  border-top:3px solid var(--gold);padding:2rem 2.2rem;margin:2.5rem 0;
+}
+.quick-facts-box h3{
+  font-family:var(--sans);font-size:.65rem;font-weight:700;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;
+  border-bottom:none;margin-top:0;
+}
+.facts-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem 2rem}
+.fact-item{
+  font-family:var(--sans);font-size:.72rem;line-height:1.5;color:var(--muted);
+}
+.fact-item strong{color:var(--navy);display:block}
+@media(max-width:600px){.facts-grid{grid-template-columns:1fr}}
+
+/* ── REALITY CHECK SECTION ── */
+.reality-section{
+  background:var(--white);border:1px solid rgba(201,162,39,.15);
+  padding:2rem 2.2rem;margin:2.5rem 0;
+  display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;
+}
+.reality-list{list-style:none;padding:0}
+.reality-list li{
+  display:flex;align-items:flex-start;gap:.8rem;
+  font-family:var(--serif);font-size:1rem;line-height:1.6;color:#2a2a3e;
+  padding:.5rem 0;border-bottom:1px solid rgba(201,162,39,.1);
+}
+.reality-list li:last-child{border-bottom:none}
+.reality-list .check{
+  color:var(--gold);font-size:.75rem;margin-top:3px;flex-shrink:0;
+  width:18px;height:18px;border:1.5px solid var(--gold);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+}
+.truth-bomb{
+  background:var(--navy);border:1px solid rgba(201,162,39,.3);
+  padding:1.5rem;display:flex;gap:1rem;align-items:flex-start;height:fit-content;
+}
+.tb-icon{font-size:1.5rem;flex-shrink:0;margin-top:2px}
+.tb-label{
+  font-family:var(--sans);font-size:.56rem;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;
+}
+.tb-text{font-family:var(--serif);font-size:.92rem;line-height:1.65;color:rgba(255,255,255,.8)}
+@media(max-width:768px){.reality-section{grid-template-columns:1fr}}
+
+/* ── STATS INFOGRAPHIC ── */
+.stats-infographic{
+  border:1px solid var(--gold);padding:2rem;margin:3rem 0;background:var(--white);
+}
+.stats-title{
+  font-family:var(--sans);font-size:.65rem;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--navy);text-align:center;margin-bottom:1.8rem;
+  padding-bottom:1rem;border-bottom:1px solid rgba(201,162,39,.25);
+}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(201,162,39,.15)}
+.stat-cell{
+  background:var(--white);padding:1.5rem;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+}
+.stat-icon{font-size:1.8rem;color:var(--gold)}
+.stat-label{font-family:var(--sans);font-size:.55rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.stat-number{font-family:var(--serif);font-size:2.2rem;font-weight:700;color:var(--navy);line-height:1}
+.stat-note{font-family:var(--sans);font-size:.58rem;color:var(--muted)}
+@media(max-width:600px){.stats-grid{grid-template-columns:1fr}}
+
+/* ── DARK CONTENT SECTION ── */
+.dark-section{
+  background:var(--navy);color:var(--white);
+  padding:3rem 2rem;margin:3rem -2rem;
+}
+.dark-section h2{
+  font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:2rem;
+  border-bottom:1px solid rgba(201,162,39,.2);padding-bottom:.8rem;
+}
+.dark-section p{color:rgba(255,255,255,.75)}
+.timeline-list{list-style:none;padding:0;position:relative}
+.timeline-list::before{
+  content:'';position:absolute;left:16px;top:24px;bottom:24px;
+  width:1px;background:rgba(201,162,39,.25);
+}
+.tl-item{display:flex;gap:1.4rem;align-items:flex-start;padding-bottom:1.8rem;position:relative}
+.tl-num{
+  width:32px;height:32px;border-radius:50%;background:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--sans);font-size:.65rem;font-weight:700;color:var(--navy);
+  flex-shrink:0;position:relative;z-index:1;
+}
+.tl-body .tl-title{
+  font-family:var(--sans);font-size:.66rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:.25rem;
+}
+.tl-body .tl-desc{font-family:var(--serif);font-size:.95rem;line-height:1.65;color:rgba(255,255,255,.7)}
+
+/* ── TIPS GRID (dark) ── */
+.tips-section{
+  background:var(--navy2);padding:3rem 2rem;margin:3rem -2rem;
+}
+.tips-section h2{
+  font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:2.5rem;
+}
+.tips-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.05);max-width:900px;margin:0 auto}
+.tip-cell{
+  background:var(--navy2);padding:1.5rem 1.2rem;
+  border-right:1px solid rgba(255,255,255,.06);
+}
+.tip-cell:last-child{border-right:none}
+.tip-icon{font-size:1.5rem;color:var(--gold);margin-bottom:.7rem;display:block}
+.tip-title{font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--white);margin-bottom:.5rem}
+.tip-desc{font-family:var(--serif);font-size:.82rem;line-height:1.65;color:rgba(255,255,255,.5)}
+@media(max-width:768px){
+  .tips-grid{grid-template-columns:1fr 1fr}
+  .dark-section,.tips-section{margin:3rem -1.4rem;padding:2.5rem 1.4rem}
+}
+@media(max-width:480px){.tips-grid{grid-template-columns:1fr}}
+
+/* ── VIDEO EMBED ── */
+.video-section{
+  margin:3rem 0;background:var(--navy);padding:2rem;
+}
+.video-label{
+  font-family:var(--sans);font-size:.58rem;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:.9rem;
+}
+.video-wrapper{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden}
+.video-wrapper iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* ── MARKS TAKE ── */
+.marks-take{
+  border-left:3px solid var(--gold);padding:1.5rem 2rem;margin:2.5rem 0;
+  background:rgba(201,162,39,.04);
+}
+.marks-take .take-label{
+  font-family:var(--sans);font-size:.58rem;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;
+}
+.marks-take p{font-family:var(--serif);font-size:1.05rem;line-height:1.85;color:#2a2a3e}
+
+/* ── AUTHOR BIO ── */
+.author-bio{
+  background:var(--white);border-top:3px solid var(--gold);
+  padding:3rem 2rem;margin-top:3.5rem;
+}
+.author-bio-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:auto 1fr auto;gap:2.5rem;align-items:start}
+.author-photo-wrap{text-align:center}
+.author-photo{
+  width:90px;height:90px;border-radius:50%;object-fit:cover;
+  border:3px solid var(--gold);display:block;margin-bottom:.7rem;
+}
+.author-bio-label{
+  font-family:var(--sans);font-size:.55rem;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:.3rem;
+}
+.author-name{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:var(--navy);margin-bottom:.2rem}
+.author-title{font-family:var(--sans);font-size:.6rem;color:var(--muted);line-height:1.7;letter-spacing:.05em}
+.author-quote-text{
+  font-family:var(--serif);font-size:1rem;line-height:1.8;color:#2a2a3e;
+  border-left:none;
+}
+.author-hd-logo{display:flex;flex-direction:column;align-items:center;gap:.4rem}
+.author-hd-logo img{height:64px;width:auto;object-fit:contain}
+.author-hd-tagline{
+  font-family:var(--sans);font-size:.5rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);text-align:center;
+}
+@media(max-width:768px){
+  .author-bio-inner{grid-template-columns:1fr;gap:1.5rem}
+  .author-hd-logo{display:none}
+}
+
+/* ── CTA BAR ── */
+.cta-bar{
+  background:var(--gold);padding:1.2rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+}
+.cta-bar-text{
+  font-family:var(--sans);font-size:.78rem;font-weight:600;letter-spacing:.05em;color:var(--white);
+  display:flex;align-items:center;gap:.7rem;
+}
+.cta-bar-text::before{content:'💬';font-size:.9rem}
+.cta-bar-btn{
+  font-family:var(--sans);font-size:.65rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;padding:.75rem 2rem;background:var(--navy);color:var(--white);
+  text-decoration:none;transition:all .25s;white-space:nowrap;
+}
+.cta-bar-btn:hover{background:#152035;transform:translateY(-1px)}
+@media(max-width:600px){.cta-bar{flex-direction:column;text-align:center}}
+
+/* ── FULL FOOTER ── */
+.blog-footer{background:var(--navy);padding:2rem;text-align:center;margin-top:0}
+.footer-links{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-bottom:.8rem}
+.footer-links a{font-family:var(--sans);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--gold)}
+.footer-legal{font-family:var(--sans);font-size:.55rem;color:rgba(255,255,255,.18);line-height:1.7}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav class="blog-nav">
+  <a class="nav-logo" href="/">
+    <img src="/images/branding/house-detective-logo.png" alt="House Detective">
+    <span>Mark Pires · Coldwell Banker</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="/blog/" class="active">Blog</a></li>
+    <li><a href="#properties">Buy</a></li>
+    <li><a href="#" onclick="openModal('home-value');return false">Sell</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta-link" href="tel:2032472655">203-247-2655</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<!-- Replace {{HERO_IMAGE_URL}} with the actual hero photo for this post -->
+<header class="blog-hero" style="background-image:url('{{HERO_IMAGE_URL}}')">
+  <div class="hero-overlay">
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-category">{{CATEGORY}} · FAIRFIELD COUNTY, CT</div>
+        <h1>{{BLOG_TITLE}}</h1>
+        <p class="hero-subtitle">{{HERO_SUBTITLE}}</p>
+        <div class="hero-author-bar">
+          <img class="author-avatar" src="/Final-Headshot.png" alt="Mark Pires">
+          <div class="hero-author-meta">
+            <div class="hero-byline">By <span>Mark Pires</span> &middot; Coldwell Banker Realty</div>
+            <div class="hero-meta-row">
+              <span>📅 {{DATE}}</span>
+              <span>⏱ {{READTIME}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-sig">
+        <div class="sig-script">Mark Pires</div>
+        <div class="sig-title">Connecticut's House Detective</div>
+        <img class="sig-logo" src="/images/branding/house-detective-logo.png" alt="House Detective">
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ ARTICLE BODY ═══ -->
+<div class="blog-article">
+
+  <!-- ── OPENING ANSWER (AEO — first 100 words answer the title question) ── -->
+  <p>{{OPENING_ANSWER_PARAGRAPH}}</p>
+
+  <!-- ── THE [TOWN] REALITY + TRUTH BOMB (two-column) ── -->
+  <div class="reality-section">
+    <div>
+      <h2>The {{TOWN_NAME}} Reality</h2>
+      <ul class="reality-list">
+        <!-- Example: <li><span class="check">✓</span><span><strong>Price range:</strong> $600K–$1.8M</span></li> -->
+        {{REALITY_LIST_ITEMS}}
+      </ul>
+    </div>
+    <div class="truth-bomb">
+      <span class="tb-icon">⭐</span>
+      <div>
+        <div class="tb-label">Mark's Insight</div>
+        <p class="tb-text">{{TRUTH_BOMB_TEXT}}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── QUICK FACTS INFOGRAPHIC ── -->
+  <div class="quick-facts-box">
+    <h3>Quick Facts: {{TOWN_NAME}}, CT</h3>
+    <div class="facts-grid">
+      <!-- Example: <div class="fact-item"><strong>Population</strong>~20,000</div> -->
+      {{QUICK_FACTS_ITEMS}}
+    </div>
+  </div>
+
+  <!-- ── STATS BOX (optional, great for market data) ── -->
+  <div class="stats-infographic">
+    <div class="stats-title">The Big Picture: {{TOWN_NAME}} 2026 Market Snapshot</div>
+    <div class="stats-grid">
+      <div class="stat-cell">
+        <span class="stat-icon">🏠</span>
+        <div class="stat-label">Median Home Price</div>
+        <div class="stat-number">{{STAT_PRICE}}</div>
+        <div class="stat-note">{{TOWN_NAME}}, CT</div>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-icon">📅</span>
+        <div class="stat-label">Avg. Days on Market</div>
+        <div class="stat-number">{{STAT_DOM}}</div>
+        <div class="stat-note">Well-priced homes</div>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-icon">📈</span>
+        <div class="stat-label">Price Trend</div>
+        <div class="stat-number">{{STAT_TREND}}</div>
+        <div class="stat-note">Year-over-year 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BODY CONTENT (H2, H3, paragraphs from Penn's content) ── -->
+  {{BODY_CONTENT}}
+
+  <!-- ── VIDEO EMBED ── -->
+  <div class="video-section">
+    <div class="video-label">Watch · Discover CT — {{TOWN_NAME}} Episode</div>
+    <div class="video-wrapper">
+      <!-- Replace VIDEO_ID with the actual YouTube video ID for this town -->
+      <iframe src="https://www.youtube.com/embed/{{VIDEO_ID}}" title="Discover CT — {{TOWN_NAME}}" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+
+  <!-- ── MARK'S TAKE ── -->
+  <div class="marks-take">
+    <div class="take-label">Mark's Take — 18 Years in Fairfield County</div>
+    {{MARKS_TAKE_CONTENT}}
+  </div>
+
+  <!-- ── WHO IS THIS TOWN RIGHT FOR ── -->
+  <h2>Who Is {{TOWN_NAME}} Right For?</h2>
+  {{WHO_IS_IT_FOR_CONTENT}}
+
+  <!-- ── CTA IN BODY ── -->
+  <p style="margin-top:2rem;text-align:center">
+    <a href="https://markpires.com" style="font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.9rem 2.2rem;background:var(--gold);color:var(--navy);text-decoration:none;display:inline-block">
+      View {{TOWN_NAME}} Listings on markpires.com
+    </a>
+  </p>
+
+</div><!-- /blog-article -->
+
+<!-- ═══ AUTHOR BIO ═══ -->
+<section class="author-bio">
+  <div class="author-bio-inner">
+    <div class="author-photo-wrap">
+      <img class="author-photo" src="/Final-Headshot.jpg" alt="Mark Pires">
+      <div class="author-bio-label">About the Author</div>
+      <div class="author-name">Mark Pires</div>
+      <div class="author-title">Licensed Real Estate Agent<br>Coldwell Banker Realty<br>Fairfield County, CT</div>
+    </div>
+    <div>
+      <p class="author-quote-text">I'm Connecticut's one and only "House Detective." With 18+ years and 400+ deals in Fairfield County, I use data, experience, and detective-level attention to detail to help my clients navigate one of the most competitive real estate markets in the Northeast. I'm also the creator and host of <strong>Discover CT</strong> on YouTube — where I film the towns, neighborhoods, and stories behind the homes I sell. When you work with me, you get me — not a team, not an assistant.</p>
+      <p style="margin-top:.8rem;font-family:var(--sans);font-size:.62rem;color:var(--gold)">
+        <a href="https://markpires.com" style="color:var(--gold)">markpires.com</a> &nbsp;|&nbsp;
+        <a href="tel:2032472655" style="color:var(--gold)">203-247-2655</a> &nbsp;|&nbsp;
+        <a href="mailto:mark@markpires.com" style="color:var(--gold)">mark@markpires.com</a>
+      </p>
+    </div>
+    <div class="author-hd-logo">
+      <img src="/images/branding/house-detective-logo.png" alt="The House Detective">
+      <div class="author-hd-tagline">Solving Real Estate.<br>Delivering Results.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA BAR ═══ -->
+<div class="cta-bar">
+  <span class="cta-bar-text">Have Questions About {{TOWN_NAME}} Real Estate? Let's Talk.</span>
+  <a class="cta-bar-btn" href="tel:2032472655">Contact Mark</a>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="blog-footer">
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/blog/">All Posts</a>
+    <a href="/blog/buyer-advice">Buyer Advice</a>
+    <a href="/blog/seller-tips">Seller Tips</a>
+    <a href="/blog/town-guides">Town Guides</a>
+    <a href="https://discoverct.net" target="_blank">Discover CT</a>
+    <a href="/privacy">Privacy</a>
+  </div>
+  <div class="footer-legal">© 2026 Mark Pires · Licensed Real Estate Agent · Coldwell Banker Realty · CT License · Equal Housing Opportunity ⊕</div>
+</footer>
+<script src="/js/lead-engine.js" defer></script>
+</body>
+</html>

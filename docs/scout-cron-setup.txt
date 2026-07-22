@@ -1,0 +1,22 @@
+Goliath Omni OS v57.5 Scout Cron Setup
+
+Recommended for Hostinger cron:
+
+Every 15 minutes:
+https://markpires.com/lead-engine/scout-revenue-cron.php?key=YOUR_CRON_KEY
+
+Purpose:
+- Seeds standing Scout revenue opportunities.
+- Queues known FSBO opportunities once.
+- Creates Scout and Jessica events.
+- Keeps the worker from sitting idle when new revenue work exists.
+
+Recommended cadence by Executive for 1.0:
+- Scout: every 15 minutes during business hours, hourly overnight.
+- Jessica: every 15 minutes for follow-up/lead queue.
+- Prospector: hourly.
+- Columbo: nightly or every 6 hours.
+- Rockefeller: hourly or nightly depending on budget data.
+- Shakespeare/Scorsese/Mozart: triggered by handoff, not constant polling.
+
+Do not run every Executive every 5 minutes at launch. Start lean and increase only when the pipeline is stable.

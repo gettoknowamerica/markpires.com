@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lead Engine Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body{font-family:Arial,sans-serif;padding:30px;max-width:700px;margin:auto}
+    input,button{width:100%;padding:12px;margin:8px 0;font-size:16px}
+    button{background:#111827;color:white;border:0;cursor:pointer}
+    pre{background:#f3f3f3;padding:15px;white-space:pre-wrap}
+  </style>
+</head>
+<body>
+
+<h1>Lead Engine Test</h1>
+
+<form id="testForm">
+  <input name="name" value="Test Lead" placeholder="Name">
+  <input name="email" value="test@example.com" placeholder="Email">
+  <input name="phone" value="2035551212" placeholder="Phone">
+  <input name="address" value="123 Main Street Fairfield CT" placeholder="Address">
+  <input name="type" value="valuation" placeholder="Type">
+  <input name="timeline" value="3-6 months" placeholder="Timeline">
+  <input name="estimated_value" value="750000" placeholder="Estimated Value">
+  <button type="submit">Send Test Lead</button>
+</form>
+
+<h2>Result</h2>
+<pre id="result">Waiting...</pre>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('testForm');
+  const resultBox = document.getElementById('result');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    resultBox.textContent = 'Sending...';
+
+    const payload = {};
+    new FormData(form).forEach((value, key) => {
+      payload[key] = value;
+    });
+
+    try {
+      const res = await fetch('/lead-engine/capture.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+      });
+
+      const text = await res.text();
+
+      try {
+        resultBox.textContent = JSON.stringify(JSON.parse(text), null, 2);
+      } catch (err) {
+        resultBox.textContent = 'Non-JSON response from server:\n\n' + text;
+      }
+
+    } catch (err) {
+      resultBox.textContent = 'Fetch failed:\n\n' + err.message;
+    }
+  });
+});
+</script>
+
+</body>
+</html>

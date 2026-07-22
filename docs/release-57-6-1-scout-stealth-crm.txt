@@ -1,0 +1,11 @@
+Goliath Omni OS Release 57.6.1
+Scout Stealth CRM Density Fix
+
+Changes:
+- Tight stealth CRV-style rows.
+- Checkbox column added.
+- Reduced row padding and huge vertical spacing.
+- Data-first table stays on Scout page.
+- No right-side single lead viewer.
+
+Install over public_html. No SQL required.

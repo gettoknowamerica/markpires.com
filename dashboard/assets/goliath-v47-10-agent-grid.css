@@ -1,0 +1,54 @@
+/* Goliath Omni V47 - 10 Agent Mission Control Grid Fix */
+.gMissionGrid{
+  grid-template-columns:minmax(0,1fr) minmax(260px,320px) !important;
+  gap:16px !important;
+  align-items:start !important;
+}
+.gFiveByFive,
+.hq.gFiveByFive{
+  display:grid !important;
+  grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+  gap:12px !important;
+  width:100% !important;
+  align-items:start !important;
+}
+.gFiveByFive .agentTile{min-width:0 !important;}
+.gFiveByFive .room{
+  aspect-ratio:1/1 !important;
+  min-height:0 !important;
+  height:auto !important;
+  border-radius:18px !important;
+  background-size:cover !important;
+  background-position:center !important;
+  overflow:hidden !important;
+}
+.gFiveByFive .agentHeader{
+  min-height:26px !important;
+  font-size:12px !important;
+  padding:4px 7px !important;
+}
+.gFiveByFive .room .metric{font-size:13px !important;}
+.gFiveByFive .room p{font-size:10px !important;line-height:1.15 !important;}
+.gFiveByFive .agentWorkBubble{font-size:9px !important;padding:3px 6px !important;}
+.gFiveByFive .worker.aiHuman{transform:scale(.82) !important;transform-origin:center bottom !important;}
+.gTenKpis{grid-template-columns:repeat(11,minmax(70px,1fr)) !important;}
+.kpi.silver{border-color:#d8d8d8 !important;box-shadow:0 0 18px rgba(216,216,216,.35) !important;}
+.kpi.violet{border-color:#8b5cf6 !important;box-shadow:0 0 18px rgba(139,92,246,.40) !important;}
+.agent-mozart .worker.aiHuman i{background:#d0d0d0 !important;box-shadow:0 -8px 0 3px #f1f5f9 !important;}
+.agent-mozart .worker.aiHuman b{background:#2c3e50 !important;}
+.agent-pandora .worker.aiHuman b{background:#3f2ab8 !important;}
+.agent-pandora .worker.aiHuman i{background:#3d2459 !important;}
+.missionSidePanel{max-width:320px !important;}
+@media(max-width:1380px){
+  .gMissionGrid{grid-template-columns:1fr !important;}
+  .missionSidePanel{max-width:none !important;}
+  .gTenKpis{grid-template-columns:repeat(5,minmax(110px,1fr)) !important;}
+}
+@media(max-width:980px){
+  .gFiveByFive,.hq.gFiveByFive{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
+  .gTenKpis{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
+}
+@media(max-width:560px){
+  .gFiveByFive,.hq.gFiveByFive{grid-template-columns:1fr !important;}
+  .gTenKpis{grid-template-columns:1fr !important;}
+}

@@ -1,0 +1,26 @@
+Goliath V66 — Executive Collaboration Engine
+
+1) Upload the lead-engine files into /public_html/lead-engine/
+   - goliath-collaboration-engine.php
+   - run-goliath-collaboration-engine.php
+   - goliath-collaboration-health.php
+
+2) In Hostinger phpMyAdmin, run:
+   /sql/goliath-v66-collaboration-engine-hostinger.sql
+
+3) Test health:
+   /lead-engine/goliath-collaboration-health.php
+
+4) Run V66:
+   /lead-engine/run-goliath-collaboration-engine.php?key=timetomakethedonuts
+
+5) Then run the existing nervous system again:
+   /lead-engine/run-goliath-nervous-system.php?key=timetomakethedonuts
+
+Expected result:
+- constitution checks created
+- collaboration requests created
+- action ledger entries created
+- notifications created
+- teamwork scores updated
+- heartbeats enriched with collaboration_count + constitution_status

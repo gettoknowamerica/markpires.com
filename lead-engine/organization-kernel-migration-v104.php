@@ -1,0 +1,25 @@
+<?php
+ini_set('display_errors',0); header('Content-Type: application/json; charset=utf-8');
+try{
+ require_once __DIR__.'/config.php'; require_once __DIR__.'/goliath-db.php';
+ $key=$_GET['key']??''; $expected=defined('AFTER_HOURS_CRON_KEY')?AFTER_HOURS_CRON_KEY:(defined('RETELL_WEBHOOK_KEY')?RETELL_WEBHOOK_KEY:'timetomakethedonuts');
+ if(!hash_equals((string)$expected,(string)$key)){http_response_code(403);echo json_encode(['ok'=>false,'error'=>'bad_key']);exit;}
+ function x($sql){return gdb()->exec($sql);}
+ function q1($s,$p=[]){try{return gdb_one($s,$p)?:null;}catch(Throwable $e){return null;}}
+ function colx($t,$c){$r=q1("SELECT COUNT(*) c FROM information_schema.columns WHERE table_schema=DATABASE() AND table_name=? AND column_name=?",[$t,$c]);return ((int)($r['c']??0))>0;}
+ function addx($t,$c,$d,&$chg){if(!colx($t,$c)){x("ALTER TABLE `$t` ADD COLUMN `$c` $d");$chg[]="$t.$c";}}
+ function idxx($t,$i,$cols,&$chg){$r=q1("SELECT COUNT(*) c FROM information_schema.statistics WHERE table_schema=DATABASE() AND table_name=? AND index_name=?",[$t,$i]);if(!((int)($r['c']??0))){try{x("ALTER TABLE `$t` ADD INDEX `$i` ($cols)");$chg[]="$t index $i";}catch(Throwable $e){}}}
+ $chg=[];
+ $tables=[
+ 'goliath_founders_vision'=>['vision_key'=>'VARCHAR(100) NULL','version'=>'VARCHAR(40) NULL','title'=>'VARCHAR(255) NULL','vision_text'=>'MEDIUMTEXT NULL','principles_json'=>'JSON NULL','created_at'=>'DATETIME DEFAULT CURRENT_TIMESTAMP','updated_at'=>'DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'],
+ 'executive_genomes'=>['genome_uid'=>'VARCHAR(100) NULL','executive_key'=>'VARCHAR(80) NULL','display_name'=>'VARCHAR(140) NULL','role_title'=>'VARCHAR(180) NULL','department'=>'VARCHAR(120) NULL','mission'=>'MEDIUMTEXT NULL','always_rules_json'=>'JSON NULL','never_rules_json'=>'JSON NULL','collaborates_with_json'=>'JSON NULL','kpis_json'=>'JSON NULL','tools_json'=>'JSON NULL','observation_rules_json'=>'JSON NULL','escalation_rules_json'=>'JSON NULL','deliverable_standards_json'=>'JSON NULL','status'=>"VARCHAR(60) DEFAULT 'active'",'created_at'=>'DATETIME DEFAULT CURRENT_TIMESTAMP','updated_at'=>'DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'],
+ 'chief_of_staff_incidents'=>['incident_uid'=>'VARCHAR(100) NULL','incident_type'=>'VARCHAR(100) NULL','severity'=>'INT DEFAULT 50','title'=>'VARCHAR(255) NULL','details'=>'MEDIUMTEXT NULL','related_table'=>'VARCHAR(120) NULL','related_id'=>'INT NULL','assigned_to'=>'VARCHAR(80) NULL','status'=>"VARCHAR(60) DEFAULT 'open'",'recommended_action'=>'MEDIUMTEXT NULL','created_at'=>'DATETIME DEFAULT CURRENT_TIMESTAMP','updated_at'=>'DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'],
+ 'goliath_notifications'=>['notification_uid'=>'VARCHAR(100) NULL','channel'=>"VARCHAR(40) DEFAULT 'dashboard'",'recipient'=>'VARCHAR(180) NULL','notification_type'=>'VARCHAR(100) NULL','title'=>'VARCHAR(255) NULL','message'=>'MEDIUMTEXT NULL','priority'=>'INT DEFAULT 50','status'=>"VARCHAR(60) DEFAULT 'queued'",'metadata_json'=>'JSON NULL','sent_at'=>'DATETIME NULL','created_at'=>'DATETIME DEFAULT CURRENT_TIMESTAMP','updated_at'=>'DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'],
+ 'executive_scorecards'=>['scorecard_uid'=>'VARCHAR(100) NULL','executive_key'=>'VARCHAR(80) NULL','score_date'=>'DATE NULL','overall_score'=>'INT DEFAULT 0','missions_active'=>'INT DEFAULT 0','missions_completed'=>'INT DEFAULT 0','blocked_count'=>'INT DEFAULT 0','top10_score'=>'INT DEFAULT 0','kpi_json'=>'JSON NULL','recommendation'=>'MEDIUMTEXT NULL','created_at'=>'DATETIME DEFAULT CURRENT_TIMESTAMP'],
+ 'organization_health_snapshots'=>['snapshot_uid'=>'VARCHAR(100) NULL','health_score'=>'INT DEFAULT 0','revenue_pipeline'=>'INT DEFAULT 0','authority_growth'=>'INT DEFAULT 0','relationships'=>'INT DEFAULT 0','production_capacity'=>'INT DEFAULT 0','system_health'=>'INT DEFAULT 0','summary'=>'MEDIUMTEXT NULL','metrics_json'=>'JSON NULL','created_at'=>'DATETIME DEFAULT CURRENT_TIMESTAMP']
+ ];
+ foreach($tables as $t=>$cols){x("CREATE TABLE IF NOT EXISTS `$t`(id INT AUTO_INCREMENT PRIMARY KEY) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");foreach($cols as $c=>$d)addx($t,$c,$d,$chg);}
+ foreach(['executive_genomes'=>'executive_key','chief_of_staff_incidents'=>'status','goliath_notifications'=>'status','executive_scorecards'=>'executive_key'] as $t=>$c)idxx($t,$c,$c,$chg);
+ echo json_encode(['ok'=>true,'version'=>'V104.0 Organization Kernel Migration','changed_count'=>count($chg),'changed'=>$chg,'next'=>'Run organization-kernel-v104.php','time'=>date('c')],JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
+}catch(Throwable $e){echo json_encode(['ok'=>false,'version'=>'V104.0 Organization Kernel Migration','error'=>$e->getMessage(),'file'=>$e->getFile(),'line'=>$e->getLine()],JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);}
+?>

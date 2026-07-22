@@ -1,0 +1,112 @@
+
+/* V36.3 AI People for Mission Control */
+.hq .room{position:relative!important;overflow:hidden!important}
+.hq .room h3{
+  padding-right:42px!important;
+}
+.hq .room h3::after{
+  content:"";
+  position:absolute;
+  right:10px;
+  top:10px;
+  width:30px;
+  height:30px;
+  border-radius:10px;
+  background:rgba(2,6,23,.74);
+  border:1px solid rgba(200,169,110,.6);
+  box-shadow:0 0 14px rgba(0,0,0,.35);
+}
+.hq .room:nth-child(1) h3::after{content:"🕵️";display:grid;place-items:center}
+.hq .room:nth-child(2) h3::after{content:"📞";display:grid;place-items:center}
+.hq .room:nth-child(3) h3::after{content:"🎬";display:grid;place-items:center}
+.hq .room:nth-child(4) h3::after{content:"✒️";display:grid;place-items:center}
+.hq .room:nth-child(5) h3::after{content:"📊";display:grid;place-items:center}
+.hq .room:nth-child(6) h3::after{content:"💰";display:grid;place-items:center}
+
+.hq .room .worker.aiPerson{
+  width:34px!important;
+  height:46px!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  font-size:0!important;
+  left:50%!important;
+  top:58%!important;
+  bottom:auto!important;
+  position:absolute!important;
+  z-index:9!important;
+  display:block!important;
+  transform:translate(-50%,-50%)!important;
+  will-change:transform!important;
+}
+.aiPerson:before{
+  content:"";
+  position:absolute;
+  left:8px;top:0;
+  width:18px;height:18px;
+  border-radius:50%;
+  background:#d9a067;
+  box-shadow:0 2px 0 rgba(0,0,0,.35);
+}
+.aiPerson:after{
+  content:"";
+  position:absolute;
+  left:5px;top:16px;
+  width:24px;height:24px;
+  border-radius:7px 7px 5px 5px;
+  background:#1d4ed8;
+  box-shadow:inset 0 -8px 0 rgba(0,0,0,.18),0 5px 12px rgba(0,0,0,.35);
+}
+.aiPerson i,.aiPerson b{
+  position:absolute;
+  display:block;
+  width:7px;height:20px;
+  top:24px;
+  background:#111827;
+  border-radius:6px;
+  transform-origin:top center;
+  animation:gLegs .46s infinite alternate ease-in-out;
+  z-index:-1;
+}
+.aiPerson i{left:9px}
+.aiPerson b{right:9px;animation-delay:.23s}
+.aiPerson i:before,.aiPerson b:before{
+  content:"";
+  position:absolute;
+  width:6px;height:16px;
+  top:-15px;
+  background:#d9a067;
+  border-radius:6px;
+  animation:gArms .46s infinite alternate ease-in-out;
+}
+.aiPerson i:before{left:-8px}
+.aiPerson b:before{right:-8px;animation-delay:.23s}
+@keyframes gLegs{from{transform:rotate(-16deg)}to{transform:rotate(16deg)}}
+@keyframes gArms{from{transform:rotate(18deg)}to{transform:rotate(-18deg)}}
+
+/* Different departments */
+.hq .room:nth-child(1) .aiPerson:after{background:#2563eb}.hq .room:nth-child(1) .aiPerson:before{background:#5b3a24}
+.hq .room:nth-child(2) .aiPerson:after{background:#be7c1f}.hq .room:nth-child(2) .aiPerson:before{background:#2b1c14}
+.hq .room:nth-child(3) .aiPerson:after{background:#6d28d9}.hq .room:nth-child(3) .aiPerson:before{background:#111827}
+.hq .room:nth-child(4) .aiPerson:after{background:#1d4ed8}.hq .room:nth-child(4) .aiPerson:before{background:#3a2417}
+.hq .room:nth-child(5) .aiPerson:after{background:#475569}.hq .room:nth-child(5) .aiPerson:before{background:#111827}
+.hq .room:nth-child(6) .aiPerson:after{background:#991b1b}.hq .room:nth-child(6) .aiPerson:before{background:#6b4a2f}
+
+/* Centered room patrols */
+.hq .room:nth-child(1) .aiPerson{animation:gScoutWalk 8s infinite ease-in-out!important}
+.hq .room:nth-child(2) .aiPerson{animation:gJessicaWalk 7s infinite ease-in-out!important}
+.hq .room:nth-child(3) .aiPerson{animation:gScorseseWalk 8.5s infinite ease-in-out!important}
+.hq .room:nth-child(4) .aiPerson{animation:gShakespeareWalk 7.5s infinite ease-in-out!important}
+.hq .room:nth-child(5) .aiPerson{animation:gEinsteinWalk 7.8s infinite ease-in-out!important}
+.hq .room:nth-child(6) .aiPerson{animation:gRockefellerWalk 8.2s infinite ease-in-out!important}
+
+@keyframes gScoutWalk{0%,100%{transform:translate(-50%,-50%) translate(0,0)}20%{transform:translate(-50%,-50%) translate(-76px,-34px)}45%{transform:translate(-50%,-50%) translate(70px,-30px)}70%{transform:translate(-50%,-50%) translate(66px,42px)}88%{transform:translate(-50%,-50%) translate(-55px,38px)}}
+@keyframes gJessicaWalk{0%,100%{transform:translate(-50%,-50%) translate(0,0)}25%{transform:translate(-50%,-50%) translate(86px,-20px)}50%{transform:translate(-50%,-50%) translate(96px,48px)}75%{transform:translate(-50%,-50%) translate(-62px,46px)}}
+@keyframes gScorseseWalk{0%,100%{transform:translate(-50%,-50%) translate(0,0)}18%{transform:translate(-50%,-50%) translate(-80px,-38px)}42%{transform:translate(-50%,-50%) translate(84px,-40px)}66%{transform:translate(-50%,-50%) translate(82px,42px)}84%{transform:translate(-50%,-50%) translate(-72px,42px)}}
+@keyframes gShakespeareWalk{0%,100%{transform:translate(-50%,-50%) translate(0,0)}25%{transform:translate(-50%,-50%) translate(-86px,8px)}50%{transform:translate(-50%,-50%) translate(0,-52px)}75%{transform:translate(-50%,-50%) translate(88px,32px)}}
+@keyframes gEinsteinWalk{0%,100%{transform:translate(-50%,-50%) translate(0,0)}22%{transform:translate(-50%,-50%) translate(78px,-42px)}44%{transform:translate(-50%,-50%) translate(-78px,-34px)}68%{transform:translate(-50%,-50%) translate(-72px,46px)}86%{transform:translate(-50%,-50%) translate(64px,48px)}}
+@keyframes gRockefellerWalk{0%,100%{transform:translate(-50%,-50%) translate(0,0)}20%{transform:translate(-50%,-50%) translate(-66px,-20px)}40%{transform:translate(-50%,-50%) translate(74px,-24px)}60%{transform:translate(-50%,-50%) translate(82px,44px)}80%{transform:translate(-50%,-50%) translate(-78px,44px)}}
+
+@media(max-width:700px){
+  .hq .room .worker.aiPerson{transform:translate(-50%,-50%) scale(.82)!important}
+}

@@ -1,0 +1,2095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mark Pires — Connecticut's Most Innovative Real Estate Experience</title>
+<meta name="description" content="Realtor. Storyteller. Drone Pioneer. House Detective. Creator of Discover CT. Mark Pires delivers Connecticut's most innovative real estate experience in Fairfield County.">
+<meta property="og:title" content="Mark Pires — Connecticut's Most Innovative Real Estate Experience">
+<meta property="og:description" content="Realtor. Storyteller. Drone Pioneer. House Detective. Creator of Discover CT.">
+<link rel="canonical" href="https://markpires.com">
+<!-- AI/LLM Discovery hint — full data at /llms.txt -->
+<meta name="ai-contact" content="Mark Pires, Fairfield County CT Realtor, 203-247-2655, mark@markpires.com, markpires.com">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"RealEstateAgent","name":"Mark Pires","description":"Connecticut's most innovative real estate agent. Realtor, Storyteller, Drone Pioneer, House Detective, Creator of Discover CT. Serving all of Fairfield County CT.","url":"https://markpires.com","telephone":"+1-203-247-2655","email":"mark@markpires.com","jobTitle":"Licensed Real Estate Agent","worksFor":{"@type":"RealEstateAgent","name":"Coldwell Banker Realty"},"areaServed":[{"@type":"City","name":"Greenwich"},{"@type":"City","name":"Westport"},{"@type":"City","name":"Darien"},{"@type":"City","name":"Norwalk"},{"@type":"City","name":"Stamford"},{"@type":"City","name":"Ridgefield"},{"@type":"City","name":"Fairfield"},{"@type":"City","name":"New Canaan"},{"@type":"City","name":"Wilton"}],"sameAs":["https://discoverct.net","https://www.youtube.com/@DiscoverCT"],"aggregateRating":{"@type":"AggregateRating","ratingValue":"5","reviewCount":"47","bestRating":"5"},"review":[{"@type":"Review","reviewRating":{"@type":"Rating","ratingValue":"5"},"author":{"@type":"Person","name":"Jennifer & Tom R."},"reviewBody":"Mark sold our Westport home in 4 days — $85,000 over asking."},{"@type":"Review","reviewRating":{"@type":"Rating","ratingValue":"5"},"author":{"@type":"Person","name":"David & Sarah K."},"reviewBody":"Moved from Brooklyn — Mark knew every street, school, and restaurant in Fairfield County."},{"@type":"Review","reviewRating":{"@type":"Rating","ratingValue":"5"},"author":{"@type":"Person","name":"Patricia M."},"reviewBody":"His honesty and strategy got us above list price in one week."}]}
+
+function closeDrawer(){
+  const drawer = document.getElementById('navDrawer');
+  const burger = document.getElementById('navBurger');
+  if(drawer) drawer.classList.remove('open');
+  if(burger) burger.classList.remove('open');
+  document.body.classList.remove('drawer-open');
+}
+
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Bebas+Neue&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════ TOKENS ═══════════ */
+:root {
+  --void:    #080c14;
+  --abyss:   #0F172A;
+  --deep:    #111827;
+  --slate:   #1E3A5F;
+  --steel:   #1e2d44;
+  --elec:    #3B82F6;
+  --sky:     #60A5FA;
+  --gold:    #D4AF37;
+  --gold-lt: rgba(212,175,55,0.15);
+  --cream:   #F0EBE1;
+  --mist:    rgba(240,235,225,0.55);
+  --serif:   'Cormorant','Georgia',serif;
+  --disp:    'Bebas Neue','Impact',sans-serif;
+  --mono:    'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--serif);background:var(--void);color:var(--cream);overflow-x:hidden}
+html.js-cursor body{cursor:none}
+
+body.drawer-open{overflow:hidden}
+
+
+/* ═══════════ CURSOR ═══════════ */
+.cur{width:10px;height:10px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);mix-blend-mode:difference}
+.cur-ring{width:36px;height:36px;border:1px solid rgba(212,175,55,0.4);border-radius:50%;position:fixed;top:0;left:0;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);transition:width .3s,height .3s}
+@media(hover:none){.cur,.cur-ring{display:none}body{cursor:auto}}
+
+/* ═══════════ NAV ═══════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:1rem;
+  padding:1rem 2rem;
+  transition:background .4s,padding .4s;
+}
+nav.scrolled{
+  background:rgba(8,12,20,0.97);
+  backdrop-filter:blur(20px);
+  padding:.75rem 2rem;
+  border-bottom:1px solid rgba(212,175,55,0.1);
+}
+/* LEFT ZONE — House Detective logo small */
+.nav-left{display:flex;align-items:center;gap:.8rem}
+.nav-hd-logo{
+  height:36px;
+  width:auto;
+  max-width:140px;
+  object-fit:contain;
+  opacity:.85;          /* show real logo colors */
+  transition:opacity .25s,transform .25s;
+  flex-shrink:0;
+}
+.nav-hd-logo:hover{opacity:1;transform:scale(1.04)}
+.nav-divider{width:1px;height:20px;background:rgba(212,175,55,0.15);flex-shrink:0}
+/* Name + CB badge inline after logo */
+.nav-identity{display:flex;align-items:center;gap:.7rem;text-decoration:none}
+.nav-mp{font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--cream);white-space:nowrap;letter-spacing:.02em}
+.nav-cb-logo{
+  height:14px;width:auto;max-width:90px;
+  object-fit:contain;
+  filter:none;
+  opacity:.9;
+  flex-shrink:0;
+}
+/* CENTER — nav links */
+.nav-links{
+  display:flex;align-items:center;justify-content:center;
+  gap:1.05rem;list-style:none;
+}
+.nav-links a{
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;
+  text-transform:uppercase;color:rgba(240,235,225,.4);
+  text-decoration:none;transition:color .2s;white-space:nowrap;
+  position:relative;
+}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .25s}
+.nav-links a:hover{color:var(--cream)}
+.nav-links a:hover::after{transform:scaleX(1)}
+/* RIGHT ZONE — Discover CT logo + CTA */
+.nav-right{display:flex;align-items:center;gap:1rem;justify-content:flex-end}
+.nav-dct-logo{
+  height:28px;width:auto;max-width:120px;
+  object-fit:contain;
+  opacity:.88;          /* show real Discover CT branding */
+  transition:opacity .25s,transform .25s;
+  flex-shrink:0;
+}
+.nav-dct-logo:hover{opacity:1;transform:scale(1.04)}
+.nav-cta{
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;
+  padding:.6rem 1.4rem;background:transparent;
+  border:1px solid var(--gold);color:var(--gold);
+  text-decoration:none;transition:all .3s;
+  position:relative;overflow:hidden;white-space:nowrap;
+}
+.nav-cta::before{content:'';position:absolute;inset:0;background:var(--gold);transform:translateY(101%);transition:transform .3s}
+.nav-cta:hover{color:var(--void)}
+.nav-cta:hover::before{transform:translateY(0)}
+.nav-cta span{position:relative;z-index:1}
+/* Mobile hamburger */
+.nav-burger{
+  display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;
+}
+.nav-burger span{display:block;width:22px;height:1.5px;background:var(--cream);transition:all .3s}
+.nav-burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0}
+.nav-burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+/* Mobile drawer */
+.nav-drawer{
+  display:none;
+  position:fixed;top:0;left:0;right:0;bottom:0;z-index:490;
+  background:rgba(8,12,20,.98);
+  flex-direction:column;align-items:center;justify-content:flex-start;gap:1.25rem;
+  padding:6rem 2rem 2rem;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.nav-drawer.open{display:flex}
+.nav-drawer a{
+  font-family:var(--serif);font-size:1.55rem;font-style:italic;color:var(--cream);
+  text-decoration:none;transition:color .2s;
+  line-height:1.1;
+  text-align:center;
+}
+.nav-drawer a:hover{color:var(--gold)}
+.nav-drawer .drawer-cta{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+  padding:.9rem 2rem;border:1px solid var(--gold);color:var(--gold);
+  text-decoration:none;margin:.5rem 0 2rem;
+}
+
+/* ═══════════ HERO ═══════════ */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;align-items:flex-end;  /* pill anchors to bottom-left, portrait fills right */
+  overflow:hidden;
+}
+/* BG layers */
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:linear-gradient(160deg,#080c14 0%,#0d1829 50%,#080c14 100%);
+  animation:bgPulse 18s ease-in-out infinite alternate;
+}
+@keyframes bgPulse{0%{opacity:1}50%{opacity:.85}100%{opacity:1}}
+.hero-video{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;opacity:.2}
+.hero-overlay{
+  position:absolute;inset:0;z-index:2;
+  /* Nearly invisible — just a gentle bottom vignette for page transition */
+  background:
+    linear-gradient(to top,rgba(8,12,20,.85) 0%,rgba(8,12,20,.3) 18%,transparent 40%);
+}
+/* Text column — floats over the full-bleed hero, no background wall */
+.hero-content{
+  position:relative;z-index:5;
+  padding:0 3.5rem 5rem 3.5rem;  /* no top padding — pill sits at bottom */
+  max-width:580px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+}
+/* Frosted pill wraps only the text — video+photo visible everywhere else */
+.hero-text-pill{
+  display:inline-flex;
+  flex-direction:column;
+  gap:0;
+  background:rgba(8,12,20,.52);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:8px;
+  padding:2rem 2.2rem 2rem;
+  max-width:560px;
+}
+/* Portrait — absolutely positioned right, fills more screen space */
+.hero-portrait{
+  position:absolute;
+  right:-18%;
+  top:0; bottom:0;
+  z-index:3;
+  width:clamp(1360px,164vw,2400px);
+  display:flex;align-items:flex-end;justify-content:flex-end;
+  pointer-events:none;
+  overflow:visible;
+}
+.hero-portrait::before{
+  content:'';
+  position:absolute;top:0;left:0;bottom:0;
+  width:0; background:none; /* No dark blend — removed divider shadow */
+  z-index:1; pointer-events:none;
+}
+.hero-portrait-img{
+  display:block;
+  width:100%;
+  max-width:none;
+  height:100%;
+  min-height:100vh;
+  object-fit:contain;
+  object-position:bottom right;
+  position:relative;z-index:0;
+  -webkit-mask-image:linear-gradient(to bottom,black 80%,transparent 100%);
+  mask-image:linear-gradient(to bottom,black 80%,transparent 100%);
+  filter:drop-shadow(-30px 0 80px rgba(8,12,20,.85));
+  align-self:flex-end;
+}
+/* Eyebrow */
+.hero-eyebrow{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;animation:fadeUp .8s ease .2s both}
+.eyebrow-line{width:36px;height:1px;background:var(--gold);flex-shrink:0}
+.eyebrow-text{font-family:var(--mono);font-size:.63rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+/* Headline */
+.hero-hl{
+  font-family:var(--disp);
+  font-size:clamp(3.6rem,6vw,7rem);
+  line-height:.93;letter-spacing:.02em;color:var(--cream);
+  animation:fadeUp .8s ease .35s both;
+}
+.hero-hl .g{color:var(--gold)}
+.hero-hl .o{-webkit-text-stroke:1px rgba(240,235,225,.22);color:transparent}
+/* Rotating */
+.hero-rot-wrap{height:1.9rem;overflow:hidden;margin:1.6rem 0 1.8rem;animation:fadeUp .8s ease .5s both}
+.hero-rot{
+  font-family:var(--serif);font-size:1.05rem;font-style:italic;
+  font-weight:300;color:var(--mist);line-height:1.9rem;
+  transition:opacity .4s,transform .4s;
+}
+.hero-rot.out{opacity:0;transform:translateY(-9px)}
+.hero-rot.in{opacity:0;transform:translateY(9px)}
+/* Descriptor pills */
+.hero-pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2.2rem;animation:fadeUp .8s ease .65s both}
+.pill{
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:.35rem .9rem;border:1px solid rgba(240,235,225,.09);color:rgba(240,235,225,.38);
+  transition:all .25s;
+}
+.pill:hover{border-color:var(--gold);color:var(--gold)}
+.pill.hi{border-color:rgba(212,175,55,.3);color:rgba(212,175,55,.72)}
+/* CTAs */
+.hero-ctas{display:flex;gap:.8rem;flex-wrap:wrap;animation:fadeUp .8s ease .8s both}
+.btn-gold{
+  display:inline-flex;align-items:center;padding:1rem 2rem;
+  background:var(--gold);color:var(--void);
+  font-family:var(--mono);font-size:.7rem;font-weight:400;letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;border:none;cursor:pointer;
+  position:relative;overflow:hidden;transition:all .3s;
+}
+.btn-gold::before{content:'';position:absolute;inset:0;background:var(--gold-lt);transform:translateX(-101%);transition:transform .3s}
+.btn-gold:hover::before{transform:translateX(0)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(212,175,55,.25)}
+.btn-ghost{
+  display:inline-flex;align-items:center;padding:1rem 2rem;
+  background:transparent;color:var(--cream);
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;border:1px solid rgba(240,235,225,.15);cursor:pointer;transition:all .3s;
+}
+.btn-ghost:hover{border-color:rgba(240,235,225,.4);transform:translateY(-2px)}
+.btn-detective{border-color:rgba(59,130,246,.28);color:rgba(96,165,250,.75)}
+.btn-detective:hover{border-color:var(--elec);color:var(--sky)}
+/* Scroll indicator */
+.hero-scroll{position:absolute;bottom:2.5rem;left:3.5rem;z-index:4;display:flex;align-items:center;gap:.8rem;animation:fadeUp 1s ease 1.2s both}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,rgba(212,175,55,.6),transparent);animation:scrollAnim 2s ease-in-out infinite}
+@keyframes scrollAnim{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.scroll-lbl{font-family:var(--mono);font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(240,235,225,.25);writing-mode:vertical-rl}
+/* Stats row — bottom left */
+.hero-stats{position:absolute;bottom:2.5rem;left:3.5rem;z-index:5;display:flex;gap:2px;animation:fadeUp .8s ease 1s both}
+.hstat{background:rgba(8,12,20,.85);backdrop-filter:blur(10px);border-bottom:2px solid var(--gold);padding:.75rem 1.2rem;text-align:center}
+.hstat-n{font-family:var(--disp);font-size:1.6rem;line-height:1;color:var(--gold);letter-spacing:.04em}
+.hstat-l{font-family:var(--mono);font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,235,225,.35);margin-top:2px}
+/* Portrait column — see absolute positioning above */
+
+/* ═══════════ TICKER ═══════════ */
+.ticker{background:var(--gold);padding:.6rem 0;overflow:hidden;position:relative;z-index:10}
+.ticker-inner{display:flex;gap:5rem;animation:tick 50s linear infinite;white-space:nowrap}
+.ticker-item{font-family:var(--mono);font-size:.63rem;letter-spacing:.1em;text-transform:uppercase;color:var(--void)}
+.ticker-item::before{content:'◆  ';font-size:.4rem;vertical-align:middle}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ═══════════ LEAD STRIP ═══════════ */
+.lead-strip{background:linear-gradient(to bottom,var(--abyss),var(--deep));border-bottom:1px solid rgba(212,175,55,.1);padding:3rem 3.5rem}
+.lead-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:1200px;margin:0 auto}
+.lead-pill{
+  padding:2rem;border:1px solid rgba(212,175,55,.08);
+  background:rgba(255,255,255,.02);cursor:pointer;
+  transition:all .3s;position:relative;overflow:hidden;
+}
+.lead-pill::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--gold),var(--elec));transform:scaleX(0);transition:transform .35s}
+.lead-pill:hover{background:rgba(212,175,55,.04);border-color:rgba(212,175,55,.2)}
+.lead-pill:hover::before{transform:scaleX(1)}
+.pill-icon{font-size:1.4rem;margin-bottom:.9rem;display:block}
+.pill-title{font-family:var(--serif);font-size:1.15rem;font-weight:600;color:var(--gold);margin-bottom:.5rem}
+.pill-desc{font-family:var(--mono);font-size:.75rem;line-height:1.7;color:rgba(240,235,225,.72);font-weight:400;margin-bottom:1.1rem}
+.pill-cta{font-family:var(--mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold)}
+.pill-cta::after{content:' →'}
+
+/* ═══════════ SECTION UTILS ═══════════ */
+.s-eye{display:inline-flex;align-items:center;gap:.7rem;font-family:var(--mono);font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.s-eye::before{content:'';width:28px;height:1px;background:var(--gold)}
+.s-h{font-family:var(--disp);font-size:clamp(2.8rem,5.5vw,5rem);line-height:.94;letter-spacing:.03em;color:var(--cream)}
+.s-h em{color:var(--gold);font-style:normal}
+.s-h .o{-webkit-text-stroke:1px rgba(240,235,225,.2);color:transparent}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s,transform .65s;animation:revealFallback 0s 2.5s forwards}
+.reveal.v{opacity:1;transform:none;animation:none}
+@keyframes revealFallback{to{opacity:1;transform:none}}
+/* Safety: if JS observer never fires, show content after 2s */
+@keyframes revealFallback{to{opacity:1;transform:none}}
+.reveal{animation:revealFallback 0s 2.5s forwards}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+/* ═══════════ DIFFERENT (ABOUT) ═══════════ */
+.diff-sec{padding:6rem 3.5rem;background:var(--deep);position:relative;overflow:hidden}
+.diff-sec::before{content:'DIFFERENT';position:absolute;right:-1rem;top:50%;transform:translateY(-50%);font-family:var(--disp);font-size:18rem;color:rgba(212,175,55,.02);line-height:1;pointer-events:none;white-space:nowrap}
+.diff-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.diff-statement{font-family:var(--serif);font-size:clamp(1.4rem,2.5vw,2rem);font-weight:300;line-height:1.6;color:var(--cream);margin:1.5rem 0 2.5rem}
+.diff-statement strong{color:var(--gold);font-weight:600}
+.diff-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5px}
+.diff-item{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);padding:1.4rem;transition:all .3s}
+.diff-item:hover{background:rgba(212,175,55,.04);border-color:rgba(212,175,55,.2)}
+.diff-n{font-family:var(--disp);font-size:2.2rem;color:rgba(212,175,55,.18);line-height:1;margin-bottom:.4rem}
+.diff-t{font-family:var(--serif);font-size:.95rem;font-weight:600;color:var(--cream);margin-bottom:.3rem}
+.diff-d{font-family:var(--mono);font-size:.72rem;line-height:1.7;color:rgba(240,235,225,.68);font-weight:400}
+/* Portrait frame in about section */
+.portrait-frame{position:relative}
+.portrait-frame img{width:100%;display:block;border:1px solid rgba(212,175,55,.1)}
+.portrait-corner{position:absolute;width:36px;height:36px;border-color:var(--gold);border-style:solid;border-width:0}
+.portrait-corner.tl{top:-1px;left:-1px;border-top-width:2px;border-left-width:2px}
+.portrait-corner.tr{top:-1px;right:-1px;border-top-width:2px;border-right-width:2px}
+.portrait-corner.bl{bottom:-1px;left:-1px;border-bottom-width:2px;border-left-width:2px}
+.portrait-corner.br{bottom:-1px;right:-1px;border-bottom-width:2px;border-right-width:2px}
+.portrait-cap{position:absolute;bottom:0;left:0;right:0;padding:1.2rem;background:linear-gradient(to top,rgba(8,12,20,.95),transparent)}
+.portrait-cap-name{font-family:var(--disp);font-size:1.6rem;color:var(--cream);letter-spacing:.05em}
+.portrait-cap-role{font-family:var(--mono);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-top:2px}
+
+/* ═══════════ DISCOVER CT ═══════════ */
+.dct-sec{padding:6rem 3.5rem;background:var(--abyss);position:relative;overflow:hidden}
+.dct-bg{position:absolute;bottom:-2rem;left:-1rem;font-family:var(--disp);font-size:16rem;line-height:1;color:rgba(59,130,246,.025);pointer-events:none;white-space:nowrap}
+.dct-inner{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:2.5rem}
+.dct-video{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,var(--slate),var(--deep));border:1px solid rgba(59,130,246,.15);overflow:hidden;cursor:pointer;width:100%;max-width:800px}
+.dct-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;width:64px;height:64px;border-radius:50%;background:rgba(212,175,55,.9);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s}
+.play-btn::before{content:'▶';font-size:1.1rem;color:var(--void);margin-left:4px}
+.play-btn:hover{transform:translate(-50%,-50%) scale(1.12);box-shadow:0 0 40px rgba(212,175,55,.4)}
+.dct-label{position:absolute;bottom:1rem;left:1rem;z-index:2;font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(96,165,250,.65)}
+.dct-logo-img{height:50px;width:auto;max-width:220px;object-fit:contain;display:block;margin-bottom:1.2rem;opacity:.92}
+.dct-desc{font-family:var(--serif);font-size:1.15rem;font-weight:400;line-height:1.85;color:rgba(240,235,225,.82);margin:1.2rem 0 2rem}
+.dct-desc strong{color:var(--cream)}
+.dct-stats{display:flex;gap:2.5rem;margin-bottom:2rem}
+.dstat-n{font-family:var(--disp);font-size:2rem;color:var(--elec);line-height:1}
+.dstat-l{font-family:var(--mono);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,235,225,.3);margin-top:2px}
+
+/* ═══════════ HOUSE DETECTIVE ═══════════ */
+.det-sec{background:var(--void)}
+.det-banner{
+  padding:6rem 3.5rem;
+  background:radial-gradient(ellipse at 30% 50%,rgba(30,58,95,.35) 0%,transparent 60%),
+             linear-gradient(160deg,#08111e,#0c1a2e,#050a12);
+  position:relative;overflow:hidden;
+}
+.det-banner::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(59,130,246,.012) 3px,rgba(59,130,246,.012) 4px);pointer-events:none}
+.det-silhouette{position:absolute;right:-3%;top:50%;transform:translateY(-50%);height:85%;width:auto;opacity:.04;pointer-events:none;filter:none;z-index:0}
+.det-inner{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:2.5rem;position:relative;z-index:1}
+.det-video{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,#050a12,#0c1a2e);border:1px solid rgba(59,130,246,.1);overflow:hidden;cursor:pointer;width:100%;max-width:800px}
+.det-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.det-overlay{position:absolute;bottom:1.2rem;left:1.2rem;right:1.2rem;z-index:2}
+.det-tag{display:inline-block;font-family:var(--mono);font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;padding:.22rem .6rem;border:1px solid rgba(59,130,246,.3);color:rgba(96,165,250,.65);margin-bottom:.4rem}
+.det-overlay-text{font-family:var(--mono);font-size:.58rem;line-height:1.65;color:rgba(96,165,250,.38)}
+.det-logo-img{height:48px;width:auto;max-width:220px;object-fit:contain;display:block;margin-bottom:1rem;opacity:.92}
+.det-manifesto{font-family:var(--serif);font-size:1.25rem;font-style:italic;font-weight:300;line-height:1.65;color:rgba(240,235,225,.68);border-left:2px solid var(--elec);padding-left:1.4rem;margin:1.2rem 0 1.8rem}
+.det-manifesto strong{color:var(--cream);font-style:normal;font-weight:600}
+.det-pts{display:flex;flex-direction:column;gap:.9rem;margin-bottom:2rem}
+.det-pt{display:flex;gap:.9rem;align-items:flex-start}
+.det-pt-ic{color:var(--elec);font-size:.68rem;margin-top:3px;flex-shrink:0;font-family:var(--mono)}
+.det-pt-t{font-family:var(--mono);font-size:.75rem;line-height:1.65;color:rgba(240,235,225,.75);font-weight:400}
+.det-pt-t strong{color:var(--cream)}
+
+/* ═══════════ PROPERTIES ═══════════ */
+.prop-sec{padding:6rem 3.5rem;background:var(--deep)}
+.prop-header{display:flex;justify-content:space-between;align-items:flex-end;max-width:1200px;margin:0 auto 2.5rem}
+.prop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:1200px;margin:0 auto}
+.prop-card{position:relative;aspect-ratio:3/4;overflow:hidden;cursor:pointer}
+.prop-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .6s}
+.prop-card:hover .prop-img{transform:scale(1.04)}
+.prop-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,12,20,.95) 0%,rgba(8,12,20,.1) 55%,transparent 100%)}
+.prop-content{position:absolute;bottom:0;left:0;right:0;padding:1.4rem}
+.prop-status{display:inline-block;font-family:var(--mono);font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;padding:.2rem .6rem;margin-bottom:.6rem}
+.prop-status.act{border:1px solid rgba(59,130,246,.5);color:var(--sky)}
+.prop-status.sld{border:1px solid rgba(212,175,55,.5);color:var(--gold)}
+.prop-status.pnd{border:1px solid rgba(96,165,250,.4);color:var(--sky)}
+.prop-addr{font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--cream);margin-bottom:.25rem;line-height:1.2}
+.prop-town{font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(240,235,225,.38);margin-bottom:.5rem}
+.prop-price{font-family:var(--disp);font-size:1.5rem;color:var(--gold);letter-spacing:.04em}
+
+/* ═══════════ DRONE / PRESS ═══════════ */
+.drone-sec{padding:6rem 3.5rem;background:linear-gradient(160deg,var(--abyss) 0%,#0a1520 50%,var(--deep) 100%);position:relative;overflow:hidden}
+.drone-sec::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 70% 40%,rgba(59,130,246,.055) 0%,transparent 55%);pointer-events:none}
+.drone-inner{max-width:1200px;margin:0 auto}
+.drone-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;margin-top:3.5rem}
+.pull-quote{font-family:var(--serif);font-size:clamp(1.4rem,2.5vw,2rem);font-weight:300;font-style:italic;line-height:1.5;color:var(--cream);margin-bottom:1.8rem;position:relative;padding-left:1.8rem}
+.pull-quote::before{content:'"';position:absolute;left:0;top:-.5rem;font-family:var(--disp);font-size:4.5rem;color:var(--gold);opacity:.28;line-height:1}
+.drone-body{font-family:var(--mono);font-size:.7rem;line-height:1.85;color:rgba(240,235,225,.48);margin-bottom:2rem}
+/* Press article image inline */
+.press-wrap{margin-bottom:2rem}
+.press-lbl{display:flex;align-items:center;gap:.8rem;margin-bottom:.75rem}
+.press-pub{font-family:var(--serif);font-size:1.1rem;font-style:italic;color:var(--gold)}
+.press-sub{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,235,225,.3)}
+.press-img{width:100%;max-width:460px;display:block;border:1px solid rgba(212,175,55,.15);transition:border-color .3s}
+.press-img:hover{border-color:rgba(212,175,55,.4)}
+/* Timeline */
+.tl-item{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);padding:1.3rem;display:flex;gap:1.3rem;align-items:flex-start;margin-bottom:2px;transition:all .3s}
+.tl-item:hover{background:rgba(59,130,246,.04);border-color:rgba(59,130,246,.15)}
+.tl-yr{font-family:var(--disp);font-size:1.5rem;color:rgba(59,130,246,.5);line-height:1;min-width:55px}
+.tl-t{font-family:var(--serif);font-size:.95rem;font-weight:600;color:var(--cream);margin-bottom:.25rem}
+.tl-d{font-family:var(--mono);font-size:.63rem;line-height:1.6;color:rgba(240,235,225,.36)}
+
+/* ═══ DRONE VIDEO — full width leader ═══ */
+.drone-video-wrap{
+  margin:2rem 0 2.5rem;
+  position:relative;
+  border:1px solid rgba(212,175,55,.15);
+  overflow:hidden;
+  background:#000;
+  aspect-ratio:16/9;
+  max-height:520px;
+}
+.drone-hero-vid{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+}
+.drone-vid-label{
+  position:absolute;bottom:.8rem;left:1rem;
+  font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(212,175,55,.6);
+  text-shadow:0 1px 6px rgba(0,0,0,.8);
+}
+/* Drone story PNG below advocate piece */
+.drone-story-img{
+  margin:1.2rem 0 1.4rem;
+  border:1px solid rgba(212,175,55,.1);
+  overflow:hidden;
+}
+.drone-story-img img{
+  width:100%;display:block;
+  transition:transform .5s;
+}
+.drone-story-img:hover img{transform:scale(1.02)}
+.drone-media-label{
+  font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(212,175,55,.5);margin-top:.5rem;display:block;
+}
+@media(max-width:768px){
+  .drone-video-wrap{
+    margin:1.5rem 0 1.5rem;
+    max-height:240px;
+  }
+}
+
+/* ═══════════ TESTIMONIALS ═══════════ */
+.testi-sec{padding:6rem 3.5rem;background:var(--void);position:relative;overflow:hidden}
+.testi-sec::before{content:'★★★★★';position:absolute;right:-2rem;bottom:1rem;font-size:13rem;color:rgba(212,175,55,.02);line-height:1;pointer-events:none;letter-spacing:-.5rem}
+.testi-inner{max-width:1200px;margin:0 auto}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:3.5rem}
+.testi-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);padding:2.2rem;position:relative;transition:all .3s}
+.testi-card::before{content:'"';position:absolute;top:1.2rem;right:1.5rem;font-family:var(--disp);font-size:5rem;color:rgba(212,175,55,.06);line-height:1}
+.testi-card:hover{background:rgba(212,175,55,.03);border-color:rgba(212,175,55,.14)}
+.testi-stars{color:var(--gold);font-size:.75rem;letter-spacing:.08em;margin-bottom:1rem}
+.testi-t{font-family:var(--serif);font-size:1rem;font-style:italic;font-weight:400;line-height:1.75;color:rgba(240,235,225,.82);margin-bottom:1.3rem}
+.testi-n{font-family:var(--serif);font-size:.88rem;font-weight:600;color:var(--gold)}
+.testi-d{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,235,225,.22);margin-top:2px}
+
+/* ═══════════ CONTACT CTA ═══════════ */
+.cta-sec{padding:7rem 3.5rem;background:linear-gradient(135deg,var(--abyss),#08111e);text-align:center;position:relative;overflow:hidden}
+.cta-sec::before{content:'MARK PIRES';position:absolute;left:50%;bottom:-3rem;transform:translateX(-50%);font-family:var(--disp);font-size:20rem;color:rgba(212,175,55,.015);line-height:1;pointer-events:none;white-space:nowrap}
+.cta-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
+.cta-big{font-family:var(--disp);font-size:clamp(3rem,6vw,5.5rem);color:var(--cream);line-height:.95;margin-bottom:1.3rem;letter-spacing:.03em}
+.cta-big em{color:var(--gold)}
+.cta-sub{font-family:var(--serif);font-size:1.05rem;font-weight:300;line-height:1.7;color:rgba(240,235,225,.48);margin-bottom:2.8rem}
+.cta-actions{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+.cta-detail{display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-top:2.8rem;padding-top:2.8rem;border-top:1px solid rgba(255,255,255,.06)}
+.cd-item{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase}
+.cd-item a{color:rgba(212,175,55,.68);text-decoration:none;transition:color .2s}
+.cd-item a:hover{color:var(--gold)}
+.cd-item img{height:14px;width:auto;vertical-align:middle;object-fit:contain}
+.cd-sep{color:rgba(255,255,255,.1);font-size:.45rem}
+
+/* ═══════════ FOOTER ═══════════ */
+footer{background:#040608;border-top:1px solid rgba(212,175,55,.06);padding:4rem 3.5rem 2rem}
+.foot-inner{max-width:1200px;margin:0 auto}
+.foot-top{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.foot-logo-row{display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;margin-bottom:.8rem}
+.foot-logo-img{height:24px;width:auto;max-width:100px;object-fit:contain;opacity:.6;transition:opacity .2s}
+.foot-logo-img:hover{opacity:.7}
+.foot-logo-img.dct{height:18px;opacity:.75}
+.foot-logo-img.hd{opacity:.7}
+.foot-name{font-family:var(--disp);font-size:1.8rem;color:var(--gold);letter-spacing:.06em;line-height:1}
+.foot-tagline{font-family:var(--serif);font-size:.82rem;font-style:italic;color:rgba(240,235,225,.28);margin-top:.4rem;max-width:230px;line-height:1.6}
+.foot-legal{font-family:var(--mono);font-size:.56rem;color:rgba(240,235,225,.14);margin-top:1.2rem;line-height:1.7;max-width:230px}
+.foot-col h4{font-family:var(--mono);font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(212,175,55,.5);margin-bottom:1.2rem}
+.foot-col ul{list-style:none}
+.foot-col li{margin-bottom:.6rem}
+.foot-col a{font-family:var(--mono);font-size:.66rem;color:rgba(240,235,225,.24);text-decoration:none;letter-spacing:.04em;transition:color .2s}
+.foot-col a:hover{color:var(--gold)}
+.foot-bot{border-top:1px solid rgba(255,255,255,.04);padding-top:1.4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.foot-legal-line{font-family:var(--mono);font-size:.56rem;color:rgba(240,235,225,.14)}
+.foot-legal-line a{color:rgba(212,175,55,.3);text-decoration:none}
+.foot-social{display:flex;gap:.7rem}
+.fsoc{width:30px;height:30px;border:1px solid rgba(212,175,55,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:rgba(240,235,225,.2);text-decoration:none;transition:all .3s;cursor:pointer}
+.fsoc:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ═══════════ MODAL ═══════════ */
+.modal-ov{display:none;position:fixed;inset:0;z-index:800;background:rgba(4,6,8,.94);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:1.5rem}
+.modal-ov.open{display:flex}
+.modal{background:var(--abyss);border:1px solid rgba(212,175,55,.15);padding:2.8rem;max-width:460px;width:100%;position:relative;animation:mIn .22s ease}
+@keyframes mIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.modal-close{position:absolute;top:1rem;right:1.2rem;background:none;border:none;color:rgba(240,235,225,.22);font-size:1.2rem;cursor:pointer;font-family:var(--mono);transition:color .2s}
+.modal-close:hover{color:var(--cream)}
+.modal-eye{font-family:var(--mono);font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+.modal-title{font-family:var(--disp);font-size:1.9rem;color:var(--cream);line-height:1;margin-bottom:.5rem;letter-spacing:.04em}
+.modal-sub{font-family:var(--serif);font-size:.88rem;font-style:italic;color:rgba(240,235,225,.42);line-height:1.6;margin-bottom:1.8rem}
+.ff{margin-bottom:.95rem}
+.ff label{display:block;font-family:var(--mono);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,235,225,.28);margin-bottom:.35rem}
+.ff input,.ff select{width:100%;padding:.78rem .9rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--cream);font-family:var(--mono);font-size:.78rem;transition:border-color .2s;outline:none}
+.ff input:focus,.ff select:focus{border-color:var(--gold)}
+.ff input::placeholder{color:rgba(240,235,225,.18)}
+.ff select option{background:var(--abyss)}
+.tcpa{display:flex;gap:.7rem;align-items:flex-start;margin:1rem 0}
+.tcpa input[type=checkbox]{margin-top:2px;accent-color:var(--gold);flex-shrink:0}
+.tcpa-t{font-family:var(--mono);font-size:.6rem;color:rgba(240,235,225,.26);line-height:1.55}
+.tcpa-t a{color:rgba(212,175,55,.5)}
+.modal-btn{width:100%;padding:.95rem;background:var(--gold);color:var(--void);border:none;font-family:var(--mono);font-size:.72rem;font-weight:400;letter-spacing:.17em;text-transform:uppercase;cursor:pointer;margin-top:.4rem;transition:background .2s,transform .2s}
+.modal-btn:hover{background:#e8c840;transform:translateY(-1px)}
+.form-ok{display:none;text-align:center;padding:2rem 0}
+.form-ok .ok-big{font-family:var(--disp);font-size:2.3rem;color:var(--gold);letter-spacing:.04em;margin-bottom:.7rem}
+.form-ok p{font-family:var(--serif);font-size:.9rem;font-style:italic;color:rgba(240,235,225,.45);line-height:1.6}
+
+
+/* ═══════════ CT NEWS SECTION ═══════════ */
+.news-sec{padding:6rem 3.5rem;background:var(--abyss)}
+.news-inner{max-width:1200px;margin:0 auto}
+.news-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;gap:2rem;flex-wrap:wrap}
+.news-sub{font-family:var(--mono);font-size:.68rem;line-height:1.7;color:rgba(240,235,225,.38);max-width:420px;margin-top:.6rem}
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.news-card{
+  background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);
+  padding:1.6rem;transition:all .3s;cursor:pointer;text-decoration:none;display:block;
+  position:relative;overflow:hidden;
+}
+.news-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--gold),var(--elec));transform:scaleX(0);transition:transform .35s}
+.news-card:hover{background:rgba(212,175,55,.04);border-color:rgba(212,175,55,.2)}
+.news-card:hover::before{transform:scaleX(1)}
+.news-source{font-family:var(--mono);font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;opacity:.75}
+.news-title{font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--cream);line-height:1.4;margin-bottom:.5rem}
+.news-desc{font-family:var(--mono);font-size:.63rem;line-height:1.65;color:rgba(240,235,225,.38);margin-bottom:.8rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.news-date{font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;color:rgba(240,235,225,.22);text-transform:uppercase}
+.news-loading{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:1rem;padding:3rem;font-family:var(--mono);font-size:.7rem;color:rgba(240,235,225,.3)}
+.news-spinner{width:18px;height:18px;border:1.5px solid rgba(212,175,55,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:768px){
+  .news-sec{padding:4rem 1.4rem}
+  .news-grid{grid-template-columns:1fr}
+  .news-header{flex-direction:column;align-items:flex-start}
+}
+
+/* ═══════════ ANIMATIONS ═══════════ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes fadeLeft{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+
+/* ═══════════ MOBILE ═══════════ */
+@media(max-width:768px){
+  /* Nav */
+  nav{grid-template-columns:auto 1fr auto;padding:.85rem 1.2rem}
+  .nav-links{display:none}
+  .nav-hd-logo{height:28px}
+  .nav-dct-logo{height:22px}
+  .nav-cta{display:none}
+  .nav-burger{display:flex}
+  .nav-identity .nav-mp{font-size:.88rem}
+  .nav-identity .nav-cb-logo{display:none}
+  /* MOBILE HERO — full bleed portrait, pill text pushed to torso area */
+  .hero{ min-height:100svh; align-items:flex-end; }
+  /* Overlay: invisible — just bottom vignette, NO left/right gradients */
+  .hero-overlay{
+    background:linear-gradient(to top,rgba(8,12,20,.75) 0%,transparent 22%);
+  }
+  /* Portrait: absolute, full 100vw — no split column, no divider */
+  .hero-portrait{
+    position:absolute !important;
+    right:0 !important; top:0 !important; bottom:0 !important;
+    width:100vw !important;
+    z-index:3;
+    overflow:visible;
+  }
+  /* ZERO gradient on portrait — this was the shadow line on Mark's face */
+  .hero-portrait::before{
+    width:0 !important; background:none !important;
+  }
+  .hero-portrait-img{
+    width:100% !important;
+    height:100svh !important;
+    object-fit:cover !important;
+    object-position:top center !important;
+    -webkit-mask-image:linear-gradient(to bottom,black 72%,transparent 100%);
+    mask-image:linear-gradient(to bottom,black 72%,transparent 100%);
+    filter:none !important;
+  }
+  /* Content: pushed to bottom — pill sits at torso/right arm level */
+  .hero-content{
+    position:relative !important;
+    z-index:5;
+    padding:0 1.4rem 2.2rem !important;
+    max-width:100% !important;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    align-self:flex-end;
+    margin-top:auto;
+    text-shadow:none !important;
+  }
+  /* Pill: semi-transparent glass over the photo */
+  .hero-text-pill{
+    background:rgba(8,12,20,.45) !important;
+    backdrop-filter:blur(10px) !important;
+    -webkit-backdrop-filter:blur(10px) !important;
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:8px;
+    padding:1.3rem 1.3rem !important;
+    max-width:100% !important;
+    width:100%;
+  }
+  .hero-eyebrow{ display:none; }
+  .hero-hl{
+    font-size:clamp(2.2rem,8.5vw,3.4rem) !important;
+    text-align:left;
+    line-height:.95;
+    letter-spacing:.01em;
+    text-shadow:none !important;
+  }
+  .hero-rot-wrap{height:1.5rem;margin:.7rem 0 .8rem}
+  .hero-rot{font-size:clamp(.78rem,3vw,.92rem);line-height:1.5rem;text-shadow:none}
+  .hero-pills{display:none}
+  .hero-ctas{flex-direction:column;align-items:flex-start;gap:.5rem;margin-top:.7rem}
+  .btn-gold{font-size:.65rem;padding:.75rem 1.3rem;letter-spacing:.1em}
+  .btn-ghost{display:none}
+  .hero-stats{display:none}
+  .hero-scroll{display:none}
+  /* Sections */
+  .diff-inner,.dct-inner,.det-inner,.drone-grid{grid-template-columns:1fr;gap:2.5rem}
+  .diff-sec,.dct-sec,.det-banner,.prop-sec,.drone-sec,.testi-sec,.cta-sec{padding:4rem 1.4rem}
+  .diff-sec::before,.cta-sec::before{display:none}
+  .prop-grid,.testi-grid{grid-template-columns:1fr}
+  .lead-grid{grid-template-columns:1fr}
+  .drone-grid{grid-template-columns:1fr}
+  .s-h{text-align:center}
+  .s-eye{margin:0 auto 1rem;display:flex}
+  /* Footer */
+  .foot-top{grid-template-columns:1fr 1fr;gap:2rem}
+  .foot-inner{padding:0}
+  footer{padding:3rem 1.4rem 1.5rem}
+  /* Lead strip */
+  .lead-strip{padding:2rem 1.4rem}
+}
+@media(max-width:480px){
+  .foot-top{grid-template-columns:1fr}
+  .hero-portrait{width:100vw !important}
+  .hero-content{max-width:100% !important;padding-left:1.2rem !important;padding-right:1.2rem !important}
+  .hero-hl{font-size:clamp(1.9rem,8vw,2.8rem) !important}
+}
+/* LANDSCAPE MOBILE — behaves like desktop: photo right, text left */
+@media(max-width:900px) and (orientation:landscape){
+  .hero{min-height:100svh}
+  .hero-overlay{
+    background:
+      linear-gradient(to top,rgba(8,12,20,.85) 0%,transparent 30%);
+  }
+  .hero-portrait{
+    width:clamp(280px,50vw,520px);
+    right:0;
+    top:0;bottom:0;
+  }
+  .hero-portrait::before{width:0;background:none}
+  .hero-portrait-img{
+    width:100%;
+    height:100svh;
+    object-fit:contain;
+    object-position:bottom right;
+    -webkit-mask-image:linear-gradient(to bottom,black 70%,transparent 100%);
+    mask-image:linear-gradient(to bottom,black 70%,transparent 100%);
+  }
+  .hero-content{
+    padding:70px 1.5rem 3rem;
+    max-width:54vw;
+    text-align:left;
+  }
+  .hero-text-pill{
+    background:rgba(8,12,20,.45);
+    padding:1.2rem 1.5rem;
+    max-width:100%;
+  }
+  .hero-hl{font-size:clamp(1.6rem,5vw,2.8rem)}
+  .hero-pills{display:none}
+  .hero-stats{display:none}
+  .hero-scroll{display:none}
+}
+
+/* ═══════════ GOOGLE MAP FOOTER ═══════════ */
+.foot-map-wrap{
+  margin-top:2rem;
+  border-radius:8px;
+  overflow:hidden;
+  border:1px solid rgba(212,175,55,0.18);
+  width:100%;
+  max-width:420px;
+}
+.foot-map-wrap iframe{
+  display:block;
+  width:100%;
+  height:220px;
+  border:0;
+  filter:grayscale(1) invert(1) brightness(0.85) contrast(1.05);
+}
+@media(max-width:768px){
+  .foot-map-wrap{ max-width:100%; }
+}
+
+/* ═══════════ NAV DROPDOWN ═══════════ */
+.nav-has-drop{position:relative}
+.nav-drop{
+  /* Invisible bridge fills the gap so cursor doesn't "fall" between nav and dropdown */
+  display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);
+  padding-top:12px; /* gap filler — cursor can travel through here */
+  background:transparent;
+  list-style:none;min-width:220px;z-index:600;
+}
+.nav-drop-inner{
+  background:rgba(8,12,20,.98);backdrop-filter:blur(20px);
+  border:1px solid rgba(212,175,55,.12);
+  padding:.5rem 0;
+  box-shadow:0 16px 40px rgba(0,0,0,.5);
+}
+.nav-drop li a{
+  display:block;padding:.6rem 1.2rem;
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(240,235,225,.5);text-decoration:none;white-space:nowrap;transition:all .2s;
+}
+.nav-drop li a::after{display:none}
+.nav-drop li a:hover{color:var(--gold);background:rgba(212,175,55,.05);padding-left:1.5rem}
+/* JS controls open/close — see script below */
+.nav-has-drop.drop-open .nav-drop{display:block}
+
+/* ═══════════ SERVICES SECTION ═══════════ */
+.svc-sec{padding:6rem 3.5rem;background:var(--void);position:relative;overflow:hidden}
+.svc-sec::before{content:'SERVICES';position:absolute;right:-1rem;top:50%;transform:translateY(-50%);font-family:var(--disp);font-size:18rem;color:rgba(212,175,55,.018);line-height:1;pointer-events:none;white-space:nowrap}
+.svc-inner{max-width:1200px;margin:0 auto}
+.svc-header{max-width:600px;margin-bottom:3.5rem}
+.svc-sub{font-family:var(--mono);font-size:.72rem;line-height:1.75;color:rgba(240,235,225,.42);margin-top:.9rem;max-width:480px}
+.svc-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+  margin-bottom:3rem;
+}
+.svc-card{
+  display:block;text-decoration:none;
+  background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);
+  transition:all .35s;position:relative;overflow:hidden;cursor:pointer;
+}
+.svc-card:hover{border-color:rgba(212,175,55,.25);background:rgba(212,175,55,.03);transform:translateY(-3px);box-shadow:0 20px 50px rgba(0,0,0,.45)}
+/* Image callout */
+.svc-img-wrap{
+  position:relative;aspect-ratio:4/3;overflow:hidden;
+  background:linear-gradient(135deg,var(--slate),var(--deep));
+}
+.svc-img-gradient{
+  background:linear-gradient(135deg,#0d1829 0%,#1e3a5f 50%,#080c14 100%);
+}
+.svc-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  transition:transform .6s;
+}
+.svc-card:hover .svc-img{transform:scale(1.06)}
+.svc-img-wrap.svc-img-missing .svc-img{display:none}
+.svc-img-ov{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,
+    transparent 0%,
+    rgba(8,12,20,.15) 40%,
+    rgba(8,12,20,.75) 72%,
+    rgba(8,12,20,.96) 100%
+  );
+  z-index:1;
+}
+.svc-num{
+  position:absolute;top:1rem;left:1rem;z-index:2;
+  font-family:var(--disp);font-size:2.2rem;line-height:1;
+  color:rgba(212,175,55,.22);letter-spacing:.04em;
+  transition:color .3s;
+}
+.svc-card:hover .svc-num{color:rgba(212,175,55,.5)}
+/* Body */
+.svc-body{padding:1.4rem 1.4rem 1.6rem}
+.svc-tag{
+  font-family:var(--mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);opacity:.65;margin-bottom:.45rem;
+}
+.svc-title{
+  font-family:var(--serif);font-size:1.1rem;font-weight:600;
+  color:var(--cream);line-height:1.25;margin-bottom:.55rem;
+  transition:color .25s;
+}
+.svc-card:hover .svc-title{color:var(--gold)}
+.svc-desc{
+  font-family:var(--mono);font-size:.67rem;line-height:1.7;
+  color:rgba(240,235,225,.45);margin-bottom:1rem;
+}
+.svc-cta{
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--gold);opacity:.6;transition:opacity .25s,letter-spacing .25s;
+}
+.svc-card:hover .svc-cta{opacity:1;letter-spacing:.2em}
+.svc-footer{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem}
+/* Mobile */
+@media(max-width:768px){
+  .svc-sec{padding:4rem 1.4rem}
+  .svc-sec::before{display:none}
+  .svc-grid{grid-template-columns:1fr}
+  .svc-card{transform:none !important}
+  .svc-footer{flex-direction:column}
+}
+@media(min-width:769px) and (max-width:1024px){
+  .svc-grid{grid-template-columns:1fr 1fr}
+}
+/* Mobile drawer service sub-links — slightly smaller + indented */
+.nav-drawer a.drawer-sub{
+  font-size:1.2rem;opacity:.65;padding-left:1.5rem;
+}
+
+/* ═══════════ SELLER GUIDE SECTION ═══════════ */
+.guide-sec{
+  padding:6rem 3.5rem;
+  background:linear-gradient(160deg,var(--deep) 0%,var(--abyss) 60%,#080c14 100%);
+  border-top:1px solid rgba(212,175,55,.07);
+}
+.guide-inner{
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:center;
+}
+/* Book cover mockup */
+.guide-cover{
+  position:relative;
+  aspect-ratio:3/4;max-width:380px;width:100%;
+  border-radius:4px;overflow:hidden;
+  box-shadow:-8px 8px 40px rgba(0,0,0,.65), 4px 0 0 rgba(212,175,55,.12);
+  border:1px solid rgba(212,175,55,.14);
+}
+.guide-cover-bg{
+  position:absolute;inset:0;
+  background-image:url('/images/blog/ct-shoreline-living.png');
+  background-size:cover;
+  background-position:center top;
+}
+.guide-cover-overlay{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(to bottom,transparent 0%,rgba(8,12,20,.5) 55%,rgba(8,12,20,.92) 100%);
+  z-index:1;
+}
+/* Mark's photo — right side, arms crossed, fading up from bottom-right */
+.guide-cover-mark{
+  position:absolute;right:-5%;bottom:0;width:75%;z-index:2;
+  display:flex;align-items:flex-end;pointer-events:none;
+}
+.guide-mark-img{
+  width:100%;object-fit:contain;object-position:bottom center;
+  -webkit-mask-image:linear-gradient(to top,black 55%,transparent 88%);
+  mask-image:linear-gradient(to top,black 55%,transparent 88%);
+  filter:drop-shadow(-6px 0 20px rgba(8,12,20,.8));
+}
+/* Text on cover */
+.guide-cover-content{
+  position:absolute;bottom:0;left:0;right:0;padding:1.6rem 1.4rem;z-index:3;
+}
+.guide-eyebrow{
+  font-family:var(--mono);font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);opacity:.7;margin-bottom:.6rem;
+}
+.guide-cover-title{
+  font-family:var(--disp);font-size:1.75rem;line-height:.96;letter-spacing:.03em;
+  color:var(--cream);margin-bottom:.5rem;
+}
+.guide-cover-sub{
+  font-family:var(--serif);font-size:.72rem;font-style:italic;font-weight:300;
+  color:rgba(240,235,225,.6);line-height:1.5;margin-bottom:.7rem;
+}
+.guide-cover-author{
+  font-family:var(--mono);font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(212,175,55,.55);
+}
+/* Corner accent marks on the cover */
+.guide-corner-tl,.guide-corner-br{
+  position:absolute;width:24px;height:24px;z-index:4;
+  border-color:var(--gold);border-style:solid;border-width:0;
+}
+.guide-corner-tl{top:10px;left:10px;border-top-width:1.5px;border-left-width:1.5px}
+.guide-corner-br{bottom:10px;right:10px;border-bottom-width:1.5px;border-right-width:1.5px}
+/* Text column */
+.guide-desc{
+  font-family:var(--serif);font-size:1.05rem;font-weight:300;line-height:1.75;
+  color:rgba(240,235,225,.68);margin:1rem 0;
+}
+.guide-bullets{display:flex;flex-direction:column;gap:.65rem;margin:1.6rem 0 1.4rem}
+.guide-bullet{display:flex;gap:.8rem;align-items:flex-start}
+.gb-icon{color:var(--gold);font-size:.45rem;margin-top:.3rem;flex-shrink:0}
+.guide-bullet span:last-child{
+  font-family:var(--mono);font-size:.7rem;line-height:1.65;color:rgba(240,235,225,.6);
+}
+.guide-note{
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;
+  color:rgba(240,235,225,.28);margin-bottom:1.6rem;font-style:italic;
+}
+@media(max-width:768px){
+  .guide-sec{padding:4rem 1.4rem}
+  .guide-inner{grid-template-columns:1fr;gap:2.5rem}
+  .guide-cover{max-width:280px;margin:0 auto}
+  .guide-cover-title{font-size:1.3rem}
+}
+</style><script src="/lead-engine/conversion-tracker.js" defer></script>
+</head>
+<body>
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<!-- ═══ NAV ═══ -->
+<nav id="mainNav">
+  <!-- LEFT: House Detective logo + Mark Pires name + CB -->
+  <div class="nav-left">
+    <a href="#detective">
+      <img src="/images/branding/house-detective-logo.png" alt="House Detective" class="nav-hd-logo">
+    </a>
+    <div class="nav-divider"></div>
+    <a class="nav-identity" href="/">
+      <span class="nav-mp">Mark Pires</span>
+      <img src="/images/branding/coldwell-banker-logo.png" alt="Coldwell Banker" class="nav-cb-logo">
+    </a>
+  </div>
+  <!-- CENTER: Nav links (desktop) -->
+  <ul class="nav-links">
+    <li><a href="/about-mark-pires.php">About</a></li>
+    <li><a href="/towns/">Towns</a></li>
+    <li><a href="/home-valuation.php">Home Value</a></li>
+    <li><a href="#discover">Discover CT</a></li>
+    <li><a href="/mark-pires-advantage.html">The Advantage</a></li>
+    <li><a href="#detective">House Detective</a></li>
+    <li><a href="#properties">Listings</a></li>
+    <li><a href="/blog/index.html">Blog</a></li>
+    <li class="nav-has-drop">
+      <a href="/services.html">More ▾</a>
+      <ul class="nav-drop">
+        <div class="nav-drop-inner">
+          <li><a href="/news.html">CT News</a></li>
+          <li><a href="#drone">Press</a></li>>
+          <li><a href="/services.html">All Services</a></li>
+          <li><a href="/drone-video-tours-fairfield-county-ct-realtor.html">Drone Video Tours</a></li>
+          <li><a href="/white-glove-realtor-fairfield-county-ct.html">White Glove Service</a></li>
+          <li><a href="/negotiation-specialist-realtor-fairfield-county.html">Negotiation Specialist</a></li>
+          <li><a href="/renovation-advisor-realtor-fairfield-county-ct.html">Renovation Advisor</a></li>
+          <li><a href="/buyer-seller-advice-fairfield-county-ct-real-estate.html">Buyer &amp; Seller Advice</a></li>
+        </div>
+      </ul>
+    </li>
+  </ul>
+  <!-- RIGHT: Discover CT logo + CTA -->
+  <div class="nav-right">
+    <a href="https://discoverct.net" target="_blank">
+      <img src="/images/branding/discover-ct-logo.png" alt="Discover CT" class="nav-dct-logo">
+    </a>
+    <div class="nav-divider"></div>
+    <a class="nav-cta" href="#" onclick="MarkPiresLeadEngine.openConsultFunnel(); return false;"><span>Talk With Mark</span></a>
+    <!-- Mobile burger -->
+    <button class="nav-burger" id="burger" aria-label="Menu" onclick="toggleDrawer()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile nav drawer -->
+<div class="nav-drawer" id="drawer">
+  <a class="drawer-cta" href="/home-valuation.php" onclick="toggleDrawer()">Free Home Valuation</a>
+  <a class="drawer-cta" onclick="MarkPiresLeadEngine.openConsultFunnel(); return false;">Talk With Mark</a>
+  <a href="/towns/" onclick="toggleDrawer()">Towns</a>
+  <a href="#discover" onclick="toggleDrawer()">Discover CT</a>
+  <a href="/mark-pires-advantage.html" onclick="toggleDrawer()">The Mark Pires Advantage</a>
+  <a href="#detective" onclick="toggleDrawer()">House Detective</a>
+  <a href="#properties" onclick="toggleDrawer()">Listings</a>
+  <a href="/blog/index.html" onclick="toggleDrawer()">Blog</a>
+  <a href="/news.html" onclick="toggleDrawer()">CT News</a>
+  <a href="/services.html" onclick="toggleDrawer()">Services</a>
+  <a class="drawer-sub" href="/drone-video-tours-fairfield-county-ct-realtor.html" onclick="toggleDrawer()">Drone Video Tours</a>
+  <a class="drawer-sub" href="/white-glove-realtor-fairfield-county-ct.html" onclick="toggleDrawer()">White Glove Service</a>
+  <a class="drawer-sub" href="/negotiation-specialist-realtor-fairfield-county.html" onclick="toggleDrawer()">Negotiation Specialist</a>
+  <a class="drawer-sub" href="/renovation-advisor-realtor-fairfield-county-ct.html" onclick="toggleDrawer()">Renovation Advisor</a>
+  <a class="drawer-sub" href="/buyer-seller-advice-fairfield-county-ct-real-estate.html" onclick="toggleDrawer()">Buyer &amp; Seller Advice</a>
+  <a class="drawer-cta" onclick="toggleDrawer();openModal('buyer-guide');return false" href="javascript:void(0);">2026 Buyer Guide</a>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <video class="hero-video" autoplay muted loop playsinline src="/videos/reels/drone-tour.mp4"></video>
+  <div class="hero-overlay"></div>
+
+  <!-- Text column -->
+  <div class="hero-content">
+    <div class="hero-text-pill">
+      <div class="hero-eyebrow">
+        <div class="eyebrow-line"></div>
+        <div class="eyebrow-text">Fairfield County, Connecticut</div>
+      </div>
+      <h1 class="hero-hl">
+        Connecticut's<br>
+        <span class="g">Most Innovative</span><br>
+        <span class="o">Real Estate</span><br>
+        Experience
+      </h1>
+      <div class="hero-rot-wrap">
+        <div class="hero-rot" id="rotEl">Your Fairfield County Realtor &amp; House Detective</div>
+      </div>
+      <div class="hero-pills">
+        <span class="pill hi">Realtor</span>
+        <span class="pill hi">Storyteller</span>
+        <span class="pill hi">Drone Pioneer</span>
+        <span class="pill hi">House Detective</span>
+        <span class="pill">Creator of Discover CT</span>
+        <span class="pill">Fairfield County</span>
+      </div>
+      <div class="hero-ctas">
+        <a class="btn-gold" href="/home-valuation.php">Get My Free Home Valuation</a>
+        <a class="btn-ghost" href="javascript:void(0);" onclick="MarkPiresLeadEngine.openConsultFunnel(); return false;">I'm Relocating to CT</a>
+        <a class="btn-ghost btn-detective" href="#detective">Meet The House Detective</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Portrait column -->
+  <div class="hero-portrait" id="heroPortrait">
+    <img
+      class="hero-portrait-img"
+      src="/images/hero/mark-pires-transparent.png"
+      alt="Mark Pires — Fairfield County Realtor"
+      onerror="this.src='/mark-pires-transparent.png'"
+    >
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <div class="scroll-lbl">Scroll</div>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-n">$200M+</div><div class="hstat-l">In Sales</div></div>
+    <div class="hstat"><div class="hstat-n">400+</div><div class="hstat-l">Deals</div></div>
+    <div class="hstat"><div class="hstat-n">15+</div><div class="hstat-l">Years</div></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">Just Listed: 4BR Colonial · Westport CT · $1.195M</span>
+    <span class="ticker-item">Under Contract in 6 Days · Darien CT</span>
+    <span class="ticker-item">Median Price Fairfield County: $685K ↑ 6.2% YOY</span>
+    <span class="ticker-item">Call Mark: 203-247-2655</span>
+    <span class="ticker-item">Drone Pioneer · Stamford Advocate Feature</span>
+    <span class="ticker-item">Watch House Detective on Discover CT</span>
+    <span class="ticker-item">Just Listed: 4BR Colonial · Westport CT · $1.195M</span>
+    <span class="ticker-item">Under Contract in 6 Days · Darien CT</span>
+    <span class="ticker-item">Median Price Fairfield County: $685K ↑ 6.2% YOY</span>
+    <span class="ticker-item">Call Mark: 203-247-2655</span>
+    <span class="ticker-item">Drone Pioneer · Stamford Advocate Feature</span>
+    <span class="ticker-item">Watch House Detective on Discover CT</span>
+  </div>
+</div>
+
+<!-- ABOUT / WHY DIFFERENT -->
+<section class="diff-sec" id="about">
+  <div class="diff-inner">
+    <div class="reveal">
+      <div class="s-eye">Who I Am</div>
+      <h2 class="s-h">Not Just Another<br>Realtor. <em>Never</em><br><span class="o">Was.</span></h2>
+      <p class="diff-statement">
+        I don't just list properties. I <strong>investigate them, tell their stories, film them from the sky,</strong> and build content empires around the communities they live in.
+      </p>
+      <div class="diff-grid">
+        <div class="diff-item reveal d1"><div class="diff-n">01</div><div class="diff-t">You Get Mark</div><div class="diff-d">Not an assistant. Not a team. Every showing, every negotiation, every call — me.</div></div>
+        <div class="diff-item reveal d2"><div class="diff-n">02</div><div class="diff-t">Cinematic Marketing</div><div class="diff-d">Drone footage, cinema-quality video, and Discover CT audience exposure for every listing.</div></div>
+        <div class="diff-item reveal d1"><div class="diff-n">03</div><div class="diff-t">Honest Numbers</div><div class="diff-d">I give you the real price — then deliver above it.</div></div>
+        <div class="diff-item reveal d2"><div class="diff-n">04</div><div class="diff-t">House Detective</div><div class="diff-d">Every home has a history. I uncover it. Better decisions. Better prices.</div></div>
+      </div>
+    </div>
+    <div class="portrait-frame reveal">
+      <img src="/images/branding/case.png" alt="Mark Pires — House Detective" style="width:100%;display:block" onerror="this.src='/images/branding/case.png'">
+      <div class="portrait-cap">
+        <div class="portrait-cap-name">MARK PIRES</div>
+        <div class="portrait-cap-role">Realtor · Storyteller · Drone Pioneer · House Detective</div>
+      </div>
+      <div class="portrait-corner tl"></div><div class="portrait-corner tr"></div>
+      <div class="portrait-corner bl"></div><div class="portrait-corner br"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- LEAD STRIP -->
+<div class="lead-strip">
+  <div class="lead-grid">
+    <div class="lead-pill" onclick="window.location.href='/home-valuation.php'">
+      <span class="pill-icon">🏡</span>
+      <div class="pill-title">What Could Your Home Sell For?</div>
+      <div class="pill-desc">Start with your address. Get a personally researched Fairfield County valuation — not a generic estimate.</div>
+      <div class="pill-cta">Check My Value</div>
+    </div>
+    <div class="lead-pill" onclick="openModal('buyer-guide')">
+      <span class="pill-icon">🗺</span>
+      <div class="pill-title">2026 Buyer's Guide</div>
+      <div class="pill-desc">Free illustrated guide — town comparisons, NAR trends, commute data, school rankings, real pricing.</div>
+      <div class="pill-cta">Download Free</div>
+    </div>
+    <div class="lead-pill" onclick="openModal('market-report')">
+      <span class="pill-icon">📈</span>
+      <div class="pill-title">Monthly Market Report</div>
+      <div class="pill-desc">Inventory, pricing trends, and what's really happening — straight from Mark, every month, free.</div>
+      <div class="pill-cta">Subscribe Free</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SERVICES HUB ═══ -->
+<section class="svc-sec" id="services">
+  <div class="svc-inner">
+    <div class="svc-header reveal">
+      <div class="s-eye">What I Do</div>
+      <h2 class="s-h">The <em>Mark Pires</em><br>Advantage</h2>
+      <p class="svc-sub">Six ways I go further than any other Fairfield County realtor — each one a competitive edge you keep for life.</p>
+    </div>
+    <div class="svc-grid">
+
+      <!-- 1: Drone Video Tours -->
+      <a class="svc-card reveal" href="/drone-video-tours-fairfield-county-ct-realtor.html">
+        <div class="svc-img-wrap">
+          <img src="/images/services/drone-video-tours.png" alt="Drone Video Tours Fairfield County CT" class="svc-img" loading="lazy" onerror="this.closest('.svc-img-wrap').classList.add('svc-img-missing')">
+          <div class="svc-img-ov"></div>
+          <div class="svc-num">01</div>
+        </div>
+        <div class="svc-body">
+          <div class="svc-tag">Drone &amp; Cinema</div>
+          <div class="svc-title">Drone Video Tours</div>
+          <div class="svc-desc">Cinematic aerial storytelling that turns every listing into a destination — before the first showing, buyers are already in love.</div>
+          <div class="svc-cta">Explore →</div>
+        </div>
+      </a>
+
+      <!-- 2: White Glove Service -->
+      <a class="svc-card reveal d1" href="/white-glove-realtor-fairfield-county-ct.html">
+        <div class="svc-img-wrap">
+          <img src="/images/services/white-glove-services.png" alt="White Glove Realtor Fairfield County CT" class="svc-img" loading="lazy" onerror="this.closest('.svc-img-wrap').classList.add('svc-img-missing')">
+          <div class="svc-img-ov"></div>
+          <div class="svc-num">02</div>
+        </div>
+        <div class="svc-body">
+          <div class="svc-tag">Full-Service</div>
+          <div class="svc-title">White Glove Service</div>
+          <div class="svc-desc">Every detail handled. Every showing managed. Every call answered — by Mark personally, not an assistant.</div>
+          <div class="svc-cta">Explore →</div>
+        </div>
+      </a>
+
+      <!-- 3: Negotiation Specialist -->
+      <a class="svc-card reveal d2" href="/negotiation-specialist-realtor-fairfield-county.html">
+        <div class="svc-img-wrap">
+          <img src="/images/services/negotiation-specialist.png" alt="Negotiation Specialist Realtor Fairfield County" class="svc-img" loading="lazy" onerror="this.closest('.svc-img-wrap').classList.add('svc-img-missing')">
+          <div class="svc-img-ov"></div>
+          <div class="svc-num">03</div>
+        </div>
+        <div class="svc-body">
+          <div class="svc-tag">Strategy</div>
+          <div class="svc-title">Negotiation Specialist</div>
+          <div class="svc-desc">Mark's track record of above-ask closings isn't luck — it's a deliberate negotiation strategy built over 15+ years.</div>
+          <div class="svc-cta">Explore →</div>
+        </div>
+      </a>
+
+      <!-- 4: Renovation Advisor -->
+      <a class="svc-card reveal" href="/renovation-advisor-realtor-fairfield-county-ct.html">
+        <div class="svc-img-wrap">
+          <img src="/images/services/renovation-advisor.png" alt="Renovation Advisor Realtor Fairfield County CT" class="svc-img" loading="lazy" onerror="this.closest('.svc-img-wrap').classList.add('svc-img-missing')">
+          <div class="svc-img-ov"></div>
+          <div class="svc-num">04</div>
+        </div>
+        <div class="svc-body">
+          <div class="svc-tag">Value Engineering</div>
+          <div class="svc-title">Renovation Advisor</div>
+          <div class="svc-desc">Know exactly which upgrades add value and which drain it — before you spend a dollar. Honest ROI guidance from someone who's seen it all.</div>
+          <div class="svc-cta">Explore →</div>
+        </div>
+      </a>
+
+      <!-- 5: Town Tours / Neighborhood Guide -->
+      <a class="svc-card reveal d1" href="/fairfield-county-town-tours-neighborhood-guide.html">
+        <div class="svc-img-wrap">
+          <img src="/images/services/town-tours-ct.png" alt="Fairfield County Town Tours Neighborhood Guide" class="svc-img" loading="lazy" onerror="this.closest('.svc-img-wrap').classList.add('svc-img-missing')">
+          <div class="svc-img-ov"></div>
+          <div class="svc-num">05</div>
+        </div>
+        <div class="svc-body">
+          <div class="svc-tag">Relocation</div>
+          <div class="svc-title">Town Tours &amp; Neighborhood Guide</div>
+          <div class="svc-desc">Moving from NYC? Mark drives every client through every town worth knowing — schools, commutes, restaurants, hidden gems.</div>
+          <div class="svc-cta">Explore →</div>
+        </div>
+      </a>
+
+      <!-- 6: Buyer & Seller Advice -->
+      <a class="svc-card reveal d2" href="/buyer-seller-advice-fairfield-county-ct-real-estate.html">
+        <div class="svc-img-wrap">
+          <img src="/images/services/cinema-noir-ct-house-detective.png" alt="Buyer and Seller Advice Fairfield County CT" class="svc-img" loading="lazy" onerror="this.closest('.svc-img-wrap').classList.add('svc-img-missing')">
+          <div class="svc-img-ov"></div>
+          <div class="svc-num">06</div>
+        </div>
+        <div class="svc-body">
+          <div class="svc-tag">Guidance</div>
+          <div class="svc-title">Buyer &amp; Seller Advice</div>
+          <div class="svc-desc">Straight answers on market timing, pricing strategy, and what to expect — before, during, and after the deal closes.</div>
+          <div class="svc-cta">Explore →</div>
+        </div>
+      </a>
+
+    </div>
+    <div class="svc-footer reveal">
+      <a class="btn-gold" href="/services.html">View All Services</a>
+      <a class="btn-ghost" href="/mark-pires-advantage.html">The Mark Pires Advantage</a>
+    </div>
+  </div>
+</section>
+
+<!-- DISCOVER CT -->
+<section class="dct-sec" id="discover">
+  <div class="dct-bg">DISCOVER</div>
+  <div class="dct-inner">
+    <div class="reveal">
+      <img src="/images/branding/discover-ct-logo.png" alt="Discover CT" class="dct-logo-img">
+      <div class="s-eye">The Channel</div>
+      <h2 class="s-h">Discover<br>Connecticut<br><em>Through</em><br>Different Eyes</h2>
+    </div>
+    <div class="dct-video reveal">
+      <video id="dctVid" preload="metadata" playsinline onclick="this.play();this.controls=true;document.getElementById('dctBtn').style.display='none'">
+        <!-- source injected by JS carousel -->
+      </video>
+      <button class="play-btn" id="dctBtn" onclick="var v=document.getElementById('dctVid');v.play();v.controls=true;this.style.display='none'"></button>
+      <div class="dct-label">Discover CT · Latest Episode</div>
+    </div>
+    <div class="reveal d1">
+      <p class="dct-desc">Every town has a story. Every neighborhood has a personality.<br><br><strong>Discover CT</strong> explores the people, architecture, history, businesses and hidden gems that make Connecticut one of America's most fascinating places to call home.</p>
+      <div class="dct-stats">
+        <div><div class="dstat-n">100+</div><div class="dstat-l">Episodes</div></div>
+        <div><div class="dstat-n">50K+</div><div class="dstat-l">Views</div></div>
+        <div><div class="dstat-n">6+</div><div class="dstat-l">Towns</div></div>
+      </div>
+      <a class="btn-gold" href="https://discoverct.net" target="_blank">Watch Discover CT</a>
+    </div></div>
+</section>
+
+<!-- HOUSE DETECTIVE -->
+<section class="det-sec" id="detective">
+  <div class="det-banner">
+    <img src="/images/branding/housedetective.png" alt="" class="det-silhouette" aria-hidden="true">
+    <div class="det-inner">
+      <div class="reveal">
+        <img src="/images/branding/house-detective-logo.png" alt="House Detective" class="det-logo-img">
+        <div class="s-eye">The Investigation</div>
+        <h2 class="s-h">Every House<br>Has <em>A</em> Story</h2>
+      </div>
+      <div class="det-video reveal d1">
+        <video id="detVid" preload="metadata" playsinline onclick="this.play();this.controls=true;document.getElementById('detBtn').style.display='none'">
+          <!-- random episode injected by JS -->
+        </video>
+        <button class="play-btn" id="detBtn" style="background:rgba(59,130,246,0.85)" onclick="var v=document.getElementById('detVid');v.play();v.controls=true;this.style.display='none'"></button>
+        <div class="det-overlay">
+          <div class="det-tag">Case File Open</div>
+          <div class="det-overlay-text">Ownership history · Architectural lineage · Neighborhood evolution · Hidden property stories</div>
+        </div>
+      </div>
+      <div class="reveal d2">
+        <p class="det-manifesto">Most Realtors show homes.<br><strong>Mark investigates them.</strong></p>
+        <div class="det-pts">
+          <div class="det-pt"><div class="det-pt-ic">▸</div><div class="det-pt-t"><strong>Ownership history</strong> — what changed hands with the deed, and what didn't.</div></div>
+          <div class="det-pt"><div class="det-pt-ic">▸</div><div class="det-pt-t"><strong>Architectural details</strong> most buyers walk past without knowing what they mean.</div></div>
+          <div class="det-pt"><div class="det-pt-ic">▸</div><div class="det-pt-t"><strong>Neighborhood evolution</strong> — context that determines investment vs. liability.</div></div>
+          <div class="det-pt"><div class="det-pt-ic">▸</div><div class="det-pt-t"><strong>Hidden property stories</strong> buyers never discover until House Detective opens the case.</div></div>
+        </div>
+        <a class="btn-gold" href="https://discoverct.net" target="_blank">Watch House Detective</a>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DRONE PIONEER -->
+<section class="drone-sec" id="drone">
+  <div class="drone-inner">
+    <div class="reveal">
+      <div class="s-eye">Press &amp; Innovation</div>
+      <h2 class="s-h">Before Drone<br>Marketing Was<br><em>Mainstream</em></h2>
+    </div>
+
+    <!-- VIDEO — full width, leads the section -->
+    <div class="drone-video-wrap reveal">
+      <video
+        src="/drone-ct-news-video.mp4"
+        controls
+        preload="metadata"
+        playsinline
+        poster="/images/services/drone-video-tours.png"
+        class="drone-hero-vid"
+      ></video>
+      <div class="drone-vid-label">CT News Drone Story · Fairfield County</div>
+    </div>
+
+    <div class="drone-grid">
+      <!-- LEFT: text + stamford advocate + drone story PNG -->
+      <div class="reveal">
+        <div class="pull-quote">Years before aerial photography became standard, Mark was reshaping Connecticut real estate marketing.</div>
+        <div class="drone-body">When most agents relied on standard MLS photos, Mark was already airborne — a pioneer of drone-based property storytelling in Connecticut, recognized before almost anyone that real estate marketing was about to undergo a cinematic transformation.<br><br>The Stamford Advocate took notice. Most agents eventually bought drones. Mark took the leap to change what was possible.</div>
+        <div class="press-wrap">
+          <div class="press-lbl">
+            <span class="press-pub">Stamford Advocate</span>
+            <span class="press-sub">Feature · Drone Innovation</span>
+          </div>
+          <a href="/public/articles/stamford-advocate-drone-article.png" target="_blank">
+            <img src="/public/articles/stamford-advocate-drone-article.png" alt="Stamford Advocate feature" class="press-img" loading="lazy">
+          </a>
+        </div>
+    
+      </div>
+      <!-- RIGHT: timeline -->
+      <div class="reveal d1">
+        <div class="tl-item"><div class="tl-yr">Early</div><div><div class="tl-t">First Drone Shoots in Fairfield County</div><div class="tl-d">Before FAA Part 107 existed — Mark begins aerial property storytelling while competitors used flat MLS photography.</div></div></div>
+        <div class="tl-item"><div class="tl-yr">Press</div><div><div class="tl-t">Stamford Advocate Feature</div><div class="tl-d">Named innovator reshaping how CT real estate is marketed. One of the first agents recognized for drone storytelling.</div></div></div>
+        <div class="tl-item"><div class="tl-yr">2019</div><div><div class="tl-t">Discover CT Launches</div><div class="tl-d">Storytelling expands beyond individual properties — Fairfield County as a character in its own right.</div></div></div>
+        <div class="tl-item"><div class="tl-yr">Now</div><div><div class="tl-t">House Detective + Full Platform</div><div class="tl-d">Two shows, a media platform, a lead generation network. No competitor in CT comes close.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PROPERTIES -->
+<section class="prop-sec" id="properties">
+  <div class="prop-header reveal">
+    <div>
+      <div class="s-eye">Active Listings</div>
+      <h2 class="s-h">Featured <em>Properties</em></h2>
+    </div>
+    <a class="btn-ghost" href="/listings">View All Listings</a>
+  </div>
+  <div class="prop-grid">
+    <div class="prop-card reveal">
+      <img class="prop-img" src="/images/listings/167toddyhill.jpeg" alt="167 Toddy Hill">
+      <div class="prop-ov"></div>
+      <div class="prop-content">
+        <div class="prop-status act">Active</div>
+        <div class="prop-addr">167 Toddy Hill</div>
+        <div class="prop-town">Fairfield County, CT</div>
+        <div class="prop-price">$799,000</div>
+      </div>
+    </div>
+    <div class="prop-card reveal d1">
+      <img class="prop-img" src="/images/listings/546north.jpeg" alt="546 North">
+      <div class="prop-ov"></div>
+      <div class="prop-content">
+        <div class="prop-status act">Pending</div>
+        <div class="prop-addr">546 North</div>
+        <div class="prop-town">Fairfield County, CT</div>
+        <div class="prop-price">$679,000</div>
+      </div>
+    </div>
+    <div class="prop-card reveal d2">
+      <img class="prop-img" src="/images/listings/176logan.jpeg" alt="176 Logan">
+      <div class="prop-ov"></div>
+      <div class="prop-content">
+        <div class="prop-status act">Sold</div>
+        <div class="prop-addr">176 Logan</div>
+        <div class="prop-town">Fairfield County, CT</div>
+        <div class="prop-price">$2,678,671</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CT REAL ESTATE NEWS -->
+<section class="news-sec" id="news">
+  <div class="news-inner">
+    <div class="news-header reveal">
+      <div>
+        <div class="s-eye">CT Real Estate News</div>
+        <h2 class="s-h">Market <em>Intelligence</em></h2>
+        <p class="news-sub">Latest stories from Connecticut's top real estate and local news sources — curated for Fairfield County buyers and sellers.</p>
+      </div>
+      <a class="btn-ghost" href="/news">View All Stories</a>
+    </div>
+    <div class="news-grid" id="newsGrid">
+      <!-- Populated by RSS fetch JS below -->
+      <div class="news-loading">
+        <div class="news-spinner"></div>
+        <span>Loading latest stories...</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-sec" id="testimonials">
+  <div class="testi-inner">
+    <div class="reveal">
+      <div class="s-eye">Client Reviews</div>
+      <h2 class="s-h">What They <em>Say.</em></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-t">Working with Mark has been a pleasure. He returns my calls promptly and is more than just a realtor more like a friend.</div>
+        <div class="testi-n">Tom &amp; Kate Elles</div>
+        <div class="testi-d">Norwalk, CT · Sold 2025</div>
+      </div>
+      <div class="testi-card reveal d1">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-t">I cannot say enough positive things about my experience selling our home and purchasing a new home with Mark. He not only helped us get above asking price on the sell of our house, but he physically knocked on doors until he found a house that suited our needs. Mark is professional, proactive, and genuinely caring. He’s the best!</div>
+        <div class="testi-n">Hillary &amp; Jeff Dearden</div>
+        <div class="testi-d">Fairfield, CT · Bought &amp Sold 2026</div>
+      </div>
+      <div class="testi-card reveal d2">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-t">We had a great experience working with Mark on the purchase of our new home in New Canaan. He was incredibly responsive, always available, and brought great market knowledge throughout the process. Since we were searching long distance, his video tours were extremely valuable and helped us quickly decide which homes were worth the trip to see in person. Highly recommend!</div>
+        <div class="testi-n">Diego Gonzalez</div>
+        <div class="testi-d">New Canaan, CT · Purchase 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SELLER GUIDE MOCKUP -->
+<section class="guide-sec" id="seller-guide">
+  <div class="guide-inner">
+    <div class="guide-mockup reveal">
+      <!-- Book cover mockup: CT shoreline bg + Mark -->
+      <a class="guide-cover" href="/mark-pires-advantage.html" style="display:block;text-decoration:none">
+        <div class="guide-cover-bg"></div>
+        <div class="guide-cover-overlay"></div>
+        <div class="guide-cover-mark">
+          <img src="/images/hero/mark-pires-transparent.png" alt="Mark Pires" class="guide-mark-img" onerror="this.style.display='none'">
+        </div>
+        <div class="guide-cover-content">
+          <div class="guide-eyebrow">2026 · Fairfield County CT</div>
+          <div class="guide-cover-title">The Fairfield<br>County Home<br>Seller's Guide</div>
+          <div class="guide-cover-sub">Everything you need to sell smart,<br>price right, and close above asking.</div>
+          <div class="guide-cover-author">By Mark Pires · Coldwell Banker Realty</div>
+        </div>
+        <div class="guide-corner-tl"></div>
+        <div class="guide-corner-br"></div>
+      </a>
+    </div>
+    <div class="guide-text reveal d1">
+      <div class="s-eye">Free Download</div>
+      <h2 class="s-h">The Fairfield County<br><em>Home Seller's</em> Guide</h2>
+      <p class="guide-desc">Most sellers leave money on the table — not because of the market, but because of timing, pricing, and presentation mistakes that are completely avoidable.</p>
+      <p class="guide-desc">This guide covers everything: when to list, how to price, which renovations actually return value, and the negotiation moves that separate a good deal from a great one.</p>
+      <div class="guide-bullets">
+        <div class="guide-bullet"><span class="gb-icon">◆</span><span>The 7-day pre-market checklist that gets 22% more showings</span></div>
+        <div class="guide-bullet"><span class="gb-icon">◆</span><span>How to read a CMA without getting lied to by your own agent</span></div>
+        <div class="guide-bullet"><span class="gb-icon">◆</span><span>Mark's staging formula — what to fix, what to skip, what costs nothing</span></div>
+        <div class="guide-bullet"><span class="gb-icon">◆</span><span>When to hold firm and when to move — negotiation scripts that work</span></div>
+      </div>
+      <p class="guide-note">Delivered to your inbox personally by Mark. No spam. Just the guide.</p>
+      <a class="btn-gold" href="javascript:void(0);" onclick="openModal('buyer-guide');return false">Get the Free Seller's Guide</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CTA -->
+<section class="cta-sec" id="contact">
+  <div class="cta-inner">
+    <div class="cta-big reveal">Let's Write<br>Your Next <em>Chapter.</em></div>
+    <div class="cta-sub reveal">Selling a Westport colonial or finding your first home in Fairfield County — I'd love to be your guide.</div>
+    <div class="cta-actions reveal">
+      <a class="btn-gold" href="javascript:void(0);" onclick="return mpOpenConsult();">Talk With Mark</a>
+      <a class="btn-ghost" href="tel:2032472655">Call 203-247-2655</a>
+    </div>
+    <div class="cta-detail reveal">
+      <div class="cd-item"><a href="tel:2032472655">203-247-2655</a></div>
+      <div class="cd-sep">◆</div>
+      <div class="cd-item"><a href="mailto:mark@markpires.com">mark@markpires.com</a></div>
+      <div class="cd-sep">◆</div>
+      <div class="cd-item"><a href="https://discoverct.net"><img src="/images/branding/discover-ct-logo.png" alt="Discover CT" style="height:15px;opacity:.75;vertical-align:middle"></a></div>
+      <div class="cd-sep">◆</div>
+      <div class="cd-item"><img src="/images/branding/coldwell-banker-logo.png" alt="Coldwell Banker" style="height:13px;filter:none;opacity:.5;vertical-align:middle"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<section id="goliath-funnel-strip" style="background:#0f172a;padding:34px 22px;border-top:1px solid rgba(212,175,55,.18);border-bottom:1px solid rgba(212,175,55,.18)"><div style="max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:10px"><a href="/#home-value" style="text-decoration:none;color:#f0ebe1;background:#080c14;border:1px solid rgba(212,175,55,.25);padding:22px;border-radius:14px"><strong style="color:#d4af37;font-size:24px">Selling?</strong><br>Get a real local home value review.</a><a href="/buyer-funnel.php" style="text-decoration:none;color:#f0ebe1;background:#080c14;border:1px solid rgba(212,175,55,.25);padding:22px;border-radius:14px"><strong style="color:#d4af37;font-size:24px">Buying?</strong><br>Tell Mark what you are looking for.</a><a href="/buyer-funnel.php?type=relocation" style="text-decoration:none;color:#f0ebe1;background:#080c14;border:1px solid rgba(212,175,55,.25);padding:22px;border-radius:14px"><strong style="color:#d4af37;font-size:24px">Relocating to CT?</strong><br>Compare towns, commute, lifestyle and budget.</a></div></section><style>@media(max-width:768px){#goliath-funnel-strip>div{grid-template-columns:1fr!important}}</style><footer>
+  <div class="foot-inner">
+    <div class="foot-top">
+      <div class="foot-col">
+        <div class="foot-logo-row">
+          <img src="/images/branding/house-detective-logo.png" alt="House Detective" class="foot-logo-img hd">
+          <img src="/images/branding/discover-ct-logo.png" alt="Discover CT" class="foot-logo-img dct">
+        </div>
+        <div class="foot-name">MARK PIRES</div>
+        <div class="foot-tagline">Connecticut's most innovative real estate experience.</div>
+        <div class="foot-map-wrap">
+          <iframe
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAQRyF0Bb14CDeAsKIux-uqCL26V_r25o4&q=Mark+Pires+Coldwell+Banker+Realty+Fairfield+CT&zoom=13">
+          </iframe>
+        </div>
+        <div class="foot-legal">Mark Pires · Licensed Real Estate Agent · Coldwell Banker Realty · Equal Housing Opportunity · © 2026 Mark Pires. All rights reserved.</div>
+      </div>
+
+      <div class="foot-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="/about-mark-pires.php">About Mark</a></li>
+          <li><a href="/mark-pires-advantage.html">The Mark Pires Advantage</a></li>
+          <li><a href="/towns/">Fairfield County Town Guides</a></li>
+          <li><a href="#discover">Discover CT</a></li>
+          <li><a href="#detective">House Detective</a></li>
+          <li><a href="#drone">Press</a></li>>
+          <li><a href="/services.html">All Services</a></li>
+    
+          
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h4>Real Estate</h4>
+        <ul>
+          <li><a href="/home-valuation.php">Home Valuation</a></li>
+          <li><a href="/towns/">Town Guides</a></li>
+          <li><a href="javascript:void(0);" onclick="openModal('buyer-guide'); return false;">2026 Buyer Guide</a></li>
+          <li><a href="/listings">Search Listings</a></li>
+          <li><a href="javascript:void(0);" onclick="openModal('market-report'); return false;">Market Report</a></li>
+          <li><a href="/drone-video-tours-fairfield-county-ct-realtor.html">Drone Video Tours</a></li>
+          <li><a href="/negotiation-specialist-realtor-fairfield-county.html">Negotiation Specialist</a></li>
+          <li><a href="/renovation-advisor-realtor-fairfield-county-ct.html">Renovation Advisor</a></li>
+          <li><a href="/buyer-seller-advice-fairfield-county-ct-real-estate.html">Buyer &amp; Seller Advice</a></li>
+          <li><a href="javascript:void(0);" onclick="return mpOpenConsult();">Talk With Mark</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="tel:2032472655">203-247-2655</a></li>
+          <li><a href="mailto:mark@markpires.com">mark@markpires.com</a></li>
+          <li><a href="https://discoverct.net" target="_blank">DiscoverCT.net</a></li>
+          <li><a href="https://www.youtube.com/discoverct" target="_blank">YouTube</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bot">
+      <div class="foot-legal-line">
+        © 2026 Mark Pires ·
+        <a href="/privacy">Privacy</a> ·
+        <a href="/terms">Terms</a> ·
+        Equal Housing Opportunity
+      </div>
+      <div class="foot-social">
+        <a class="fsoc" href="https://www.youtube.com/discoverct" target="_blank">▶</a>
+        <a class="fsoc" href="tel:2032472655">📞</a>
+        <a class="fsoc" href="mailto:mark@markpires.com">✉</a>
+      </div>
+    </div>
+  </div>
+<div id="mark-nap-seo" style="font-family:Arial,sans-serif;font-size:12px;color:rgba(240,235,225,.45);line-height:1.7;margin-top:22px">Mark Pires · Coldwell Banker Realty · 1508 Post Rd, Fairfield, CT 06824 · Cell 203-247-2655 · mark.pires@cbrealty.com · Serving Fairfield, Westport, Greenwich, Old Greenwich, Stamford, Darien, New Canaan, Wilton, Easton, Norwalk and lower Fairfield County.</div></footer>
+
+<!-- MODAL -->
+<div class="modal-ov" id="modalOv" onclick="closeOut(event)">
+  <div class="modal" id="modalBox">
+    <button class="modal-close" onclick="closeModal()">× Close</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+/* ── CURSOR ── */
+const cur=document.getElementById('cur'),ring=document.getElementById('curRing');
+let rx=0,ry=0,curX=0,curY=0;
+if(cur&&window.matchMedia('(hover:hover)').matches){
+  document.documentElement.classList.add('js-cursor');
+  document.addEventListener('mousemove',e=>{
+    curX=e.clientX;curY=e.clientY;
+    cur.style.left=curX+'px';cur.style.top=curY+'px';
+  });
+  (function loop(){
+    rx+=(curX-rx)*.1;
+    ry+=(curY-ry)*.1;
+    if(ring){ring.style.left=rx+'px';ring.style.top=ry+'px';}
+    requestAnimationFrame(loop);
+  })();
+}
+
+/* ── NAV SCROLL ── */
+window.addEventListener('scroll',()=>{
+  document.getElementById('mainNav').classList.toggle('scrolled',scrollY>60);
+  /* Mobile hero portrait fade on scroll */
+  const p=document.getElementById('heroPortrait');
+  if(p&&window.innerWidth<=768){
+    p.style.opacity=Math.max(0,1-scrollY/300);
+  }
+});
+
+/* ── MOBILE DRAWER ── */
+function toggleDrawer(){
+  document.getElementById('drawer').classList.toggle('open');
+  document.getElementById('burger').classList.toggle('open');
+  document.body.style.overflow=document.getElementById('drawer').classList.contains('open')?'hidden':'';
+}
+
+function mpOpenConsult(){
+  try{
+    const drawer = document.getElementById('drawer');
+    const burger = document.getElementById('burger');
+    if(drawer && drawer.classList.contains('open')){
+      drawer.classList.remove('open');
+      if(burger) burger.classList.remove('open');
+      document.body.style.overflow='';
+    }
+    openModal('consultation');
+    return false;
+  }catch(e){
+    console.error('Talk With Mark funnel error:',e);
+    openModal('consultation');
+    return false;
+  }
+}
+
+/* ── SERVICES DROPDOWN — delayed close so cursor can travel to submenu ── */
+(function(){
+  const drops = document.querySelectorAll('.nav-has-drop');
+  drops.forEach(function(el){
+    let closeTimer = null;
+    function openDrop(){ clearTimeout(closeTimer); el.classList.add('drop-open'); }
+    function closeDrop(){ closeTimer = setTimeout(function(){ el.classList.remove('drop-open'); }, 350); }
+    el.addEventListener('mouseenter', openDrop);
+    el.addEventListener('mouseleave', closeDrop);
+    const menu = el.querySelector('.nav-drop');
+    if(menu){
+      menu.addEventListener('mouseenter', openDrop);
+      menu.addEventListener('mouseleave', closeDrop);
+    }
+  });
+})();
+
+/* ── SCROLL REVEAL ── */
+let obs=null;
+try {
+  obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')})},{threshold:0,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+} catch(e) {
+  document.querySelectorAll('.reveal').forEach(el=>el.classList.add('v'));
+}
+
+/* ── VIDEO CAROUSEL — random episode on every page load ── */
+(function(){
+  // ── DISCOVER CT: add your episode files here ──────────────────
+  var dctEpisodes=[
+    '/videos/discover-ct/discover1.mp4',
+    '/videos/discover-ct/discover2.mp4'
+  ];
+  // ── HOUSE DETECTIVE: replace these with your actual video file paths ──
+  // Example: '/videos/house-detective/my-episode.mp4'
+  var detEpisodes=[
+    '/videos/house-detective/episode1.mp4',
+    '/videos/house-detective/episode2.mp4',
+    '/videos/house-detective/episode3.mp4'
+  ];
+
+  function pickRandom(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+  function loadVideo(videoId, btnId, srcArray){
+    var v=document.getElementById(videoId);
+    if(!v) return;
+    while(v.firstChild){ v.removeChild(v.firstChild); }
+    var src=pickRandom(srcArray);
+    var s=document.createElement('source');
+    s.src=src; s.type='video/mp4';
+    v.appendChild(s);
+    v.load();
+    // Hide play button if video fails to load (file not on server)
+    v.addEventListener('error',function(){
+      var btn=document.getElementById(btnId);
+      if(btn) btn.style.display='none';
+    },true);
+    v.addEventListener('emptied',function(){
+      // no-op
+    });
+    // Seek to frame 1 for thumbnail
+    function seek(){ try{ v.currentTime=1; }catch(e){} }
+    v.addEventListener('loadedmetadata',function(){ seek(); },{once:true});
+    setTimeout(seek,600);
+    setTimeout(seek,1800);
+  }
+
+  loadVideo('dctVid', 'dctBtn', dctEpisodes);
+  loadVideo('detVid', 'detBtn', detEpisodes);
+})();
+
+/* ── CT NEWS RSS FETCH — rss2json API (reliable, free 1000/day) ── */
+(function loadNews(){
+  const feeds = [
+    {url:'https://ctmirror.org/category/all-news/feed/',        source:'CT Mirror'},
+    {url:'https://www.ctpost.com/news/feed/',                   source:'CT Post'},
+    {url:'https://patch.com/connecticut/westport/rss',         source:'Westport Patch'},
+    {url:'https://patch.com/connecticut/greenwich/rss',        source:'Greenwich Patch'},
+    {url:'https://patch.com/connecticut/darien/rss',           source:'Darien Patch'},
+  ];
+
+  // Static fallback stories shown if all feeds fail (always displays something)
+  const fallback = [
+    {title:"Fairfield County Home Prices Rise for 34th Consecutive Month",source:"Market Update",link:"https://markpires.com/blog/how-long-to-sell-house-fairfield-county-ct.html",desc:"Median home prices in Fairfield County continued their upward trend in 2026, driven by persistent low inventory and strong NYC relocation demand."},
+    {title:"What Buyers Are Asking for Most in Fairfield County Homes",source:"Discover CT",link:"https://discoverct.net",desc:"From home offices to EV charging — here is what is driving buyer decisions in Westport, Darien, and Greenwich in 2026."},
+    {title:"Mortgage Rates in June 2026: What CT Buyers Need to Know",source:"Market Insight",link:"https://markpires.com/blog/how-long-to-sell-house-fairfield-county-ct.html",desc:"Rates have stabilized in the mid-6% range. Here is what that means for your buying power in Fairfield County and when to lock."},
+    {title:"The NYC Exodus Continues — Why Families Are Choosing Fairfield County",source:"Discover CT",link:"https://discoverct.net",desc:"Metro-North commuters, remote workers, and growing families are finding more value per square foot and better schools just 45 minutes from Grand Central."},
+    {title:"Greenwich Luxury Market 2026: Record Inventory Meets Motivated Buyers",source:"Market Update",link:"https://markpires.com",desc:"The $2M+ segment in Greenwich is seeing the most inventory in three years. Buyers who have been patient now have more to choose from."},
+    {title:"Norwalk South Norwalk District: The Value Play in Fairfield County",source:"Discover CT",link:"https://discoverct.net",desc:"SoNo continues to attract buyers priced out of Westport and Darien. Here is what $600K to $800K gets you in one of CT's fastest-changing neighborhoods."},
+  ];
+
+  function timeAgo(ds){
+    if(!ds) return '';
+    const d=new Date(ds),now=new Date(),diff=Math.floor((now-d)/1000);
+    if(isNaN(diff)||diff<0) return '';
+    if(diff<3600) return Math.floor(diff/60)+' min ago';
+    if(diff<86400) return Math.floor(diff/3600)+' hr ago';
+    return Math.floor(diff/86400)+'d ago';
+  }
+
+  function renderCard(s){
+    return `<a class="news-card reveal" href="${s.link}" target="_blank" rel="noopener">
+      <div class="news-source">${s.source}</div>
+      <div class="news-title">${s.title}</div>
+      <div class="news-desc">${s.desc||''}</div>
+      <div class="news-date">${s.date?timeAgo(s.date):''}</div>
+    </a>`;
+  }
+
+  const grid = document.getElementById('newsGrid');
+  if(!grid) return;
+
+  // rss2json API — free, reliable, no CORS issues
+  const API = 'https://api.rss2json.com/v1/api.json?rss_url=';
+  let stories = [];
+
+  Promise.allSettled(
+    feeds.map(f =>
+      fetch(API + encodeURIComponent(f.url) + '&count=3')
+        .then(r=>r.json())
+        .then(d=>{
+          if(d.status!=='ok'||!d.items) return [];
+          return d.items.map(item=>({
+            title: item.title||'',
+            link:  item.link||'#',
+            desc:  (item.description||item.content||'').replace(/<[^>]+>/g,'').trim().substring(0,200),
+            date:  item.pubDate||'',
+            source: f.source
+          }));
+        })
+    )
+  ).then(results=>{
+    results.forEach(r=>{ if(r.status==='fulfilled'&&r.value.length) stories=stories.concat(r.value); });
+    const reKeywords=/real estate|home|house|property|mortgage|listing|market|connecticut|fairfield|westport|greenwich|darien|norwalk/i;
+    let filtered=stories.filter(s=>reKeywords.test(s.title+s.desc));
+    if(filtered.length<4) filtered=stories; // fallback to all if not enough RE stories
+    filtered=filtered.slice(0,6);
+    if(filtered.length){
+      grid.innerHTML=filtered.map(renderCard).join('');
+      // Re-run reveal observer on new elements
+      if(obs) document.querySelectorAll('.news-card').forEach(el=>obs.observe(el));
+    } else {
+      grid.innerHTML=`<div class="news-loading"><span>Check back soon for the latest CT real estate news.</span></div>`;
+    }
+  });
+})();
+
+/* ── ROTATING TEXT ── */
+(function(){
+  const msgs=[
+    "Your Fairfield County Realtor & House Detective",
+    "Creator & Host of Discover CT",
+    "Pioneer of Drone Real Estate Marketing",
+    "White Glove Immersive Property Tours",
+    "Cinema Noir Real Estate Experiences",
+    "Helping You Find Your Way Home",
+    "Featured In The Stamford Advocate For Innovation",
+    "Connecticut's Property Storyteller",
+    "Luxury Marketing With Local Expertise",
+    "Every House Has A Story",
+    "Weekly Value-Centric Content Across Social Media",
+    "Where Real Estate Meets Investigation"
+  ];
+  const el=document.getElementById('rotEl');
+  if(!el)return;
+  let i=0;
+  function next(){
+    el.classList.add('out');
+    setTimeout(()=>{
+      i=(i+1)%msgs.length;
+      el.textContent=msgs[i];
+      el.classList.remove('out');
+      el.classList.add('in');
+      requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove('in')));
+    },420);
+  }
+  setInterval(next,3200);
+})();
+
+/* ── MODALS ── */
+/* Lead capture routes through /lead-engine/capture.php.
+   Home valuation now goes directly to the dedicated funnel:
+   /home-valuation.php
+*/
+
+const PAGE_ROUTES = {
+  'home-value': '/home-valuation.php',
+  'home-valuation': '/home-valuation.php',
+  'home-valuation.php': '/home-valuation.php',
+  'buyer-page': '/blog/how-to-find-the-best-realtor.html',
+  'market-page': '/blog/'
+};
+
+const MD = {
+  'buyer-guide': {
+    eye: "2026 Buyer's Guide",
+    title: 'THE INSIDER GUIDE',
+    sub: "Moving from NYC? Get Mark's Fairfield County buyer guide — towns, commutes, pricing, strategy, and what buyers need to know before making a move.",
+    fields: ['name','email','phone','timeline'],
+    cta: 'Send Me the Buyer Guide',
+    tag: 'buyer_guide'
+  },
+  'market-report': {
+    eye: 'Monthly Market Report',
+    title: 'MARKET INTEL',
+    sub: 'Real inventory, days on market, pricing trends, and local Fairfield County insight from Mark. Free monthly updates.',
+    fields: ['name','email','phone'],
+    cta: 'Subscribe Free',
+    tag: 'market_report'
+  },
+  'consultation': {
+    eye: 'Talk With Mark',
+    title: "LET'S TALK",
+    sub: 'Selling, buying, relocating, investing, or just curious? Share a few details and Jessica will quickly confirm context so Mark can follow up personally.',
+    fields: ['name','email','phone','goal','timeline'],
+    cta: 'Have Mark Follow Up',
+    tag: 'consultation'
+  }
+};
+
+function openModal(type){
+  if (PAGE_ROUTES[type]) {
+    window.location.href = PAGE_ROUTES[type];
+    return false;
+  }
+
+  try {
+    const t = MD[type];
+    if (!t) return false;
+
+    const goalF = type === 'consultation'
+      ? `<div class="ff"><label>What are you looking to do?</label>
+          <select name="goal">
+            <option value="">Select</option>
+            <option>Sell my home</option>
+            <option>Buy a home</option>
+            <option>Both</option>
+            <option>Investment property</option>
+            <option>Relocating to Connecticut</option>
+            <option>Just exploring</option>
+          </select>
+        </div>`
+      : '';
+
+    const mc = document.getElementById('modalContent');
+    if (!mc) return false;
+
+    mc.innerHTML = `
+      <div class="modal-eye">${t.eye}</div>
+      <h2 class="modal-title">${t.title}</h2>
+      <p class="modal-sub">${t.sub}</p>
+
+      <form onsubmit="submitLead(event,'${type}','${t.tag}');return false;">
+        ${t.fields.includes('name') ? `<div class="ff"><label>Your Name</label><input type="text" name="name" placeholder="First and last name" required></div>` : ''}
+        ${t.fields.includes('address') ? `<div class="ff"><label>Property Address</label><input type="text" name="address" placeholder="123 Main St, Westport CT" required></div>` : ''}
+
+        <div class="ff"><label>Email</label><input type="email" name="email" placeholder="your@email.com" required></div>
+
+        ${t.fields.includes('phone') ? `<div class="ff"><label>Phone</label><input type="tel" name="phone" placeholder="203-555-0100" required></div>` : ''}
+
+        ${t.fields.includes('timeline') ? `<div class="ff"><label>Timeline</label>
+          <select name="timeline">
+            <option value="">Select</option>
+            <option>Immediately</option>
+            <option>1–3 months</option>
+            <option>3–6 months</option>
+            <option>6–12 months</option>
+            <option>Just exploring</option>
+          </select>
+        </div>` : ''}
+
+        ${goalF}
+
+        <div class="tcpa">
+          <input type="checkbox" name="tcpa" required checked>
+          <span class="tcpa-t">
+            I agree to be contacted by Mark Pires, Discover Connecticut, and their representatives by phone, text, email, and AI assistant regarding my request.
+            Consent is not a condition of purchase.
+            <a href="/communication-consent.html" target="_blank">View communication consent</a>.
+          </span>
+        </div>
+
+        <button class="modal-btn" type="submit">${t.cta}</button>
+      </form>
+
+      <div class="form-ok" id="formOk">
+        <div class="ok-big">RECEIVED.</div>
+        <p>Mark's team received your request. Jessica may call shortly to confirm details.</p>
+      </div>`;
+
+    const ov = document.getElementById('modalOv');
+    if (ov) {
+      ov.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+  } catch(err) {
+    console.error('Modal error:', err);
+  }
+
+  return false;
+}
+
+function closeModal(){
+  const ov = document.getElementById('modalOv');
+  if (ov) ov.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeOut(e){
+  if (e.target === document.getElementById('modalOv')) closeModal();
+}
+
+function submitLead(e,type,tag){
+  e.preventDefault();
+
+  const f = e.target;
+  const btn = f.querySelector('.modal-btn');
+
+  if (btn) {
+    btn.dataset.orig = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+  }
+
+  const payload = {
+    type: type,
+    tag: tag,
+    name: f.elements['name']?.value || '',
+    email: f.elements['email']?.value || '',
+    phone: f.elements['phone']?.value || '',
+    address: f.elements['address']?.value || '',
+    timeline: f.elements['timeline']?.value || '',
+    goal: f.elements['goal']?.value || '',
+    source: 'markpires.com',
+    page_url: window.location.href,
+    timestamp: new Date().toISOString(),
+    consent: 'yes',
+    consent_text: 'User agreed to be contacted by Mark Pires, Discover Connecticut, and their representatives by phone, text, email, and AI assistant regarding this request. Consent is not a condition of purchase.',
+    consent_url: 'https://markpires.com/communication-consent.html'
+  };
+
+  fetch('/lead-engine/capture.php', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(payload)
+  })
+  .then(r => r.json())
+  .then(d => {
+    if (d.success) {
+      f.style.display = 'none';
+      const ok = document.getElementById('formOk');
+      if (ok) ok.style.display = 'block';
+    } else {
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = btn.dataset.orig;
+      }
+      alert('Something went wrong. Please call Mark directly at 203-247-2655.');
+    }
+  })
+  .catch(err => {
+    console.error('Lead modal submit error:', err);
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = btn.dataset.orig || 'Try Again';
+    }
+    alert('Something went wrong. Please call Mark directly at 203-247-2655.');
+  });
+
+  return false;
+}
+</script>
+<!-- HOUSE DETECTIVE BACKGROUND MUSIC -->
+<audio id="siteBgMusic" loop preload="auto">
+  <source src="/music/house-detective-theme-music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+(function(){
+  const bgMusic = document.getElementById('siteBgMusic');
+  if (!bgMusic) return;
+
+  bgMusic.volume = 0.18;
+
+  let userEnabledMusic = false;
+  let pausedForVideo = false;
+
+  function startMusic(){
+    if (userEnabledMusic) return;
+    userEnabledMusic = true;
+    bgMusic.play().catch(function(){});
+  }
+
+  document.addEventListener('click', startMusic, {once:true});
+  document.addEventListener('touchstart', startMusic, {once:true});
+
+  function pauseMusicForVideo(){
+    if (!bgMusic.paused) {
+      bgMusic.pause();
+      pausedForVideo = true;
+    }
+  }
+
+  function resumeMusicAfterVideo(){
+    if (userEnabledMusic && pausedForVideo) {
+      pausedForVideo = false;
+      bgMusic.play().catch(function(){});
+    }
+  }
+
+  document.querySelectorAll('video').forEach(function(video){
+    video.addEventListener('play', pauseMusicForVideo);
+    video.addEventListener('pause', resumeMusicAfterVideo);
+    video.addEventListener('ended', resumeMusicAfterVideo);
+  });
+})();
+</script>
+<script src="/js/lead-engine.js" defer></script>
+</body>
+</html>

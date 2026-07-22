@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real Estate Blog — Mark Pires | Connecticut's House Detective</title>
+<meta name="description" content="Expert Fairfield County real estate guides, market insights, town-by-town breakdowns, and Connecticut lifestyle content from Mark Pires at Coldwell Banker Realty.">
+<link rel="canonical" href="https://markpires.com/blog/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0B1C36;--navy2:#152035;--gold:#C9A227;--cream:#F8F5EF;--white:#FFFFFF;--text:#1a1a2e;--muted:#666;--serif:'Cormorant Garamond','Georgia',serif;--sans:'Montserrat','Arial',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--serif);background:var(--cream);color:var(--text);overflow-x:hidden}
+
+/* NAV */
+.blog-nav{background:var(--navy);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(201,162,39,.15)}
+.nav-logo{display:flex;align-items:center;gap:.7rem;text-decoration:none}
+.nav-logo img{height:40px;width:auto;object-fit:contain}
+.nav-logo span{font-family:var(--sans);font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.38)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-family:var(--sans);font-size:.65rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-links a.active{border-bottom:1px solid var(--gold);padding-bottom:2px}
+.nav-cta-link{font-family:var(--sans);font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.55rem 1.2rem;border:1px solid var(--gold);color:var(--gold);text-decoration:none;transition:all .25s}
+.nav-cta-link:hover{background:var(--gold);color:var(--navy)}
+@media(max-width:768px){.nav-links{display:none}.blog-nav{padding:.8rem 1.2rem}}
+
+/* BLOG MASTHEAD */
+.blog-masthead{background:var(--navy);padding:3.5rem 2rem 3rem;text-align:center;border-bottom:1px solid rgba(201,162,39,.2)}
+.masthead-eye{font-family:var(--sans);font-size:.6rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.masthead-title{font-family:var(--serif);font-size:clamp(2.4rem,5vw,3.6rem);font-weight:700;color:var(--white);margin-bottom:.6rem;line-height:1.1}
+.masthead-sub{font-family:var(--serif);font-size:1.05rem;font-style:italic;color:rgba(255,255,255,.45)}
+
+/* CATEGORY NAV */
+.category-nav{background:var(--white);border-bottom:2px solid rgba(201,162,39,.15);position:sticky;top:65px;z-index:99}
+.cat-nav-inner{max-width:1200px;margin:0 auto;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.cat-nav-inner::-webkit-scrollbar{display:none}
+.cat-link{
+  font-family:var(--sans);font-size:.6rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  padding:1rem 1.6rem;color:var(--muted);text-decoration:none;white-space:nowrap;
+  border-bottom:2px solid transparent;transition:all .2s;
+}
+.cat-link:hover,.cat-link.active{color:var(--navy);border-bottom-color:var(--gold)}
+.cat-link.active{color:var(--gold)}
+
+/* FEATURED POST */
+.featured-section{max-width:1200px;margin:0 auto;padding:3.5rem 2rem 2rem}
+.section-eye{font-family:var(--sans);font-size:.58rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+.section-eye::before{content:'';width:24px;height:1px;background:var(--gold)}
+.featured-card{
+  display:grid;grid-template-columns:1.2fr 1fr;gap:0;
+  background:var(--navy);overflow:hidden;
+}
+.featured-img{position:relative;min-height:380px;background:var(--navy2) no-repeat center/cover}
+.featured-img-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(11,28,54,.35) 0%,transparent 60%)}
+.featured-img-badge{
+  position:absolute;top:1.2rem;left:1.2rem;
+  font-family:var(--sans);font-size:.52rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  padding:.3rem .7rem;background:var(--gold);color:var(--navy);
+}
+.featured-content{padding:3rem;display:flex;flex-direction:column;justify-content:center;gap:1rem}
+.featured-tag{font-family:var(--sans);font-size:.55rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.featured-title{font-family:var(--serif);font-size:1.9rem;font-weight:700;color:var(--white);line-height:1.2}
+.featured-excerpt{font-family:var(--serif);font-size:.95rem;line-height:1.75;color:rgba(255,255,255,.55)}
+.featured-meta{display:flex;gap:1rem;align-items:center;font-family:var(--sans);font-size:.58rem;color:rgba(255,255,255,.3);flex-wrap:wrap}
+.featured-meta img{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--gold);object-fit:cover}
+.featured-cta{
+  font-family:var(--sans);font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  padding:.75rem 1.8rem;background:var(--gold);color:var(--navy);text-decoration:none;display:inline-block;
+  align-self:flex-start;transition:all .25s;
+}
+.featured-cta:hover{background:#e0b52a;transform:translateY(-1px)}
+@media(max-width:768px){.featured-card{grid-template-columns:1fr}.featured-img{min-height:260px}.featured-content{padding:2rem 1.5rem}}
+
+/* RECENT POSTS GRID */
+.posts-section{max-width:1200px;margin:0 auto;padding:2rem}
+.posts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:1.5rem}
+.post-card{
+  background:var(--white);text-decoration:none;display:flex;flex-direction:column;
+  transition:all .3s;overflow:hidden;border:1px solid rgba(201,162,39,.1);
+}
+.post-card:hover{border-color:rgba(201,162,39,.3);transform:translateY(-2px);box-shadow:0 8px 32px rgba(11,28,54,.08)}
+.post-card-img{aspect-ratio:16/9;background:var(--navy2) no-repeat center/cover;position:relative;overflow:hidden}
+.post-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.post-card:hover .post-card-img img{transform:scale(1.03)}
+.post-card-tag{
+  position:absolute;bottom:.7rem;left:.7rem;
+  font-family:var(--sans);font-size:.5rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:.22rem .55rem;background:var(--gold);color:var(--navy);
+}
+.post-card-body{padding:1.4rem;flex:1;display:flex;flex-direction:column;gap:.6rem}
+.post-card-title{font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--navy);line-height:1.3}
+.post-card-excerpt{font-family:var(--serif);font-size:.85rem;line-height:1.65;color:var(--muted);flex:1}
+.post-card-meta{font-family:var(--sans);font-size:.55rem;color:rgba(100,100,120,.6);letter-spacing:.05em}
+@media(max-width:900px){.posts-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.posts-grid{grid-template-columns:1fr}}
+
+/* TOPIC ECOSYSTEM */
+.ecosystem-section{background:var(--navy);padding:4rem 2rem;margin-top:4rem}
+.ecosystem-inner{max-width:1200px;margin:0 auto}
+.eco-title{font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.eco-sub{font-family:var(--serif);font-size:1.1rem;font-style:italic;color:rgba(255,255,255,.4);margin-bottom:3rem}
+.eco-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.eco-card{
+  background:var(--navy2);padding:2rem 1.5rem;text-decoration:none;display:flex;flex-direction:column;gap:.8rem;
+  border:1px solid rgba(255,255,255,.04);transition:all .3s;
+}
+.eco-card:hover{background:rgba(201,162,39,.06);border-color:rgba(201,162,39,.2)}
+.eco-icon{font-size:1.8rem}
+.eco-label{font-family:var(--sans);font-size:.55rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.eco-name{font-family:var(--serif);font-size:1.2rem;font-weight:600;color:var(--white)}
+.eco-desc{font-family:var(--serif);font-size:.85rem;line-height:1.65;color:rgba(255,255,255,.4)}
+.eco-arrow{font-family:var(--sans);font-size:.58rem;color:var(--gold);letter-spacing:.1em;margin-top:auto}
+@media(max-width:900px){.eco-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.eco-grid{grid-template-columns:1fr}}
+
+/* TOWN GUIDES SECTION */
+.towns-section{max-width:1200px;margin:0 auto;padding:4rem 2rem}
+.towns-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:2rem}
+.town-card{
+  background:var(--white);padding:1.5rem;text-decoration:none;
+  border:1px solid rgba(201,162,39,.1);transition:all .3s;
+  display:flex;flex-direction:column;gap:.5rem;position:relative;overflow:hidden;
+}
+.town-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:transform .3s}
+.town-card:hover{border-color:rgba(201,162,39,.3)}
+.town-card:hover::before{transform:scaleX(1)}
+.town-name{font-family:var(--serif);font-size:1.15rem;font-weight:700;color:var(--navy)}
+.town-price{font-family:var(--sans);font-size:.58rem;font-weight:600;letter-spacing:.08em;color:var(--gold)}
+.town-tagline{font-family:var(--serif);font-size:.8rem;line-height:1.5;color:var(--muted)}
+.town-cta{font-family:var(--sans);font-size:.55rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-top:.5rem}
+.town-cta::after{content:' →'}
+@media(max-width:1000px){.towns-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){.towns-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.towns-grid{grid-template-columns:1fr}}
+
+/* NEWSLETTER BAR */
+.newsletter-bar{background:var(--gold);padding:2.5rem 2rem}
+.newsletter-inner{max-width:800px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center}
+.nl-text h3{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:var(--navy);margin-bottom:.3rem}
+.nl-text p{font-family:var(--serif);font-size:.9rem;color:rgba(11,28,54,.65)}
+.nl-form{display:flex;gap:.5rem}
+.nl-form input{
+  padding:.75rem 1rem;border:none;background:rgba(255,255,255,.9);
+  font-family:var(--sans);font-size:.7rem;color:var(--navy);min-width:220px;
+  outline:none;flex:1;
+}
+.nl-form button{
+  padding:.75rem 1.4rem;background:var(--navy);color:var(--white);border:none;cursor:pointer;
+  font-family:var(--sans);font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  white-space:nowrap;transition:background .2s;
+}
+.nl-form button:hover{background:#152035}
+@media(max-width:700px){.newsletter-inner{grid-template-columns:1fr}.nl-form{flex-direction:column}}
+
+/* CTA BAR */
+.cta-bar{background:var(--gold);padding:1.2rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.cta-bar-text{font-family:var(--sans);font-size:.78rem;font-weight:600;letter-spacing:.05em;color:var(--white);display:flex;align-items:center;gap:.7rem}
+.cta-bar-text::before{content:'💬';font-size:.9rem}
+.cta-bar-btn{font-family:var(--sans);font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:.75rem 2rem;background:var(--navy);color:var(--white);text-decoration:none;transition:all .25s;white-space:nowrap}
+.cta-bar-btn:hover{background:#152035}
+.blog-footer{background:var(--navy);padding:2rem;text-align:center}
+.footer-links{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-bottom:.8rem}
+.footer-links a{font-family:var(--sans);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--gold)}
+.footer-legal{font-family:var(--sans);font-size:.55rem;color:rgba(255,255,255,.18);line-height:1.7}
+
+/* ── MODAL SYSTEM ── */
+.modal-ov{display:none;position:fixed;inset:0;z-index:800;background:rgba(4,6,8,.94);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:1.5rem}
+.modal-ov.open{display:flex}
+.modal{background:var(--navy);border:1px solid rgba(212,175,55,.15);padding:2.8rem;max-width:460px;width:100%;position:relative;animation:mIn .22s ease}
+@keyframes mIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.modal-close{position:absolute;top:1rem;right:1.2rem;background:none;border:none;color:rgba(240,235,225,.22);font-size:1.2rem;cursor:pointer;font-family:var(--mono);transition:color .2s}
+.modal-close:hover{color:var(--cream)}
+.modal-eye{font-family:var(--mono);font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+.modal-title{font-family:var(--disp);font-size:1.9rem;color:var(--cream);line-height:1;margin-bottom:.5rem;letter-spacing:.04em}
+.modal-sub{font-family:var(--serif);font-size:.88rem;font-style:italic;color:rgba(240,235,225,.42);line-height:1.6;margin-bottom:1.8rem}
+.ff{margin-bottom:.95rem}
+.ff label{display:block;font-family:var(--mono);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,235,225,.28);margin-bottom:.35rem}
+.ff input,.ff select{width:100%;padding:.78rem .9rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--cream);font-family:var(--mono);font-size:.78rem;transition:border-color .2s;outline:none}
+.ff input:focus,.ff select:focus{border-color:var(--gold)}
+.ff input::placeholder{color:rgba(240,235,225,.18)}
+.ff select option{background:var(--navy)}
+.tcpa{display:flex;gap:.7rem;align-items:flex-start;margin:1rem 0}
+.tcpa input[type=checkbox]{margin-top:2px;accent-color:var(--gold);flex-shrink:0}
+.tcpa-t{font-family:var(--mono);font-size:.6rem;color:rgba(240,235,225,.26);line-height:1.55}
+.tcpa-t a{color:rgba(212,175,55,.5)}
+.modal-btn{width:100%;padding:.95rem;background:var(--gold);color:var(--void);border:none;font-family:var(--mono);font-size:.72rem;font-weight:400;letter-spacing:.17em;text-transform:uppercase;cursor:pointer;margin-top:.4rem;transition:background .2s,transform .2s}
+.modal-btn:hover{background:#e8c840;transform:translateY(-1px)}
+.form-ok{display:none;text-align:center;padding:2rem 0}
+.form-ok .ok-big{font-family:var(--disp);font-size:2.3rem;color:var(--gold);letter-spacing:.04em;margin-bottom:.7rem}
+.form-ok p{font-family:var(--serif);font-size:.9rem;font-style:italic;color:rgba(240,235,225,.45);line-height:1.6}
+</style>
+<script src="/lead-engine/conversion-tracker.js" defer></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="blog-nav">
+  <a class="nav-logo" href="/">
+    <img src="/images/branding/house-detective-logo.png" alt="House Detective">
+    <span>Mark Pires · Coldwell Banker</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/#about">About</a></li>
+    <li><a href="/blog/" class="active">Blog</a></li>
+    <li><a href="/#properties">Buy</a></li>
+    <li><a href="/" onclick="openModal('home-value');return false">Sell</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta-link" href="tel:2032472655">203-247-2655</a>
+</nav>
+
+<!-- MASTHEAD -->
+<div class="blog-masthead">
+  <div class="masthead-eye">The House Detective · Blog</div>
+  <h1 class="masthead-title">Fairfield County<br>Real Estate Intelligence</h1>
+  <p class="masthead-sub">Market insights, town guides, and seller strategies — from Connecticut's House Detective.</p>
+</div>
+
+<!-- CATEGORY NAV -->
+<nav class="category-nav">
+  <div class="cat-nav-inner">
+    <a class="cat-link active" href="/blog/">All Posts</a>
+    <a class="cat-link" href="/buyer-seller-advice-fairfield-county-ct-real-estate.html/">Buyer Advice</a>
+    <a class="cat-link" href="/fairfield-county-home-selling-guide.html/">Seller Tips</a>
+    <a class="cat-link" href="/fairfield-county-home-selling-guide.html/">Market Reports</a>
+    <a class="cat-link" href="/fairfield-county-town-tours-neighborhood-guide.html/">Town Guides</a>
+    <a class="cat-link" href="https://www.youtube.com/@DiscoverCT" target="_blank">Discover CT Episodes ↗</a>
+  </div>
+</nav>
+
+<!-- FEATURED POST -->
+<div class="featured-section">
+  <div class="section-eye">Featured Post</div>
+  <div class="featured-card">
+    <div class="featured-img" style="background-image:url('/images/blog/ct-shoreline-living.png')">
+      <div class="featured-img-overlay"></div>
+      <span class="featured-img-badge">Latest</span>
+    </div>
+    <div class="featured-content">
+      <div class="featured-tag">Buyer Advice · Fairfield County, CT</div>
+      <h2 class="featured-title">The Complete Fairfield County Home Buyer's Guide to Choosing the Right Realtor in 2026</h2>
+      <p class="featured-excerpt">What to look for, what to avoid, and the questions that actually matter — whether you're a first-time buyer or searching for a luxury home in Fairfield County.</p>
+      <div class="featured-meta">
+        <img src="https://sintra-images.s3.eu-north-1.amazonaws.com/21403952-74df-4f52-bb32-89d2f3372d0c/message-files/e6127440-d1a9-49c5-87ac-9eea4e461e8f/Final_Headshot.jpg" alt="Mark Pires">
+        <span>By Mark Pires</span>
+        <span>·</span>
+        <span>June 2026</span>
+        <span>·</span>
+        <span>12 min read</span>
+      </div>
+      <a class="featured-cta" href="/blog/how-to-find-the-best-realtor.html">Read the Full Guide →</a>
+    </div>
+  </div>
+</div>
+
+<!-- RECENT POSTS -->
+<div class="posts-section">
+  <div class="section-eye">Recent Posts</div>
+  <div class="posts-grid">
+
+    <!-- Post 0 — How Long to Sell -->
+    <a class="post-card" href="/blog/how-long-to-sell-house-fairfield-county-ct.html">
+      <div class="post-card-img" style="background-image:url('https://us.chat-img.sintra.ai/21403952-74df-4f52-bb32-89d2f3372d0c/b1c186b0-0ab1-456c-ac30-e056849f1030/image.png');background-size:cover;background-position:center">
+        <span class="post-card-tag">Home Selling</span>
+      </div>
+      <div class="post-card-body">
+        <div class="post-card-title">How Long Does It Take to Sell a House in Fairfield County, CT?</div>
+        <p class="post-card-excerpt">Real timelines. Local insight. No guesswork. Mark breaks down exactly what to expect from list date to closing day.</p>
+        <div class="post-card-meta">June 2026 · 7 min read</div>
+      </div>
+    </a>
+
+    <!-- Post 1 -->
+    <a class="post-card" href="/blog/living-in-fairfield-ct.html">
+      <div class="post-card-img" style="background-image:url('/images/blog/fairfield-ct-aerial.png');background-size:cover;background-position:center">
+        <span class="post-card-tag">Town Guide</span>
+      </div>
+      <div class="post-card-body">
+        <div class="post-card-title">Why Are So Many People Buying Homes in Fairfield, CT? A Realtor's 2026 Market Breakdown</div>
+        <p class="post-card-excerpt">Fairfield leads Fairfield County with 8,100 monthly home searches — here's why everyone wants in and what you need to know.</p>
+        <div class="post-card-meta">June 2026 · 7 min read</div>
+      </div>
+    </a>
+
+    <!-- Post 2 -->
+    <a class="post-card" href="/blog/living-in-stamford-ct.html">
+      <div class="post-card-img" style="background-image:url('/images/blog/scenic-ct.png');background-size:cover;background-position:center">
+        <span class="post-card-tag">NYC Relocation</span>
+      </div>
+      <div class="post-card-body">
+        <div class="post-card-title">What Is It Like Living in Stamford, CT? The NYC-to-CT Relocation Guide You Actually Need</div>
+        <p class="post-card-excerpt">Direct Metro-North to Grand Central, corporate employers, and the most diverse housing in the county. The honest guide.</p>
+        <div class="post-card-meta">June 2026 · 7 min read</div>
+      </div>
+    </a>
+
+    <!-- Post 3 -->
+    <a class="post-card" href="/blog/living-in-greenwich-ct.html">
+      <div class="post-card-img" style="background-image:url('/images/blog/greenwich-ct-downtown.png');background-size:cover;background-position:center">
+        <span class="post-card-tag">Town Guide</span>
+      </div>
+      <div class="post-card-body">
+        <div class="post-card-title">What Is It Really Like to Live in Greenwich, CT? A Local Realtor's Honest Guide</div>
+        <p class="post-card-excerpt">Greenwich is prestigious — but it's also more nuanced than outsiders assume. Here's the honest picture from 18 years of selling there.</p>
+        <div class="post-card-meta">June 2026 · 7 min read</div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<!-- TOPIC ECOSYSTEM -->
+<div class="ecosystem-section">
+  <div class="ecosystem-inner">
+    <div class="eco-title">Explore By Topic</div>
+    <p class="eco-sub">Everything you need to navigate Fairfield County real estate</p>
+    <div class="eco-grid">
+
+      <a class="eco-card" href="/buyer-seller-advice-fairfield-county-ct-real-estate.html/">
+        <span class="eco-icon">🏠</span>
+        <div class="eco-label">Buyers</div>
+        <div class="eco-name">Buyer Advice</div>
+        <p class="eco-desc">From first showings to closing day — guides for every stage of buying a Fairfield County home.</p>
+        <span class="eco-arrow">Explore guides →</span>
+      </a>
+
+      <a class="eco-card" href="/fairfield-county-home-selling-guide.html/">
+        <span class="eco-icon">📋</span>
+        <div class="eco-label">Sellers</div>
+        <div class="eco-name">Seller Tips</div>
+        <p class="eco-desc">Pricing strategy, presentation, timelines, and how to get above-ask offers in today's market.</p>
+        <span class="eco-arrow">Explore tips →</span>
+      </a>
+
+      <a class="eco-card" href="https://www.youtube.com/@DiscoverCT" target="_blank">
+        <span class="eco-icon">🎬</span>
+        <div class="eco-label">Video</div>
+        <div class="eco-name">Discover CT Episodes</div>
+        <p class="eco-desc">Mark's YouTube channel — neighborhood tours, business spotlights, and Connecticut stories.</p>
+        <span class="eco-arrow">Watch on YouTube →</span>
+      </a>
+
+      <a class="eco-card" href="/fairfield-county-town-tours-neighborhood-guide.html/">
+        <span class="eco-icon">📍</span>
+        <div class="eco-label">Town Guides</div>
+        <div class="eco-name">Town Blogs</div>
+        <p class="eco-desc">Deep-dive guides on every Fairfield County town — schools, prices, lifestyle, and 2026 market data.</p>
+        <span class="eco-arrow">Explore towns →</span>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<!-- TOWN GUIDES GRID -->
+<div class="towns-section">
+  <div class="section-eye">Town Guides</div>
+  <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;color:var(--navy);margin-bottom:.4rem">Your Fairfield County<br><em style="color:var(--gold);font-style:normal">Town-by-Town Playbook</em></h2>
+  <p style="font-family:var(--serif);font-size:1rem;color:var(--muted);margin-bottom:0;max-width:600px">Considering a move? Each guide covers schools, prices, commute, neighborhoods, and what Mark honestly thinks about each town.</p>
+  <div class="towns-grid">
+
+    <a class="town-card" href="/blog/living-in-greenwich-ct.html">
+      <div class="town-name">Greenwich</div>
+      <div class="town-price">$800K – $5M+</div>
+      <div class="town-tagline">Prestige address, 45-min Metro-North, elite private schools</div>
+      <span class="town-cta">Read guide</span>
+    </a>
+
+    <a class="town-card" href="/blog/living-in-new-canaan-ct.html">
+      <div class="town-name">New Canaan</div>
+      <div class="town-price">$1.2M – $3.5M</div>
+      <div class="town-tagline">Top-ranked Saxe Middle School, Glass House, Waveny Park</div>
+      <span class="town-cta">Read guide</span>
+    </a>
+
+    <a class="town-card" href="/blog/living-in-westport-ct.html">
+      <div class="town-name">Westport</div>
+      <div class="town-price">$900K – $3M+</div>
+      <div class="town-tagline">Compo Beach, Levitt Pavilion, Staples HS, Saugatuck River</div>
+      <span class="town-cta">Read guide</span>
+    </a>
+
+    <a class="town-card" href="/blog/living-in-wilton-ct.html">
+      <div class="town-name">Wilton</div>
+      <div class="town-price">$650K – $1.8M</div>
+      <div class="town-tagline">Top-10 CT schools, Weir Farm National Park, Westport value</div>
+      <span class="town-cta">Read guide</span>
+    </a>
+
+    <a class="town-card" href="/blog/living-in-norwalk-ct.html">
+      <div class="town-name">Norwalk</div>
+      <div class="town-price">$400K – $900K</div>
+      <div class="town-tagline">SoNo dining, Maritime Aquarium, Calf Pasture Beach</div>
+      <span class="town-cta">Read guide</span>
+    </a>
+
+    <a class="town-card" href="/blog/living-in-stamford-ct.html">
+      <div class="town-name">Stamford</div>
+      <div class="town-price">$450K – $1.5M</div>
+      <div class="town-tagline">NYC relocation hub, 45-min train, UBS/Synchrony HQ</div>
+      <span class="town-cta">Read guide</span>
+    </a>
+
+    <a class="town-card" href="/blog/living-in-fairfield-ct.html">
+      <div class="town-name">Fairfield</div>
+      <div class="town-price">$600K – $1.8M</div>
+      <div class="town-tagline">Fastest-moving market, two train stations, Penfield Beach</div>
+      <span class="town-cta">Read guide</span>
+    </a>
+
+    <a class="town-card" href="/blog/living-in-southport-ct.html">
+      <div class="town-name">Southport</div>
+      <div class="town-price">$900K – $3M+</div>
+      <div class="town-tagline">Historic harbor village, Pequot Library, walkable charm</div>
+      <span class="town-cta">Read guide</span>
+    </a>
+
+    <a class="town-card" href="/blog/living-in-easton-ct.html">
+      <div class="town-name">Easton</div>
+      <div class="town-price">$600K – $1.4M</div>
+      <div class="town-tagline">Rural character, horse properties, Aspetuck Land Trust</div>
+      <span class="town-cta">Read guide</span>
+    </a>
+
+    <a class="town-card" href="/blog/living-in-weston-ct.html">
+      <div class="town-name">Weston</div>
+      <div class="town-price">$700K – $2M</div>
+      <div class="town-tagline">Devil's Den Preserve, tight-knit school culture, privacy</div>
+      <span class="town-cta">Read guide</span>
+    </a>
+
+    <a class="town-card" href="/blog/living-in-ridgefield-ct.html">
+      <div class="town-name">Ridgefield</div>
+      <div class="town-price">$600K – $1.8M</div>
+      <div class="town-tagline">Aldrich Museum, Ridgefield Playhouse, arts capital of FC</div>
+      <span class="town-cta">Read guide</span>
+    </a>
+
+    <a class="town-card" href="/blog/living-in-stratford-ct.html">
+      <div class="town-name">Stratford</div>
+      <div class="town-price">$300K – $700K</div>
+      <div class="town-tagline">Most affordable with waterfront options, Short Beach</div>
+      <span class="town-cta">Read guide</span>
+    </a>
+
+    <a class="town-card" href="/blog/living-in-newtown-ct.html">
+      <div class="town-name">Newtown</div>
+      <div class="town-price">$400K – $900K</div>
+      <div class="town-tagline">Community resilience, Lake Zoar, Edmond Town Hall</div>
+      <span class="town-cta">Read guide</span>
+    </a>
+
+    <a class="town-card" href="/blog/living-in-redding-ct.html">
+      <div class="town-name">Redding</div>
+      <div class="town-price">$450K – $1.2M</div>
+      <div class="town-tagline">Historic farmhouses, Mark Twain Library, rural affordability</div>
+      <span class="town-cta">Read guide</span>
+    </a>
+
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<div class="newsletter-bar">
+  <div class="newsletter-inner">
+    <div class="nl-text">
+      <h3>Get Mark's Monthly Market Report — Free</h3>
+      <p>Real inventory data, pricing trends, and what's actually happening in Fairfield County. Straight from Mark. Every month.</p>
+    </div>
+    <form class="nl-form" onsubmit="subNewsletter(event)">
+      <input type="email" name="email" placeholder="your@email.com" required>
+      <button type="submit">Subscribe Free</button>
+    </form>
+    <div id="nlOk" style="display:none;font-family:var(--sans);font-size:.7rem;color:var(--navy);font-weight:600;margin-top:.5rem">✓ You're subscribed!</div>
+  </div>
+</div>
+
+<!-- CTA BAR -->
+<div class="cta-bar">
+  <span class="cta-bar-text">Have Questions About Fairfield County Real Estate? Let's Talk.</span>
+  <a class="cta-bar-btn" href="tel:2032472655">Contact Mark</a>
+</div>
+
+<!-- FOOTER -->
+<footer class="blog-footer">
+  <div class="footer-links">
+    <a href="/">markpires.com</a>
+    <a href="/blog/">All Posts</a>
+    <a href="/buyer-seller-advice-fairfield-county-ct-real-estate.html/">Buyer Advice</a>
+    <a href="/mark-pires-advantage.html/">Seller Tips</a>
+    <a href="/towns.html/">Town Guides</a>
+    <a href="https://discoverct.net" target="_blank">Discover CT</a>
+    <a href="/privacy">Privacy</a>
+  </div>
+  <div class="footer-legal">© 2026 Mark Pires · Licensed Real Estate Agent · Coldwell Banker Realty · CT License · Equal Housing Opportunity ⊕</div>
+</footer>
+<!-- MODAL — exact system from markpires.com index -->
+<div class="modal-ov" id="modalOv" onclick="closeOut(event)">
+  <div class="modal" id="modalBox">
+    <button class="modal-close" onclick="closeModal()">× Close</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+/* ── MODALS — identical to markpires.com/index.html ── */
+const MD={
+  'home-value':{eye:'Free Seller Report',title:"WHAT'S IT WORTH",sub:'Get a personalized Fairfield County home valuation — based on real recent sales. Delivered personally by Mark within 24 hours.',fields:['address','email','phone'],cta:'Get My Free Valuation',tag:'seller'},
+  'buyer-guide':{eye:"2026 Buyer's Guide",title:'THE INSIDER GUIDE',sub:"Moving from NYC? The 2026 Fairfield County buyer guide — NAR trends, town comparisons, commutes, schools, real pricing. Free illustrated PDF.",fields:['name','email','phone','timeline'],cta:'Send Me the 2026 Guide',tag:'buyer'},
+  'market-report':{eye:'Monthly Market Report',title:'MARKET INTEL',sub:'Real inventory, days on market, pricing trends — for every Fairfield County town. From Mark, every month, free.',fields:['name','email'],cta:'Subscribe Free',tag:'market'},
+  'consultation':{eye:'Schedule A Call',title:"LET'S TALK",sub:'30 minutes with Mark. Selling, buying, or just curious — no pressure, just straight answers.',fields:['name','email','phone','goal'],cta:'Schedule My Consultation',tag:'consultation'}
+};
+
+function openModal(type){
+  try{
+    const t=MD[type];if(!t)return false;
+    const goalF=type==='consultation'?`<div class="ff"><label>What are you looking to do?</label><select name="goal"><option value="">Select</option><option>Sell my home</option><option>Buy a home</option><option>Both</option><option>Investment property</option><option>Just exploring</option></select></div>`:'';
+    const mc=document.getElementById('modalContent');
+    if(!mc)return false;
+    mc.innerHTML=`
+      <div class="modal-eye">${t.eye}</div>
+      <h2 class="modal-title">${t.title}</h2>
+      <p class="modal-sub">${t.sub}</p>
+      <form onsubmit="submitLead(event,'${type}','${t.tag}');return false;">
+        ${t.fields.includes('name')?`<div class="ff"><label>Your Name</label><input type="text" name="name" placeholder="First and last name" required></div>`:''}
+        ${t.fields.includes('address')?`<div class="ff"><label>Property Address</label><input type="text" name="address" placeholder="123 Main St, Westport CT" required></div>`:''}
+        <div class="ff"><label>Email</label><input type="email" name="email" placeholder="your@email.com" required></div>
+        ${t.fields.includes('phone')?`<div class="ff"><label>Phone <span style="opacity:.4">(optional)</span></label><input type="tel" name="phone" placeholder="203-555-0100"></div>`:''}
+        ${t.fields.includes('timeline')?`<div class="ff"><label>Buying timeline</label><select name="timeline"><option value="">Select</option><option>1–3 months</option><option>3–6 months</option><option>6–12 months</option><option>Just exploring</option></select></div>`:''}
+        ${goalF}
+        <div class="tcpa"><input type="checkbox" name="tcpa" required><span class="tcpa-t">I agree to receive calls and texts from Mark Pires at the number provided. Msg &amp; data rates may apply. Reply STOP to opt out. <a href="/privacy">Privacy Policy</a>.</span></div>
+        <button class="modal-btn" type="submit">${t.cta}</button>
+      </form>
+      <div class="form-ok" id="formOk">
+        <div class="ok-big">RECEIVED.</div>
+        <p>Mark reviews every submission personally and will be in touch within 24 hours.<br>Check your inbox.</p>
+      </div>`;
+    const ov=document.getElementById('modalOv');
+    if(ov){ov.classList.add('open');document.body.style.overflow='hidden';}
+  }catch(err){console.error('Modal error:',err);}
+  return false;
+}
+function closeModal(){
+  const ov=document.getElementById('modalOv');
+  if(ov)ov.classList.remove('open');
+  document.body.style.overflow='';
+}
+function closeOut(e){if(e.target===document.getElementById('modalOv'))closeModal();}
+function submitLead(e,type,tag){
+  e.preventDefault();
+  const f=e.target;
+  const btn=f.querySelector('.modal-btn');
+  if(btn){btn.dataset.orig=btn.textContent;btn.disabled=true;btn.textContent='Sending...';}
+  const payload={
+    type,tag,
+    name:     f.elements['name']?.value||'',
+    email:    f.elements['email']?.value||'',
+    phone:    f.elements['phone']?.value||'',
+    address:  f.elements['address']?.value||'',
+    timeline: f.elements['timeline']?.value||'',
+    goal:     f.elements['goal']?.value||'',
+    source:   'markpires.com/mark-pires-advantage',
+    timestamp:new Date().toISOString()
+  };
+  fetch('/lead-engine/capture.php',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(payload)
+  })
+  .then(r=>r.json())
+  .then(d=>{
+    if(d.success){
+      f.style.display='none';
+      document.getElementById('formOk').style.display='block';
+    } else {
+      if(btn){btn.disabled=false;btn.textContent=btn.dataset.orig;}
+      alert('Something went wrong. Please call Mark directly at 203-247-2655.');
+    }
+  })
+  .catch(()=>{
+    f.style.display='none';
+    document.getElementById('formOk').style.display='block';
+  });
+  return false;
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+</script>
+
+<style>
+.modal-ov{display:none;position:fixed;inset:0;z-index:800;background:rgba(4,6,8,.94);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:1.5rem}
+.modal-ov.open{display:flex}
+.modal{background:var(--navy);border:1px solid rgba(212,175,55,.15);padding:2.8rem;max-width:460px;width:100%;position:relative;animation:mIn .22s ease}
+@keyframes mIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.modal-close{position:absolute;top:1rem;right:1.2rem;background:none;border:none;color:rgba(240,235,225,.22);font-size:1.2rem;cursor:pointer;font-family:var(--mono);transition:color .2s}
+.modal-close:hover{color:var(--cream)}
+.modal-eye{font-family:var(--mono);font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+.modal-title{font-family:var(--disp);font-size:1.9rem;color:var(--cream);line-height:1;margin-bottom:.5rem;letter-spacing:.04em}
+.modal-sub{font-family:var(--serif);font-size:.88rem;font-style:italic;color:rgba(240,235,225,.42);line-height:1.6;margin-bottom:1.8rem}
+.ff{margin-bottom:.95rem}
+.ff label{display:block;font-family:var(--mono);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,235,225,.28);margin-bottom:.35rem}
+.ff input,.ff select{width:100%;padding:.78rem .9rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--cream);font-family:var(--mono);font-size:.78rem;transition:border-color .2s;outline:none}
+.ff input:focus,.ff select:focus{border-color:var(--gold)}
+.ff input::placeholder{color:rgba(240,235,225,.18)}
+.ff select option{background:var(--navy)}
+.tcpa{display:flex;gap:.7rem;align-items:flex-start;margin:1rem 0}
+.tcpa input[type=checkbox]{margin-top:2px;accent-color:var(--gold);flex-shrink:0}
+.tcpa-t{font-family:var(--mono);font-size:.6rem;color:rgba(240,235,225,.26);line-height:1.55}
+.tcpa-t a{color:rgba(212,175,55,.5)}
+.modal-btn{width:100%;padding:.95rem;background:var(--gold);color:var(--void);border:none;font-family:var(--mono);font-size:.72rem;font-weight:400;letter-spacing:.17em;text-transform:uppercase;cursor:pointer;margin-top:.4rem;transition:background .2s,transform .2s}
+.modal-btn:hover{background:#e8c840;transform:translateY(-1px)}
+.form-ok{display:none;text-align:center;padding:2rem 0}
+.form-ok .ok-big{font-family:var(--disp);font-size:2.3rem;color:var(--gold);letter-spacing:.04em;margin-bottom:.7rem}
+.form-ok p{font-family:var(--serif);font-size:.9rem;font-style:italic;color:rgba(240,235,225,.45);line-height:1.6}
+</style>
+</body>
+</html>
+<script>
+function subNewsletter(e){
+  e.preventDefault();const f=e.target;
+  fetch('/lead-engine/capture.php',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({type:'newsletter',tag:'newsletter',name:'',email:f.elements['email']?.value||'',source:'markpires.com/blog',timestamp:new Date().toISOString()})
+  }).catch(()=>{});
+  f.style.display='none';document.getElementById('nlOk').style.display='block';
+}
+function filterPosts(cat,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.post-card').forEach(card=>{
+    if(cat==='all'){card.style.display='';return;}
+    card.style.display=(card.dataset.cats||'').includes(cat)?'':'none';
+  });
+}
+try{
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')})},{threshold:0,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+}catch(err){document.querySelectorAll('.reveal').forEach(el=>el.classList.add('v'));}
+</script>
+</body>
+</html>

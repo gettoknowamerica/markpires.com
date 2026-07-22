@@ -1,0 +1,7 @@
+/* V32.2 notification/new badges */
+.newBadge{display:inline-flex;align-items:center;gap:5px;background:#b91c1c;color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:4px 9px;font-size:10px;font-weight:950;text-transform:uppercase;letter-spacing:.04em;box-shadow:0 0 18px rgba(185,28,28,.35)}
+.freshNotice{background:linear-gradient(135deg,#7f1d1d,#111827);border:1px solid rgba(248,113,113,.45);border-radius:14px;padding:10px 12px;margin:10px 0;color:#fff;font-weight:850}
+.inlineRefresh{display:inline-flex;gap:8px;align-items:center;flex-wrap:wrap}
+.spinner{display:none;width:14px;height:14px;border:2px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:gspin .8s linear infinite}
+@keyframes gspin{to{transform:rotate(360deg)}}
+.isLoading .spinner{display:inline-block}

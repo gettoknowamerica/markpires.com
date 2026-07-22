@@ -1,0 +1,10 @@
+<?php
+session_start();
+require_once __DIR__ . '/../lead-engine/config.php';
+if(empty($_SESSION['mp_dashboard_auth'])){header('Location:/dashboard/');exit;}
+if(file_exists(__DIR__.'/includes/goliath-nav.php')) require_once __DIR__.'/includes/goliath-nav.php';
+$key=defined('AFTER_HOURS_CRON_KEY')?AFTER_HOURS_CRON_KEY:'timetomakethedonuts';
+?><!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Media Asset Upload</title><style>body{margin:0;background:#151515;color:#eee;font-family:Arial}.hero{background:#0b0b0b;padding:28px}.hero h1{color:#c8a96e}.wrap{max-width:1000px;margin:auto;padding:20px}.panel{background:#202020;border:1px solid #333;border-radius:16px;padding:20px}.btn{background:#c8a96e;border:0;border-radius:10px;padding:12px 16px;font-weight:900}.bar{height:24px;background:#c8a96e;width:0}.prog{height:24px;background:#333;border-radius:99px;overflow:hidden}</style></head><body><section class="hero"><h1>Media Asset Upload</h1><p>Upload logos, thumbnails, and supporting graphics.</p></section><main class="wrap"><section class="panel"><input type="file" id="file"><select id="type"><option value="logos">Logo</option><option value="thumbs">Thumbnail</option><option value="raw">Raw Media</option></select><button class="btn" onclick="up()">Upload Asset</button><div class="prog"><div class="bar" id="bar"></div></div><p id="status"></p></section></main><script>
+const KEY=<?=json_encode($key)?>;
+async function up(){let f=document.getElementById('file').files[0];let type=document.getElementById('type').value;if(!f)return;let fd=new FormData();fd.append('key',KEY);fd.append('asset_type',type);fd.append('file',f);let xhr=new XMLHttpRequest();xhr.upload.onprogress=e=>{if(e.lengthComputable)document.getElementById('bar').style.width=Math.round(e.loaded/e.total*100)+'%'};xhr.onload=()=>{document.getElementById('status').textContent=xhr.responseText};xhr.open('POST','/lead-engine/media-asset-upload.php');xhr.send(fd);}
+</script></body></html>

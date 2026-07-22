@@ -1,0 +1,357 @@
+/* V75.6.2 — Square Mission Control Rooms + Randomized Task-Aware Top-Down Agents */
+
+/* restore square room tiles and prevent squashing */
+body .hq.gFiveByFive,
+body .hq.v61Grid,
+body .hq.gFourByFour {
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  gap:12px !important;
+  width:100% !important;
+  align-items:start !important;
+}
+
+body .agentTile,
+body .agentTile.v59Tile,
+body .agentTile.v62Tile {
+  position:relative !important;
+  min-width:0 !important;
+  width:100% !important;
+  min-height:0 !important;
+  height:auto !important;
+  display:flex !important;
+  flex-direction:column !important;
+  overflow:visible !important;
+  border-radius:18px !important;
+  background:transparent !important;
+}
+
+/* name bar above the square */
+body .agentTile .agentHeader {
+  position:relative !important;
+  inset:auto !important;
+  height:34px !important;
+  min-height:34px !important;
+  margin:0 !important;
+  border-radius:12px 12px 0 0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:8px !important;
+  background:linear-gradient(180deg,rgba(20,30,48,.96),rgba(5,10,21,.92)) !important;
+  border:1px solid color-mix(in srgb,var(--agent,var(--shirt,#d4af37)) 58%,rgba(255,255,255,.12)) !important;
+  border-bottom:0 !important;
+  color:#fff !important;
+  box-shadow:0 0 18px color-mix(in srgb,var(--agent,var(--shirt,#d4af37)) 22%,transparent),0 8px 20px rgba(0,0,0,.28) !important;
+  z-index:8 !important;
+}
+
+body .agentHeaderName {
+  font-size:12px !important;
+  font-weight:1000 !important;
+  text-transform:uppercase !important;
+  letter-spacing:.06em !important;
+  color:var(--agent,var(--shirt,#d4af37)) !important;
+}
+
+body .newBadge {
+  position:absolute !important;
+  right:8px !important;
+  top:7px !important;
+  background:#18e36b !important;
+  color:#06120b !important;
+  border-radius:999px !important;
+  font-size:10px !important;
+  font-weight:1000 !important;
+  padding:4px 7px !important;
+  box-shadow:0 0 18px #18e36b66 !important;
+}
+
+/* square office image */
+body .agentTile .room,
+body .agentTile .room.v62Room,
+body .hq.gFiveByFive .agentTile .room,
+body .hq.v61Grid .agentTile .room {
+  position:relative !important;
+  width:100% !important;
+  aspect-ratio:1/1 !important;
+  height:auto !important;
+  min-height:0 !important;
+  display:block !important;
+  overflow:hidden !important;
+  padding:0 !important;
+  box-sizing:border-box !important;
+  border-radius:0 0 18px 18px !important;
+  background-image:var(--room-bg) !important;
+  background-size:cover !important;
+  background-position:center center !important;
+  background-repeat:no-repeat !important;
+  text-decoration:none !important;
+  color:#fff !important;
+  border:1px solid color-mix(in srgb,var(--agent,var(--shirt,#d4af37)) 45%,rgba(255,255,255,.10)) !important;
+  border-top:0 !important;
+  outline:1px solid color-mix(in srgb,var(--agent,var(--shirt,#d4af37)) 22%,transparent) !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),0 13px 26px rgba(0,0,0,.34),0 0 22px color-mix(in srgb,var(--agent,var(--shirt,#d4af37)) 12%,transparent) !important;
+}
+
+body .agentTile .room:before {
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:0 !important;
+  pointer-events:none !important;
+  background:linear-gradient(180deg,rgba(4,6,12,.28) 0%,rgba(4,6,12,.04) 45%,rgba(4,6,12,.82) 100%) !important;
+}
+
+body .agentRoomTitle {
+  position:absolute !important;
+  left:9px !important;
+  top:9px !important;
+  right:52px !important;
+  z-index:9 !important;
+  display:block !important;
+  text-align:left !important;
+  font-size:10px !important;
+  line-height:1.08 !important;
+  letter-spacing:.04em !important;
+  text-transform:uppercase !important;
+  font-weight:950 !important;
+  color:#fff !important;
+  text-shadow:0 2px 8px #000 !important;
+  background:rgba(2,6,23,.66) !important;
+  border:1px solid color-mix(in srgb,var(--agent,var(--shirt,#d4af37)) 40%,rgba(255,255,255,.14)) !important;
+  border-radius:10px !important;
+  padding:6px 8px !important;
+  max-height:34px !important;
+  overflow:hidden !important;
+  backdrop-filter:blur(5px) !important;
+}
+
+body .agentTile .metric {
+  position:absolute !important;
+  right:8px !important;
+  top:9px !important;
+  z-index:10 !important;
+  background:rgba(0,0,0,.62) !important;
+  color:#fff !important;
+  border:1px solid color-mix(in srgb,var(--agent,var(--shirt,#d4af37)) 50%,rgba(255,255,255,.14)) !important;
+  border-radius:999px !important;
+  font-size:15px !important;
+  font-weight:1000 !important;
+  padding:5px 7px !important;
+  line-height:1 !important;
+}
+
+/* old station dots */
+body .v45Station,
+body .v402Station {
+  position:absolute !important;
+  z-index:5 !important;
+  width:7px !important;
+  height:7px !important;
+  border-radius:50% !important;
+  background:var(--agent,var(--shirt,#d4af37)) !important;
+  box-shadow:0 0 10px var(--agent,var(--shirt,#d4af37)) !important;
+  opacity:.7 !important;
+}
+
+/* top-down human character, not straight-on */
+body .worker.aiHuman {
+  position:absolute !important;
+  left:50% !important;
+  top:50% !important;
+  right:auto !important;
+  bottom:auto !important;
+  width:30px !important;
+  height:42px !important;
+  z-index:7 !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  border-radius:0 !important;
+  font-size:0 !important;
+  will-change:transform !important;
+  transition:none !important;
+  animation:none !important;
+  filter:drop-shadow(0 3px 5px rgba(0,0,0,.46)) !important;
+}
+
+/* head top-down */
+body .worker.aiHuman:before {
+  content:"" !important;
+  position:absolute !important;
+  left:7px !important;
+  top:0 !important;
+  width:16px !important;
+  height:16px !important;
+  border-radius:50% !important;
+  background:var(--skin,#d28a56) !important;
+  box-shadow:
+    0 2px 0 rgba(0,0,0,.35),
+    0 -5px 0 -2px var(--hair,#3b2317),
+    0 0 10px color-mix(in srgb,var(--agent,var(--shirt,#d4af37)) 30%,transparent) !important;
+}
+
+/* body top-down */
+body .worker.aiHuman:after {
+  content:"" !important;
+  position:absolute !important;
+  left:3px !important;
+  top:14px !important;
+  width:24px !important;
+  height:24px !important;
+  border-radius:9px 9px 6px 6px !important;
+  background:var(--shirt,#d4af37) !important;
+  box-shadow:
+    inset 0 -8px 0 rgba(0,0,0,.20),
+    0 5px 12px rgba(0,0,0,.36),
+    0 0 11px color-mix(in srgb,var(--agent,var(--shirt,#d4af37)) 30%,transparent) !important;
+}
+
+/* legs/arms reused from i/b */
+body .worker.aiHuman i,
+body .worker.aiHuman b {
+  position:absolute !important;
+  display:block !important;
+  width:6px !important;
+  height:16px !important;
+  top:22px !important;
+  background:#0f172a !important;
+  border-radius:6px !important;
+  z-index:-1 !important;
+  transform-origin:top center !important;
+}
+body .worker.aiHuman i{left:8px !important}
+body .worker.aiHuman b{right:8px !important}
+body .worker.aiHuman i:before,
+body .worker.aiHuman b:before {
+  content:"" !important;
+  position:absolute !important;
+  width:5px !important;
+  height:13px !important;
+  top:-13px !important;
+  background:var(--skin,#d28a56) !important;
+  border-radius:6px !important;
+}
+body .worker.aiHuman i:before{left:-7px !important}
+body .worker.aiHuman b:before{right:-7px !important}
+
+body .worker.aiHuman.walking i{animation:v762Legs .34s infinite alternate ease-in-out !important}
+body .worker.aiHuman.walking b{animation:v762Legs .34s infinite alternate-reverse ease-in-out !important}
+body .worker.aiHuman.working{filter:drop-shadow(0 0 13px var(--agent,var(--shirt,#d4af37))) !important}
+@keyframes v762Legs{from{transform:rotate(-16deg)}to{transform:rotate(16deg)}}
+
+/* agent-specific details */
+body .agentTile[data-agent-tile="Columbo"] .worker.aiHuman i:after {
+  content:"" !important;
+  position:absolute !important;
+  left:-5px !important;
+  top:-30px !important;
+  width:30px !important;
+  height:7px !important;
+  border-radius:50% !important;
+  background:#2a1a12 !important;
+  z-index:9 !important;
+  box-shadow:8px -6px 0 -1px #3a2417 !important;
+  transform:rotate(-8deg) !important;
+}
+body .agentTile[data-agent-tile="Mozart"] .worker.aiHuman:before {
+  box-shadow:0 2px 0 rgba(0,0,0,.35),-6px -4px 0 -1px #d8d8d8,6px -4px 0 -1px #f4f4f5,0 -7px 0 -2px #e5e7eb,0 0 11px rgba(255,255,255,.45) !important;
+}
+body .agentTile[data-agent-tile="Pandora"] .worker.aiHuman:after{background:linear-gradient(180deg,#7b5cff,#3f2ab8) !important}
+
+body .agentWorkBubble {
+  position:absolute !important;
+  left:8px !important;
+  top:48px !important;
+  z-index:8 !important;
+  font-size:9px !important;
+  font-weight:900 !important;
+  line-height:1 !important;
+  padding:5px 6px !important;
+  border-radius:999px !important;
+  color:#fff !important;
+  background:rgba(0,0,0,.52) !important;
+  border:1px solid color-mix(in srgb,var(--agent,var(--shirt,#d4af37)) 46%,rgba(255,255,255,.16)) !important;
+  max-width:calc(100% - 16px) !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  backdrop-filter:blur(4px) !important;
+}
+
+/* live meter/current task dock */
+body .officeDock,
+body .v62OfficeDock {
+  position:absolute !important;
+  left:9px !important;
+  right:9px !important;
+  bottom:8px !important;
+  z-index:11 !important;
+  display:grid !important;
+  grid-template-columns:minmax(72px,.88fr) minmax(0,1.12fr) !important;
+  gap:8px !important;
+  align-items:center !important;
+  background:rgba(2,6,23,.76) !important;
+  border:1px solid rgba(255,255,255,.16) !important;
+  border-radius:12px !important;
+  padding:7px 8px !important;
+  backdrop-filter:blur(8px) !important;
+  box-shadow:0 -10px 24px rgba(0,0,0,.28) !important;
+  pointer-events:none !important;
+}
+body .battery,
+body .v59Battery {
+  height:10px !important;
+  background:rgba(255,255,255,.22) !important;
+  border-radius:999px !important;
+  overflow:hidden !important;
+}
+body .battery b,
+body .v59Battery b {
+  display:block !important;
+  height:100% !important;
+  border-radius:999px !important;
+  background:linear-gradient(90deg,#ef4444 0%,#f59e0b 48%,var(--agent,var(--shirt,#22c55e)) 100%) !important;
+}
+body .currentTask strong,
+body .v62CurrentTask strong {
+  display:block !important;
+  font-size:9.2px !important;
+  line-height:1.05 !important;
+  text-transform:uppercase !important;
+  letter-spacing:.04em !important;
+  color:#f8fafc !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+body .currentTask small,
+body .v62CurrentTask small {
+  display:block !important;
+  margin-top:2px !important;
+  font-size:9px !important;
+  line-height:1.05 !important;
+  color:#dbeafe !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+
+/* scoreboard tile stays square */
+body .scoreboard.agentTile {
+  aspect-ratio:1/1 !important;
+  min-height:0 !important;
+  height:auto !important;
+  overflow:hidden !important;
+}
+
+@media(max-width:1200px){
+  body .hq.gFiveByFive,body .hq.v61Grid,body .hq.gFourByFour{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
+}
+@media(max-width:900px){
+  body .hq.gFiveByFive,body .hq.v61Grid,body .hq.gFourByFour{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+}
+@media(max-width:560px){
+  body .hq.gFiveByFive,body .hq.v61Grid,body .hq.gFourByFour{grid-template-columns:1fr !important}
+}

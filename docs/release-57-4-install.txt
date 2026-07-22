@@ -1,0 +1,17 @@
+Goliath Omni OS Release 57.4
+Scout Revenue Pipeline
+
+Install:
+1. Upload the public_html folder over public_html.
+2. Run sql/goliath-v57-4-scout-revenue-pipeline.sql in Supabase.
+3. Open /dashboard/scout-expired-upload.php.
+4. Upload today's expired CSV.
+5. Leave run-goliath-local-worker-v55.cmd running.
+
+Tests:
+- CSV import endpoint: /lead-engine/scout-expired-import.php
+- FSBO seed endpoint: /lead-engine/scout-fsbo-seed.php
+- Dashboard: /dashboard/scout-expired-upload.php
+
+Mission Control UI fix:
+- Room descriptions are moved to the top under each Executive name so the room animation/details are not covered.

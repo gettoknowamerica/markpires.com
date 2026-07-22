@@ -1,0 +1,16 @@
+/* V35.6 Goliath Voice Command Center */
+.gVoiceBackdrop{display:none;position:fixed;inset:0;background:#000b;z-index:12000}
+.gVoicePanel{display:none;position:fixed;right:22px;top:22px;width:560px;max-width:calc(100vw - 24px);background:linear-gradient(180deg,#0b1220,#07101d);border:1px solid #c8a96e66;border-radius:22px;box-shadow:0 30px 90px #000e;z-index:12001;overflow:hidden}
+.gVoicePanel.open,.gVoiceBackdrop.open{display:block}
+.gVoiceHead{padding:14px;border-bottom:1px solid #263753;display:flex;justify-content:space-between;gap:12px;align-items:start;background:#08111f}
+.gVoiceHead h2{margin:0;color:#c8a96e;font:900 28px Georgia,serif}
+.gVoiceHead small{color:#94a3b8;font-weight:800}
+.gVoiceBody{padding:16px;display:grid;gap:12px}
+.gVoiceOrb{width:92px;height:92px;margin:auto;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#c8a96e,#7c5f28);color:#07101d;font:900 42px Georgia,serif;box-shadow:0 0 42px rgba(200,169,110,.45)}
+.gVoiceOrb.active{animation:gVoicePulse 1.2s infinite ease-in-out}
+@keyframes gVoicePulse{0%,100%{transform:scale(1);box-shadow:0 0 32px rgba(200,169,110,.45)}50%{transform:scale(1.08);box-shadow:0 0 70px rgba(34,197,94,.55)}}
+.gVoiceStatus{background:#0f172a;border:1px solid #263753;border-radius:14px;padding:12px;color:#e5e7eb;line-height:1.4;font-size:13px}
+.gVoiceTranscript{width:100%;min-height:120px;background:#030712;color:#fff;border:1px solid #263753;border-radius:14px;padding:12px;font:800 13px ui-monospace,Consolas,monospace}
+.gVoiceActions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.gVoiceHint{color:#94a3b8;font-size:12px;line-height:1.45}
+@media(max-width:800px){.gVoicePanel{left:10px;right:10px;top:10px;width:auto}.gVoiceOrb{width:72px;height:72px;font-size:32px}.gVoiceActions{grid-template-columns:1fr}}

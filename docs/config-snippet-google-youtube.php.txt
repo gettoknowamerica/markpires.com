@@ -1,0 +1,44 @@
+// ==========================================================
+// GOLIATH OMNI VAULT — GOOGLE / YOUTUBE
+// Add this inside /public_html/lead-engine/config.php
+// Replace placeholders with your actual values.
+// ==========================================================
+
+if (!defined('GOOGLE_CLIENT_ID')) {
+  define('GOOGLE_CLIENT_ID', 'PASTE_GOOGLE_CLIENT_ID_HERE');
+}
+
+if (!defined('GOOGLE_CLIENT_SECRET')) {
+  define('GOOGLE_CLIENT_SECRET', 'PASTE_GOOGLE_CLIENT_SECRET_HERE');
+}
+
+if (!defined('GOOGLE_REDIRECT_URI')) {
+  define('GOOGLE_REDIRECT_URI', 'https://markpires.com/oauth/google/callback.php');
+}
+
+if (!defined('YOUTUBE_API_KEY')) {
+  define('YOUTUBE_API_KEY', 'PASTE_YOUTUBE_DATA_API_V3_KEY_HERE');
+}
+
+// Best option: paste actual channel IDs beginning with UC...
+// If you only have @handles, this v57.1 indexer can try to resolve them.
+if (!defined('YOUTUBE_CHANNEL_MARK_INSPIRES')) {
+  define('YOUTUBE_CHANNEL_MARK_INSPIRES', '@MarkInspiresTheWorld');
+}
+
+if (!defined('YOUTUBE_CHANNEL_DISCOVER_CT')) {
+  define('YOUTUBE_CHANNEL_DISCOVER_CT', '@DiscoverConnecticut');
+}
+
+if (!defined('GOOGLE_MAPS_API_KEY')) {
+  define('GOOGLE_MAPS_API_KEY', 'PASTE_GOOGLE_MAPS_API_KEY_HERE');
+}
+
+if (!defined('GOOGLE_PLACES_API_KEY')) {
+  define('GOOGLE_PLACES_API_KEY', 'PASTE_GOOGLE_PLACES_API_KEY_HERE');
+}
+
+// OAuth APIs usually use GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET rather than a simple API key.
+if (!defined('GOOGLE_BUSINESS_PROFILE_API_KEY')) {
+  define('GOOGLE_BUSINESS_PROFILE_API_KEY', 'PASTE_IF_YOU_HAVE_A_SEPARATE_BUSINESS_PROFILE_KEY_ELSE_LEAVE');
+}

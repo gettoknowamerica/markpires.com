@@ -1,0 +1,126 @@
+/* V46.5 Mission Control final visual override
+   Square TV rooms, no off-screen agents, hard-wired unique room art + unique agent colors. */
+body .grid.gMissionGrid{
+  grid-template-columns:minmax(900px,1fr) 235px!important;
+  gap:12px!important;
+  align-items:start!important;
+}
+body .gMissionGrid>.panel:first-child{min-width:0!important;overflow:visible!important}
+body .hq.gFourByFour{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:12px!important;
+  align-items:start!important;
+  width:100%!important;
+}
+body .agentTile{min-width:0!important;overflow:visible!important;position:relative!important;--agent:#31d38d;}
+body .agentTile[data-agent-tile="Scout"]{--agent:#31d38d;--shirt:#1f8cff;--skin:#d28a56;--hair:#3b2317}
+body .agentTile[data-agent-tile="Jessica"]{--agent:#f5c85d;--shirt:#f59e0b;--skin:#d38b5b;--hair:#26130c}
+body .agentTile[data-agent-tile="Scorsese"]{--agent:#b66cff;--shirt:#7c3aed;--skin:#c98b61;--hair:#111827}
+body .agentTile[data-agent-tile="Shakespeare"]{--agent:#66d9ff;--shirt:#0284c7;--skin:#d7a06d;--hair:#4b2e1e}
+body .agentTile[data-agent-tile="Einstein"]{--agent:#60a5fa;--shirt:#334155;--skin:#e5c29f;--hair:#f8fafc}
+body .agentTile[data-agent-tile="Rockefeller"]{--agent:#ff8b3d;--shirt:#991b1b;--skin:#c99062;--hair:#6b4a2f}
+body .agentTile[data-agent-tile="Prospector"]{--agent:#eab308;--shirt:#b45309;--skin:#d99b68;--hair:#4b2e1f}
+body .agentTile[data-agent-tile="Columbo"]{--agent:#d09b72;--shirt:#8b6f47;--skin:#c98b61;--hair:#3a2417}
+body .agentHeader{
+  margin:0 0 6px!important;
+  padding:7px 10px!important;
+  min-height:30px!important;
+  border-radius:14px!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;
+  font-size:13px!important;font-weight:900!important;letter-spacing:.02em!important;
+  color:var(--agent)!important;
+  background:linear-gradient(180deg,rgba(9,14,25,.88),rgba(4,8,16,.78))!important;
+  border:1px solid color-mix(in srgb,var(--agent) 46%,transparent)!important;
+  box-shadow:0 0 20px color-mix(in srgb,var(--agent) 18%,transparent),0 8px 22px rgba(0,0,0,.24)!important;
+}
+body .agentHeaderIcon{font-size:15px!important;filter:drop-shadow(0 0 8px var(--agent))!important}
+body .agentHeaderName{white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+/* Square room screens. Use cover to avoid black bars, but keep position high enough so original top-down art stays natural. */
+body .hq.gFourByFour .agentTile .room{
+  aspect-ratio:1/1!important;
+  min-height:0!important;height:auto!important;width:100%!important;max-width:none!important;
+  display:flex!important;flex-direction:column!important;justify-content:flex-end!important;
+  padding:10px!important;box-sizing:border-box!important;position:relative!important;overflow:hidden!important;
+  border-radius:22px!important;
+  background-size:cover!important;background-position:center 42%!important;background-repeat:no-repeat!important;
+  border:1px solid color-mix(in srgb,var(--agent) 36%,rgba(255,255,255,.12))!important;
+  outline:1px solid color-mix(in srgb,var(--agent) 22%,transparent)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),0 18px 30px rgba(0,0,0,.32),0 0 22px color-mix(in srgb,var(--agent) 10%,transparent)!important;
+}
+body .hq.gFourByFour .agentTile .room:before{
+  content:""!important;position:absolute!important;inset:0!important;z-index:0!important;pointer-events:none!important;
+  background:linear-gradient(180deg,rgba(3,5,12,.02) 0%,rgba(3,5,12,.05) 52%,rgba(3,5,12,.70) 100%)!important;
+}
+/* Hard-wire exact offices by data attribute. This avoids nth-child conflicts from older files. */
+body .hq.gFourByFour .room[data-dept="Scout"]{background-image:url('/dashboard/assets/rooms/scout-office.png?v=465')!important}
+body .hq.gFourByFour .room[data-dept="Jessica"]{background-image:url('/dashboard/assets/rooms/jessica-office.jpeg?v=465')!important}
+body .hq.gFourByFour .room[data-dept="Scorsese"]{background-image:url('/dashboard/assets/rooms/scorsese-studio.png?v=465')!important}
+body .hq.gFourByFour .room[data-dept="Shakespeare"]{background-image:url('/dashboard/assets/rooms/shakespeare-publishing.png?v=465')!important}
+body .hq.gFourByFour .room[data-dept="Einstein"]{background-image:url('/dashboard/assets/rooms/einstein-analytics.png?v=465')!important}
+body .hq.gFourByFour .room[data-dept="Rockefeller"]{background-image:url('/dashboard/assets/rooms/rockefeller-office.png?v=465')!important}
+body .hq.gFourByFour .room[data-dept="Prospector"]{background-image:url('/dashboard/assets/rooms/prospector-office.png?v=465')!important}
+body .hq.gFourByFour .room[data-dept="Columbo"]{background-image:url('/dashboard/assets/rooms/columbo-office.png?v=465')!important}
+body .hq.gFourByFour .room .metric{
+  position:absolute!important;top:10px!important;right:10px!important;z-index:6!important;
+  font-size:17px!important;line-height:1!important;padding:6px 8px!important;border-radius:999px!important;
+  background:rgba(0,0,0,.46)!important;border:1px solid color-mix(in srgb,var(--agent) 42%,rgba(255,255,255,.14))!important;color:#fff!important;
+  text-shadow:0 2px 8px #000!important;
+}
+body .agentWorkBubble{
+  position:absolute!important;left:9px!important;top:10px!important;z-index:6!important;
+  font-size:10px!important;font-weight:900!important;line-height:1!important;padding:5px 7px!important;border-radius:999px!important;
+  color:#fff!important;background:rgba(0,0,0,.46)!important;border:1px solid color-mix(in srgb,var(--agent) 42%,rgba(255,255,255,.16))!important;
+  backdrop-filter:blur(4px)!important;max-width:calc(100% - 70px)!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+}
+body .agentTile.is-working .agentWorkBubble{background:color-mix(in srgb,var(--agent) 24%,rgba(0,0,0,.45))!important;color:#fff!important;box-shadow:0 0 14px color-mix(in srgb,var(--agent) 35%,transparent)!important}
+body .hq.gFourByFour .room p{
+  position:relative!important;z-index:4!important;display:inline-block!important;margin:0!important;
+  font-size:11px!important;line-height:1.18!important;padding:6px 7px!important;border-radius:10px!important;
+  color:#fff!important;background:rgba(0,0,0,.34)!important;backdrop-filter:blur(4px)!important;text-shadow:0 2px 8px #000!important;
+}
+/* Final agent object. Higher specificity beats old .nth-child and old .aiHuman rules. */
+body .hq.gFourByFour .agentTile .room .worker.aiHuman{
+  position:absolute!important;left:50%!important;top:50%!important;right:auto!important;bottom:auto!important;
+  width:32px!important;height:45px!important;max-width:32px!important;max-height:45px!important;
+  background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;font-size:0!important;z-index:5!important;
+  color:var(--agent)!important;will-change:transform!important;transition:none!important;animation:none!important;filter:drop-shadow(0 3px 5px rgba(0,0,0,.45))!important;
+}
+body .hq.gFourByFour .agentTile .room .worker.aiHuman:before{
+  content:""!important;position:absolute!important;left:7px!important;top:0!important;width:18px!important;height:18px!important;border-radius:50%!important;
+  background:var(--skin)!important;box-shadow:0 2px 0 rgba(0,0,0,.35),0 -5px 0 -2px var(--hair),0 0 10px color-mix(in srgb,var(--agent) 25%,transparent)!important;
+}
+body .hq.gFourByFour .agentTile .room .worker.aiHuman:after{
+  content:""!important;position:absolute!important;left:4px!important;top:16px!important;width:24px!important;height:25px!important;border-radius:8px 8px 5px 5px!important;
+  background:var(--shirt)!important;box-shadow:inset 0 -8px 0 rgba(0,0,0,.18),0 5px 12px rgba(0,0,0,.35),0 0 10px color-mix(in srgb,var(--agent) 28%,transparent)!important;
+}
+body .hq.gFourByFour .agentTile .room .worker.aiHuman i,
+body .hq.gFourByFour .agentTile .room .worker.aiHuman b{
+  position:absolute!important;display:block!important;width:7px!important;height:18px!important;top:25px!important;background:#0f172a!important;border-radius:6px!important;z-index:-1!important;transform-origin:top center!important;
+}
+body .hq.gFourByFour .agentTile .room .worker.aiHuman i{left:8px!important}
+body .hq.gFourByFour .agentTile .room .worker.aiHuman b{right:8px!important}
+body .hq.gFourByFour .agentTile .room .worker.aiHuman i:before,
+body .hq.gFourByFour .agentTile .room .worker.aiHuman b:before{
+  content:""!important;position:absolute!important;width:6px!important;height:15px!important;top:-15px!important;background:var(--skin)!important;border-radius:6px!important;
+}
+body .hq.gFourByFour .agentTile .room .worker.aiHuman i:before{left:-8px!important}
+body .hq.gFourByFour .agentTile .room .worker.aiHuman b:before{right:-8px!important}
+body .hq.gFourByFour .agentTile .room .worker.aiHuman.walking i{animation:g465Legs .34s infinite alternate ease-in-out!important}
+body .hq.gFourByFour .agentTile .room .worker.aiHuman.walking b{animation:g465Legs .34s infinite alternate-reverse ease-in-out!important}
+body .hq.gFourByFour .agentTile .room .worker.aiHuman.working{filter:drop-shadow(0 0 13px var(--agent))!important}
+@keyframes g465Legs{from{transform:rotate(-16deg)}to{transform:rotate(16deg)}}
+/* Columbo fedora, hard forced */
+body .agentTile[data-agent-tile="Columbo"] .worker.aiHuman:before{box-shadow:0 2px 0 rgba(0,0,0,.35),0 0 10px rgba(255,255,255,.12)!important}
+body .agentTile[data-agent-tile="Columbo"] .worker.aiHuman .fedora,
+body .agentTile[data-agent-tile="Columbo"] .worker.aiHuman::selection{display:none!important}
+body .agentTile[data-agent-tile="Columbo"] .worker.aiHuman:after{background:var(--shirt)!important}
+body .agentTile[data-agent-tile="Columbo"] .worker.aiHuman i:after{
+  content:""!important;position:absolute!important;left:-5px!important;top:-32px!important;width:32px!important;height:8px!important;border-radius:50%!important;background:#2a1a12!important;z-index:9!important;box-shadow:8px -6px 0 -1px #3a2417!important;transform:rotate(-8deg)!important;
+}
+body .v45Station,body .v402Station{z-index:4!important;box-shadow:0 0 10px var(--agent)!important;background:var(--agent)!important;opacity:.78!important}
+body .missionSidePanel{width:235px!important;min-width:235px!important;max-width:235px!important;position:sticky!important;top:12px!important}
+body .miniFeed{max-height:410px!important;overflow:auto!important}
+@media(max-width:1480px){body .grid.gMissionGrid{grid-template-columns:1fr!important}body .missionSidePanel{width:auto!important;min-width:0!important;max-width:none!important;position:static!important}body .hq.gFourByFour{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+@media(max-width:980px){body .hq.gFourByFour{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:560px){body .hq.gFourByFour{grid-template-columns:1fr!important}body .agentHeader{font-size:14px!important}}

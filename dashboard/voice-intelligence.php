@@ -1,0 +1,31 @@
+<?php
+session_start();
+require_once __DIR__ . '/../lead-engine/config.php';
+if(empty($_SESSION['mp_dashboard_auth'])){header('Location:/dashboard/');exit;}
+function h($v){return htmlspecialchars((string)$v,ENT_QUOTES,'UTF-8');}
+function sb136d($m,$ep,$p=null){
+  $ch=curl_init(rtrim(SUPABASE_URL,'/').'/rest/v1/'.ltrim($ep,'/'));
+  curl_setopt_array($ch,[CURLOPT_RETURNTRANSFER=>true,CURLOPT_CUSTOMREQUEST=>$m,CURLOPT_HTTPHEADER=>['apikey: '.SUPABASE_SERVICE_ROLE_KEY,'Authorization: Bearer '.SUPABASE_SERVICE_ROLE_KEY,'Content-Type: application/json','Prefer: return=representation'],CURLOPT_TIMEOUT=>25]);
+  if($p!==null)curl_setopt($ch,CURLOPT_POSTFIELDS,json_encode($p));
+  $b=curl_exec($ch);curl_close($ch);$d=json_decode($b,true);return is_array($d)?$d:[];
+}
+$msg='';
+if($_SERVER['REQUEST_METHOD']==='POST'){
+  $id=$_POST['id']??''; $status=$_POST['status']??'';
+  if($id && in_array($status,['new','reviewed','callback_done','archived'],true)){
+    sb136d('PATCH','voice_intelligence_events?id=eq.'.rawurlencode($id),['status'=>$status,'updated_at'=>date('c')]);
+    $msg='Voice event updated.';
+  }
+}
+$rows=sb136d('GET','voice_intelligence_events?select=*&order=lead_score.desc,created_at.desc&limit=300');
+$briefs=sb136d('GET','voice_intelligence_briefings?select=*&order=created_at.desc&limit=5');
+$brief=$briefs[0]??[];
+$stats=['total'=>count($rows),'hot'=>0,'appt'=>0,'callback'=>0,'lead'=>0,'forwarded'=>0];
+foreach($rows as $r){ if(!empty($r['hot_lead']))$stats['hot']++; if(!empty($r['appointment_requested']))$stats['appt']++; if(!empty($r['callback_needed']))$stats['callback']++; if(!empty($r['lead_related']))$stats['lead']++; if(($r['call_type']??'')==='forwarded_call')$stats['forwarded']++; }
+$cronKey=defined('AFTER_HOURS_CRON_KEY')?AFTER_HOURS_CRON_KEY:'YOUR_KEY';
+?><!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>V13.6 Voice Intelligence</title><style>
+body{margin:0;background:#f5f3ef;color:#10101a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.header{background:linear-gradient(135deg,#10101a,#1a1a2e);color:#fff;padding:30px}.brand{font-family:Georgia,serif;color:#c8a96e;font-size:38px}.wrap{max-width:1700px;margin:auto;padding:26px}.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}.kpi,.panel{background:#fff;border-radius:16px;box-shadow:0 2px 12px #0001}.kpi{padding:18px}.n{font-size:28px;font-weight:900}.panel{margin-top:18px;overflow:hidden}.panel h2{font-family:Georgia,serif;margin:0;padding:18px;border-bottom:1px solid #eee}.btn{border:0;display:inline-block;background:#c8a96e;color:#111;text-decoration:none;padding:9px 11px;border-radius:9px;font-weight:900;font-size:12px;margin:2px;cursor:pointer}.light{background:#f2efe8;color:#111}.layout{display:grid;grid-template-columns:1fr .36fr;gap:18px}table{width:100%;border-collapse:collapse}td,th{text-align:left;padding:11px;border-bottom:1px solid #eee;font-size:14px;vertical-align:top}th{font-size:11px;text-transform:uppercase;color:#777;background:#faf9f6}.muted{color:#777;font-size:13px}pre{white-space:pre-wrap;background:#111;color:#fff;padding:16px;border-radius:12px}.hot{color:#b00020;font-weight:900}@media(max-width:1000px){.grid,.layout{grid-template-columns:1fr}.wrap{padding:14px}}</style></head><body><div class="header"><div class="brand">V13.6 Voice Intelligence Router</div><div>Forwarded calls, Retell transcripts, lead calls, callbacks, and appointments routed into Jessica’s pipeline</div></div><main class="wrap"><?php if($msg):?><div class="panel" style="padding:16px"><?=h($msg)?></div><?php endif;?>
+<p><a class="btn" target="_blank" href="/lead-engine/build-voice-intelligence.php?key=<?=h($cronKey)?>">Build Voice Routing</a><a class="btn light" target="_blank" href="/lead-engine/voice-intelligence-intake.php?key=<?=h($cronKey)?>&caller_name=Demo%20Caller&caller_phone=2035551212&summary=I%20want%20Mark%20to%20call%20me%20about%20selling%20my%20home&transcript=I%20need%20a%20home%20value%20and%20would%20like%20an%20appointment">Demo Call</a><a class="btn light" href="/dashboard/opportunity-pipeline.php">Pipeline</a><a class="btn light" href="/dashboard/executive-inbox.php">Executive Inbox</a></p>
+<section class="grid"><div class="kpi"><div class="n"><?=h($stats['total'])?></div>Total</div><div class="kpi"><div class="n"><?=h($stats['hot'])?></div>Hot</div><div class="kpi"><div class="n"><?=h($stats['appt'])?></div>Appts</div><div class="kpi"><div class="n"><?=h($stats['callback'])?></div>Callbacks</div><div class="kpi"><div class="n"><?=h($stats['lead'])?></div>Leads</div><div class="kpi"><div class="n"><?=h($stats['forwarded'])?></div>Forwarded</div></section>
+<div class="layout"><section class="panel"><h2>Voice Events</h2><table><tr><th>Score</th><th>Caller</th><th>Type</th><th>Summary</th><th>Action</th></tr><?php foreach($rows as $r):?><tr><td class="<?=!empty($r['hot_lead'])?'hot':''?>"><strong><?=h($r['lead_score'])?></strong><div class="muted"><?=h($r['urgency'])?></div></td><td><strong><?=h($r['caller_name']?:$r['caller_phone'])?></strong><div class="muted"><?=h($r['caller_phone'])?><br><?=h($r['caller_email'])?></div></td><td><?=h($r['call_type'])?><div class="muted">Appt: <?=h(!empty($r['appointment_requested'])?'yes':'no')?><br>Callback: <?=h(!empty($r['callback_needed'])?'yes':'no')?></div></td><td><?=h($r['summary'])?><div class="muted"><?=h(substr($r['transcript']??'',0,220))?></div><?php if(!empty($r['recording_url'])):?><a target="_blank" href="<?=h($r['recording_url'])?>">Recording</a><?php endif;?></td><td><?=h($r['recommended_action'])?><form method="post"><input type="hidden" name="id" value="<?=h($r['id'])?>"><button class="btn" name="status" value="reviewed">Reviewed</button><button class="btn light" name="status" value="callback_done">Callback Done</button><button class="btn light" name="status" value="archived">Archive</button></form></td></tr><?php endforeach;?></table></section><section class="panel"><h2>Voice Brief</h2><div style="padding:16px"><pre><?=h($brief['briefing_text']??'Build Voice Routing to create briefing.')?></pre></div><h2>Retell Webhook</h2><div style="padding:16px"><pre>https://markpires.com/lead-engine/voice-intelligence-intake.php?key=<?=h($cronKey)?></pre></div></section></div>
+</main></body></html>

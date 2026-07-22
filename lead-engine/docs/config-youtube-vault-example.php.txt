@@ -1,0 +1,17 @@
+Paste this in lead-engine/config.php and fill ONLY the values there.
+Do not paste keys into Columbo files.
+
+/*
+|--------------------------------------------------------------------------
+| YOUTUBE / COLUMBO VAULT
+|--------------------------------------------------------------------------
+*/
+
+define('YOUTUBE_API_KEY_MARK_INSPIRES', 'AIza...PASTE_MARK_INSPIRES_KEY_HERE');
+define('YOUTUBE_CHANNEL_MARK_INSPIRES', 'UCu3f0qHwbQiNXCX5mjIKL9Q');
+
+define('YOUTUBE_API_KEY_DISCOVER_CT', 'AIza...PASTE_DISCOVER_CT_KEY_HERE');
+define('YOUTUBE_CHANNEL_DISCOVER_CT', 'UCyMNm7MbIR4H4LMZRgnKSPw');
+
+// Optional: if you want one shared key later, you can also define this:
+// define('YOUTUBE_API_KEY', 'AIza...PASTE_SHARED_KEY_HERE');

@@ -1,0 +1,1 @@
+window.showCommand=function(c){let v=document.getElementById('viewer'); if(v)v.innerHTML='<h3 style="color:#c8a96e">'+(c.title||'Creation')+'</h3><p>No raw JSON. Media URL must come from studio-media-ingest/media_projects source_url.</p>';};

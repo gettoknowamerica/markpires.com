@@ -1,0 +1,8 @@
+/* V46.6 Ask Goliath Free Conversation */
+.gAskPanel.gAskConversation{width:700px;height:820px}
+.gAskPanel.gAskConversation .gAskInput{min-height:64px}
+.gTrace{margin-top:10px;border-top:1px solid #c8a96e33;padding-top:8px;color:#9ca3af;font-size:12px}
+.gTrace summary{cursor:pointer;color:#c8a96e;font-weight:900;margin-bottom:6px}
+.gTrace div{padding:4px 0;border-bottom:1px solid #ffffff0a}
+.gAskConversation .gMsg{font-size:14px}
+@media(max-width:800px){.gAskPanel.gAskConversation{left:10px;right:10px;top:10px;width:auto;height:calc(100vh - 20px)}}

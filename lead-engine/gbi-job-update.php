@@ -1,0 +1,23 @@
+<?php
+ini_set('display_errors',0); header('Content-Type: application/json; charset=utf-8');
+try{ require_once __DIR__.'/config.php'; require_once __DIR__.'/goliath-db.php'; require_once __DIR__.'/gbi-helpers.php';
+$data=json_decode(file_get_contents('php://input'),true); if(!$data)$data=$_POST;
+$key=$data['key']??($_GET['key']??''); $expected=defined('AFTER_HOURS_CRON_KEY')?AFTER_HOURS_CRON_KEY:(defined('RETELL_WEBHOOK_KEY')?RETELL_WEBHOOK_KEY:'timetomakethedonuts');
+if(!hash_equals((string)$expected,(string)$key)){http_response_code(403);echo json_encode(['ok'=>false,'error'=>'bad_key']);exit;}
+$id=(int)($data['id']??0); if(!$id){echo json_encode(['ok'=>false,'error'=>'missing_id']);exit;}
+$result=$data['result']??[]; if(is_string($result)){ $tmp=json_decode($result,true); if(is_array($tmp))$result=$tmp; }
+$job=gdb_one("SELECT * FROM goliath_browser_jobs WHERE id=?",[$id]); if(!$job){echo json_encode(['ok'=>false,'error'=>'job_not_found']);exit;}
+$status=$data['status']??'complete'; $evidence=$data['evidence']??($result['source_evidence']??'');
+gbi_update('goliath_browser_jobs',$id,['status'=>$status,'progress'=>(int)($data['progress']??100),'current_step'=>$data['current_step']??'Browser intelligence complete','result_json'=>gbi_json($result),'evidence'=>$evidence,'error_message'=>$data['error_message']??'','completed_at'=>$status==='complete'?gdb_now():null,'updated_at'=>gdb_now()]);
+$phone1=trim((string)($result['phone_1']??'')); $phone2=trim((string)($result['phone_2']??'')); $email1=strtolower(trim((string)($result['email_1']??''))); $email2=strtolower(trim((string)($result['email_2']??'')));
+$phones=array_filter([$phone1,$phone2]); $emails=array_filter([$email1,$email2]);
+gbi_heartbeat($job['executive_key']?:'browser',['status'=>$status==='complete'?'idle':'working','current_job_id'=>$id,'current_step'=>$status==='complete'?'Browser job complete':($data['current_step']??'Working'),'progress'=>(int)($data['progress']??100),'browser_status'=>$status,'pages_read'=>(int)($result['pages_read']??0),'evidence_count'=>(int)($result['evidence_count']??0),'phones_found'=>count($phones),'emails_found'=>count($emails),'confidence_score'=>(int)($result['confidence_score']??0),'message'=>$evidence,'metadata'=>gbi_json($result)]);
+if(($job['executive_key']??'')==='scout' && ($job['job_type']??'')==='contact_enrichment'){
+ $dossierId=(int)($result['dossier_id']??0); $contactId=(int)($result['contact_id']??0); $ready=($phone1||$phone2||$email1||$email2);
+ $phoneConf=(int)($result['phone_confidence']??($ready?75:0)); $emailConf=(int)($result['email_confidence']??($ready?75:0)); $source=$result['source_url']??'openclaw_browser'; $note=$result['research_notes']??'Browser intelligence completed.';
+ if($contactId) gbi_update('internal_crm_contacts',$contactId,['phone_1'=>$phone1,'phone_2'=>$phone2,'best_phone'=>($phone1?:$phone2),'email_1'=>$email1,'email_2'=>$email2,'best_email'=>($email1?:$email2),'phone_confidence'=>$phoneConf,'email_confidence'=>$emailConf,'contact_source'=>'openclaw_browser','contact_source_url'=>$source,'contact_verified_at'=>$ready?gdb_now():null,'contact_enrichment_status'=>$ready?'candidate_found':'needs_external_search','contact_enrichment_notes'=>$note,'research_status'=>$ready?'ready_for_mark':'needs_external_search','evidence'=>$evidence,'notes'=>$note,'last_researched_at'=>gdb_now(),'updated_at'=>gdb_now()]);
+ if($dossierId) gbi_update('scout_intel_dossiers',$dossierId,['phone_1'=>$phone1,'phone_2'=>$phone2,'best_phone'=>($phone1?:$phone2),'phone'=>trim(implode(' | ',$phones)),'email_1'=>$email1,'email_2'=>$email2,'best_email'=>($email1?:$email2),'email'=>trim(implode(' | ',$emails)),'contact_source'=>'openclaw_browser','contact_source_url'=>$source,'contact_verified_at'=>$ready?gdb_now():null,'contact_confidence'=>max($phoneConf,$emailConf),'confidence_score'=>$ready?90:65,'research_status'=>$ready?'ready_for_mark':'needs_external_search','handoff_status'=>$ready?'ready_for_mark':'not_ready','next_action'=>$ready?'Ready for Mark: browser intelligence found candidate contact. Verify before outreach.':'Needs manual/API search; browser found no contact.','evidence_log'=>$evidence,'public_notes'=>$note,'completed_at'=>$ready?gdb_now():null,'updated_at'=>gdb_now()]);
+}
+echo json_encode(['ok'=>true,'success'=>true,'version'=>'V94 Browser Job Update','job_id'=>$id,'phones_found'=>count($phones),'emails_found'=>count($emails),'time'=>date('c')],JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
+}catch(Throwable $e){echo json_encode(['ok'=>false,'error'=>$e->getMessage(),'file'=>$e->getFile(),'line'=>$e->getLine()],JSON_PRETTY_PRINT);}
+?>

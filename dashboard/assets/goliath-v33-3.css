@@ -1,0 +1,46 @@
+
+.gAskPanel{height:auto!important;min-height:0!important}
+.gAskBody{height:auto!important;max-height:42vh!important;overflow:auto!important}
+.gAskInput{min-height:74px!important;max-height:150px!important}
+@media(max-width:800px){
+.gAskPanel{left:10px!important;right:10px!important;top:10px!important;width:auto!important;height:auto!important;max-height:calc(100vh - 24px)!important;transform:none!important}
+.gAskHead{padding:10px 12px!important}.gAskHead h2{font-size:24px!important}.gAskHead small{font-size:11px!important}
+.gAskBody{padding:10px!important;max-height:30vh!important}.gMsg{font-size:12px!important;line-height:1.35!important;padding:10px!important}
+.gAskFoot{padding:10px!important}.gAskInput{min-height:70px!important;font-size:12px!important}
+.gAskActions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:7px!important}.gAskActions button{padding:9px 8px!important;font-size:11px!important}.gAskMemory{grid-column:1/-1}
+}
+.room .worker{left:22px!important;bottom:26px!important;will-change:transform}
+.room.scoutRoom .worker{animation:scoutSearch 6.2s infinite ease-in-out!important}
+.room.jessicaRoom .worker{animation:jessicaOutreach 5.6s infinite ease-in-out!important}
+.room.directorRoom .worker{animation:directorStudio 7.1s infinite ease-in-out!important}
+.room.publisherRoom .worker{animation:publisherDelivery 6.4s infinite ease-in-out!important}
+.room.analystRoom .worker{animation:analystScan 5.8s infinite ease-in-out!important}
+.room.executiveRoom .worker{animation:executivePace 6.8s infinite ease-in-out!important}
+.room.active .worker{filter:drop-shadow(0 0 12px #f8d784)!important}.room.idle .worker{opacity:.72!important}
+@keyframes scoutSearch{0%{transform:translate(0,0)}15%{transform:translate(35px,-26px)}32%{transform:translate(158px,-10px)}52%{transform:translate(126px,88px)}74%{transform:translate(36px,70px)}100%{transform:translate(0,0)}}
+@keyframes jessicaOutreach{0%{transform:translate(0,0)}22%{transform:translate(88px,-22px)}44%{transform:translate(170px,58px)}58%{transform:translate(170px,58px) scale(1.15)}78%{transform:translate(42px,82px)}100%{transform:translate(0,0)}}
+@keyframes directorStudio{0%{transform:translate(0,0)}18%{transform:translate(142px,-26px)}35%{transform:translate(175px,24px)}55%{transform:translate(82px,96px)}72%{transform:translate(18px,74px)}100%{transform:translate(0,0)}}
+@keyframes publisherDelivery{0%{transform:translate(0,0)}25%{transform:translate(160px,-18px)}42%{transform:translate(176px,74px)}70%{transform:translate(52px,90px)}100%{transform:translate(0,0)}}
+@keyframes analystScan{0%{transform:translate(0,0) scale(1)}20%{transform:translate(92px,-32px) scale(1.04)}46%{transform:translate(176px,10px) scale(.98)}68%{transform:translate(102px,92px) scale(1.04)}84%{transform:translate(24px,46px) scale(.98)}100%{transform:translate(0,0) scale(1)}}
+@keyframes executivePace{0%{transform:translate(0,0)}20%{transform:translate(62px,-16px)}40%{transform:translate(166px,-2px)}60%{transform:translate(132px,76px)}80%{transform:translate(34px,88px)}100%{transform:translate(0,0)}}
+@media(max-width:700px){.overlay{display:none!important}.room{min-height:172px!important}.worker{font-size:24px!important}}
+
+
+/* ==========================================================
+   HARD FALLBACK: animate workers by room position
+   (used if JS room class injection fails)
+   ========================================================== */
+.hq .room:nth-child(1) .worker{animation:scoutSearch 6.2s infinite ease-in-out!important}
+.hq .room:nth-child(2) .worker{animation:jessicaOutreach 5.6s infinite ease-in-out!important}
+.hq .room:nth-child(3) .worker{animation:directorStudio 7.1s infinite ease-in-out!important}
+.hq .room:nth-child(4) .worker{animation:publisherDelivery 6.4s infinite ease-in-out!important}
+.hq .room:nth-child(5) .worker{animation:analystScan 5.8s infinite ease-in-out!important}
+.hq .room:nth-child(6) .worker{animation:executivePace 6.8s infinite ease-in-out!important}
+
+.hq .room .worker{
+  position:absolute!important;
+  left:22px!important;
+  bottom:26px!important;
+  display:block!important;
+  will-change:transform!important;
+}

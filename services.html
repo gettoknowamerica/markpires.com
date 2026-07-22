@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real Estate Services — Mark Pires | Fairfield County CT</title>
+<meta name="description" content="Full-service Fairfield County real estate from Connecticut's House Detective. Drone video tours, white glove service, negotiation specialist, renovation advisor, town guides & more.">
+<link rel="canonical" href="https://markpires.com/services.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600;0,700;1,300;1,400&family=Bebas+Neue&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0B1C36;--navy2:#152035;--gold:#D4AF37;--void:#080c14;--cream:#F0EBE1;--elec:#3B82F6;--serif:'Cormorant','Georgia',serif;--disp:'Bebas Neue','Impact',sans-serif;--mono:'DM Mono',monospace;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--serif);background:var(--void);color:var(--cream);overflow-x:hidden}
+.snav{background:rgba(8,12,20,.97);padding:.85rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(212,175,55,.12)}
+.snav-home{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-decoration:none;display:flex;align-items:center;gap:.5rem}.snav-home:hover{opacity:.7}.snav-home::before{content:'←'}
+.snav-brand{font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.snav-cta{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;padding:.5rem 1.1rem;border:1px solid var(--gold);color:var(--gold);cursor:pointer;background:none;transition:all .25s}.snav-cta:hover{background:var(--gold);color:var(--navy)}
+@media(max-width:600px){.snav-brand{display:none}}
+/* HERO */
+.hub-hero{background:radial-gradient(ellipse at 30% 50%,rgba(30,58,95,.4) 0%,transparent 60%),linear-gradient(160deg,#06101f,#0c1a2e,#050a12);padding:5rem 2rem 4rem;text-align:center;position:relative;overflow:hidden}
+.hub-hero::before{content:'MARK PIRES';position:absolute;left:50%;bottom:-2rem;transform:translateX(-50%);font-family:var(--disp);font-size:18rem;color:rgba(212,175,55,.015);line-height:1;pointer-events:none;white-space:nowrap}
+.hub-eye{font-family:var(--mono);font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+.hub-hero h1{font-family:var(--disp);font-size:clamp(2.8rem,6vw,5.5rem);color:var(--cream);line-height:.95;letter-spacing:.04em;margin-bottom:1rem}
+.hub-hero h1 em{color:var(--gold);font-style:normal}
+.hub-sub{font-family:var(--serif);font-size:1.1rem;font-style:italic;color:rgba(240,235,225,.45);max-width:560px;margin:0 auto 2.5rem}
+.hub-cta{display:inline-flex;align-items:center;padding:.9rem 2.2rem;background:var(--gold);color:var(--void);font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;border:none;cursor:pointer;transition:all .3s}.hub-cta:hover{background:#e8c840;transform:translateY(-2px)}
+/* STATS BAR */
+.stats-bar{background:rgba(255,255,255,.03);border-top:1px solid rgba(212,175,55,.1);border-bottom:1px solid rgba(212,175,55,.1);display:flex;justify-content:center;gap:0}
+.stat-item{padding:1.4rem 3rem;text-align:center;border-right:1px solid rgba(212,175,55,.08)}
+.stat-item:last-child{border-right:none}
+.stat-n{font-family:var(--disp);font-size:2rem;color:var(--gold);letter-spacing:.04em;line-height:1}
+.stat-l{font-family:var(--mono);font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,235,225,.3);margin-top:3px}
+@media(max-width:600px){.stats-bar{flex-wrap:wrap}.stat-item{flex:1 0 50%;border-bottom:1px solid rgba(212,175,55,.08)}}
+/* SERVICES GRID */
+.services-section{max-width:1200px;margin:0 auto;padding:5rem 2rem}
+.section-eye{font-family:var(--mono);font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;display:flex;align-items:center;gap:.7rem}.section-eye::before{content:'';width:28px;height:1px;background:var(--gold)}
+.section-h{font-family:var(--disp);font-size:clamp(2.2rem,4vw,3.8rem);color:var(--cream);line-height:.95;margin-bottom:3rem;letter-spacing:.03em}.section-h em{color:var(--gold);font-style:normal}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.svc-card{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);padding:2rem;position:relative;overflow:hidden;text-decoration:none;display:block;transition:all .3s;cursor:pointer}
+.svc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--gold),var(--elec));transform:scaleX(0);transition:transform .35s}
+.svc-card:hover{background:rgba(212,175,55,.05);border-color:rgba(212,175,55,.2)}.svc-card:hover::before{transform:scaleX(1)}
+.svc-icon{font-size:1.8rem;margin-bottom:1rem;display:block}
+.svc-priority{font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(212,175,55,.5);margin-bottom:.4rem}
+.svc-title{font-family:var(--serif);font-size:1.25rem;font-weight:600;color:var(--cream);margin-bottom:.6rem}
+.svc-desc{font-family:var(--mono);font-size:.7rem;line-height:1.75;color:rgba(240,235,225,.5);margin-bottom:1.2rem}
+.svc-link{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}.svc-link::after{content:' →'}
+@media(max-width:900px){.svc-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.svc-grid{grid-template-columns:1fr}}
+/* ADVANTAGE TEASER */
+.adv-teaser{background:linear-gradient(135deg,#06101f,#0c1a2e);border-top:1px solid rgba(212,175,55,.1);border-bottom:1px solid rgba(212,175,55,.1);padding:4rem 2rem;text-align:center}
+.adv-inner{max-width:700px;margin:0 auto}
+.adv-title{font-family:var(--disp);font-size:clamp(2rem,4vw,3rem);color:var(--cream);margin-bottom:.8rem;letter-spacing:.04em}.adv-title em{color:var(--gold);font-style:normal}
+.adv-sub{font-family:var(--serif);font-size:1rem;font-style:italic;color:rgba(240,235,225,.4);margin-bottom:1.8rem}
+.adv-btn{display:inline-flex;align-items:center;padding:.85rem 2rem;border:1px solid var(--gold);color:var(--gold);font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:all .3s;background:none;cursor:pointer}.adv-btn:hover{background:var(--gold);color:var(--navy)}
+/* CTA */
+.hub-cta-sec{padding:5rem 2rem;text-align:center}
+.hub-cta-big{font-family:var(--disp);font-size:clamp(2.5rem,5vw,4.5rem);color:var(--cream);line-height:.95;margin-bottom:1rem;letter-spacing:.04em}.hub-cta-big em{color:var(--gold);font-style:normal}
+.hub-cta-sub{font-family:var(--serif);font-size:1.05rem;font-style:italic;color:rgba(240,235,225,.4);margin-bottom:2.5rem}
+.hub-btns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+.btn-gold-lg{display:inline-flex;align-items:center;padding:1rem 2.4rem;background:var(--gold);color:var(--void);font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;border:none;cursor:pointer;transition:all .3s}.btn-gold-lg:hover{background:#e8c840;transform:translateY(-2px)}
+.btn-ghost-lg{display:inline-flex;align-items:center;padding:1rem 2.4rem;background:transparent;color:var(--cream);font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;border:1px solid rgba(240,235,225,.2);text-decoration:none;transition:all .3s}.btn-ghost-lg:hover{border-color:rgba(240,235,225,.5);transform:translateY(-2px)}
+.cta-detail{font-family:var(--mono);font-size:.62rem;color:rgba(240,235,225,.2);letter-spacing:.08em;margin-top:1.8rem}.cta-detail a{color:rgba(212,175,55,.5);text-decoration:none}
+.sfoot{background:#040608;border-top:1px solid rgba(212,175,55,.06);padding:2rem;text-align:center}
+.sfoot-links{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-bottom:.8rem}
+.sfoot-links a{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25);text-decoration:none;transition:color .2s}.sfoot-links a:hover{color:var(--gold)}
+.sfoot-legal{font-family:var(--mono);font-size:.55rem;color:rgba(255,255,255,.15)}
+</style><script src="/lead-engine/conversion-tracker.js" defer></script>
+</head>
+<body>
+
+<nav class="snav">
+  <a class="snav-home" href="https://markpires.com">Home</a>
+  <span class="snav-brand">Mark Pires · Coldwell Banker Realty</span>
+  <button class="snav-cta" onclick="openModal('consultation')">Free Consultation</button>
+</nav>
+
+<div class="hub-hero">
+  <div class="hub-eye">Services · Fairfield County, CT</div>
+  <h1>Connecticut's Most <em>Innovative</em><br>Real Estate Experience</h1>
+  <p class="hub-sub">Drone pioneer. House Detective. Discover CT host. 400+ deals. Every service delivered personally by Mark.</p>
+  <button class="hub-cta" onclick="openModal('consultation')">Schedule a Free Consultation</button>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-n">400+</div><div class="stat-l">Closed Deals</div></div>
+  <div class="stat-item"><div class="stat-n">18+</div><div class="stat-l">Years Local</div></div>
+  <div class="stat-item"><div class="stat-n">13+</div><div class="stat-l">Yrs Construction</div></div>
+  <div class="stat-item"><div class="stat-n">100K+</div><div class="stat-l">Discover CT Reach</div></div>
+</div>
+
+<div class="services-section">
+  <div class="section-eye">What Mark Brings to Every Deal</div>
+  <h2 class="section-h">Every Service.<br><em>Personally Delivered.</em></h2>
+
+  <div class="svc-grid">
+    <a class="svc-card" href="/drone-video-tours-fairfield-county-ct-realtor.html">
+      <span class="svc-icon">🚁</span>
+      <div class="svc-priority">Highest Priority · Most Unique in CT</div>
+      <div class="svc-title">Drone &amp; Video Tours</div>
+      <div class="svc-desc">Connecticut's first licensed drone realtor since 2013. Cinema-quality aerial and walkthrough video on every listing — no extra charge. Buyers preview, fall in love, and arrive ready to buy.</div>
+      <span class="svc-link">Learn more</span>
+    </a>
+
+    <a class="svc-card" href="/fairfield-county-town-tours-neighborhood-guide.html">
+      <span class="svc-icon">📍</span>
+      <div class="svc-priority">Essential for Relocating Buyers</div>
+      <div class="svc-title">Town Tours &amp; Neighborhood Guides</div>
+      <div class="svc-desc">18 years selling in every Fairfield County town. Honest breakdowns of schools, commutes, prices, and lifestyle — not a marketing brochure. Host of Discover CT with 100+ filmed community episodes.</div>
+      <span class="svc-link">Explore all towns</span>
+    </a>
+
+    <a class="svc-card" href="/white-glove-realtor-fairfield-county-ct.html">
+      <span class="svc-icon">🤝</span>
+      <div class="svc-priority">The Core Promise</div>
+      <div class="svc-title">White Glove Service</div>
+      <div class="svc-desc">You get Mark personally — every showing, negotiation, call, and closing. No assistants. No team handoffs. 7-day availability because real estate doesn't follow business hours.</div>
+      <span class="svc-link">See what that looks like</span>
+    </a>
+
+    <a class="svc-card" href="/negotiation-specialist-realtor-fairfield-county.html">
+      <span class="svc-icon">⚖️</span>
+      <div class="svc-priority">Buyers Save · Sellers Win</div>
+      <div class="svc-title">Negotiation Specialist</div>
+      <div class="svc-desc">400+ deals of firsthand experience. Construction expertise reveals what a property is actually worth. House Detective research uncovers leverage before you write a number down. Preparation wins negotiations.</div>
+      <span class="svc-link">Learn the strategy</span>
+    </a>
+
+    <a class="svc-card" href="/renovation-advisor-realtor-fairfield-county-ct.html">
+      <span class="svc-icon">🔨</span>
+      <div class="svc-priority">Seller's Secret Weapon</div>
+      <div class="svc-title">Renovation &amp; Design Advisor</div>
+      <div class="svc-desc">13+ years of construction experience means honest advice on what to fix, what to skip, and what inspectors will flag before you list. Saves sellers from over-improving and buyers from under-estimating.</div>
+      <span class="svc-link">What's worth fixing?</span>
+    </a>
+
+    <a class="svc-card" href="/buyer-seller-advice-fairfield-county-ct-real-estate.html">
+      <span class="svc-icon">📊</span>
+      <div class="svc-priority">Weekly Intelligence · Free</div>
+      <div class="svc-title">Buyer &amp; Seller Advice</div>
+      <div class="svc-desc">Monthly market reports. Weekly social media video updates. The 2026 Buyer's Guide. Real data on what's happening in Fairfield County — no spin, no hype. First-time buyer and NYC relocation expertise.</div>
+      <span class="svc-link">Get the 2026 guide</span>
+    </a>
+  </div>
+</div>
+
+<div class="adv-teaser">
+  <div class="adv-inner">
+    <h2 class="adv-title">The <em>Mark Pires Advantage</em> —<br>Buyers vs. Sellers</h2>
+    <p class="adv-sub">See exactly how construction expertise, drone marketing, House Detective research, and Discover CT storytelling serve both sides of the transaction.</p>
+    <a class="adv-btn" href="/mark-pires-advantage.html">See the Full Breakdown →</a>
+  </div>
+</div>
+
+<div class="hub-cta-sec">
+  <div class="hub-cta-big">Ready to Work With<br>Fairfield County's<br><em>House Detective?</em></div>
+  <p class="hub-cta-sub">Free consultation. Straight answers. No obligation.</p>
+  <div class="hub-btns">
+    <button class="btn-gold-lg" onclick="openModal('consultation')">Schedule a Consultation</button>
+    <button class="btn-gold-lg" onclick="openModal('home-value')">What's My Home Worth?</button>
+    <a class="btn-ghost-lg" href="tel:2032472655">Call 203-247-2655</a>
+  </div>
+  <div class="cta-detail"><a href="mailto:mark@markpires.com">mark@markpires.com</a> &nbsp;·&nbsp; <a href="https://discoverct.net" target="_blank">DiscoverCT.net</a></div>
+</div>
+
+<footer class="sfoot">
+  <div class="sfoot-links">
+    <a href="https://markpires.com">Home</a>
+    <a href="/mark-pires-advantage.html">The Advantage</a>
+    <a href="/blog/how-long-to-sell-house-fairfield-county-ct.html">Blog</a>
+    <a href="https://discoverct.net" target="_blank">Discover CT</a>
+    <a href="https://markpires.com/privacy">Privacy</a>
+  </div>
+  <div class="sfoot-legal">© 2026 Mark Pires · Coldwell Banker Realty · CT License · Equal Housing Opportunity ⊕</div>
+</footer>
+
+<script src="/js/lead-engine.js" defer></script>
+</body>
+</html>

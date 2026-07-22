@@ -1,0 +1,9 @@
+<?php
+$base=__DIR__.'/../goliath-core/constitution';
+$execBase=__DIR__.'/../goliath-core/executives';
+$files=glob($base.'/*.md') ?: [];
+$doctrine=glob($base.'/doctrine/*.md') ?: [];
+$execs=glob($execBase.'/*.md') ?: [];
+function md_title($f){$txt=file_get_contents($f); if(preg_match('/^#\s+(.+)$/m',$txt,$m))return $m[1]; return basename($f);}
+?>
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Goliath Constitution</title><link rel="stylesheet" href="/dashboard/assets/goliath-offices-v72.css?v=721"></head><body class="gox-body constitution-page"><aside class="gox-side"><div class="brand logoBrand"><a href="/dashboard/goliath-mission-control.php"><img src="/dashboard/assets/goliath-ai-full-logo.png?v=33" alt="Goliath Omni"></a></div><a href="/dashboard/goliath-mission-control.php">Mission Control</a><a href="/dashboard/goliath-executive-offices.php">Executive Offices</a><a class="active" href="/dashboard/goliath-constitution.php">Constitution</a></aside><main class="constitution-book"><h1>The Goliath Constitution</h1><p>Founder's Edition v1.0 — the governing framework of the Executive Operating System.</p><section><h2>Core Constitution</h2><?php foreach($files as $f): ?><a class="doc-link" href="/goliath-core/constitution/<?=basename($f)?>"><?=htmlspecialchars(md_title($f))?></a><?php endforeach; ?></section><section><h2>Doctrine</h2><?php foreach($doctrine as $f): ?><a class="doc-link" href="/goliath-core/constitution/doctrine/<?=basename($f)?>"><?=htmlspecialchars(md_title($f))?></a><?php endforeach; ?></section><section><h2>Executive Charters</h2><?php foreach($execs as $f): ?><a class="doc-link" href="/goliath-core/executives/<?=basename($f)?>"><?=htmlspecialchars(md_title($f))?></a><?php endforeach; ?></section></main></body></html>

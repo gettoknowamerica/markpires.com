@@ -1,0 +1,148 @@
+
+/* V35.3 Mission Control Room Backgrounds + Centered Agents */
+
+.hq .room{
+  min-height:235px!important;
+  background-size:cover!important;
+  background-position:center center!important;
+  background-repeat:no-repeat!important;
+  overflow:hidden!important;
+  position:relative!important;
+  border-color:#34415f!important;
+}
+.hq .room:before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  background:
+    radial-gradient(circle at 50% 50%,rgba(0,0,0,.08),rgba(0,0,0,.55)),
+    linear-gradient(180deg,rgba(7,16,30,.15),rgba(7,16,30,.62))!important;
+  z-index:0!important;
+}
+.hq .room h3,.hq .room p,.hq .room .metric,.hq .room .roomStatus{
+  position:relative!important;
+  z-index:3!important;
+  text-shadow:0 2px 9px #000!important;
+}
+.hq .room h3{
+  background:rgba(2,6,23,.56);
+  display:inline-flex;
+  padding:5px 8px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  backdrop-filter:blur(4px);
+}
+.hq .room p{
+  background:rgba(2,6,23,.46);
+  display:inline-block;
+  padding:4px 7px;
+  border-radius:8px;
+}
+.hq .room .metric{
+  background:rgba(2,6,23,.72);
+  padding:4px 8px;
+  border-radius:999px;
+}
+
+/* Assign the six uploaded office/floorplan images */
+.hq .room:nth-child(1){background-image:url('/dashboard/assets/rooms/scout-office.png')!important}
+.hq .room:nth-child(2){background-image:url('/dashboard/assets/rooms/jessica-office.jpeg')!important}
+.hq .room:nth-child(3){background-image:url('/dashboard/assets/rooms/scorsese-studio.png')!important}
+.hq .room:nth-child(4){background-image:url('/dashboard/assets/rooms/shakespeare-publishing.png')!important}
+.hq .room:nth-child(5){background-image:url('/dashboard/assets/rooms/einstein-analytics.png')!important}
+.hq .room:nth-child(6){background-image:url('/dashboard/assets/rooms/rockefeller-office.png')!important}
+
+/* Remove old prop clutter. The room image is now the office. */
+.hq .room .pixelDesk,
+.hq .room .pixelCabinet,
+.hq .room .pixelScreen,
+.hq .room .pixelDoor,
+.hq .room .pixelConsole,
+.hq .room .pixelLamp,
+.hq .room .pixelInjected{display:none!important}
+
+/* Center the agent so it no longer disappears low/outside the room */
+.hq .room .worker{
+  position:absolute!important;
+  left:50%!important;
+  top:55%!important;
+  bottom:auto!important;
+  z-index:5!important;
+  display:grid!important;
+  place-items:center!important;
+  width:40px!important;
+  height:40px!important;
+  border-radius:999px!important;
+  background:rgba(2,6,23,.72)!important;
+  border:1px solid rgba(200,169,110,.75)!important;
+  box-shadow:0 0 22px rgba(200,169,110,.45), 0 12px 32px rgba(0,0,0,.6)!important;
+  font-size:24px!important;
+  transform:translate(-50%,-50%)!important;
+  will-change:transform!important;
+}
+
+/* True centered patrol routes. Every route stays inside the room. */
+.hq .room:nth-child(1) .worker{animation:gScoutPatrol 7.2s infinite ease-in-out!important}
+.hq .room:nth-child(2) .worker{animation:gJessicaPatrol 6.2s infinite ease-in-out!important}
+.hq .room:nth-child(3) .worker{animation:gScorsesePatrol 7.8s infinite ease-in-out!important}
+.hq .room:nth-child(4) .worker{animation:gShakespearePatrol 6.8s infinite ease-in-out!important}
+.hq .room:nth-child(5) .worker{animation:gEinsteinPatrol 6.5s infinite ease-in-out!important}
+.hq .room:nth-child(6) .worker{animation:gRockefellerPatrol 7.4s infinite ease-in-out!important}
+
+@keyframes gScoutPatrol{
+  0%{transform:translate(-50%,-50%) translate(0,0)}
+  20%{transform:translate(-50%,-50%) translate(-72px,-42px)}
+  42%{transform:translate(-50%,-50%) translate(72px,-35px)}
+  66%{transform:translate(-50%,-50%) translate(58px,42px)}
+  84%{transform:translate(-50%,-50%) translate(-58px,38px)}
+  100%{transform:translate(-50%,-50%) translate(0,0)}
+}
+@keyframes gJessicaPatrol{
+  0%{transform:translate(-50%,-50%) translate(0,0)}
+  24%{transform:translate(-50%,-50%) translate(84px,-16px)}
+  48%{transform:translate(-50%,-50%) translate(92px,54px) scale(1.08)}
+  72%{transform:translate(-50%,-50%) translate(-58px,48px)}
+  100%{transform:translate(-50%,-50%) translate(0,0)}
+}
+@keyframes gScorsesePatrol{
+  0%{transform:translate(-50%,-50%) translate(0,0)}
+  18%{transform:translate(-50%,-50%) translate(-82px,-34px)}
+  38%{transform:translate(-50%,-50%) translate(84px,-44px)}
+  61%{transform:translate(-50%,-50%) translate(80px,44px)}
+  82%{transform:translate(-50%,-50%) translate(-74px,46px)}
+  100%{transform:translate(-50%,-50%) translate(0,0)}
+}
+@keyframes gShakespearePatrol{
+  0%{transform:translate(-50%,-50%) translate(0,0)}
+  25%{transform:translate(-50%,-50%) translate(-92px,0)}
+  50%{transform:translate(-50%,-50%) translate(0,-54px)}
+  75%{transform:translate(-50%,-50%) translate(92px,30px)}
+  100%{transform:translate(-50%,-50%) translate(0,0)}
+}
+@keyframes gEinsteinPatrol{
+  0%{transform:translate(-50%,-50%) translate(0,0)}
+  22%{transform:translate(-50%,-50%) translate(78px,-46px)}
+  44%{transform:translate(-50%,-50%) translate(-80px,-34px)}
+  68%{transform:translate(-50%,-50%) translate(-72px,48px)}
+  86%{transform:translate(-50%,-50%) translate(64px,50px)}
+  100%{transform:translate(-50%,-50%) translate(0,0)}
+}
+@keyframes gRockefellerPatrol{
+  0%{transform:translate(-50%,-50%) translate(0,0)}
+  20%{transform:translate(-50%,-50%) translate(-66px,-24px)}
+  40%{transform:translate(-50%,-50%) translate(72px,-22px)}
+  60%{transform:translate(-50%,-50%) translate(82px,46px)}
+  80%{transform:translate(-50%,-50%) translate(-78px,46px)}
+  100%{transform:translate(-50%,-50%) translate(0,0)}
+}
+
+.hq .room.active .worker{
+  border-color:#22c55e!important;
+  box-shadow:0 0 28px rgba(34,197,94,.5), 0 12px 32px rgba(0,0,0,.65)!important;
+}
+.hq .room.idle .worker{opacity:.82!important}
+
+@media(max-width:700px){
+  .hq .room{min-height:185px!important}
+  .hq .room .worker{width:34px!important;height:34px!important;font-size:20px!important;top:58%!important}
+}

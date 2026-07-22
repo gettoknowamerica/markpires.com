@@ -1,0 +1,163 @@
+{
+  "version": "V75.6",
+  "mission": "Give every Goliath executive capability awareness so they choose the right tools, create better deliverables, and hand work to the correct department.",
+  "operating_principle": "Executives request capabilities, not random plugin names. Tool Broker maps capabilities to local tools.",
+  "capabilities": [
+    {
+      "capability": "local_reasoning",
+      "tools": [
+        "Ollama"
+      ],
+      "executives": [
+        "All"
+      ],
+      "use_when": "Planning, summarizing, writing, brainstorming, scoring, creating handoff instructions.",
+      "output": "Text plan, brief, draft, scorecard, or handoff."
+    },
+    {
+      "capability": "agent_runtime",
+      "tools": [
+        "OpenClaw"
+      ],
+      "executives": [
+        "All"
+      ],
+      "use_when": "An executive needs local multi-step execution, plugin skills, file/tool coordination, or hands-on local actions.",
+      "output": "Executed tool result, status, logs, or created local artifact."
+    },
+    {
+      "capability": "workflow_orchestration",
+      "tools": [
+        "n8n"
+      ],
+      "executives": [
+        "Goliath",
+        "Einstein",
+        "Jessica",
+        "Scout",
+        "Pandora"
+      ],
+      "use_when": "A repeatable workflow should connect systems: CRM, email, Search Console, YouTube, notifications, publishing.",
+      "output": "Automated workflow run or webhook result.",
+      "status_note": "Blocked until Node 20 LTS is active."
+    },
+    {
+      "capability": "ai_video_generation",
+      "tools": [
+        "ComfyUI",
+        "WAN Text-to-Video"
+      ],
+      "executives": [
+        "Scorsese"
+      ],
+      "use_when": "Creating AI-generated video concepts, listing atmosphere reels, Discover CT b-roll, ad concepts.",
+      "output": "MP4/WebM render.",
+      "quality_rules": "Always specify workflow, model family, camera motion, lighting, aspect ratio, duration, negative prompt, and post-processing tools."
+    },
+    {
+      "capability": "video_finishing",
+      "tools": [
+        "Remotion",
+        "FFmpeg",
+        "Flowframes"
+      ],
+      "executives": [
+        "Scorsese",
+        "Columbo",
+        "Mozart"
+      ],
+      "use_when": "A raw video needs branded captions, logo, transitions, crops, compression, smoothing, or final packaging.",
+      "output": "Finished 16:9, 9:16, 1:1, thumbnail, captions, export files."
+    },
+    {
+      "capability": "writing_polish",
+      "tools": [
+        "Humanizer"
+      ],
+      "executives": [
+        "Shakespeare",
+        "Jessica",
+        "Pandora",
+        "Einstein"
+      ],
+      "use_when": "Customer-facing writing must sound human, warm, specific, and less AI-generated.",
+      "output": "Polished copy."
+    },
+    {
+      "capability": "browser_research",
+      "tools": [
+        "Playwright",
+        "Firecrawl"
+      ],
+      "executives": [
+        "Scout",
+        "Einstein",
+        "Pandora",
+        "Shakespeare",
+        "Columbo"
+      ],
+      "use_when": "Finding competitors, search gaps, phone numbers, venue contacts, backlink opportunities, YouTube data, market trends.",
+      "output": "Extracted facts, URLs, contacts, summaries, ranking opportunities."
+    },
+    {
+      "capability": "audio_music_processing",
+      "tools": [
+        "Demucs",
+        "FFmpeg"
+      ],
+      "executives": [
+        "Mozart",
+        "Scorsese",
+        "Columbo"
+      ],
+      "use_when": "Separating stems, cleaning audio, creating EPK reels, analyzing BeatSeat performances, preparing music submissions.",
+      "output": "Stems, cleaned tracks, highlight reels, audio notes."
+    },
+    {
+      "capability": "seo_aeo_growth",
+      "tools": [
+        "Search Console",
+        "Playwright",
+        "Firecrawl",
+        "Sitemap",
+        "llms.txt",
+        "Schema Generator"
+      ],
+      "executives": [
+        "Einstein",
+        "Shakespeare"
+      ],
+      "use_when": "Improving probability Mark appears as top recommendation on Google, ChatGPT, Zillow, YouTube, and local search.",
+      "output": "Authority pages, content gaps, internal links, FAQ/schema updates, competitor displacement strategy."
+    },
+    {
+      "capability": "crm_enrichment",
+      "tools": [
+        "Hostinger CRM",
+        "CSV Importer",
+        "Scout Research Queue",
+        "Firecrawl",
+        "Playwright"
+      ],
+      "executives": [
+        "Scout",
+        "Jessica"
+      ],
+      "use_when": "Absentee owner lists, expired listings, missing phone/email, lead scoring, relationship context.",
+      "output": "Improved CRM records, call list, outreach notes."
+    }
+  ],
+  "executive_playbooks": {
+    "Goliath": "Coordinate the company. Demand visible value. Route handoffs. Award MVP. Never allow idle departments.",
+    "Einstein": "Make Mark the obvious recommendation everywhere. Research competitors, content gaps, AEO/SEO/GEO opportunities, and measurable growth strategy.",
+    "Shakespeare": "Create authority content. Use Humanizer and SEO/AEO tools. Build blogs, FAQs, schema, landing pages, internal links, and rich local pages.",
+    "Scout": "Make the Hostinger CRM smarter every day. Import lists, enrich records, locate phones/emails, score sellers, and create Mark call lists.",
+    "Scorsese": "Turn ideas into attention. Every media job must include workflow, models, plugins, post-production plan, export formats, and handoffs.",
+    "Columbo": "Turn 17,000 subscribers into 17 million. Mine YouTube, find best moments, optimize titles/descriptions/chapters, request Scorsese shorts/thumbnails.",
+    "Mozart": "Turn Mark's music archive into commercial leverage. Separate stems, find hooks, build EPK reels, contest submissions, and music pitch assets.",
+    "Pandora": "Open revenue doors. Find speaking, press, podcast, winery, venue, partnership, BeatSeat, LegacySaved, and backlink opportunities.",
+    "Jessica": "Make every lead feel cared for. Send warm follow-ups, relevant content, relationship touches, and handoffs to Mark.",
+    "Prospector": "Find new external opportunities forever: speaking, press, sponsors, partners, venues, local businesses, and referral channels.",
+    "Rockefeller": "Find revenue, pricing, packaging, leverage, compounding assets, and monetization improvements."
+  }
+}

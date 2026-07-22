@@ -1,0 +1,12 @@
+<?php
+declare(strict_types=1);ini_set('display_errors','0');header('Content-Type: application/json; charset=utf-8');
+require_once __DIR__.'/config.php';require_once __DIR__.'/goliath-db.php';require_once __DIR__.'/goliath-orchestration-lib-v114.php';
+function eb_data():array{$j=json_decode((string)file_get_contents('php://input'),true);return is_array($j)?$j:$_POST;}
+function eb_key():string{if(defined('AFTER_HOURS_CRON_KEY'))return (string)AFTER_HOURS_CRON_KEY;if(defined('RETELL_WEBHOOK_KEY'))return (string)RETELL_WEBHOOK_KEY;return 'timetomakethedonuts';}
+$d=eb_data();$key=(string)($d['key']??$_GET['key']??'');if(!hash_equals(eb_key(),$key)){http_response_code(403);echo json_encode(['ok'=>false,'error'=>'bad_key']);exit;}
+try{
+ gdb()->exec("CREATE TABLE IF NOT EXISTS goliath_event_bus_v114 (id BIGINT AUTO_INCREMENT PRIMARY KEY,event_uid VARCHAR(100) NOT NULL,event_type VARCHAR(80) NOT NULL,department VARCHAR(80) NULL,executive_key VARCHAR(80) NULL,title VARCHAR(255) NOT NULL,detail MEDIUMTEXT NULL,status VARCHAR(50) DEFAULT 'new',priority INT DEFAULT 80,mission_id BIGINT NULL,artifact_id BIGINT NULL,link_url VARCHAR(500) NULL,metadata_json JSON NULL,created_at DATETIME DEFAULT CURRENT_TIMESTAMP,UNIQUE KEY uq_event_uid(event_uid),KEY idx_event_status(status,priority),KEY idx_event_created(created_at)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+ $id=gdb_insert('goliath_event_bus_v114',['event_uid'=>g114_uid('event'),'event_type'=>$d['event_type']??$d['action']??'event','department'=>$d['department']??'Executive','executive_key'=>strtolower((string)($d['executive_key']??$d['assigned_to']??'')),'title'=>$d['title']??'Goliath activity','detail'=>$d['detail']??$d['prompt']??'','status'=>$d['status']??'new','priority'=>(int)($d['priority']??80),'mission_id'=>$d['mission_id']??null,'artifact_id'=>$d['artifact_id']??null,'link_url'=>$d['link_url']??'/dashboard/goliath-mission-control.php','metadata_json'=>gdb_json($d['metadata']??[]),'created_at'=>gdb_now()]);
+ echo json_encode(['ok'=>true,'version'=>'V114.0 MySQL Event Bus','event_id'=>(int)$id,'system_of_record'=>'Hostinger MySQL'],JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
+}catch(Throwable $e){http_response_code(500);echo json_encode(['ok'=>false,'error'=>$e->getMessage(),'file'=>$e->getFile(),'line'=>$e->getLine()],JSON_PRETTY_PRINT);}
+?>
